@@ -1,0 +1,81 @@
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmConcentradoFonacot.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAgregarEmpleado.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscarEmpleado.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEstatusPrestamo.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDocumentos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEmpleados.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmExcel.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmExcelO.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFamilia.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmHojasNomina.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmImportarEmpleadosAlta.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmIncapacidad.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmJuridico.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAcceso.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmUsuarios.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPension.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Resources.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPensionA.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEstatusPres.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamoSA.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDeudaInfonavit.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamo.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFonacot.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmConcentradoFonacot.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAgregarEmpleado.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscarEmpleado.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEstatusPrestamo.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDocumentos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEmpleados.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmExcel.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmExcelO.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFamilia.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmHojasNomina.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmImportarEmpleadosAlta.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmIncapacidad.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmJuridico.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAcceso.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmUsuarios.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPension.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Resources.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPensionA.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEstatusPres.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamoSA.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDeudaInfonavit.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamo.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFonacot.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache

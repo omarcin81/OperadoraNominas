@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0046EE3-C5D1-481A-B8CA-A84E5FADF2E3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>OperadoraNominas.My.MyApplication</StartupObject>
+    <RootNamespace>OperadoraNominas</RootNamespace>
+    <AssemblyName>OperadoraNominas</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>OperadoraNominas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>OperadoraNominas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logooperadora.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.93.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Update System\Operadora\Original Libreria\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Intel\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Excel\frmNominaFinalE.Designer.vb">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\frmNominaFinalE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Excel\getDescanso.vb" />
+    <Compile Include="frmAdministrativos.Designer.vb">
+      <DependentUpon>frmAdministrativos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdministrativos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscar.Designer.vb">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConcentradoFonacot.Designer.vb">
+      <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConcentradoFonacot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgregarEmpleado.Designer.vb">
+      <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarEmpleado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarEmpleado.designer.vb">
+      <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarEmpleado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConcentradoInfonavit.Designer.vb">
+      <DependentUpon>frmConcentradoInfonavit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConcentradoInfonavit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDocumentos.designer.vb">
+      <DependentUpon>frmDocumentos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocumentos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmpleados.designer.vb">
+      <DependentUpon>frmEmpleados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmpleados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExcel.Designer.vb">
+      <DependentUpon>frmExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExcelO.designer.vb">
+      <DependentUpon>frmExcelO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExcelO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFamilia.designer.vb">
+      <DependentUpon>frmFamilia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFamilia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHojasNomina.designer.vb">
+      <DependentUpon>frmHojasNomina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHojasNomina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportarEmpleadosAlta.designer.vb">
+      <DependentUpon>frmImportarEmpleadosAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportarEmpleadosAlta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmIncapacidad.designer.vb">
+      <DependentUpon>frmIncapacidad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmIncapacidad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmJuridico.designer.vb">
+      <DependentUpon>frmJuridico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmJuridico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmnominasmarinos.designer.vb">
+      <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmnominasmarinos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlaneacionAsi.Designer.vb">
+      <DependentUpon>frmPlaneacionAsi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlaneacionAsi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.designer.vb">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubirDatos.Designer.vb">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubirDatos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General\frmAcceso.designer.vb">
+      <DependentUpon>frmAcceso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="General\frmAcceso.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General\frmUsuarios.designer.vb">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="General\frmUsuarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="imss\frmImss.Designer.vb">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="imss\frmImss.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modulos\GenPass.vb" />
+    <Compile Include="Modulos\mdoFunciones.vb" />
+    <Compile Include="Modulos\mdoInicio.vb" />
+    <Compile Include="Modulos\mdoMail.vb" />
+    <Compile Include="Modulos\mdoNumAPal.vb" />
+    <Compile Include="Modulos\mdoObjetos.vb" />
+    <Compile Include="Modulos\mdoObjetos2.vb" />
+    <Compile Include="Modulos\mdoObjetos3.vb" />
+    <Compile Include="Modulos\mdoOLEDB.vb" />
+    <Compile Include="Modulos\mdoRemoto.vb" />
+    <Compile Include="Modulos\WinApi.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="pension\frmPensionA.Designer.vb">
+      <DependentUpon>frmPensionA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pension\frmPensionA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmEstatusPres.Designer.vb">
+      <DependentUpon>frmEstatusPres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmEstatusPres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamoSA.Designer.vb">
+      <DependentUpon>frmPrestamoSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamoSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmDeudaInfonavit.Designer.vb">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmDeudaInfonavit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamo.Designer.vb">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmFonacot.Designer.vb">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmFonacot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ruta.Designer.vb">
+      <DependentUpon>ruta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ruta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Serie.Designer.vb">
+      <DependentUpon>Serie.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Serie.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Excel\frmNominaFinalE.resx">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdministrativos.resx">
+      <DependentUpon>frmAdministrativos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscar.resx">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConcentradoFonacot.resx">
+      <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAgregarEmpleado.resx">
+      <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarEmpleado.resx">
+      <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConcentradoInfonavit.resx">
+      <DependentUpon>frmConcentradoInfonavit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDocumentos.resx">
+      <DependentUpon>frmDocumentos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmpleados.resx">
+      <DependentUpon>frmEmpleados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExcel.resx">
+      <DependentUpon>frmExcel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExcelO.resx">
+      <DependentUpon>frmExcelO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFamilia.resx">
+      <DependentUpon>frmFamilia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHojasNomina.resx">
+      <DependentUpon>frmHojasNomina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportarEmpleadosAlta.resx">
+      <DependentUpon>frmImportarEmpleadosAlta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmIncapacidad.resx">
+      <DependentUpon>frmIncapacidad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJuridico.resx">
+      <DependentUpon>frmJuridico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmnominasmarinos.resx">
+      <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlaneacionAsi.resx">
+      <DependentUpon>frmPlaneacionAsi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubirDatos.resx">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\frmAcceso.resx">
+      <DependentUpon>frmAcceso.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="imss\frmImss.resx">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pension\frmPensionA.resx">
+      <DependentUpon>frmPensionA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmEstatusPres.resx">
+      <DependentUpon>frmEstatusPres.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmPrestamoSA.resx">
+      <DependentUpon>frmPrestamoSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmDeudaInfonavit.resx">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmPrestamo.resx">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmFonacot.resx">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ruta.resx">
+      <DependentUpon>ruta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Serie.resx">
+      <DependentUpon>Serie.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="bin\Debug\Archivos\timbradosa.xlsx" />
+    <None Include="bin\Debug\Archivos\timbradosa2.xlsx" />
+    <None Include="bin\Debug\Archivos\TMM.xlsx" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logooperadora.ico" />
+    <Content Include="LOGO_NAVIGATOR.ico" />
+    <Content Include="Resources\1361008137_export_excel.png" />
+    <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
+    <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
+    <Content Include="Resources\bloggif_5aa2e2fc58d9a.png" />
+    <Content Include="Resources\bloggif_5aac5ea61bc88.png" />
+    <Content Include="Resources\cerrar.png" />
+    <Content Include="Resources\disquete.png" />
+    <Content Include="Resources\escala-de-la-justicia.png" />
+    <Content Include="Resources\familia %282%29.png" />
+    <Content Include="Resources\familia.png" />
+    <None Include="Resources\material-escolar.png" />
+    <None Include="Resources\if_magnifier-data_532758.png" />
+    <None Include="Resources\if_rotation_job_seeker_employee_unemployee_work_2620504.png" />
+    <Content Include="Resources\pasaporte.png" />
+    <Content Include="Resources\sobresalir %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
