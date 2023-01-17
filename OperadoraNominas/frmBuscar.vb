@@ -17,7 +17,7 @@
             gNombre = txtbuscar.Text
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
-
+            'dos
         Catch ex As Exception
 
         End Try
