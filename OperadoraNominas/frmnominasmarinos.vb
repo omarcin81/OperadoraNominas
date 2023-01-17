@@ -18,6 +18,8 @@ Public Class frmnominasmarinos
     Dim IDCalculoInfonavit As Integer
     Dim FechaInicioPeriodoGlobal As Date
     Dim dsPeriodo As New DataSet
+    Dim dsPeriodo2 As New DataSet
+    Dim Agregartrabajadores As Boolean
 
 
     
@@ -98,7 +100,7 @@ Public Class frmnominasmarinos
                 aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
 
             End If
-
+            Agregartrabajadores = False
             campoordenamiento = "cCodigoEmpleado"
             TipoNomina = False
             Me.KeyPreview = True
@@ -170,7 +172,414 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+    Private Sub MATGRID()
+        dtgDatos.Columns(0).Width = 30
+        dtgDatos.Columns(0).ReadOnly = True
+        dtgDatos.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(0).Frozen = True
+        'consecutivo
+        dtgDatos.Columns(1).Width = 60
+        dtgDatos.Columns(1).ReadOnly = True
+        dtgDatos.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(1).Frozen = True
+        'idempleado
+        dtgDatos.Columns(2).Width = 100
+        dtgDatos.Columns(2).ReadOnly = True
+        dtgDatos.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(2).Frozen = True
+        'codigo empleado
+        dtgDatos.Columns(3).Width = 100
+        dtgDatos.Columns(3).ReadOnly = True
+        dtgDatos.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(3).Frozen = True
+        'Nombre
+        dtgDatos.Columns(4).Width = 250
+        dtgDatos.Columns(4).ReadOnly = True
+        dtgDatos.Columns(4).Frozen = True
+        'Estatus
+        dtgDatos.Columns(5).Width = 100
+        dtgDatos.Columns(5).ReadOnly = True
+        'RFC
+        dtgDatos.Columns(6).Width = 100
+        dtgDatos.Columns(6).ReadOnly = True
+        'dtgDatos.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        'CURP
+        dtgDatos.Columns(7).Width = 150
+        dtgDatos.Columns(7).ReadOnly = True
+        'IMSS 
+
+        dtgDatos.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(8).ReadOnly = True
+        'Fecha_Nac
+        dtgDatos.Columns(9).Width = 150
+        dtgDatos.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(9).ReadOnly = True
+
+        'Edad
+        dtgDatos.Columns(10).ReadOnly = True
+        dtgDatos.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        'Puesto
+        dtgDatos.Columns(11).ReadOnly = True
+        dtgDatos.Columns(11).Width = 200
+        dtgDatos.Columns.Remove("Puesto")
+
+        Dim combo As New DataGridViewComboBoxColumn
+
+        sql = "select * from puestos where iTipo=1 order by cNombre"
+
+        'Dim rwPuestos As DataRow() = nConsulta(sql)
+        'If rwPuestos Is Nothing = False Then
+        '    combo.Items.Add("uno")
+        '    combo.Items.Add("dos")
+        '    combo.Items.Add("tres")
+        'End If
+
+        nCargaCBO(combo, sql, "cNombre", "iIdPuesto")
+
+        combo.HeaderText = "Puesto"
+
+        combo.Width = 150
+        dtgDatos.Columns.Insert(11, combo)
+
+
+
+
+        'DirectCast(dtgDatos.Columns(11), DataGridViewComboBoxColumn).Sorted = True
+        'Dim combo2 As New DataGridViewComboBoxCell
+        'combo2 = CType(Me.dtgDatos.Rows(2).Cells(11), DataGridViewComboBoxCell)
+        'combo2.Value = combo.Items(11)
+
+
+
+        'dtgDatos.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        'Buque
+        'dtgDatos.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(12).ReadOnly = True
+        dtgDatos.Columns(12).Width = 150
+        dtgDatos.Columns.Remove("Depto")
+
+        Dim combo2 As New DataGridViewComboBoxColumn
+
+        sql = "select * from departamentos where iEstatus=1 order by cNombre"
+
+        'Dim rwPuestos As DataRow() = nConsulta(sql)
+        'If rwPuestos Is Nothing = False Then
+        '    combo.Items.Add("uno")
+        '    combo.Items.Add("dos")
+        '    combo.Items.Add("tres")
+        'End If
+
+        nCargaCBO(combo2, sql, "cNombre", "iIdDepartamento")
+
+        combo2.HeaderText = "Depto"
+        combo2.Width = 150
+        dtgDatos.Columns.Insert(12, combo2)
+
+        'Tipo_Infonavit
+        dtgDatos.Columns(13).ReadOnly = True
+        dtgDatos.Columns(13).Width = 150
+        'dtgDatos.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+
+
+        'Valor_Infonavit
+        dtgDatos.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(14).ReadOnly = True
+        dtgDatos.Columns(14).Width = 150
+        'Horas_extras_dobles_V
+        dtgDatos.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(15).ReadOnly = True
+        dtgDatos.Columns(15).Width = 150
+        'Horas_extras_triples_V
+        dtgDatos.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(16).ReadOnly = True
+        dtgDatos.Columns(16).Width = 150
+        'Descanso_Laborado_V
+        dtgDatos.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(17).ReadOnly = True
+        dtgDatos.Columns(17).Width = 150
+        'Dia_Festivo_laborado_V
+        dtgDatos.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(18).Width = 150
+        'Prima_Dominical_V
+        dtgDatos.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(19).ReadOnly = True
+        dtgDatos.Columns(19).Width = 150
+        'Falta_Injustificada_V
+        dtgDatos.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(20).ReadOnly = True
+        dtgDatos.Columns(20).Width = 150
+        'Permiso_Sin_GS_V
+        dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(21).ReadOnly = True
+        dtgDatos.Columns(21).Width = 150
+        'T_No_laborado_V
+        dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(22).ReadOnly = True
+        dtgDatos.Columns(22).Width = 150
+
+        'Sueldo_Base
+        dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(23).ReadOnly = True
+        dtgDatos.Columns(23).Width = 150
+
+        'Salario_Diario
+        dtgDatos.Columns(24).Width = 150
+        dtgDatos.Columns(24).ReadOnly = True
+        dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'Salario_Cotización
+        dtgDatos.Columns(25).Width = 150
+        dtgDatos.Columns(25).ReadOnly = True
+        dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'Dias_Trabajados
+        dtgDatos.Columns(26).Width = 150
+        dtgDatos.Columns(26).ReadOnly = True
+        dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'Tipo_Incapacidad
+        dtgDatos.Columns(27).Width = 150
+        'dtgDatos.Columns(27).ReadOnly = True
+        dtgDatos.Columns(27).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'Número_días
+        dtgDatos.Columns(28).Width = 150
+        dtgDatos.Columns(28).ReadOnly = True
+        dtgDatos.Columns(28).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'Sueldo_Bruto
+        dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(29).Width = 150
+        dtgDatos.Columns(29).ReadOnly = True
+
+        'Septimo_Dia
+        dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(30).ReadOnly = True
+        dtgDatos.Columns(30).Width = 150
+        'Prima_Dominical_Gravada
+        dtgDatos.Columns(31).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(31).ReadOnly = True
+        dtgDatos.Columns(31).Width = 150
+
+        'Prima_Dominical_Exenta
+        dtgDatos.Columns(32).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(32).ReadOnly = True
+        dtgDatos.Columns(32).Width = 150
+
+
+        'Tiempo_Extra_Doble_Gravado
+        dtgDatos.Columns(33).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(33).ReadOnly = True
+        dtgDatos.Columns(33).Width = 150
+        'Tiempo_Extra_Doble_Exento
+        dtgDatos.Columns(34).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(34).ReadOnly = True
+        dtgDatos.Columns(34).Width = 150
+
+        'Tiempo_Extra_Triple
+        dtgDatos.Columns(35).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(35).ReadOnly = True
+        dtgDatos.Columns(35).Width = 150
+
+        'Descanso_Labarado
+        dtgDatos.Columns(36).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(36).ReadOnly = True
+        dtgDatos.Columns(36).Width = 150
+
+
+        'Dia_Festivo_laborado
+        dtgDatos.Columns(37).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(37).ReadOnly = True
+        dtgDatos.Columns(37).Width = 150
+
+        'Bono_Asistencia
+        dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(38).ReadOnly = True
+        dtgDatos.Columns(38).Width = 150
+        'Bono_Productividad
+        dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(39).ReadOnly = True
+        dtgDatos.Columns(39).Width = 150
+        'Bono_Polivalencia
+        dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(40).ReadOnly = True
+        dtgDatos.Columns(40).Width = 150
+        'Bono_Especialidad
+        dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(41).ReadOnly = True
+        dtgDatos.Columns(41).Width = 150
+        'Bono_Calidad
+        dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(42).ReadOnly = True
+        dtgDatos.Columns(42).Width = 150
+        'Compensacion
+        dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(43).ReadOnly = True
+        dtgDatos.Columns(43).Width = 150
+        'Semana_fondo
+        dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(44).ReadOnly = True
+        dtgDatos.Columns(44).Width = 150
+        'Falta_Injustificada
+        dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(45).ReadOnly = True
+        dtgDatos.Columns(45).Width = 150
+        'Permiso_Sin_GS
+        dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(46).ReadOnly = True
+        dtgDatos.Columns(46).Width = 150
+
+        'Incremento_Retenido
+        dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(48).ReadOnly = True
+        dtgDatos.Columns(47).Width = 150
+
+        'Vacaciones_proporcionales
+        dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(49).ReadOnly = True
+        dtgDatos.Columns(48).Width = 150
+
+        '
+        dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(50).ReadOnly = True
+        dtgDatos.Columns(49).Width = 150
+
+        '
+        dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(50).ReadOnly = True
+        dtgDatos.Columns(50).Width = 150
+
+        '
+        dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(51).ReadOnly = True
+        dtgDatos.Columns(51).Width = 150
+
+        '
+        dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(52).ReadOnly = True
+        dtgDatos.Columns(52).Width = 150
+
+        '
+        dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(53).ReadOnly = True
+        dtgDatos.Columns(53).Width = 150
+
+        '
+        dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(54).ReadOnly = True
+        dtgDatos.Columns(54).Width = 150
+
+        '
+        dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(55).ReadOnly = True
+        dtgDatos.Columns(55).Width = 150
+
+        '
+        dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(56).ReadOnly = True
+        dtgDatos.Columns(56).Width = 150
+
+        '
+        dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(57).ReadOnly = True
+        dtgDatos.Columns(57).Width = 150
+
+        '
+        dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(58).ReadOnly = True
+        dtgDatos.Columns(58).Width = 150
+
+        '
+        dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(59).ReadOnly = True
+        dtgDatos.Columns(59).Width = 150
+
+        '
+        dtgDatos.Columns(60).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(60).ReadOnly = True
+        dtgDatos.Columns(60).Width = 150
+
+        'Infonavit_bim_anterior
+        dtgDatos.Columns(61).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(61).ReadOnly = True
+        dtgDatos.Columns(61).Width = 150
+
+        'Ajuste_infonavit
+        dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(62).ReadOnly = True
+        dtgDatos.Columns(62).Width = 150
+
+        'Pension alimenticia
+        dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dtgDatos.Columns(63).ReadOnly = True
+        dtgDatos.Columns(63).Width = 150
+
+        'Prestamo
+        dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(64).ReadOnly = True
+        dtgDatos.Columns(64).Width = 150
+
+        'Fonacot
+        dtgDatos.Columns(65).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(65).ReadOnly = True
+        dtgDatos.Columns(65).Width = 150
+
+        'T_No_laborado
+        dtgDatos.Columns(66).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(66).ReadOnly = True
+        dtgDatos.Columns(66).Width = 150
+
+        'Cuota_Sindical
+        dtgDatos.Columns(67).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(67).ReadOnly = True
+        dtgDatos.Columns(67).Width = 150
+
+        '
+        dtgDatos.Columns(68).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(68).ReadOnly = True
+        dtgDatos.Columns(68).Width = 150
+
+        '
+        dtgDatos.Columns(69).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(69).ReadOnly = True
+        dtgDatos.Columns(69).Width = 150
+
+        '
+        dtgDatos.Columns(70).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(70).ReadOnly = True
+        dtgDatos.Columns(70).Width = 150
+
+        '
+        dtgDatos.Columns(71).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(71).ReadOnly = True
+        dtgDatos.Columns(71).Width = 150
+
+        '
+        dtgDatos.Columns(72).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        'dtgDatos.Columns(72).ReadOnly = True
+        dtgDatos.Columns(72).Width = 150
+
+        'calcular()
+
+        'Cambiamos index del combo en el grid
+
+        For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+            sql = "select iIdEmpleadoC,iIdDepartamento,departamentos.cNombre as cDepto ,iIdPuesto,Puestos.cnombre as cPuesto from empleadosC"
+            sql &= " inner join Puestos on     empleadosc.fkiIdPuesto =Puestos.iIdPuesto"
+            sql &= " inner join departamentos on empleadosc.fkiIdDepartamento = departamentos.iIdDepartamento"
+
+            sql &= " where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+
+            Dim rwFila As DataRow() = nConsulta(sql)
+
+
+
+            CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
+            CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cDepto").ToString()
+        Next
+
+
+    End Sub
     Private Sub DSP()
        
 
@@ -259,7 +668,7 @@ Public Class frmnominasmarinos
         'dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_A")
         dsPeriodo.Tables("Tabla").Columns.Add("PA_A")
         dsPeriodo.Tables("Tabla").Columns.Add("SINDICATO/PPP")
-        dsPeriodo.Tables("Tabla").Columns.Add("Retenciones")
+        dsPeriodo.Tables("Tabla").Columns.Add("PRIMA_EXCEN")
         dsPeriodo.Tables("Tabla").Columns.Add("%_Comisión")
         dsPeriodo.Tables("Tabla").Columns.Add("Comisión_SA")
         dsPeriodo.Tables("Tabla").Columns.Add("Comisión_Beneficio")
@@ -274,6 +683,107 @@ Public Class frmnominasmarinos
         dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
         dsPeriodo.Tables("Tabla").Columns.Add("fecha_inicio")
         dsPeriodo.Tables("Tabla").Columns.Add("fecha_fin")
+
+        dsPeriodo2.Tables.Add("Tabla")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Consecutivo")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Id_empleado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("CodigoEmpleado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Nombre")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Status")
+        dsPeriodo2.Tables("Tabla").Columns.Add("RFC")
+        dsPeriodo2.Tables("Tabla").Columns.Add("CURP")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Num_IMSS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Fecha_Nac")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Edad")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Puesto")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Depto")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Tipo_Infonavit")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Valor_Infonavit")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Horas_extras_dobles_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Horas_extras_triples_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Descanso_Laborado_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Dia_Festivo_laborado_V")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_Dominical_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Falta_Injustificada_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Permiso_Sin_GS_V")
+        dsPeriodo2.Tables("Tabla").Columns.Add("T_No_laborado_V")
+
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Sueldo_Base")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Salario_Diario")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Salario_Cotización")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Dias_Trabajados")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Número_días")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Sueldo_Bruto")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Septimo_Dia")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_Dominical_Gravada")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_Dominical_Exenta")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Gravado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Exento")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Tiempo_Extra_Triple")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Descanso_Labarado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Dia_Festivo_laborado")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Bono_Asistencia")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Bono_Productividad")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Bono_Polivalencia")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Bono_Especialidad")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Bono_Calidad")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Compensacion")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Semana_fondo")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Falta_Injustificada")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Permiso_Sin_GS")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Incremento_Retenido")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Aguinaldo_exento")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Total_Aguinaldo")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_vac_gravado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_vac_exento")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("Total_Prima_vac")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Total_percepciones")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Total_percepciones_p/isr")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Incapacidad")
+        dsPeriodo2.Tables("Tabla").Columns.Add("ISR")
+        dsPeriodo2.Tables("Tabla").Columns.Add("IMSS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Infonavit")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Ajuste_infonavit")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Pension_Alimenticia")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prestamo")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Fonacot")
+        dsPeriodo2.Tables("Tabla").Columns.Add("T_No_laborado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Cuota_Sindical")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Subsidio_Generado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Neto_SA")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Prestamo_Personal_A")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Adeudo_Infonavit_A")
+        'dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_A")
+        dsPeriodo2.Tables("Tabla").Columns.Add("PA_A")
+        dsPeriodo2.Tables("Tabla").Columns.Add("SINDICATO/PPP")
+        dsPeriodo2.Tables("Tabla").Columns.Add("PRIMA_EXCEN")
+        dsPeriodo2.Tables("Tabla").Columns.Add("%_Comisión")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Comisión_SA")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Comisión_Beneficio")
+
+        dsPeriodo2.Tables("Tabla").Columns.Add("IMSS_CS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("RCV_CS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Infonavit_CS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("ISN_CS")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Total_Costo_Social")
+        dsPeriodo2.Tables("Tabla").Columns.Add("Subtotal")
+        dsPeriodo2.Tables("Tabla").Columns.Add("IVA")
+        dsPeriodo2.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
+        dsPeriodo2.Tables("Tabla").Columns.Add("fecha_inicio")
+        dsPeriodo2.Tables("Tabla").Columns.Add("fecha_fin")
 
     End Sub
 
@@ -373,7 +883,7 @@ Public Class frmnominasmarinos
 
 
 
-                    fila.Item("Sueldo_Base") = "0.00"
+                    fila.Item("Sueldo_Base") = rwNominaGuardada(x)("fSalarioBase").ToString
                     fila.Item("Salario_Diario") = rwNominaGuardada(x)("fSalarioDiario").ToString
                     'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                     fila.Item("Salario_Cotización") = rwNominaGuardada(x)("fSalarioBC").ToString
@@ -432,7 +942,7 @@ Public Class frmnominasmarinos
                     fila.Item("Adeudo_Infonavit_A") = rwNominaGuardada(x)("fAdeudoInfonavitA").ToString
                     fila.Item("PA_A") = rwNominaGuardada(x)("fDiferenciaInfonavitA").ToString
                     fila.Item("SINDICATO/PPP") = rwNominaGuardada(x)("fAsimilados").ToString
-                    fila.Item("Retenciones") = rwNominaGuardada(x)("fRetencionOperadora").ToString
+                    fila.Item("PRIMA_EXCEN") = rwNominaGuardada(x)("fRetencionOperadora").ToString
                     fila.Item("%_Comisión") = rwNominaGuardada(x)("fPorComision").ToString
                     fila.Item("Comisión_SA") = rwNominaGuardada(x)("fComisionOperadora").ToString
                     fila.Item("Comisión_Beneficio") = rwNominaGuardada(x)("fComisionAsimilados").ToString
@@ -458,526 +968,10 @@ Public Class frmnominasmarinos
 
                 dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
 
-                dtgDatos.Columns(0).Width = 30
-                dtgDatos.Columns(0).ReadOnly = True
-                dtgDatos.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(0).Frozen = True
-                'consecutivo
-                dtgDatos.Columns(1).Width = 60
-                dtgDatos.Columns(1).ReadOnly = True
-                dtgDatos.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(1).Frozen = True
-                'idempleado
-                dtgDatos.Columns(2).Width = 100
-                dtgDatos.Columns(2).ReadOnly = True
-                dtgDatos.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(2).Frozen = True
-                'codigo empleado
-                dtgDatos.Columns(3).Width = 100
-                dtgDatos.Columns(3).ReadOnly = True
-                dtgDatos.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(3).Frozen = True
-                'Nombre
-                dtgDatos.Columns(4).Width = 250
-                dtgDatos.Columns(4).ReadOnly = True
-                dtgDatos.Columns(4).Frozen = True
-                'Estatus
-                dtgDatos.Columns(5).Width = 100
-                dtgDatos.Columns(5).ReadOnly = True
-                'RFC
-                dtgDatos.Columns(6).Width = 100
-                dtgDatos.Columns(6).ReadOnly = True
-                'dtgDatos.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                MATGRID()
 
-                'CURP
-                dtgDatos.Columns(7).Width = 150
-                dtgDatos.Columns(7).ReadOnly = True
-                'IMSS 
 
-                dtgDatos.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(8).ReadOnly = True
-                'Fecha_Nac
-                dtgDatos.Columns(9).Width = 150
-                dtgDatos.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(9).ReadOnly = True
-
-                'Edad
-                dtgDatos.Columns(10).ReadOnly = True
-                dtgDatos.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                'Puesto
-                dtgDatos.Columns(11).ReadOnly = True
-                dtgDatos.Columns(11).Width = 200
-                dtgDatos.Columns.Remove("Puesto")
-
-                Dim combo As New DataGridViewComboBoxColumn
-
-                sql = "select * from puestos where iTipo=1 order by cNombre"
-
-                'Dim rwPuestos As DataRow() = nConsulta(sql)
-                'If rwPuestos Is Nothing = False Then
-                '    combo.Items.Add("uno")
-                '    combo.Items.Add("dos")
-                '    combo.Items.Add("tres")
-                'End If
-
-                nCargaCBO(combo, sql, "cNombre", "iIdPuesto")
-
-                combo.HeaderText = "Puesto"
-
-                combo.Width = 150
-                dtgDatos.Columns.Insert(11, combo)
-
-
-
-
-                'DirectCast(dtgDatos.Columns(11), DataGridViewComboBoxColumn).Sorted = True
-                'Dim combo2 As New DataGridViewComboBoxCell
-                'combo2 = CType(Me.dtgDatos.Rows(2).Cells(11), DataGridViewComboBoxCell)
-                'combo2.Value = combo.Items(11)
-
-
-
-                'dtgDatos.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                'Buque
-                'dtgDatos.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(12).ReadOnly = True
-                dtgDatos.Columns(12).Width = 150
-                dtgDatos.Columns.Remove("Depto")
-
-                Dim combo2 As New DataGridViewComboBoxColumn
-
-                sql = "select * from departamentos where iEstatus=1 order by cNombre"
-
-                'Dim rwPuestos As DataRow() = nConsulta(sql)
-                'If rwPuestos Is Nothing = False Then
-                '    combo.Items.Add("uno")
-                '    combo.Items.Add("dos")
-                '    combo.Items.Add("tres")
-                'End If
-
-                nCargaCBO(combo2, sql, "cNombre", "iIdDepartamento")
-
-                combo2.HeaderText = "Depto"
-                combo2.Width = 150
-                dtgDatos.Columns.Insert(12, combo2)
-
-                'Tipo_Infonavit
-                dtgDatos.Columns(13).ReadOnly = True
-                dtgDatos.Columns(13).Width = 150
-                'dtgDatos.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-
-
-                'Valor_Infonavit
-                dtgDatos.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(14).ReadOnly = True
-                dtgDatos.Columns(14).Width = 150
-                'Horas_extras_dobles_V
-                dtgDatos.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(15).ReadOnly = True
-                dtgDatos.Columns(15).Width = 150
-                'Horas_extras_triples_V
-                dtgDatos.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(16).ReadOnly = True
-                dtgDatos.Columns(16).Width = 150
-                'Descanso_Laborado_V
-                dtgDatos.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(17).ReadOnly = True
-                dtgDatos.Columns(17).Width = 150
-                'Dia_Festivo_laborado_V
-                dtgDatos.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(18).Width = 150
-                'Prima_Dominical_V
-                dtgDatos.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(19).ReadOnly = True
-                dtgDatos.Columns(19).Width = 150
-                'Falta_Injustificada_V
-                dtgDatos.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(20).ReadOnly = True
-                dtgDatos.Columns(20).Width = 150
-                'Permiso_Sin_GS_V
-                dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(21).ReadOnly = True
-                dtgDatos.Columns(21).Width = 150
-                'T_No_laborado_V
-                dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(22).ReadOnly = True
-                dtgDatos.Columns(22).Width = 150
-
-                'Sueldo_Base
-                dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(23).ReadOnly = True
-                dtgDatos.Columns(23).Width = 150
-
-                'Salario_Diario
-                dtgDatos.Columns(24).Width = 150
-                dtgDatos.Columns(24).ReadOnly = True
-                dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'Salario_Cotización
-                dtgDatos.Columns(25).Width = 150
-                dtgDatos.Columns(25).ReadOnly = True
-                dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'Dias_Trabajados
-                dtgDatos.Columns(26).Width = 150
-                dtgDatos.Columns(26).ReadOnly = True
-                dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'Tipo_Incapacidad
-                dtgDatos.Columns(27).Width = 150
-                'dtgDatos.Columns(27).ReadOnly = True
-                dtgDatos.Columns(27).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'Número_días
-                dtgDatos.Columns(28).Width = 150
-                dtgDatos.Columns(28).ReadOnly = True
-                dtgDatos.Columns(28).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'Sueldo_Bruto
-                dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(29).Width = 150
-                dtgDatos.Columns(29).ReadOnly = True
-
-                'Septimo_Dia
-                dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(30).ReadOnly = True
-                dtgDatos.Columns(30).Width = 150
-                'Prima_Dominical_Gravada
-                dtgDatos.Columns(31).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(31).ReadOnly = True
-                dtgDatos.Columns(31).Width = 150
-
-                'Prima_Dominical_Exenta
-                dtgDatos.Columns(32).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(32).ReadOnly = True
-                dtgDatos.Columns(32).Width = 150
-
-
-                'Tiempo_Extra_Doble_Gravado
-                dtgDatos.Columns(33).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(33).ReadOnly = True
-                dtgDatos.Columns(33).Width = 150
-                'Tiempo_Extra_Doble_Exento
-                dtgDatos.Columns(34).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(34).ReadOnly = True
-                dtgDatos.Columns(34).Width = 150
-
-                'Tiempo_Extra_Triple
-                dtgDatos.Columns(35).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(35).ReadOnly = True
-                dtgDatos.Columns(35).Width = 150
-
-                'Descanso_Labarado
-                dtgDatos.Columns(36).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(36).ReadOnly = True
-                dtgDatos.Columns(36).Width = 150
-
-
-                'Dia_Festivo_laborado
-                dtgDatos.Columns(37).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(37).ReadOnly = True
-                dtgDatos.Columns(37).Width = 150
-
-                'Bono_Asistencia
-                dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(38).ReadOnly = True
-                dtgDatos.Columns(38).Width = 150
-                'Bono_Productividad
-                dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(39).ReadOnly = True
-                dtgDatos.Columns(39).Width = 150
-                'Bono_Polivalencia
-                dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(40).ReadOnly = True
-                dtgDatos.Columns(40).Width = 150
-                'Bono_Especialidad
-                dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(41).ReadOnly = True
-                dtgDatos.Columns(41).Width = 150
-                'Bono_Calidad
-                dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(42).ReadOnly = True
-                dtgDatos.Columns(42).Width = 150
-                'Compensacion
-                dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(43).ReadOnly = True
-                dtgDatos.Columns(43).Width = 150
-                'Semana_fondo
-                dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(44).ReadOnly = True
-                dtgDatos.Columns(44).Width = 150
-                'Falta_Injustificada
-                dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(45).ReadOnly = True
-                dtgDatos.Columns(45).Width = 150
-                'Permiso_Sin_GS
-                dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(46).ReadOnly = True
-                dtgDatos.Columns(46).Width = 150
-
-                'Incremento_Retenido
-                dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(48).ReadOnly = True
-                dtgDatos.Columns(47).Width = 150
-
-                '
-                dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(49).ReadOnly = True
-                dtgDatos.Columns(48).Width = 150
-
-                '
-                dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(50).ReadOnly = True
-                dtgDatos.Columns(49).Width = 150
-
-                '
-                dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(50).ReadOnly = True
-                dtgDatos.Columns(50).Width = 150
-
-                '
-                dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(51).ReadOnly = True
-                dtgDatos.Columns(51).Width = 150
-
-                '
-                dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(52).ReadOnly = True
-                dtgDatos.Columns(52).Width = 150
-
-                '
-                dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(53).ReadOnly = True
-                dtgDatos.Columns(53).Width = 150
-
-                '
-                dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(54).ReadOnly = True
-                dtgDatos.Columns(54).Width = 150
-
-                '
-                dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(55).ReadOnly = True
-                dtgDatos.Columns(55).Width = 150
-
-                '
-                dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(56).ReadOnly = True
-                dtgDatos.Columns(56).Width = 150
-
-                '
-                dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(57).ReadOnly = True
-                dtgDatos.Columns(57).Width = 150
-
-                '
-                dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(58).ReadOnly = True
-                dtgDatos.Columns(58).Width = 150
-
-                '
-                dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(59).ReadOnly = True
-                dtgDatos.Columns(59).Width = 150
-
-                '
-                dtgDatos.Columns(60).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(60).ReadOnly = True
-                dtgDatos.Columns(60).Width = 150
-
-                'Infonavit_bim_anterior
-                dtgDatos.Columns(61).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(61).ReadOnly = True
-                dtgDatos.Columns(61).Width = 150
-
-                'Ajuste_infonavit
-                dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(62).ReadOnly = True
-                dtgDatos.Columns(62).Width = 150
-
-                'Pension alimenticia
-                dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(63).ReadOnly = True
-                dtgDatos.Columns(63).Width = 150
-
-                'Prestamo
-                dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(64).ReadOnly = True
-                dtgDatos.Columns(64).Width = 150
-
-                'Fonacot
-                dtgDatos.Columns(65).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(65).ReadOnly = True
-                dtgDatos.Columns(65).Width = 150
-
-                'T_No_laborado
-                dtgDatos.Columns(66).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(66).ReadOnly = True
-                dtgDatos.Columns(66).Width = 150
-
-                'Cuota_Sindical
-                dtgDatos.Columns(67).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(67).ReadOnly = True
-                dtgDatos.Columns(67).Width = 150
-
-                '
-                dtgDatos.Columns(68).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(68).ReadOnly = True
-                dtgDatos.Columns(68).Width = 150
-
-                '
-                dtgDatos.Columns(69).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(69).ReadOnly = True
-                dtgDatos.Columns(69).Width = 150
-
-                '
-                dtgDatos.Columns(70).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(70).ReadOnly = True
-                dtgDatos.Columns(70).Width = 150
-
-                '
-                dtgDatos.Columns(71).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(71).ReadOnly = True
-                dtgDatos.Columns(71).Width = 150
-
-                '
-                dtgDatos.Columns(72).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                'dtgDatos.Columns(72).ReadOnly = True
-                dtgDatos.Columns(72).Width = 150
-                'calcular()
-
-                'Cambiamos index del combo en el grid
-
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                    sql = "select iIdEmpleadoC,iIdDepartamento,departamentos.cNombre as cDepto ,iIdPuesto,Puestos.cnombre as cPuesto from empleadosC"
-                    sql &= " inner join Puestos on     empleadosc.fkiIdPuesto =Puestos.iIdPuesto"
-                    sql &= " inner join departamentos on empleadosc.fkiIdDepartamento = departamentos.iIdDepartamento"
-
-                    sql &= " where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-
-                    Dim rwFila As DataRow() = nConsulta(sql)
-
-
-
-                    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
-                    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cDepto").ToString()
-                Next
-
-
-
-                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                '    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                '    sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                '    sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                '    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
-                '    Dim rwFila As DataRow() = nConsulta(sql)
-
-
-
-                '    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                'Next
-
-
-                'verificar costo social
-
-                'Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
-
-
-                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                '    contador = 0
-
-
-                '    For y As Integer = 0 To dtgDatos.Rows.Count - 1
-                '        If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
-                '            contador = contador + 1
-                '            If contador = 1 Then
-                '                Posicion1 = y
-                '            End If
-                '            If contador = 2 Then
-                '                Posicion2 = y
-                '            End If
-                '            If contador = 3 Then
-                '                Posicion3 = y
-                '            End If
-                '            If contador = 4 Then
-                '                Posicion4 = y
-                '            End If
-                '            If contador = 5 Then
-                '                Posicion5 = y
-                '            End If
-                '        End If
-
-
-
-                '    Next
-                '    sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC  where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                '    'sql = "select * from nomina inner join EmpleadosC on nomin where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                '    sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                '    sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                '    sql &= " and iTipoNomina=0"
-                '    sql &= " order by " & campoordenamiento
-
-                '    Dim rwFila As DataRow() = nConsulta(sql)
-
-                '    If rwFila.Length = 1 Then
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-
-                '    End If
-
-                '    If rwFila.Length = 2 Then
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
-
-                '    End If
-                '    If rwFila.Length = 3 Then
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
-                '    End If
-                '    If rwFila.Length = 4 Then
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
-                '    End If
-                '    If rwFila.Length = 5 Then
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion5).Cells(11), DataGridViewComboBoxCell).Value = rwFila(4)("Puesto").ToString()
-                '        CType(Me.dtgDatos.Rows(Posicion5).Cells(12), DataGridViewComboBoxCell).Value = rwFila(4)("Buque").ToString()
-                '    End If
-                'Next
-
-
-
-                ''Cambiamos el index del combro de departamentos
-
-                ''For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                ''    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                ''    Dim rwFila As DataRow() = nConsulta(sql)
-
-
-
-
-                'Next
+               
                 If tiponom = "" Then
                     MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -1041,7 +1035,7 @@ Public Class frmnominasmarinos
 
 
 
-                            fila.Item("Sueldo_Base") = "0.00"
+                            fila.Item("Sueldo_Base") = rwDatosEmpleados(x)("fSueldoOrd").ToString
                             fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fSueldoBase").ToString
                             'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                             fila.Item("Salario_Cotización") = rwDatosEmpleados(x)("fSueldoIntegrado").ToString
@@ -1101,7 +1095,7 @@ Public Class frmnominasmarinos
                             fila.Item("Adeudo_Infonavit_A") = ""
                             fila.Item("PA_A") = ""
                             fila.Item("SINDICATO/PPP") = ""
-                            fila.Item("Retenciones") = ""
+                            fila.Item("PRIMA_EXCEN") = ""
                             fila.Item("%_Comisión") = ""
                             fila.Item("Comisión_SA") = ""
                             fila.Item("Comisión_Beneficio") = ""
@@ -1130,412 +1124,7 @@ Public Class frmnominasmarinos
 
                         dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
 
-                        dtgDatos.Columns(0).Width = 30
-                        dtgDatos.Columns(0).ReadOnly = True
-                        dtgDatos.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(0).Frozen = True
-                        'consecutivo
-                        dtgDatos.Columns(1).Width = 60
-                        dtgDatos.Columns(1).ReadOnly = True
-                        dtgDatos.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(1).Frozen = True
-                        'idempleado
-                        dtgDatos.Columns(2).Width = 100
-                        dtgDatos.Columns(2).ReadOnly = True
-                        dtgDatos.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(2).Frozen = True
-                        'codigo empleado
-                        dtgDatos.Columns(3).Width = 100
-                        dtgDatos.Columns(3).ReadOnly = True
-                        dtgDatos.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(3).Frozen = True
-                        'Nombre
-                        dtgDatos.Columns(4).Width = 250
-                        dtgDatos.Columns(4).ReadOnly = True
-                        dtgDatos.Columns(4).Frozen = True
-                        'Estatus
-                        dtgDatos.Columns(5).Width = 100
-                        dtgDatos.Columns(5).ReadOnly = True
-                        'RFC
-                        dtgDatos.Columns(6).Width = 100
-                        dtgDatos.Columns(6).ReadOnly = True
-                        'dtgDatos.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'CURP
-                        dtgDatos.Columns(7).Width = 150
-                        dtgDatos.Columns(7).ReadOnly = True
-                        'IMSS 
-
-                        dtgDatos.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(8).ReadOnly = True
-                        'Fecha_Nac
-                        dtgDatos.Columns(9).Width = 150
-                        dtgDatos.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(9).ReadOnly = True
-
-                        'Edad
-                        dtgDatos.Columns(10).ReadOnly = True
-                        dtgDatos.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'Puesto
-                        dtgDatos.Columns(11).ReadOnly = True
-                        dtgDatos.Columns(11).Width = 200
-                        dtgDatos.Columns.Remove("Puesto")
-
-                        Dim combo As New DataGridViewComboBoxColumn
-
-                        sql = "select * from puestos where iTipo=1 order by cNombre"
-
-                        'Dim rwPuestos As DataRow() = nConsulta(sql)
-                        'If rwPuestos Is Nothing = False Then
-                        '    combo.Items.Add("uno")
-                        '    combo.Items.Add("dos")
-                        '    combo.Items.Add("tres")
-                        'End If
-
-                        nCargaCBO(combo, sql, "cNombre", "iIdPuesto")
-
-                        combo.HeaderText = "Puesto"
-
-                        combo.Width = 150
-                        dtgDatos.Columns.Insert(11, combo)
-
-
-
-
-                        'DirectCast(dtgDatos.Columns(11), DataGridViewComboBoxColumn).Sorted = True
-                        'Dim combo2 As New DataGridViewComboBoxCell
-                        'combo2 = CType(Me.dtgDatos.Rows(2).Cells(11), DataGridViewComboBoxCell)
-                        'combo2.Value = combo.Items(11)
-
-
-
-                        'dtgDatos.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'Buque
-                        'dtgDatos.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(12).ReadOnly = True
-                        dtgDatos.Columns(12).Width = 150
-                        dtgDatos.Columns.Remove("Depto")
-
-                        Dim combo2 As New DataGridViewComboBoxColumn
-
-                        sql = "select * from departamentos where iEstatus=1 order by cNombre"
-
-                        'Dim rwPuestos As DataRow() = nConsulta(sql)
-                        'If rwPuestos Is Nothing = False Then
-                        '    combo.Items.Add("uno")
-                        '    combo.Items.Add("dos")
-                        '    combo.Items.Add("tres")
-                        'End If
-
-                        nCargaCBO(combo2, sql, "cNombre", "iIdDepartamento")
-
-                        combo2.HeaderText = "Depto"
-                        combo2.Width = 150
-                        dtgDatos.Columns.Insert(12, combo2)
-
-                        'Tipo_Infonavit
-                        dtgDatos.Columns(13).ReadOnly = True
-                        dtgDatos.Columns(13).Width = 150
-                        'dtgDatos.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-
-
-                        'Valor_Infonavit
-                        dtgDatos.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(14).ReadOnly = True
-                        dtgDatos.Columns(14).Width = 150
-                        'Horas_extras_dobles_V
-                        dtgDatos.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(15).ReadOnly = True
-                        dtgDatos.Columns(15).Width = 150
-                        'Horas_extras_triples_V
-                        dtgDatos.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(16).ReadOnly = True
-                        dtgDatos.Columns(16).Width = 150
-                        'Descanso_Laborado_V
-                        dtgDatos.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(17).ReadOnly = True
-                        dtgDatos.Columns(17).Width = 150
-                        'Dia_Festivo_laborado_V
-                        dtgDatos.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(18).Width = 150
-                        'Prima_Dominical_V
-                        dtgDatos.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(19).ReadOnly = True
-                        dtgDatos.Columns(19).Width = 150
-                        'Falta_Injustificada_V
-                        dtgDatos.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(20).ReadOnly = True
-                        dtgDatos.Columns(20).Width = 150
-                        'Permiso_Sin_GS_V
-                        dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(21).ReadOnly = True
-                        dtgDatos.Columns(21).Width = 150
-                        'T_No_laborado_V
-                        dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(22).ReadOnly = True
-                        dtgDatos.Columns(22).Width = 150
-
-                        'Sueldo_Base
-                        dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(23).ReadOnly = True
-                        dtgDatos.Columns(23).Width = 150
-
-                        'Salario_Diario
-                        dtgDatos.Columns(24).Width = 150
-                        dtgDatos.Columns(24).ReadOnly = True
-                        dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Salario_Cotización
-                        dtgDatos.Columns(25).Width = 150
-                        dtgDatos.Columns(25).ReadOnly = True
-                        dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Dias_Trabajados
-                        dtgDatos.Columns(26).Width = 150
-                        dtgDatos.Columns(26).ReadOnly = True
-                        dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Tipo_Incapacidad
-                        dtgDatos.Columns(27).Width = 150
-                        'dtgDatos.Columns(27).ReadOnly = True
-                        dtgDatos.Columns(27).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Número_días
-                        dtgDatos.Columns(28).Width = 150
-                        dtgDatos.Columns(28).ReadOnly = True
-                        dtgDatos.Columns(28).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Sueldo_Bruto
-                        dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(29).Width = 150
-                        dtgDatos.Columns(29).ReadOnly = True
-
-                        'Septimo_Dia
-                        dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(30).ReadOnly = True
-                        dtgDatos.Columns(30).Width = 150
-                        'Prima_Dominical_Gravada
-                        dtgDatos.Columns(31).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(31).ReadOnly = True
-                        dtgDatos.Columns(31).Width = 150
-
-                        'Prima_Dominical_Exenta
-                        dtgDatos.Columns(32).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(32).ReadOnly = True
-                        dtgDatos.Columns(32).Width = 150
-
-
-                        'Tiempo_Extra_Doble_Gravado
-                        dtgDatos.Columns(33).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(33).ReadOnly = True
-                        dtgDatos.Columns(33).Width = 150
-                        'Tiempo_Extra_Doble_Exento
-                        dtgDatos.Columns(34).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(34).ReadOnly = True
-                        dtgDatos.Columns(34).Width = 150
-
-                        'Tiempo_Extra_Triple
-                        dtgDatos.Columns(35).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(35).ReadOnly = True
-                        dtgDatos.Columns(35).Width = 150
-
-                        'Descanso_Labarado
-                        dtgDatos.Columns(36).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(36).ReadOnly = True
-                        dtgDatos.Columns(36).Width = 150
-
-
-                        'Dia_Festivo_laborado
-                        dtgDatos.Columns(37).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(37).ReadOnly = True
-                        dtgDatos.Columns(37).Width = 150
-
-                        'Bono_Asistencia
-                        dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(38).ReadOnly = True
-                        dtgDatos.Columns(38).Width = 150
-                        'Bono_Productividad
-                        dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(39).ReadOnly = True
-                        dtgDatos.Columns(39).Width = 150
-                        'Bono_Polivalencia
-                        dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(40).ReadOnly = True
-                        dtgDatos.Columns(40).Width = 150
-                        'Bono_Especialidad
-                        dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(41).ReadOnly = True
-                        dtgDatos.Columns(41).Width = 150
-                        'Bono_Calidad
-                        dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(42).ReadOnly = True
-                        dtgDatos.Columns(42).Width = 150
-                        'Compensacion
-                        dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(43).ReadOnly = True
-                        dtgDatos.Columns(43).Width = 150
-                        'Semana_fondo
-                        dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(44).ReadOnly = True
-                        dtgDatos.Columns(44).Width = 150
-                        'Falta_Injustificada
-                        dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(45).ReadOnly = True
-                        dtgDatos.Columns(45).Width = 150
-                        'Permiso_Sin_GS
-                        dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(46).ReadOnly = True
-                        dtgDatos.Columns(46).Width = 150
-
-                        'Incremento_Retenido
-                        dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(48).ReadOnly = True
-                        dtgDatos.Columns(47).Width = 150
-
-                        'Vacaciones_proporcionales
-                        dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(49).ReadOnly = True
-                        dtgDatos.Columns(48).Width = 150
-
-                        '
-                        dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(50).ReadOnly = True
-                        dtgDatos.Columns(49).Width = 150
-
-                        '
-                        dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(50).ReadOnly = True
-                        dtgDatos.Columns(50).Width = 150
-
-                        '
-                        dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(51).ReadOnly = True
-                        dtgDatos.Columns(51).Width = 150
-
-                        '
-                        dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(52).ReadOnly = True
-                        dtgDatos.Columns(52).Width = 150
-
-                        '
-                        dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(53).ReadOnly = True
-                        dtgDatos.Columns(53).Width = 150
-
-                        '
-                        dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(54).ReadOnly = True
-                        dtgDatos.Columns(54).Width = 150
-
-                        '
-                        dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(55).ReadOnly = True
-                        dtgDatos.Columns(55).Width = 150
-
-                        '
-                        dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(56).ReadOnly = True
-                        dtgDatos.Columns(56).Width = 150
-
-                        '
-                        dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(57).ReadOnly = True
-                        dtgDatos.Columns(57).Width = 150
-
-                        '
-                        dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(58).ReadOnly = True
-                        dtgDatos.Columns(58).Width = 150
-
-                        '
-                        dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(59).ReadOnly = True
-                        dtgDatos.Columns(59).Width = 150
-
-                        '
-                        dtgDatos.Columns(60).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(60).ReadOnly = True
-                        dtgDatos.Columns(60).Width = 150
-
-                        'Infonavit_bim_anterior
-                        dtgDatos.Columns(61).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(61).ReadOnly = True
-                        dtgDatos.Columns(61).Width = 150
-
-                        'Ajuste_infonavit
-                        dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(62).ReadOnly = True
-                        dtgDatos.Columns(62).Width = 150
-
-                        'Pension alimenticia
-                        dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(63).ReadOnly = True
-                        dtgDatos.Columns(63).Width = 150
-
-                        'Prestamo
-                        dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(64).ReadOnly = True
-                        dtgDatos.Columns(64).Width = 150
-
-                        'Fonacot
-                        dtgDatos.Columns(65).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(65).ReadOnly = True
-                        dtgDatos.Columns(65).Width = 150
-
-                        'T_No_laborado
-                        dtgDatos.Columns(66).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(66).ReadOnly = True
-                        dtgDatos.Columns(66).Width = 150
-
-                        'Cuota_Sindical
-                        dtgDatos.Columns(67).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(67).ReadOnly = True
-                        dtgDatos.Columns(67).Width = 150
-
-                        '
-                        dtgDatos.Columns(68).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(68).ReadOnly = True
-                        dtgDatos.Columns(68).Width = 150
-
-                        '
-                        dtgDatos.Columns(69).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(69).ReadOnly = True
-                        dtgDatos.Columns(69).Width = 150
-
-                        '
-                        dtgDatos.Columns(70).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(70).ReadOnly = True
-                        dtgDatos.Columns(70).Width = 150
-
-                        '
-                        dtgDatos.Columns(71).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(71).ReadOnly = True
-                        dtgDatos.Columns(71).Width = 150
-
-                        '
-                        dtgDatos.Columns(72).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(72).ReadOnly = True
-                        dtgDatos.Columns(72).Width = 150
-
-                        'calcular()
-
-                        'Cambiamos index del combo en el grid
-
-                        For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                            sql = "select iIdEmpleadoC,iIdDepartamento,departamentos.cNombre as cDepto ,iIdPuesto,Puestos.cnombre as cPuesto from empleadosC"
-                            sql &= " inner join Puestos on     empleadosc.fkiIdPuesto =Puestos.iIdPuesto"
-                            sql &= " inner join departamentos on empleadosc.fkiIdDepartamento = departamentos.iIdDepartamento"
-
-                            sql &= " where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-
-                            Dim rwFila As DataRow() = nConsulta(sql)
-
-
-
-                            CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
-                            CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cDepto").ToString()
-                        Next
-
-
+                        MATGRID()
                         'Cambiamos el index del combro de departamentos
 
                         'For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -2689,7 +2278,7 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * 15, 2).ToString("###,##0.00")
                                 dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
-                            ElseIf diasperiodo = 6 Or DiasCadaPeriodo = 7 Then
+                            ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
                                 dtgDatos.Rows(x).Cells(26).Value = "7"
                                 If diastrabajados = 7 Then
                                     dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * 6, 2).ToString("###,##0.00")
@@ -2766,6 +2355,21 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(66).Value = "0.00"
                             End If
 
+                            'Calcular la prima
+
+                            If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 1, SDEMPLEADO, ValorUMA)), 2)
+                                dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 2, SDEMPLEADO, ValorUMA)), 2)
+                                dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
+                                dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
+
+                            ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
+                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 1, SDEMPLEADO, ValorUMA)), 2)
+                                dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 2, SDEMPLEADO, ValorUMA)), 2)
+                                dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
+                                dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
+                            End If
+
 
                             'sumar Para ISR
 
@@ -2794,7 +2398,7 @@ Public Class frmnominasmarinos
                             PRIMAVACGRA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(52).Value = "", 0, dtgDatos.Rows(x).Cells(52).Value))
                             PRIMAVACEXEN = Double.Parse(IIf(dtgDatos.Rows(x).Cells(53).Value = "", 0, dtgDatos.Rows(x).Cells(53).Value))
 
-                            dtgDatos.Rows(x).Cells(54).Value = Math.Round(PRIDOMEXENTA + PRIMAVACGRA, 2)
+
 
                             SUMAPERCEPCIONES = SUELDOBRUTON + SEPTIMO + PRIDOMGRAVADA + PRIDOMEXENTA + TE2G + TE2E + TE3 + DESCANSOLABORADO + FESTIVOTRAB
                             SUMAPERCEPCIONES = SUMAPERCEPCIONES + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION + SEMANAFONDO
@@ -5648,7 +5252,98 @@ Public Class frmnominasmarinos
         Return cadenabanco
     End Function
 
-    Function CalculoPrimaSindicato(ByVal idempleado As String, ByVal idempresa As String, porcentajeprima As Double) As String
+    Function CalculoPrimaSA(ByVal idempleado As String, ByVal idempresa As String, porcentajeprima As Double, parte As String, sd As Double, umavalor As Double) As String
+        'Agregar el banco y el tipo de cuenta ya sea a terceros o interbancaria
+        'Buscamos el banco y verificarmos el tipo de cuenta a tercero o interbancaria
+        Dim Sql As String
+        Dim cadenabanco As String
+        Dim dia As String
+        Dim mes As String
+        Dim anio As String
+        Dim anios As Integer
+        Dim sueldodiario As Double
+        Dim dias As Integer
+        Dim BaseExento As Double
+        Dim Excento As Double
+        Dim gravado As Double
+        Dim Prima As String
+
+
+        cadenabanco = ""
+
+
+        Sql = "select *"
+        Sql &= " from empleadosC"
+        Sql &= " where fkiIdEmpresa=" & gIdEmpresa & " and iIdempleadoC=" & idempleado
+
+        Dim rwDatosBanco As DataRow() = nConsulta(Sql)
+
+        cadenabanco = "@"
+        Prima = "0"
+        If rwDatosBanco Is Nothing = False Then
+
+            If Double.Parse(rwDatosBanco(0)("fsueldoOrd")) > 0 Then
+                dia = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad").ToString).Day.ToString("00")
+                mes = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad").ToString).Month.ToString("00")
+                anio = Date.Today.Year
+                'verificar el periodo para saber si queda entre el rango de fecha
+
+                sueldodiario = Double.Parse(rwDatosBanco(0)("fsueldoOrd")) / diasperiodo
+
+                Sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+                Dim rwPeriodo As DataRow() = nConsulta(Sql)
+
+                If rwPeriodo Is Nothing = False Then
+                    Dim FechaBuscar As Date = Date.Parse(dia & "/" & mes & "/" & anio)
+                    Dim FechaInicial As Date = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                    Dim FechaFinal As Date = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                    Dim FechaAntiguedad As Date = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad"))
+
+                    If FechaBuscar.CompareTo(FechaInicial) >= 0 And FechaBuscar.CompareTo(FechaFinal) <= 0 Then
+                        'Estamos dentro del rango 
+                        'Calculamos la prima
+
+                        anios = DateDiff("yyyy", FechaAntiguedad, FechaBuscar)
+
+                        dias = CalculoDiasVacaciones(anios)
+
+                        'Calcular prima
+
+                        Prima = Math.Round(sd * dias * (porcentajeprima / 100), 2).ToString()
+                        BaseExento = 15 * umavalor
+                        If Prima >= BaseExento Then
+                            Excento = BaseExento
+                            gravado = Prima - BaseExento
+                        Else
+                            Excento = Prima
+                            gravado = 0
+                        End If
+
+                        If parte = 1 Then
+                            Prima = gravado
+                        End If
+                        If parte = 2 Then
+                            Prima = Excento
+                        End If
+
+                    End If
+
+
+                End If
+
+
+            End If
+
+
+        End If
+
+
+        Return Prima
+
+
+    End Function
+
+    Function CalculoPrimaExcedente(ByVal idempleado As String, ByVal idempresa As String, porcentajeprima As Double) As String
         'Agregar el banco y el tipo de cuenta ya sea a terceros o interbancaria
         'Buscamos el banco y verificarmos el tipo de cuenta a tercero o interbancaria
         Dim Sql As String
@@ -5682,7 +5377,7 @@ Public Class frmnominasmarinos
                 anio = Date.Today.Year
                 'verificar el periodo para saber si queda entre el rango de fecha
 
-                sueldodiario = Double.Parse(rwDatosBanco(0)("fsueldoOrd")) / diasperiodo
+                sueldodiario = Double.Parse(rwDatosBanco(0)("fsueldoOrd")) / 30
 
                 Sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
                 Dim rwPeriodo As DataRow() = nConsulta(Sql)
@@ -5843,13 +5538,21 @@ Public Class frmnominasmarinos
             Dim cadenaempleados As String
             If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
 
-                DSP()
+
 
 
                 
 
                 ids = Forma.gidEmpleados.Split(",")
                 If dtgDatos.Rows.Count > 0 Then
+
+                    If Agregartrabajadores Then
+                        dsPeriodo.Tables("Tabla").Rows.Clear()
+                    Else
+                        dsPeriodo2.Tables("Tabla").Rows.Clear()
+
+                    End If
+
                     'Dim dt As DataTable = DirectCast(dtgDatos.DataSource, DataTable)
                     'dsPeriodo.Tables("Tabla") = dtgDatos.DataSource, DataTable
                     'Dim dt As DataTable = dsPeriodo.Tables("Tabla")
@@ -5861,8 +5564,15 @@ Public Class frmnominasmarinos
 
                     'Pasamos del datagrid al dataset ya creado
                     For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                        Dim fila As DataRow
+                        If Agregartrabajadores Then
 
-                        Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
+                            fila = dsPeriodo.Tables("Tabla").NewRow
+                        Else
+                            fila = dsPeriodo2.Tables("Tabla").NewRow
+
+                        End If
+
 
                         fila.Item("Consecutivo") = (y + 1).ToString
                         fila.Item("Id_empleado") = dtgDatos.Rows(y).Cells(2).Value
@@ -5955,7 +5665,7 @@ Public Class frmnominasmarinos
                         fila.Item("Adeudo_Infonavit_A") = IIf(dtgDatos.Rows(y).Cells(72).Value = "", "0", dtgDatos.Rows(y).Cells(72).Value.ToString.Replace(",", ""))
                         fila.Item("PA_A") = IIf(dtgDatos.Rows(y).Cells(73).Value = "", "0", dtgDatos.Rows(y).Cells(73).Value.ToString.Replace(",", ""))
                         fila.Item("SINDICATO/PPP") = IIf(dtgDatos.Rows(y).Cells(74).Value = "", "0", dtgDatos.Rows(y).Cells(74).Value.ToString.Replace(",", ""))
-                        fila.Item("Retenciones") = IIf(dtgDatos.Rows(y).Cells(75).Value = "", "0", dtgDatos.Rows(y).Cells(75).Value.ToString.Replace(",", ""))
+                        fila.Item("PRIMA_EXCEN") = IIf(dtgDatos.Rows(y).Cells(75).Value = "", "0", dtgDatos.Rows(y).Cells(75).Value.ToString.Replace(",", ""))
                         fila.Item("%_Comisión") = IIf(dtgDatos.Rows(y).Cells(76).Value = "", "0", dtgDatos.Rows(y).Cells(76).Value.ToString.Replace(",", ""))
                         fila.Item("Comisión_SA") = IIf(dtgDatos.Rows(y).Cells(77).Value = "", "0", dtgDatos.Rows(y).Cells(77).Value.ToString.Replace(",", ""))
                         fila.Item("Comisión_Beneficio") = IIf(dtgDatos.Rows(y).Cells(78).Value = "", "0", dtgDatos.Rows(y).Cells(78).Value.ToString.Replace(",", ""))
@@ -5971,15 +5681,32 @@ Public Class frmnominasmarinos
                         fila.Item("fecha_inicio") = IIf(dtgDatos.Rows(y).Cells(87).Value = "", "0", dtgDatos.Rows(y).Cells(87).Value.ToString.Replace(",", ""))
                         fila.Item("fecha_fin") = IIf(dtgDatos.Rows(y).Cells(88).Value = "", "0", dtgDatos.Rows(y).Cells(88).Value.ToString.Replace(",", ""))
 
-                        
 
-                        dsPeriodo.Tables("Tabla").Rows.Add(fila)
+                        If Agregartrabajadores Then
+
+                            dsPeriodo.Tables("Tabla").Rows.Add(fila)
+
+                        Else
+                            dsPeriodo2.Tables("Tabla").Rows.Add(fila)
+
+
+                        End If
+
                     Next
+
+                    
 
                     'Agregar a la tabla los datos que vienen de la busqueda de empleados
                     For x As Integer = 0 To ids.Length - 1
 
-                        Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
+                        Dim fila As DataRow
+                        If Agregartrabajadores Then
+
+                            fila = dsPeriodo.Tables("Tabla").NewRow
+                        Else
+                            fila = dsPeriodo2.Tables("Tabla").NewRow
+
+                        End If
                         'Dim fila As DataRow = dt.NewRow
                         'Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
                         sql = "select  * from empleadosC where " 'fkiIdClienteInter=-1"
@@ -5987,11 +5714,13 @@ Public Class frmnominasmarinos
                         sql &= " order by cFuncionesPuesto,cNombreLargo"
                         Dim rwEmpleado As DataRow() = nConsulta(sql)
                         If rwEmpleado Is Nothing = False Then
-                            fila.Item("Consecutivo") = (dtgDatos.Rows.Count + x + 1).ToString
+
+                            'Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
+                            fila.Item("Consecutivo") = (dtgDatos.Rows.Count + 1).ToString
                             fila.Item("Id_empleado") = rwEmpleado(0)("iIdEmpleadoC").ToString
                             fila.Item("CodigoEmpleado") = rwEmpleado(0)("cCodigoEmpleado").ToString
                             fila.Item("Nombre") = rwEmpleado(0)("cNombreLargo").ToString.ToUpper()
-                            fila.Item("Status") = IIf(rwEmpleado(0)("iOrigen").ToString = "1", "INTERINO", "PLANTA")
+                            fila.Item("Status") = IIf(rwEmpleado(0)("iOrigen").ToString = "1", "CONFIANZA", "SINDICALIZADO")
                             fila.Item("RFC") = rwEmpleado(0)("cRFC").ToString
                             fila.Item("CURP") = rwEmpleado(0)("cCURP").ToString
                             fila.Item("Num_IMSS") = rwEmpleado(0)("cIMSS").ToString
@@ -6000,31 +5729,65 @@ Public Class frmnominasmarinos
                             'Dim tiempo As TimeSpan = Date.Now - Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString)
                             fila.Item("Edad") = CalcularEdad(Date.Parse(rwEmpleado(0)("dFechaNac").ToString).Day, Date.Parse(rwEmpleado(0)("dFechaNac").ToString).Month, Date.Parse(rwEmpleado(0)("dFechaNac").ToString).Year)
                             fila.Item("Puesto") = rwEmpleado(0)("cPuesto").ToString
-                            fila.Item("Buque") = "ECO III"
+                            fila.Item("Depto") = "uno"
 
                             fila.Item("Tipo_Infonavit") = rwEmpleado(0)("cTipoFactor").ToString
                             fila.Item("Valor_Infonavit") = rwEmpleado(0)("fFactor").ToString
-                            fila.Item("Sueldo_Base") = "0.00"
+
+
+                            fila.Item("Horas_extras_dobles_V") = ""
+                            fila.Item("Horas_extras_triples_V") = ""
+                            fila.Item("Descanso_Laborado_V") = ""
+                            fila.Item("Dia_Festivo_laborado_V") = ""
+                            fila.Item("Prima_Dominical_V") = ""
+                            fila.Item("Falta_Injustificada_V") = ""
+                            fila.Item("Permiso_Sin_GS_V") = ""
+                            fila.Item("T_No_laborado_V") = ""
+
+
+
+
+
+                            fila.Item("Sueldo_Base") = rwEmpleado(0)("fSueldoOrd").ToString
                             fila.Item("Salario_Diario") = rwEmpleado(0)("fSueldoBase").ToString
+                            'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                             fila.Item("Salario_Cotización") = rwEmpleado(0)("fSueldoIntegrado").ToString
-                            fila.Item("Dias_Trabajados") = "30"
-                            fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwEmpleado(0)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
-                            fila.Item("Número_días") = NumDiasIncapacidad(rwEmpleado(0)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
+                            fila.Item("Dias_Trabajados") = "7"
+                            fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwEmpleado(0)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
+                            fila.Item("Número_días") = NumDiasIncapacidad(rwEmpleado(0)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                             fila.Item("Sueldo_Bruto") = ""
-                            fila.Item("Tiempo_Extra_Fijo_Gravado") = ""
-                            fila.Item("Tiempo_Extra_Fijo_Exento") = ""
-                            fila.Item("Tiempo_Extra_Ocasional") = ""
-                            fila.Item("Desc_Sem_Obligatorio") = ""
+                            fila.Item("Septimo_Dia") = ""
+                            fila.Item("Prima_Dominical_Gravada") = ""
+                            fila.Item("Prima_Dominical_Exenta") = ""
+                            fila.Item("Tiempo_Extra_Doble_Gravado") = ""
+                            fila.Item("Tiempo_Extra_Doble_Exento") = ""
+                            fila.Item("Tiempo_Extra_Triple") = ""
+
+                            fila.Item("Descanso_Labarado") = ""
+                            fila.Item("Dia_Festivo_laborado") = ""
+                            fila.Item("Bono_Asistencia") = ""
+                            fila.Item("Bono_Productividad") = ""
+                            fila.Item("Bono_Polivalencia") = ""
+                            fila.Item("Bono_Especialidad") = ""
+                            fila.Item("Bono_Calidad") = ""
+                            fila.Item("Compensacion") = ""
+                            fila.Item("Semana_fondo") = ""
+                            fila.Item("Falta_Injustificada") = ""
+                            fila.Item("Permiso_Sin_GS") = ""
+                            fila.Item("Incremento_Retenido") = ""
+
+
                             fila.Item("Vacaciones_proporcionales") = ""
                             fila.Item("Aguinaldo_gravado") = ""
                             fila.Item("Aguinaldo_exento") = ""
                             fila.Item("Total_Aguinaldo") = ""
                             fila.Item("Prima_vac_gravado") = ""
                             fila.Item("Prima_vac_exento") = ""
-
                             fila.Item("Total_Prima_vac") = ""
+
                             fila.Item("Total_percepciones") = ""
                             fila.Item("Total_percepciones_p/isr") = ""
+
                             fila.Item("Incapacidad") = ""
                             fila.Item("ISR") = ""
                             fila.Item("IMSS") = ""
@@ -6034,17 +5797,21 @@ Public Class frmnominasmarinos
                             fila.Item("Pension_Alimenticia") = ""
                             fila.Item("Prestamo") = ""
                             fila.Item("Fonacot") = ""
+                            fila.Item("T_No_laborado") = ""
+                            fila.Item("Cuota_Sindical") = ""
+
+
                             fila.Item("Subsidio_Generado") = ""
                             fila.Item("Subsidio_Aplicado") = ""
-                            fila.Item("Operadora") = ""
+                            fila.Item("Neto_SA") = ""
                             fila.Item("Prestamo_Personal_A") = ""
                             fila.Item("Adeudo_Infonavit_A") = ""
-                            fila.Item("Diferencia_Infonavit_A") = ""
-                            fila.Item("Asimilados") = ""
-                            fila.Item("Retenciones_Operadora") = ""
+                            fila.Item("PA_A") = ""
+                            fila.Item("SINDICATO/PPP") = ""
+                            fila.Item("PRIMA_EXCEN") = ""
                             fila.Item("%_Comisión") = ""
-                            fila.Item("Comisión_Operadora") = ""
-                            fila.Item("Comisión_Asimilados") = ""
+                            fila.Item("Comisión_SA") = ""
+                            fila.Item("Comisión_Beneficio") = ""
                             fila.Item("IMSS_CS") = ""
                             fila.Item("RCV_CS") = ""
                             fila.Item("Infonavit_CS") = ""
@@ -6053,13 +5820,21 @@ Public Class frmnominasmarinos
                             fila.Item("Subtotal") = ""
                             fila.Item("IVA") = ""
                             fila.Item("TOTAL_DEPOSITO") = ""
+                            fila.Item("IVA") = ""
+                            fila.Item("TOTAL_DEPOSITO") = ""
                             fila.Item("fecha_inicio") = ""
                             fila.Item("fecha_fin") = ""
 
-                            dsPeriodo.Tables("Tabla").Rows.Add(fila)
+
                             'dt.Rows.Add(fila)
 
+                            If Agregartrabajadores Then
 
+                                dsPeriodo.Tables("Tabla").Rows.Add(fila)
+                            Else
+                                dsPeriodo2.Tables("Tabla").Rows.Add(fila)
+
+                            End If
 
                         End If
 
@@ -6070,376 +5845,21 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns.Add(chk)
                     chk.HeaderText = ""
                     chk.Name = "chk"
-                    dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
+                    If Agregartrabajadores Then
+                        dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
+                        Agregartrabajadores = False
+                    Else
+                        dtgDatos.DataSource = dsPeriodo2.Tables("Tabla")
+                        Agregartrabajadores = True
 
-                    dtgDatos.Columns(0).Width = 30
-                    dtgDatos.Columns(0).ReadOnly = True
-                    dtgDatos.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    End If
 
-                    'consecutivo
-                    dtgDatos.Columns(1).Width = 60
-                    dtgDatos.Columns(1).ReadOnly = True
-                    dtgDatos.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'idempleado
-                    dtgDatos.Columns(2).Width = 100
-                    dtgDatos.Columns(2).ReadOnly = True
-                    dtgDatos.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'codigo empleado
-                    dtgDatos.Columns(3).Width = 100
-                    dtgDatos.Columns(3).ReadOnly = True
-                    dtgDatos.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Nombre
-                    dtgDatos.Columns(4).Width = 250
-                    dtgDatos.Columns(4).ReadOnly = True
-                    'Estatus
-                    dtgDatos.Columns(5).Width = 100
-                    dtgDatos.Columns(5).ReadOnly = True
-                    'RFC
-                    dtgDatos.Columns(6).Width = 100
-                    dtgDatos.Columns(6).ReadOnly = True
-                    'dtgDatos.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    
 
-                    'CURP
-                    dtgDatos.Columns(7).Width = 150
-                    dtgDatos.Columns(7).ReadOnly = True
-                    'IMSS 
 
-                    dtgDatos.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(8).ReadOnly = True
-                    'Fecha_Nac
-                    dtgDatos.Columns(9).Width = 150
-                    dtgDatos.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(9).ReadOnly = True
 
-                    'Edad
-                    dtgDatos.Columns(10).ReadOnly = True
-                    dtgDatos.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    MATGRID()
 
-                    'Puesto
-                    dtgDatos.Columns(11).ReadOnly = True
-                    dtgDatos.Columns(11).Width = 200
-                    dtgDatos.Columns.Remove("Puesto")
-
-                    Dim combo As New DataGridViewComboBoxColumn
-
-                    sql = "select * from puestos where iTipo=1 order by cNombre"
-
-                    'Dim rwPuestos As DataRow() = nConsulta(sql)
-                    'If rwPuestos Is Nothing = False Then
-                    '    combo.Items.Add("uno")
-                    '    combo.Items.Add("dos")
-                    '    combo.Items.Add("tres")
-                    'End If
-
-                    nCargaCBO(combo, sql, "cNombre", "iIdPuesto")
-
-                    combo.HeaderText = "Puesto"
-
-                    combo.Width = 150
-                    dtgDatos.Columns.Insert(11, combo)
-                    'DirectCast(dtgDatos.Columns(11), DataGridViewComboBoxColumn).Sorted = True
-                    'Dim combo2 As New DataGridViewComboBoxCell
-                    'combo2 = CType(Me.dtgDatos.Rows(2).Cells(11), DataGridViewComboBoxCell)
-                    'combo2.Value = combo.Items(11)
-
-
-
-                    'dtgDatos.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                    'Buque
-                    'dtgDatos.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(12).ReadOnly = True
-                    dtgDatos.Columns(12).Width = 150
-                    dtgDatos.Columns.Remove("Buque")
-
-                    Dim combo2 As New DataGridViewComboBoxColumn
-
-                    sql = "select * from departamentos where iEstatus=1 order by cNombre"
-
-                    'Dim rwPuestos As DataRow() = nConsulta(sql)
-                    'If rwPuestos Is Nothing = False Then
-                    '    combo.Items.Add("uno")
-                    '    combo.Items.Add("dos")
-                    '    combo.Items.Add("tres")
-                    'End If
-
-                    nCargaCBO(combo2, sql, "cNombre", "iIdDepartamento")
-
-                    combo2.HeaderText = "Buque"
-                    combo2.Width = 150
-                    dtgDatos.Columns.Insert(12, combo2)
-
-                    'Tipo_Infonavit
-                    dtgDatos.Columns(13).ReadOnly = True
-                    dtgDatos.Columns(13).Width = 150
-                    'dtgDatos.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-
-
-                    'Valor_Infonavit
-                    dtgDatos.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(14).ReadOnly = True
-                    dtgDatos.Columns(14).Width = 150
-                    'Sueldo_Base
-                    dtgDatos.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(15).ReadOnly = True
-                    dtgDatos.Columns(15).Width = 150
-                    'Salario_Diario
-                    dtgDatos.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(16).ReadOnly = True
-                    dtgDatos.Columns(16).Width = 150
-                    'Salario_Cotización
-                    dtgDatos.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(17).ReadOnly = True
-                    dtgDatos.Columns(17).Width = 150
-                    'Dias_Trabajados
-                    dtgDatos.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(18).Width = 150
-                    'Tipo_Incapacidad
-                    dtgDatos.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(19).ReadOnly = True
-                    dtgDatos.Columns(19).Width = 150
-                    'Número_días
-                    dtgDatos.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(20).ReadOnly = True
-                    dtgDatos.Columns(20).Width = 150
-                    'Sueldo_Bruto
-                    dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(21).ReadOnly = True
-                    dtgDatos.Columns(21).Width = 150
-                    'Tiempo_Extra_Fijo_Gravado
-                    dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(22).ReadOnly = True
-                    dtgDatos.Columns(22).Width = 150
-
-                    'Tiempo_Extra_Fijo_Exento
-                    dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(23).ReadOnly = True
-                    dtgDatos.Columns(23).Width = 150
-
-                    'Tiempo_Extra_Ocasional
-                    dtgDatos.Columns(24).Width = 150
-                    dtgDatos.Columns(24).ReadOnly = True
-                    dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Desc_Sem_Obligatorio
-                    dtgDatos.Columns(25).Width = 150
-                    dtgDatos.Columns(25).ReadOnly = True
-                    dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Vacaciones_proporcionales
-                    dtgDatos.Columns(26).Width = 150
-                    dtgDatos.Columns(26).ReadOnly = True
-                    dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Aguinaldo_gravado
-                    dtgDatos.Columns(27).Width = 150
-                    dtgDatos.Columns(27).ReadOnly = True
-                    dtgDatos.Columns(27).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Aguinaldo_exento
-                    dtgDatos.Columns(28).Width = 150
-                    dtgDatos.Columns(28).ReadOnly = True
-                    dtgDatos.Columns(28).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'Total_Aguinaldo
-                    dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(29).Width = 150
-                    dtgDatos.Columns(29).ReadOnly = True
-
-                    'Prima_vac_gravado
-                    dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(30).ReadOnly = True
-                    dtgDatos.Columns(30).Width = 150
-                    'Prima_vac_exento 
-                    dtgDatos.Columns(31).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(31).ReadOnly = True
-                    dtgDatos.Columns(31).Width = 150
-
-                    'Total_Prima_vac
-                    dtgDatos.Columns(32).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(32).ReadOnly = True
-                    dtgDatos.Columns(32).Width = 150
-
-
-                    'Total_percepciones
-                    dtgDatos.Columns(33).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(33).ReadOnly = True
-                    dtgDatos.Columns(33).Width = 150
-                    'Total_percepciones_p/isr
-                    dtgDatos.Columns(34).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(34).ReadOnly = True
-                    dtgDatos.Columns(34).Width = 150
-
-                    'Incapacidad
-                    dtgDatos.Columns(35).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(35).ReadOnly = True
-                    dtgDatos.Columns(35).Width = 150
-
-                    'ISR
-                    dtgDatos.Columns(36).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(36).ReadOnly = True
-                    dtgDatos.Columns(36).Width = 150
-
-
-                    'IMSS
-                    dtgDatos.Columns(37).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(37).ReadOnly = True
-                    dtgDatos.Columns(37).Width = 150
-
-                    'Infonavit
-                    dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(38).ReadOnly = True
-                    dtgDatos.Columns(38).Width = 150
-                    'Infonavit_bim_anterior
-                    dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(39).ReadOnly = True
-                    dtgDatos.Columns(39).Width = 150
-                    'Ajuste_infonavit
-                    dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(40).ReadOnly = True
-                    dtgDatos.Columns(40).Width = 150
-                    'Pension_Alimenticia
-                    dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(40).ReadOnly = True
-                    dtgDatos.Columns(41).Width = 150
-                    'Prestamo
-                    dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(42).ReadOnly = True
-                    dtgDatos.Columns(42).Width = 150
-                    'Fonacot
-                    dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(43).ReadOnly = True
-                    dtgDatos.Columns(43).Width = 150
-                    'Subsidio_Generado
-                    dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(44).ReadOnly = True
-                    dtgDatos.Columns(44).Width = 150
-                    'Subsidio_Aplicado
-                    dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(45).ReadOnly = True
-                    dtgDatos.Columns(45).Width = 150
-                    'Operadora
-                    dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(46).ReadOnly = True
-                    dtgDatos.Columns(46).Width = 150
-
-                    'Prestamo Personal Asimilado
-                    dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(48).ReadOnly = True
-                    dtgDatos.Columns(47).Width = 150
-
-                    'Adeudo_Infonavit_Asimilado
-                    dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(49).ReadOnly = True
-                    dtgDatos.Columns(48).Width = 150
-
-                    'Difencia infonavit Asimilado
-                    dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(50).ReadOnly = True
-                    dtgDatos.Columns(49).Width = 150
-
-                    'Complemento Asimilado
-                    dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(50).ReadOnly = True
-                    dtgDatos.Columns(50).Width = 150
-
-                    'Retenciones_Operadora
-                    dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(51).ReadOnly = True
-                    dtgDatos.Columns(51).Width = 150
-
-                    '% Comision
-                    dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(52).ReadOnly = True
-                    dtgDatos.Columns(52).Width = 150
-
-                    'Comision_Operadora
-                    dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(53).ReadOnly = True
-                    dtgDatos.Columns(53).Width = 150
-
-                    'Comision asimilados
-                    dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(54).ReadOnly = True
-                    dtgDatos.Columns(54).Width = 150
-
-                    'IMSS_CS
-                    dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(55).ReadOnly = True
-                    dtgDatos.Columns(55).Width = 150
-
-                    'RCV_CS
-                    dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(56).ReadOnly = True
-                    dtgDatos.Columns(56).Width = 150
-
-                    'Infonavit_CS
-                    dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(57).ReadOnly = True
-                    dtgDatos.Columns(57).Width = 150
-
-                    'ISN_CS
-                    dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(58).ReadOnly = True
-                    dtgDatos.Columns(58).Width = 150
-
-                    'Total Costo Social
-                    dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(59).ReadOnly = True
-                    dtgDatos.Columns(59).Width = 150
-
-                    'Subtotal
-                    dtgDatos.Columns(60).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(60).ReadOnly = True
-                    dtgDatos.Columns(60).Width = 150
-
-                    'IVA
-                    dtgDatos.Columns(61).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(61).ReadOnly = True
-                    dtgDatos.Columns(61).Width = 150
-
-                    'TOTAL DEPOSITO
-                    dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(62).ReadOnly = True
-                    dtgDatos.Columns(62).Width = 150
-
-                    'fecha inicio
-                    dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(63).ReadOnly = True
-                    dtgDatos.Columns(63).Width = 150
-                    'fecha fin
-                    dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    'dtgDatos.Columns(64).ReadOnly = True
-                    dtgDatos.Columns(64).Width = 150
-                    'calcular()
-
-                    'calcular()
-
-                    'Cambiamos index del combo en el grid
-
-
-
-
-                    For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                        sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                        sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                        sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                        sql &= " and iTipoNomina=0"
-                        Dim rwFila As DataRow() = nConsulta(sql)
-
-                        If rwFila Is Nothing = False Then
-                            CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                            CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
-                        Else
-                            sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                            Dim rwEmpleado As DataRow() = nConsulta(sql)
-
-
-
-                            CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwEmpleado(0)("cPuesto").ToString()
-                            CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwEmpleado(0)("cFuncionesPuesto").ToString()
-                        End If
-
-
-
-                    Next
 
                     MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -6466,18 +5886,18 @@ Public Class frmnominasmarinos
                     sql &= cadenaempleados
                     sql &= " order by cFuncionesPuesto,cNombreLargo"
 
+                    dsPeriodo.Tables("Tabla").Rows.Clear()
                     Dim rwDatosEmpleados As DataRow() = nConsulta(sql)
                     If rwDatosEmpleados Is Nothing = False Then
                         For x As Integer = 0 To rwDatosEmpleados.Length - 1
 
 
                             Dim fila As DataRow = dsPeriodo.Tables("Tabla").NewRow
-
                             fila.Item("Consecutivo") = (x + 1).ToString
                             fila.Item("Id_empleado") = rwDatosEmpleados(x)("iIdEmpleadoC").ToString
                             fila.Item("CodigoEmpleado") = rwDatosEmpleados(x)("cCodigoEmpleado").ToString
                             fila.Item("Nombre") = rwDatosEmpleados(x)("cNombreLargo").ToString.ToUpper()
-                            fila.Item("Status") = IIf(rwDatosEmpleados(x)("iOrigen").ToString = "1", "INTERINO", "PLANTA")
+                            fila.Item("Status") = IIf(rwDatosEmpleados(x)("iOrigen").ToString = "1", "CONFIANZA", "SINDICALIZADO")
                             fila.Item("RFC") = rwDatosEmpleados(x)("cRFC").ToString
                             fila.Item("CURP") = rwDatosEmpleados(x)("cCURP").ToString
                             fila.Item("Num_IMSS") = rwDatosEmpleados(x)("cIMSS").ToString
@@ -6486,21 +5906,54 @@ Public Class frmnominasmarinos
                             'Dim tiempo As TimeSpan = Date.Now - Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString)
                             fila.Item("Edad") = CalcularEdad(Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString).Day, Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString).Month, Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString).Year)
                             fila.Item("Puesto") = rwDatosEmpleados(x)("cPuesto").ToString
-                            fila.Item("Buque") = "ECO III"
+                            fila.Item("Depto") = "uno"
 
                             fila.Item("Tipo_Infonavit") = rwDatosEmpleados(x)("cTipoFactor").ToString
                             fila.Item("Valor_Infonavit") = rwDatosEmpleados(x)("fFactor").ToString
-                            fila.Item("Sueldo_Base") = "0.00"
+
+
+                            fila.Item("Horas_extras_dobles_V") = ""
+                            fila.Item("Horas_extras_triples_V") = ""
+                            fila.Item("Descanso_Laborado_V") = ""
+                            fila.Item("Dia_Festivo_laborado_V") = ""
+                            fila.Item("Prima_Dominical_V") = ""
+                            fila.Item("Falta_Injustificada_V") = ""
+                            fila.Item("Permiso_Sin_GS_V") = ""
+                            fila.Item("T_No_laborado_V") = ""
+
+
+
+
+
+                            fila.Item("Sueldo_Base") = rwDatosEmpleados(x)("fSueldoOrd").ToString
                             fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fSueldoBase").ToString
+                            'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                             fila.Item("Salario_Cotización") = rwDatosEmpleados(x)("fSueldoIntegrado").ToString
-                            fila.Item("Dias_Trabajados") = "30"
-                            fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
-                            fila.Item("Número_días") = NumDiasIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
+                            fila.Item("Dias_Trabajados") = "7"
+                            fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
+                            fila.Item("Número_días") = NumDiasIncapacidad(rwDatosEmpleados(x)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                             fila.Item("Sueldo_Bruto") = ""
-                            fila.Item("Tiempo_Extra_Fijo_Gravado") = ""
-                            fila.Item("Tiempo_Extra_Fijo_Exento") = ""
-                            fila.Item("Tiempo_Extra_Ocasional") = ""
-                            fila.Item("Desc_Sem_Obligatorio") = ""
+                            fila.Item("Septimo_Dia") = ""
+                            fila.Item("Prima_Dominical_Gravada") = ""
+                            fila.Item("Prima_Dominical_Exenta") = ""
+                            fila.Item("Tiempo_Extra_Doble_Gravado") = ""
+                            fila.Item("Tiempo_Extra_Doble_Exento") = ""
+                            fila.Item("Tiempo_Extra_Triple") = ""
+
+                            fila.Item("Descanso_Labarado") = ""
+                            fila.Item("Dia_Festivo_laborado") = ""
+                            fila.Item("Bono_Asistencia") = ""
+                            fila.Item("Bono_Productividad") = ""
+                            fila.Item("Bono_Polivalencia") = ""
+                            fila.Item("Bono_Especialidad") = ""
+                            fila.Item("Bono_Calidad") = ""
+                            fila.Item("Compensacion") = ""
+                            fila.Item("Semana_fondo") = ""
+                            fila.Item("Falta_Injustificada") = ""
+                            fila.Item("Permiso_Sin_GS") = ""
+                            fila.Item("Incremento_Retenido") = ""
+
+
                             fila.Item("Vacaciones_proporcionales") = ""
                             fila.Item("Aguinaldo_gravado") = ""
                             fila.Item("Aguinaldo_exento") = ""
@@ -6508,8 +5961,10 @@ Public Class frmnominasmarinos
                             fila.Item("Prima_vac_gravado") = ""
                             fila.Item("Prima_vac_exento") = ""
                             fila.Item("Total_Prima_vac") = ""
+
                             fila.Item("Total_percepciones") = ""
                             fila.Item("Total_percepciones_p/isr") = ""
+
                             fila.Item("Incapacidad") = ""
                             fila.Item("ISR") = ""
                             fila.Item("IMSS") = ""
@@ -6519,23 +5974,29 @@ Public Class frmnominasmarinos
                             fila.Item("Pension_Alimenticia") = ""
                             fila.Item("Prestamo") = ""
                             fila.Item("Fonacot") = ""
+                            fila.Item("T_No_laborado") = ""
+                            fila.Item("Cuota_Sindical") = ""
+
+
                             fila.Item("Subsidio_Generado") = ""
                             fila.Item("Subsidio_Aplicado") = ""
-                            fila.Item("Operadora") = ""
+                            fila.Item("Neto_SA") = ""
                             fila.Item("Prestamo_Personal_A") = ""
                             fila.Item("Adeudo_Infonavit_A") = ""
-                            fila.Item("Diferencia_Infonavit_A") = ""
-                            fila.Item("Asimilados") = ""
-                            fila.Item("Retenciones_Operadora") = ""
+                            fila.Item("PA_A") = ""
+                            fila.Item("SINDICATO/PPP") = ""
+                            fila.Item("Retenciones") = ""
                             fila.Item("%_Comisión") = ""
-                            fila.Item("Comisión_Operadora") = ""
-                            fila.Item("Comisión_Asimilados") = ""
+                            fila.Item("Comisión_SA") = ""
+                            fila.Item("Comisión_Beneficio") = ""
                             fila.Item("IMSS_CS") = ""
                             fila.Item("RCV_CS") = ""
                             fila.Item("Infonavit_CS") = ""
                             fila.Item("ISN_CS") = ""
                             fila.Item("Total_Costo_Social") = ""
                             fila.Item("Subtotal") = ""
+                            fila.Item("IVA") = ""
+                            fila.Item("TOTAL_DEPOSITO") = ""
                             fila.Item("IVA") = ""
                             fila.Item("TOTAL_DEPOSITO") = ""
                             fila.Item("fecha_inicio") = ""
@@ -6555,360 +6016,9 @@ Public Class frmnominasmarinos
                         chk.Name = "chk"
                         dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
 
-                        dtgDatos.Columns(0).Width = 30
-                        dtgDatos.Columns(0).ReadOnly = True
-                        dtgDatos.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'consecutivo
-                        dtgDatos.Columns(1).Width = 60
-                        dtgDatos.Columns(1).ReadOnly = True
-                        dtgDatos.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'idempleado
-                        dtgDatos.Columns(2).Width = 100
-                        dtgDatos.Columns(2).ReadOnly = True
-                        dtgDatos.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'codigo empleado
-                        dtgDatos.Columns(3).Width = 100
-                        dtgDatos.Columns(3).ReadOnly = True
-                        dtgDatos.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Nombre
-                        dtgDatos.Columns(4).Width = 250
-                        dtgDatos.Columns(4).ReadOnly = True
-                        'Estatus
-                        dtgDatos.Columns(5).Width = 100
-                        dtgDatos.Columns(5).ReadOnly = True
-                        'RFC
-                        dtgDatos.Columns(6).Width = 100
-                        dtgDatos.Columns(6).ReadOnly = True
-                        'dtgDatos.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'CURP
-                        dtgDatos.Columns(7).Width = 150
-                        dtgDatos.Columns(7).ReadOnly = True
-                        'IMSS 
-
-                        dtgDatos.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(8).ReadOnly = True
-                        'Fecha_Nac
-                        dtgDatos.Columns(9).Width = 150
-                        dtgDatos.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(9).ReadOnly = True
-
-                        'Edad
-                        dtgDatos.Columns(10).ReadOnly = True
-                        dtgDatos.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'Puesto
-                        dtgDatos.Columns(11).ReadOnly = True
-                        dtgDatos.Columns(11).Width = 200
-                        dtgDatos.Columns.Remove("Puesto")
-
-                        Dim combo As New DataGridViewComboBoxColumn
-
-                        sql = "select * from puestos where iTipo=1 order by cNombre"
-
-                        'Dim rwPuestos As DataRow() = nConsulta(sql)
-                        'If rwPuestos Is Nothing = False Then
-                        '    combo.Items.Add("uno")
-                        '    combo.Items.Add("dos")
-                        '    combo.Items.Add("tres")
-                        'End If
-
-                        nCargaCBO(combo, sql, "cNombre", "iIdPuesto")
-
-                        combo.HeaderText = "Puesto"
-
-                        combo.Width = 150
-                        dtgDatos.Columns.Insert(11, combo)
-                        'DirectCast(dtgDatos.Columns(11), DataGridViewComboBoxColumn).Sorted = True
-                        'Dim combo2 As New DataGridViewComboBoxCell
-                        'combo2 = CType(Me.dtgDatos.Rows(2).Cells(11), DataGridViewComboBoxCell)
-                        'combo2.Value = combo.Items(11)
 
 
-
-                        'dtgDatos.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-                        'Buque
-                        'dtgDatos.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(12).ReadOnly = True
-                        dtgDatos.Columns(12).Width = 150
-                        dtgDatos.Columns.Remove("Buque")
-
-                        Dim combo2 As New DataGridViewComboBoxColumn
-
-                        sql = "select * from departamentos where iEstatus=1 order by cNombre"
-
-                        'Dim rwPuestos As DataRow() = nConsulta(sql)
-                        'If rwPuestos Is Nothing = False Then
-                        '    combo.Items.Add("uno")
-                        '    combo.Items.Add("dos")
-                        '    combo.Items.Add("tres")
-                        'End If
-
-                        nCargaCBO(combo2, sql, "cNombre", "iIdDepartamento")
-
-                        combo2.HeaderText = "Buque"
-                        combo2.Width = 150
-                        dtgDatos.Columns.Insert(12, combo2)
-
-                        'Tipo_Infonavit
-                        dtgDatos.Columns(13).ReadOnly = True
-                        dtgDatos.Columns(13).Width = 150
-                        'dtgDatos.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
-
-
-                        'Valor_Infonavit
-                        dtgDatos.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(14).ReadOnly = True
-                        dtgDatos.Columns(14).Width = 150
-                        'Sueldo_Base
-                        dtgDatos.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(15).ReadOnly = True
-                        dtgDatos.Columns(15).Width = 150
-                        'Salario_Diario
-                        dtgDatos.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(16).ReadOnly = True
-                        dtgDatos.Columns(16).Width = 150
-                        'Salario_Cotización
-                        dtgDatos.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(17).ReadOnly = True
-                        dtgDatos.Columns(17).Width = 150
-                        'Dias_Trabajados
-                        dtgDatos.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(18).Width = 150
-                        'Tipo_Incapacidad
-                        dtgDatos.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(19).ReadOnly = True
-                        dtgDatos.Columns(19).Width = 150
-                        'Número_días
-                        dtgDatos.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(20).ReadOnly = True
-                        dtgDatos.Columns(20).Width = 150
-                        'Sueldo_Bruto
-                        dtgDatos.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(21).ReadOnly = True
-                        dtgDatos.Columns(21).Width = 150
-                        'Tiempo_Extra_Fijo_Gravado
-                        dtgDatos.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(22).ReadOnly = True
-                        dtgDatos.Columns(22).Width = 150
-
-                        'Tiempo_Extra_Fijo_Exento
-                        dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(23).ReadOnly = True
-                        dtgDatos.Columns(23).Width = 150
-
-                        'Tiempo_Extra_Ocasional
-                        dtgDatos.Columns(24).Width = 150
-                        dtgDatos.Columns(24).ReadOnly = True
-                        dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Desc_Sem_Obligatorio
-                        dtgDatos.Columns(25).Width = 150
-                        dtgDatos.Columns(25).ReadOnly = True
-                        dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Vacaciones_proporcionales
-                        dtgDatos.Columns(26).Width = 150
-                        dtgDatos.Columns(26).ReadOnly = True
-                        dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Aguinaldo_gravado
-                        dtgDatos.Columns(27).Width = 150
-                        dtgDatos.Columns(27).ReadOnly = True
-                        dtgDatos.Columns(27).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Aguinaldo_exento
-                        dtgDatos.Columns(28).Width = 150
-                        dtgDatos.Columns(28).ReadOnly = True
-                        dtgDatos.Columns(28).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'Total_Aguinaldo
-                        dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(29).Width = 150
-                        dtgDatos.Columns(29).ReadOnly = True
-
-                        'Prima_vac_gravado
-                        dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(30).ReadOnly = True
-                        dtgDatos.Columns(30).Width = 150
-                        'Prima_vac_exento 
-                        dtgDatos.Columns(31).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(31).ReadOnly = True
-                        dtgDatos.Columns(31).Width = 150
-
-                        'Total_Prima_vac
-                        dtgDatos.Columns(32).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(32).ReadOnly = True
-                        dtgDatos.Columns(32).Width = 150
-
-
-                        'Total_percepciones
-                        dtgDatos.Columns(33).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(33).ReadOnly = True
-                        dtgDatos.Columns(33).Width = 150
-                        'Total_percepciones_p/isr
-                        dtgDatos.Columns(34).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(34).ReadOnly = True
-                        dtgDatos.Columns(34).Width = 150
-
-                        'Incapacidad
-                        dtgDatos.Columns(35).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(35).ReadOnly = True
-                        dtgDatos.Columns(35).Width = 150
-
-                        'ISR
-                        dtgDatos.Columns(36).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(36).ReadOnly = True
-                        dtgDatos.Columns(36).Width = 150
-
-
-                        'IMSS
-                        dtgDatos.Columns(37).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(37).ReadOnly = True
-                        dtgDatos.Columns(37).Width = 150
-
-                        'Infonavit
-                        dtgDatos.Columns(38).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(38).ReadOnly = True
-                        dtgDatos.Columns(38).Width = 150
-                        'Infonavit_bim_anterior
-                        dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(39).ReadOnly = True
-                        dtgDatos.Columns(39).Width = 150
-                        'Ajuste_infonavit
-                        dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(40).ReadOnly = True
-                        dtgDatos.Columns(40).Width = 150
-                        'Pension_Alimenticia
-                        dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(40).ReadOnly = True
-                        dtgDatos.Columns(41).Width = 150
-                        'Prestamo
-                        dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(42).ReadOnly = True
-                        dtgDatos.Columns(42).Width = 150
-                        'Fonacot
-                        dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(43).ReadOnly = True
-                        dtgDatos.Columns(43).Width = 150
-                        'Subsidio_Generado
-                        dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(44).ReadOnly = True
-                        dtgDatos.Columns(44).Width = 150
-                        'Subsidio_Aplicado
-                        dtgDatos.Columns(45).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(45).ReadOnly = True
-                        dtgDatos.Columns(45).Width = 150
-                        'Operadora
-                        dtgDatos.Columns(46).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(46).ReadOnly = True
-                        dtgDatos.Columns(46).Width = 150
-
-                        'Prestamo Personal Asimilado
-                        dtgDatos.Columns(47).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(48).ReadOnly = True
-                        dtgDatos.Columns(47).Width = 150
-
-                        'Adeudo_Infonavit_Asimilado
-                        dtgDatos.Columns(48).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(49).ReadOnly = True
-                        dtgDatos.Columns(48).Width = 150
-
-                        'Difencia infonavit Asimilado
-                        dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(50).ReadOnly = True
-                        dtgDatos.Columns(49).Width = 150
-
-                        'Complemento Asimilado
-                        dtgDatos.Columns(50).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(50).ReadOnly = True
-                        dtgDatos.Columns(50).Width = 150
-
-                        'Retenciones_Operadora
-                        dtgDatos.Columns(51).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(51).ReadOnly = True
-                        dtgDatos.Columns(51).Width = 150
-
-                        '% Comision
-                        dtgDatos.Columns(52).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(52).ReadOnly = True
-                        dtgDatos.Columns(52).Width = 150
-
-                        'Comision_Operadora
-                        dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(53).ReadOnly = True
-                        dtgDatos.Columns(53).Width = 150
-
-                        'Comision asimilados
-                        dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(54).ReadOnly = True
-                        dtgDatos.Columns(54).Width = 150
-
-                        'IMSS_CS
-                        dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(55).ReadOnly = True
-                        dtgDatos.Columns(55).Width = 150
-
-                        'RCV_CS
-                        dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(56).ReadOnly = True
-                        dtgDatos.Columns(56).Width = 150
-
-                        'Infonavit_CS
-                        dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(57).ReadOnly = True
-                        dtgDatos.Columns(57).Width = 150
-
-                        'ISN_CS
-                        dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(58).ReadOnly = True
-                        dtgDatos.Columns(58).Width = 150
-
-                        'Total Costo Social
-                        dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(59).ReadOnly = True
-                        dtgDatos.Columns(59).Width = 150
-
-                        'Subtotal
-                        dtgDatos.Columns(60).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(60).ReadOnly = True
-                        dtgDatos.Columns(60).Width = 150
-
-                        'IVA
-                        dtgDatos.Columns(61).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(61).ReadOnly = True
-                        dtgDatos.Columns(61).Width = 150
-
-                        'TOTAL DEPOSITO
-                        dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(62).ReadOnly = True
-                        dtgDatos.Columns(62).Width = 150
-
-
-                        'fecha inicio
-                        dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(63).ReadOnly = True
-                        dtgDatos.Columns(63).Width = 150
-                        'fecha fin
-                        dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        'dtgDatos.Columns(64).ReadOnly = True
-                        dtgDatos.Columns(64).Width = 150
-
-                        'calcular()
-
-                        'Cambiamos index del combo en el grid
-
-                        For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                            sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                            Dim rwFila As DataRow() = nConsulta(sql)
-
-
-
-                            CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
-                            CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cFuncionesPuesto").ToString()
-                        Next
-
-
-
+                        MATGRID()
 
                         MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Else
@@ -7553,10 +6663,31 @@ Public Class frmnominasmarinos
             Dim filaExcel As Integer = 5
             Dim dialogo As New SaveFileDialog()
             Dim contadorfacturas As Integer
-
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim DiasCadaPeriodo As Integer
+            Dim numperiodo As Integer
             Alter = True
 
             If dtgDatos.Rows.Count > 0 Then
+
+
+                SQL = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+                Dim rwPeriodo As DataRow() = nConsulta(SQL)
+
+                If rwPeriodo Is Nothing = False Then
+                    FechaInicioPeriodo = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+
+                    FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                    DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
+                    numperiodo = rwPeriodo(0)("iNumeroPeriodo")
+
+
+
+                End If
+
+
+
                 Dim libro As New ClosedXML.Excel.XLWorkbook
                 Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
                 Dim hoja2 As IXLWorksheet = libro.Worksheets.Add("Resumen pago")
@@ -7597,16 +6728,16 @@ Public Class frmnominasmarinos
                 'hoja.Cell(3, 2).Value = ":"
                 'hoja.Cell(3, 3).Value = ""
 
-                hoja.Range(4, 2, 4, 83).Style.Font.FontSize = 10
-                hoja.Range(4, 2, 4, 83).Style.Font.SetBold(True)
-                hoja.Range(4, 2, 4, 83).Style.Alignment.WrapText = True
-                hoja.Range(4, 2, 4, 83).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(4, 1, 4, 83).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                hoja.Range(4, 2, 4, 85).Style.Font.FontSize = 10
+                hoja.Range(4, 2, 4, 85).Style.Font.SetBold(True)
+                hoja.Range(4, 2, 4, 85).Style.Alignment.WrapText = True
+                hoja.Range(4, 2, 4, 85).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(4, 1, 4, 85).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
                 'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-                hoja.Range(4, 2, 4, 83).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-                hoja.Range(4, 2, 4, 83).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+                hoja.Range(4, 2, 4, 85).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+                hoja.Range(4, 2, 4, 85).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
-                hoja.Range(5, 15, 1000, 84).Style.NumberFormat.NumberFormatId = 4
+                hoja.Range(5, 15, 1000, 85).Style.NumberFormat.NumberFormatId = 4
 
                 'Format = ("$ #,###,##0.00")
                 'hoja.Cell(4, 1).Value = "Num"
@@ -7684,15 +6815,16 @@ Public Class frmnominasmarinos
                 hoja.Cell(4, 73).Value = "ADEUDO INF EXCEDENTE"
                 hoja.Cell(4, 74).Value = "PA E"
                 hoja.Cell(4, 75).Value = "EXCEDENTE"
-                hoja.Cell(4, 76).Value = "POR COMISION"
-                hoja.Cell(4, 77).Value = "COMISION A"
-                hoja.Cell(4, 78).Value = "COMISION B"
-                hoja.Cell(4, 79).Value = "IMSS_CS"
-                hoja.Cell(4, 80).Value = "RCV_CS"
-                hoja.Cell(4, 81).Value = "INFONAVIT_CS"
-                hoja.Cell(4, 82).Value = "ISN_CS"
-                hoja.Cell(4, 83).Value = "TCS"
-                'hoja.Cell(4, 84).Value = "TOTAL COSTO"
+                hoja.Cell(4, 76).Value = "PRIMA EXCEDENTE"
+                hoja.Cell(4, 77).Value = "POR COMISION"
+                hoja.Cell(4, 78).Value = "COMISION A"
+                hoja.Cell(4, 79).Value = "COMISION B"
+                hoja.Cell(4, 80).Value = "IMSS_CS"
+                hoja.Cell(4, 81).Value = "RCV_CS"
+                hoja.Cell(4, 82).Value = "INFONAVIT_CS"
+                hoja.Cell(4, 83).Value = "ISN_CS"
+                hoja.Cell(4, 84).Value = "TCS"
+                hoja.Cell(4, 85).Value = "VALES"
                 
                 filaExcel = 5
                 contadorfacturas = 1
@@ -7783,20 +6915,39 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                     hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value
-                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(76).Value
-                    hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(77).Value
-                    hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(78).Value
-                    hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(79).Value
-                    hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(80).Value
-                    hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(81).Value
-                    hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(82).Value
-                    hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(83).Value
-                    'hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(84).Value
+                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(75).Value
+                    hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(76).Value
+                    hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(77).Value
+                    hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(78).Value
+                    hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(79).Value
+                    hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(80).Value
+                    hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
+                    hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
+                    hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
+
+                    'verificar los datos de los trabajadores
+                    If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                        If numperiodo Mod 2 = 1 Then
+                            'le toca tener vales de despensa
+                            'quincena
+
+
+                        End If
+                        
+                    ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
+                        If numperiodo Mod 4 = 0 Then
+                            'le toca tener vales de despensa
+
+                        End If
+
+                    End If
+
+
                     'hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(84).Value
-                    'hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(85).Value
+                    'hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(86).Value
                     'hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(86).Value
 
-                    
+
 
                 Next
 
@@ -7865,9 +7016,11 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count, 81).FormulaA1 = "=SUM(CC" & filaExcel & ":CC" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count, 82).FormulaA1 = "=SUM(CD" & filaExcel & ":CD" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count, 83).FormulaA1 = "=SUM(CE" & filaExcel & ":CE" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
-                'hoja.Cell(filaExcel + dtgDatos.Rows.Count, 84).FormulaA1 = "=SUM(CF" & filaExcel & ":CF" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count, 84).FormulaA1 = "=SUM(CF" & filaExcel & ":CF" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count, 85).FormulaA1 = "=SUM(CG" & filaExcel & ":CG" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 85).Style.Font.SetBold(True)
 
-                hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 84).Style.Font.SetBold(True)
+
 
 
                 '##### HOJA NUMERO 2 RESUMEN PAGO
