@@ -17,6 +17,7 @@
             gNombre = txtbuscar.Text
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
+            'olallsls
 
         Catch ex As Exception
 
@@ -24,7 +25,7 @@
     End Sub
 
 
-    
+    'buscar
    
     Private Sub txtbuscar_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtbuscar.KeyDown
         Select Case e.KeyData
