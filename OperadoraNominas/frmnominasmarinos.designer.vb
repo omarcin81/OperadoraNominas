@@ -97,6 +97,7 @@ Partial Class frmnominasmarinos
         Me.cmdKioskoSove = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
+        Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -196,6 +197,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
         Me.pnlCatalogo.Controls.Add(Me.chkPrestamoSA)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
         Me.pnlCatalogo.Controls.Add(Me.Button1)
@@ -336,7 +338,7 @@ Partial Class frmnominasmarinos
         Me.chkPrestamosAsi.AutoSize = True
         Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
         Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamosAsi.Location = New System.Drawing.Point(223, 37)
+        Me.chkPrestamosAsi.Location = New System.Drawing.Point(403, 9)
         Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
         Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
         Me.chkPrestamosAsi.TabIndex = 28
@@ -815,6 +817,18 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
+        'chkPrimaDominical
+        '
+        Me.chkPrimaDominical.AutoSize = True
+        Me.chkPrimaDominical.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrimaDominical.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrimaDominical.Location = New System.Drawing.Point(127, 36)
+        Me.chkPrimaDominical.Name = "chkPrimaDominical"
+        Me.chkPrimaDominical.Size = New System.Drawing.Size(153, 22)
+        Me.chkPrimaDominical.TabIndex = 35
+        Me.chkPrimaDominical.Text = "No Calcular PRIMA D"
+        Me.chkPrimaDominical.UseVisualStyleBackColor = False
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -929,6 +943,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
     Friend WithEvents chkPrestamoSA As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
 
 
 End Class
