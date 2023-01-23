@@ -40,3 +40,7 @@ E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraN
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
