@@ -7066,9 +7066,9 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
                     hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
                     hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
-                    SQL = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                    sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
-                    
+
 
 
                     'hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(84).Value
@@ -7101,7 +7101,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
 
 
-                   
+
                 Next
 
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 16).FormulaA1 = "=SUM(P" & filaExcel & ":P" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
@@ -7188,7 +7188,7 @@ Public Class frmnominasmarinos
 
                 Dim cuenta, banco, clabe, nombrecompleto As String
 
-                
+
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     hoja2.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
@@ -7252,6 +7252,7 @@ Public Class frmnominasmarinos
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 End If
+
             End If
 
         Catch ex As Exception
@@ -8706,6 +8707,7 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
     Private Sub BorrarTablas()
         Try
             Dim sql As String
@@ -10102,4 +10104,7 @@ Public Class frmnominasmarinos
 
 
 
+    Private Sub layoutTimbrado_Click(sender As System.Object, e As System.EventArgs) Handles layoutTimbrado.Click
+
+    End Sub
 End Class
