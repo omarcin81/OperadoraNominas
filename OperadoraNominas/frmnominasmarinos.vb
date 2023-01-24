@@ -7254,9 +7254,6 @@ Public Class frmnominasmarinos
     End Sub
 
 
-    
-   
-
     Public Sub limpiarCell(ByVal hoja As IXLWorksheet, ByVal celda As Integer) ', ByVal fila As Integer, ByVal filatotal As Integer)
 
         For x As Integer = celda To 200
