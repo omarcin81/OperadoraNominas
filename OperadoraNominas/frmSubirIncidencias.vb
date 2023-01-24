@@ -986,8 +986,6 @@ Public Class frmSubirIncidencias
                     pnlProgreso.Visible = False
                     MessageBox.Show("Incidencias procesadas", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-
-
                 
             End If
 

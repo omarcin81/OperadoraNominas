@@ -4877,11 +4877,11 @@ Public Class frmnominasmarinos
     Private Sub cmdreiniciar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdreiniciar.Click
         Try
             Dim sql As String
-            Dim resultado As Integer = MessageBox.Show("Se borraran los datos tanto de la nomina Abordo como Descanso,¿Desea reiniciar la nomina?", "Pregunta", MessageBoxButtons.YesNo)
+            Dim resultado As Integer = MessageBox.Show("Se borraran los datos de la nomina y empezara de 0,¿Desea reiniciar la nomina?", "Pregunta", MessageBoxButtons.YesNo)
             If resultado = DialogResult.Yes Then
 
                 sql = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+                sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=0" '& cboserie.SelectedIndex
                 sql &= " and iTipoNomina=0"
 
                 Dim rwNominaGuardadaFinal As DataRow() = nConsulta(sql)
@@ -4891,11 +4891,11 @@ Public Class frmnominasmarinos
                 If rwNominaGuardadaFinal Is Nothing = False Then
                     MessageBox.Show("La nomina ya esta marcada como final, no  se pueden guardar cambios.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    MessageBox.Show("Se borraran los datos tanto de la nomina abordo como la de descanso", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    'MessageBox.Show("Se borraran los datos tanto de la nomina abordo como la de descanso", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                     sql = "delete from Nomina"
                     sql &= " where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                    sql &= " and iEstatusNomina=0 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+                    sql &= " and iEstatusNomina=0 and iEstatus=1 and iEstatusEmpleado=0" '& cboserie.SelectedIndex
                     'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
 
                     If nExecute(sql) = False Then
