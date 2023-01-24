@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.chkPrestamoSA = New System.Windows.Forms.CheckBox()
         Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -97,7 +98,6 @@ Partial Class frmnominasmarinos
         Me.cmdKioskoSove = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -234,6 +234,18 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'chkPrimaDominical
+        '
+        Me.chkPrimaDominical.AutoSize = True
+        Me.chkPrimaDominical.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrimaDominical.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrimaDominical.Location = New System.Drawing.Point(127, 36)
+        Me.chkPrimaDominical.Name = "chkPrimaDominical"
+        Me.chkPrimaDominical.Size = New System.Drawing.Size(153, 22)
+        Me.chkPrimaDominical.TabIndex = 35
+        Me.chkPrimaDominical.Text = "No Calcular PRIMA D"
+        Me.chkPrimaDominical.UseVisualStyleBackColor = False
         '
         'chkPrestamoSA
         '
@@ -816,18 +828,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
-        '
-        'chkPrimaDominical
-        '
-        Me.chkPrimaDominical.AutoSize = True
-        Me.chkPrimaDominical.BackColor = System.Drawing.Color.Transparent
-        Me.chkPrimaDominical.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrimaDominical.Location = New System.Drawing.Point(127, 36)
-        Me.chkPrimaDominical.Name = "chkPrimaDominical"
-        Me.chkPrimaDominical.Size = New System.Drawing.Size(153, 22)
-        Me.chkPrimaDominical.TabIndex = 35
-        Me.chkPrimaDominical.Text = "No Calcular PRIMA D"
-        Me.chkPrimaDominical.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
