@@ -28,6 +28,9 @@ Partial Class frmSubirIncidencias
         Me.cboTipo = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkIncidencia0 = New System.Windows.Forms.CheckBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cboperiodo = New System.Windows.Forms.ComboBox()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
@@ -41,8 +44,6 @@ Partial Class frmSubirIncidencias
         Me.NudFilaI = New System.Windows.Forms.NumericUpDown()
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.lsvLista = New System.Windows.Forms.ListView()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.cboperiodo = New System.Windows.Forms.ComboBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
@@ -74,7 +75,7 @@ Partial Class frmSubirIncidencias
         '
         Me.cboIncidencia.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboIncidencia.FormattingEnabled = True
-        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO CON GOCE DE SUELDO", "SUELDO PENDIENTE"})
+        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "BONO CALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO CON GOCE DE SUELDO", "SUELDO PENDIENTE", "COMPENSACION"})
         Me.cboIncidencia.Location = New System.Drawing.Point(126, 7)
         Me.cboIncidencia.Name = "cboIncidencia"
         Me.cboIncidencia.Size = New System.Drawing.Size(191, 27)
@@ -106,6 +107,7 @@ Partial Class frmSubirIncidencias
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkIncidencia0)
         Me.pnlCatalogo.Controls.Add(Me.Label10)
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
         Me.pnlCatalogo.Controls.Add(Me.pnlProgreso)
@@ -126,15 +128,47 @@ Partial Class frmSubirIncidencias
         Me.pnlCatalogo.Enabled = False
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(903, 535)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1121, 535)
         Me.pnlCatalogo.TabIndex = 24
+        '
+        'chkIncidencia0
+        '
+        Me.chkIncidencia0.AutoSize = True
+        Me.chkIncidencia0.BackColor = System.Drawing.Color.Transparent
+        Me.chkIncidencia0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkIncidencia0.Location = New System.Drawing.Point(144, 47)
+        Me.chkIncidencia0.Name = "chkIncidencia0"
+        Me.chkIncidencia0.Size = New System.Drawing.Size(110, 22)
+        Me.chkIncidencia0.TabIndex = 27
+        Me.chkIncidencia0.Text = "Incidencia a 0"
+        Me.chkIncidencia0.UseVisualStyleBackColor = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(594, 11)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(62, 19)
+        Me.Label10.TabIndex = 26
+        Me.Label10.Text = "Periodo:"
+        '
+        'cboperiodo
+        '
+        Me.cboperiodo.Enabled = False
+        Me.cboperiodo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboperiodo.FormattingEnabled = True
+        Me.cboperiodo.Location = New System.Drawing.Point(662, 7)
+        Me.cboperiodo.Name = "cboperiodo"
+        Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
+        Me.cboperiodo.TabIndex = 25
         '
         'pnlProgreso
         '
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(210, 268)
+        Me.pnlProgreso.Location = New System.Drawing.Point(319, 268)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 24
@@ -143,11 +177,11 @@ Partial Class frmSubirIncidencias
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(154, 55)
+        Me.Label2.Location = New System.Drawing.Point(191, 55)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(106, 13)
+        Me.Label2.Size = New System.Drawing.Size(64, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Procesando articulos"
+        Me.Label2.Text = "Procesando"
         '
         'pgbProgreso
         '
@@ -159,7 +193,7 @@ Partial Class frmSubirIncidencias
         'NudColumnaC
         '
         Me.NudColumnaC.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaC.Location = New System.Drawing.Point(717, 47)
+        Me.NudColumnaC.Location = New System.Drawing.Point(909, 47)
         Me.NudColumnaC.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaC.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaC.Name = "NudColumnaC"
@@ -170,7 +204,7 @@ Partial Class frmSubirIncidencias
         'NudColumnaN
         '
         Me.NudColumnaN.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaN.Location = New System.Drawing.Point(539, 47)
+        Me.NudColumnaN.Location = New System.Drawing.Point(731, 47)
         Me.NudColumnaN.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaN.Name = "NudColumnaN"
@@ -182,7 +216,7 @@ Partial Class frmSubirIncidencias
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(586, 48)
+        Me.Label7.Location = New System.Drawing.Point(778, 48)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(130, 19)
         Me.Label7.TabIndex = 14
@@ -192,16 +226,16 @@ Partial Class frmSubirIncidencias
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(418, 48)
+        Me.Label6.Location = New System.Drawing.Point(582, 48)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(123, 19)
+        Me.Label6.Size = New System.Drawing.Size(146, 19)
         Me.Label6.TabIndex = 13
-        Me.Label6.Text = "Columna nombre:"
+        Me.Label6.Text = "Columna # empleado"
         '
         'NudFilaF
         '
         Me.NudFilaF.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaF.Location = New System.Drawing.Point(345, 47)
+        Me.NudFilaF.Location = New System.Drawing.Point(509, 47)
         Me.NudFilaF.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaF.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaF.Name = "NudFilaF"
@@ -213,7 +247,7 @@ Partial Class frmSubirIncidencias
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(277, 48)
+        Me.Label5.Location = New System.Drawing.Point(441, 48)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(71, 19)
         Me.Label5.TabIndex = 11
@@ -223,7 +257,7 @@ Partial Class frmSubirIncidencias
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(122, 48)
+        Me.Label4.Location = New System.Drawing.Point(286, 48)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 19)
         Me.Label4.TabIndex = 10
@@ -232,7 +266,7 @@ Partial Class frmSubirIncidencias
         'NudFilaI
         '
         Me.NudFilaI.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaI.Location = New System.Drawing.Point(200, 47)
+        Me.NudFilaI.Location = New System.Drawing.Point(364, 47)
         Me.NudFilaI.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaI.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaI.Name = "NudFilaI"
@@ -265,29 +299,10 @@ Partial Class frmSubirIncidencias
         Me.lsvLista.Location = New System.Drawing.Point(1, 92)
         Me.lsvLista.MultiSelect = False
         Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(895, 441)
+        Me.lsvLista.Size = New System.Drawing.Size(1113, 441)
         Me.lsvLista.TabIndex = 2
         Me.lsvLista.UseCompatibleStateImageBehavior = False
         Me.lsvLista.View = System.Windows.Forms.View.Details
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(594, 11)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 19)
-        Me.Label10.TabIndex = 26
-        Me.Label10.Text = "Periodo:"
-        '
-        'cboperiodo
-        '
-        Me.cboperiodo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboperiodo.FormattingEnabled = True
-        Me.cboperiodo.Location = New System.Drawing.Point(662, 7)
-        Me.cboperiodo.Name = "cboperiodo"
-        Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
-        Me.cboperiodo.TabIndex = 25
         '
         'ToolStrip1
         '
@@ -296,7 +311,7 @@ Partial Class frmSubirIncidencias
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbProcesar, Me.tsbCancelar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(903, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1121, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -367,7 +382,7 @@ Partial Class frmSubirIncidencias
         '
         Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(829, 592)
+        Me.cmdCerrar.Location = New System.Drawing.Point(1047, 592)
         Me.cmdCerrar.Name = "cmdCerrar"
         Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
@@ -379,7 +394,7 @@ Partial Class frmSubirIncidencias
         'frmSubirIncidencias
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(903, 637)
+        Me.ClientSize = New System.Drawing.Size(1121, 637)
         Me.Controls.Add(Me.cmdCerrar)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.ToolStrip1)
@@ -430,4 +445,5 @@ Partial Class frmSubirIncidencias
     Friend WithEvents tsbCancelar As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblRuta As System.Windows.Forms.Label
     Friend WithEvents cmdCerrar As System.Windows.Forms.Button
+    Friend WithEvents chkIncidencia0 As System.Windows.Forms.CheckBox
 End Class

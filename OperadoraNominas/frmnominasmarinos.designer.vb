@@ -44,7 +44,7 @@ Partial Class frmnominasmarinos
         Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
         Me.chkNofonacot = New System.Windows.Forms.CheckBox()
         Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
-        Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
+        Me.chkPrimaVacacional = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
         Me.cmdSubirDatos = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
@@ -59,7 +59,7 @@ Partial Class frmnominasmarinos
         Me.cmdincidencias = New System.Windows.Forms.Button()
         Me.cmdexcel = New System.Windows.Forms.Button()
         Me.cmdlayouts = New System.Windows.Forms.Button()
-        Me.cmdrecibosA = New System.Windows.Forms.Button()
+        Me.cmdActualizarS = New System.Windows.Forms.Button()
         Me.cmdguardarfinal = New System.Windows.Forms.Button()
         Me.cmdguardarnomina = New System.Windows.Forms.Button()
         Me.cmdcalcular = New System.Windows.Forms.Button()
@@ -207,7 +207,7 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
         Me.pnlCatalogo.Controls.Add(Me.chkNofonacot)
         Me.pnlCatalogo.Controls.Add(Me.chkCalSoloMarcados)
-        Me.pnlCatalogo.Controls.Add(Me.chkPrestamosAsi)
+        Me.pnlCatalogo.Controls.Add(Me.chkPrimaVacacional)
         Me.pnlCatalogo.Controls.Add(Me.cmdResumenInfo)
         Me.pnlCatalogo.Controls.Add(Me.cmdSubirDatos)
         Me.pnlCatalogo.Controls.Add(Me.btnReporte)
@@ -222,7 +222,7 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cmdincidencias)
         Me.pnlCatalogo.Controls.Add(Me.cmdexcel)
         Me.pnlCatalogo.Controls.Add(Me.cmdlayouts)
-        Me.pnlCatalogo.Controls.Add(Me.cmdrecibosA)
+        Me.pnlCatalogo.Controls.Add(Me.cmdActualizarS)
         Me.pnlCatalogo.Controls.Add(Me.cmdguardarfinal)
         Me.pnlCatalogo.Controls.Add(Me.cmdguardarnomina)
         Me.pnlCatalogo.Controls.Add(Me.cmdcalcular)
@@ -258,6 +258,7 @@ Partial Class frmnominasmarinos
         Me.chkPrestamoSA.TabIndex = 37
         Me.chkPrestamoSA.Text = "No CAL PRES SA"
         Me.chkPrestamoSA.UseVisualStyleBackColor = False
+        Me.chkPrestamoSA.Visible = False
         '
         'cmdsoloisr
         '
@@ -320,6 +321,7 @@ Partial Class frmnominasmarinos
         Me.chkSoloCostoSocial.TabIndex = 31
         Me.chkSoloCostoSocial.Text = "Solo costo social"
         Me.chkSoloCostoSocial.UseVisualStyleBackColor = False
+        Me.chkSoloCostoSocial.Visible = False
         '
         'chkNofonacot
         '
@@ -332,6 +334,7 @@ Partial Class frmnominasmarinos
         Me.chkNofonacot.TabIndex = 30
         Me.chkNofonacot.Text = "No fonacot"
         Me.chkNofonacot.UseVisualStyleBackColor = False
+        Me.chkNofonacot.Visible = False
         '
         'chkCalSoloMarcados
         '
@@ -345,17 +348,17 @@ Partial Class frmnominasmarinos
         Me.chkCalSoloMarcados.Text = "Solo marcados"
         Me.chkCalSoloMarcados.UseVisualStyleBackColor = False
         '
-        'chkPrestamosAsi
+        'chkPrimaVacacional
         '
-        Me.chkPrestamosAsi.AutoSize = True
-        Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
-        Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamosAsi.Location = New System.Drawing.Point(403, 9)
-        Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
-        Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
-        Me.chkPrestamosAsi.TabIndex = 28
-        Me.chkPrestamosAsi.Text = "No CAL PRES ASI"
-        Me.chkPrestamosAsi.UseVisualStyleBackColor = False
+        Me.chkPrimaVacacional.AutoSize = True
+        Me.chkPrimaVacacional.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrimaVacacional.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrimaVacacional.Location = New System.Drawing.Point(403, 9)
+        Me.chkPrimaVacacional.Name = "chkPrimaVacacional"
+        Me.chkPrimaVacacional.Size = New System.Drawing.Size(149, 22)
+        Me.chkPrimaVacacional.TabIndex = 28
+        Me.chkPrimaVacacional.Text = "No PrimaVacacional"
+        Me.chkPrimaVacacional.UseVisualStyleBackColor = False
         '
         'cmdResumenInfo
         '
@@ -428,6 +431,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.TabIndex = 18
         Me.chkinter.Text = "Interbancario"
         Me.chkinter.UseVisualStyleBackColor = False
+        Me.chkinter.Visible = False
         '
         'cbobancos
         '
@@ -449,6 +453,7 @@ Partial Class frmnominasmarinos
         Me.chkSindicato.TabIndex = 16
         Me.chkSindicato.Text = "Sindicato"
         Me.chkSindicato.UseVisualStyleBackColor = False
+        Me.chkSindicato.Visible = False
         '
         'chkAll
         '
@@ -502,15 +507,15 @@ Partial Class frmnominasmarinos
         Me.cmdlayouts.Text = "Layout"
         Me.cmdlayouts.UseVisualStyleBackColor = True
         '
-        'cmdrecibosA
+        'cmdActualizarS
         '
-        Me.cmdrecibosA.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdrecibosA.Location = New System.Drawing.Point(886, 3)
-        Me.cmdrecibosA.Name = "cmdrecibosA"
-        Me.cmdrecibosA.Size = New System.Drawing.Size(122, 27)
-        Me.cmdrecibosA.TabIndex = 10
-        Me.cmdrecibosA.Text = "Asimilado Simple"
-        Me.cmdrecibosA.UseVisualStyleBackColor = True
+        Me.cmdActualizarS.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdActualizarS.Location = New System.Drawing.Point(886, 3)
+        Me.cmdActualizarS.Name = "cmdActualizarS"
+        Me.cmdActualizarS.Size = New System.Drawing.Size(122, 27)
+        Me.cmdActualizarS.TabIndex = 10
+        Me.cmdActualizarS.Text = "Actualizar SD"
+        Me.cmdActualizarS.UseVisualStyleBackColor = True
         '
         'cmdguardarfinal
         '
@@ -735,6 +740,7 @@ Partial Class frmnominasmarinos
         Me.layoutTimbrado.Text = "Layout Timbrado SA"
         Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.layoutTimbrado.UseVisualStyleBackColor = True
+        Me.layoutTimbrado.Visible = False
         '
         'cmdInfonavit
         '
@@ -747,6 +753,7 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavit.Text = "Reporte Infonavit"
         Me.cmdInfonavit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdInfonavit.UseVisualStyleBackColor = True
+        Me.cmdInfonavit.Visible = False
         '
         'cmdReporteInfonavit
         '
@@ -758,6 +765,7 @@ Partial Class frmnominasmarinos
         Me.cmdReporteInfonavit.TabIndex = 30
         Me.cmdReporteInfonavit.Text = "Saldo Infonavit"
         Me.cmdReporteInfonavit.UseVisualStyleBackColor = True
+        Me.cmdReporteInfonavit.Visible = False
         '
         'cmdComision
         '
@@ -769,6 +777,7 @@ Partial Class frmnominasmarinos
         Me.cmdComision.TabIndex = 31
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
+        Me.cmdComision.Visible = False
         '
         'btnAsimilados
         '
@@ -781,6 +790,7 @@ Partial Class frmnominasmarinos
         Me.btnAsimilados.Text = "Layout Timbrado Asimilados"
         Me.btnAsimilados.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.btnAsimilados.UseVisualStyleBackColor = True
+        Me.btnAsimilados.Visible = False
         '
         'cmdInfonavitNominaSerie
         '
@@ -792,6 +802,7 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.TabIndex = 32
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
+        Me.cmdInfonavitNominaSerie.Visible = False
         '
         'cmdKioskoSove
         '
@@ -803,6 +814,7 @@ Partial Class frmnominasmarinos
         Me.cmdKioskoSove.TabIndex = 33
         Me.cmdKioskoSove.Text = "Subis Kiosko"
         Me.cmdKioskoSove.UseVisualStyleBackColor = True
+        Me.cmdKioskoSove.Visible = False
         '
         'cmdConcentradoFonacot
         '
@@ -875,7 +887,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents tsbdeptos As ToolStripButton
     Friend WithEvents dtgDatos As DataGridView
     Friend WithEvents cmdverdatos As Button
-    Friend WithEvents cmdrecibosA As Button
+    Friend WithEvents cmdActualizarS As Button
     Friend WithEvents cmdguardarfinal As Button
     Friend WithEvents cmdguardarnomina As Button
     Friend WithEvents cmdcalcular As Button
@@ -914,7 +926,7 @@ Partial Class frmnominasmarinos
 
 
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
-    Friend WithEvents chkPrestamosAsi As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPrimaVacacional As System.Windows.Forms.CheckBox
     Friend WithEvents NoCalcularPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

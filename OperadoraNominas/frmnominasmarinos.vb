@@ -883,7 +883,7 @@ Public Class frmnominasmarinos
 
 
 
-                    fila.Item("Sueldo_Base") = rwNominaGuardada(x)("fSalarioBase").ToString
+                    fila.Item("Sueldo_Base") = rwNominaGuardada(x)("fSueldoOrd").ToString
                     fila.Item("Salario_Diario") = rwNominaGuardada(x)("fSalarioDiario").ToString
                     'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                     fila.Item("Salario_Cotización") = rwNominaGuardada(x)("fSalarioBC").ToString
@@ -2316,7 +2316,7 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
-                                If dtgDatos.Rows(x).Cells(2).Value = "73" Then
+                                If dtgDatos.Rows(x).Cells(2).Value = "42" Then
                                     MsgBox("llego")
                                 End If
 
@@ -2324,6 +2324,10 @@ Public Class frmnominasmarinos
                                 If diastrabajados = 7 Then
                                     dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * 6, 2).ToString("###,##0.00")
                                     dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO, 2).ToString("###,##0.00")
+                                    ValorIncapacidad = IIf(dtgDatos.Rows(x).Cells(28).Value = "", 0, dtgDatos.Rows(x).Cells(28).Value)
+                                    If ValorIncapacidad = 6 Then
+                                        dtgDatos.Rows(x).Cells(30).Value = "0.00"
+                                    End If
                                 Else
                                     'dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(24).Value) * (diastrabajados - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2).ToString("###,##0.00")
                                     dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * (diastrabajados), 2).ToString("###,##0.00")
@@ -2339,6 +2343,11 @@ Public Class frmnominasmarinos
                                         If PERMISOSINGOCEDESUELDO = 7 Then
                                             dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO, 2).ToString("###,##0.00")
                                         End If
+                                        ValorIncapacidad = IIf(dtgDatos.Rows(x).Cells(28).Value = "", 0, dtgDatos.Rows(x).Cells(28).Value)
+                                        If ValorIncapacidad = 6 Then
+                                            dtgDatos.Rows(x).Cells(30).Value = "0.00"
+                                        End If
+
                                     End If
 
                                 End If
@@ -2411,19 +2420,21 @@ Public Class frmnominasmarinos
                             End If
 
                             'Calcular la prima
+                            If chkPrimaVacacional.Checked = False Then
+                                If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                                    dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 1, SDEMPLEADO, ValorUMA)), 2)
+                                    dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 2, SDEMPLEADO, ValorUMA)), 2)
+                                    dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
+                                    dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
 
-                            If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
-                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 1, SDEMPLEADO, ValorUMA)), 2)
-                                dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 2, SDEMPLEADO, ValorUMA)), 2)
-                                dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
-                                dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 50)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
-
-                            ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
-                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 1, SDEMPLEADO, ValorUMA)), 2)
-                                dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 2, SDEMPLEADO, ValorUMA)), 2)
-                                dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
-                                dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
+                                ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
+                                    dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 1, SDEMPLEADO, ValorUMA)), 2)
+                                    dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 25, 2, SDEMPLEADO, ValorUMA)), 2)
+                                    dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
+                                    dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
+                                End If
                             End If
+                            
 
 
                             'sumar Para ISR
@@ -5642,7 +5653,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub cmdrecibosA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdrecibosA.Click
+    Private Sub cmdrecibosA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdActualizarS.Click
 
     End Sub
 
@@ -6837,91 +6848,91 @@ Public Class frmnominasmarinos
 
                 'Format = ("$ #,###,##0.00")
                 'hoja.Cell(4, 1).Value = "Num"
-                hoja.Cell(4, 2).Value = "CONSECUTIVO"
-                hoja.Cell(4, 3).Value = "IDEMPLEADO"
-                hoja.Cell(4, 4).Value = "CODIGOEMPLEADO"
-                hoja.Cell(4, 5).Value = "NOMBRE"
-                hoja.Cell(4, 6).Value = "STATUS"
-                hoja.Cell(4, 7).Value = "RFC"
-                hoja.Cell(4, 8).Value = "CURP"
-                hoja.Cell(4, 9).Value = "NUM IMSS"
-                hoja.Cell(4, 10).Value = "FECHA NAC"
-                hoja.Cell(4, 11).Value = "EDAD"
-                hoja.Cell(4, 12).Value = "PUESTO"
-                hoja.Cell(4, 13).Value = "DEPTO"
-                hoja.Cell(4, 14).Value = "TIPO INFONAVIT"
-                hoja.Cell(4, 15).Value = "VALOR INFONAVIT"
-                hoja.Cell(4, 16).Value = "HE2V"
-                hoja.Cell(4, 17).Value = "HE3V"
-                hoja.Cell(4, 18).Value = "DESC LAB V"
-                hoja.Cell(4, 19).Value = "DIA FESTIVO V"
-                hoja.Cell(4, 20).Value = "PRIMA DOM V"
-                hoja.Cell(4, 21).Value = "FINJ V"
-                hoja.Cell(4, 22).Value = "PSGS V"
-                hoja.Cell(4, 23).Value = "T NO LAB V"
-                hoja.Cell(4, 24).Value = "SUELDO BASE"
-                hoja.Cell(4, 25).Value = "SALARIO DIARIO"
-                hoja.Cell(4, 26).Value = "SBC"
-                hoja.Cell(4, 27).Value = "DIAS TRAB"
-                hoja.Cell(4, 28).Value = "TIPO INCAPAC"
-                hoja.Cell(4, 29).Value = "NUM DIAS"
-                hoja.Cell(4, 30).Value = "SUELDO BRUTO"
-                hoja.Cell(4, 31).Value = "SEPTIMO DIA"
-                hoja.Cell(4, 32).Value = "PDG"
-                hoja.Cell(4, 33).Value = "PDE"
-                hoja.Cell(4, 34).Value = "TE2G"
-                hoja.Cell(4, 35).Value = "TE2E"
-                hoja.Cell(4, 36).Value = "TE3"
-                hoja.Cell(4, 37).Value = "DESCANSO LABORADO"
-                hoja.Cell(4, 38).Value = "DIA FESTIVO"
-                hoja.Cell(4, 39).Value = "B ASISTENCIA"
-                hoja.Cell(4, 40).Value = "B PRODUCTIVIDA"
-                hoja.Cell(4, 41).Value = "B POLIVALENCIA"
-                hoja.Cell(4, 42).Value = "B ESPECIALIDAD"
-                hoja.Cell(4, 43).Value = "B CALIDAD"
-                hoja.Cell(4, 44).Value = "CONPENSACION"
-                hoja.Cell(4, 45).Value = "SEMANA FONDO"
-                hoja.Cell(4, 46).Value = "FALTA INJUSTIFICADA"
-                hoja.Cell(4, 47).Value = "PERMISO S GOCE"
-                hoja.Cell(4, 48).Value = "I RET"
-                hoja.Cell(4, 49).Value = "VACACIONES PRO"
-                hoja.Cell(4, 50).Value = "AGUINADO G"
-                hoja.Cell(4, 51).Value = "AGUINALDO E"
-                hoja.Cell(4, 52).Value = "T AGUINALDO"
-                hoja.Cell(4, 53).Value = "PRIM GRAV"
-                hoja.Cell(4, 54).Value = "PRIM EXE"
-                hoja.Cell(4, 55).Value = "T PRIMA"
-                hoja.Cell(4, 56).Value = "TOTAL PERCEPCIONES"
-                hoja.Cell(4, 57).Value = "TOTAL P/ISR"
-                hoja.Cell(4, 58).Value = "INCAPACIDAD"
-                hoja.Cell(4, 59).Value = "ISR"
-                hoja.Cell(4, 60).Value = "IMSS"
-                hoja.Cell(4, 61).Value = "INFOVAVIT"
-                hoja.Cell(4, 62).Value = "INF BIN ANT"
-                hoja.Cell(4, 63).Value = "AJUSTE INFONAVIT"
-                hoja.Cell(4, 64).Value = "PENSION ALIM"
-                hoja.Cell(4, 65).Value = "PRESTAMO"
-                hoja.Cell(4, 66).Value = "FONACOT"
-                hoja.Cell(4, 67).Value = "T NO LAB"
-                hoja.Cell(4, 68).Value = "CUOTA SINDICAL"
-                hoja.Cell(4, 69).Value = "SUBSIDIO GENERADO"
-                hoja.Cell(4, 70).Value = "SUBSIDIO APLICADO"
-                hoja.Cell(4, 71).Value = "NETO SA"
-                hoja.Cell(4, 72).Value = "PRESTAMO EXCEDENTE"
-                hoja.Cell(4, 73).Value = "ADEUDO INF EXCEDENTE"
-                hoja.Cell(4, 74).Value = "PA E"
-                hoja.Cell(4, 75).Value = "EXCEDENTE"
-                hoja.Cell(4, 76).Value = "PRIMA EXCEDENTE"
-                hoja.Cell(4, 77).Value = "POR COMISION"
-                hoja.Cell(4, 78).Value = "COMISION A"
-                hoja.Cell(4, 79).Value = "COMISION B"
-                hoja.Cell(4, 80).Value = "IMSS_CS"
-                hoja.Cell(4, 81).Value = "RCV_CS"
-                hoja.Cell(4, 82).Value = "INFONAVIT_CS"
-                hoja.Cell(4, 83).Value = "ISN_CS"
-                hoja.Cell(4, 84).Value = "TCS"
-                hoja.Cell(4, 85).Value = "VALES"
-                hoja.Cell(4, 85).Value = "EXCENTE MONTO"
+                'hoja.Cell(4, 2).Value = "CONSECUTIVO"
+                'hoja.Cell(4, 3).Value = "IDEMPLEADO"
+                'hoja.Cell(4, 4).Value = "CODIGOEMPLEADO"
+                'hoja.Cell(4, 5).Value = "NOMBRE"
+                'hoja.Cell(4, 6).Value = "STATUS"
+                'hoja.Cell(4, 7).Value = "RFC"
+                'hoja.Cell(4, 8).Value = "CURP"
+                'hoja.Cell(4, 9).Value = "NUM IMSS"
+                'hoja.Cell(4, 10).Value = "FECHA NAC"
+                'hoja.Cell(4, 11).Value = "EDAD"
+                'hoja.Cell(4, 12).Value = "PUESTO"
+                'hoja.Cell(4, 13).Value = "DEPTO"
+                'hoja.Cell(4, 14).Value = "TIPO INFONAVIT"
+                'hoja.Cell(4, 15).Value = "VALOR INFONAVIT"
+                'hoja.Cell(4, 16).Value = "HE2V"
+                'hoja.Cell(4, 17).Value = "HE3V"
+                'hoja.Cell(4, 18).Value = "DESC LAB V"
+                'hoja.Cell(4, 19).Value = "DIA FESTIVO V"
+                'hoja.Cell(4, 20).Value = "PRIMA DOM V"
+                'hoja.Cell(4, 21).Value = "FINJ V"
+                'hoja.Cell(4, 22).Value = "PSGS V"
+                'hoja.Cell(4, 23).Value = "T NO LAB V"
+                'hoja.Cell(4, 24).Value = "SUELDO BASE"
+                'hoja.Cell(4, 25).Value = "SALARIO DIARIO"
+                'hoja.Cell(4, 26).Value = "SBC"
+                'hoja.Cell(4, 27).Value = "DIAS TRAB"
+                'hoja.Cell(4, 28).Value = "TIPO INCAPAC"
+                'hoja.Cell(4, 29).Value = "NUM DIAS"
+                'hoja.Cell(4, 30).Value = "SUELDO BRUTO"
+                'hoja.Cell(4, 31).Value = "SEPTIMO DIA"
+                'hoja.Cell(4, 32).Value = "PDG"
+                'hoja.Cell(4, 33).Value = "PDE"
+                'hoja.Cell(4, 34).Value = "TE2G"
+                'hoja.Cell(4, 35).Value = "TE2E"
+                'hoja.Cell(4, 36).Value = "TE3"
+                'hoja.Cell(4, 37).Value = "DESCANSO LABORADO"
+                'hoja.Cell(4, 38).Value = "DIA FESTIVO"
+                'hoja.Cell(4, 39).Value = "B ASISTENCIA"
+                'hoja.Cell(4, 40).Value = "B PRODUCTIVIDA"
+                'hoja.Cell(4, 41).Value = "B POLIVALENCIA"
+                'hoja.Cell(4, 42).Value = "B ESPECIALIDAD"
+                'hoja.Cell(4, 43).Value = "B CALIDAD"
+                'hoja.Cell(4, 44).Value = "CONPENSACION"
+                'hoja.Cell(4, 45).Value = "SEMANA FONDO"
+                'hoja.Cell(4, 46).Value = "FALTA INJUSTIFICADA"
+                'hoja.Cell(4, 47).Value = "PERMISO S GOCE"
+                'hoja.Cell(4, 48).Value = "I RET"
+                'hoja.Cell(4, 49).Value = "VACACIONES PRO"
+                'hoja.Cell(4, 50).Value = "AGUINADO G"
+                'hoja.Cell(4, 51).Value = "AGUINALDO E"
+                'hoja.Cell(4, 52).Value = "T AGUINALDO"
+                'hoja.Cell(4, 53).Value = "PRIM GRAV"
+                'hoja.Cell(4, 54).Value = "PRIM EXE"
+                'hoja.Cell(4, 55).Value = "T PRIMA"
+                'hoja.Cell(4, 56).Value = "TOTAL PERCEPCIONES"
+                'hoja.Cell(4, 57).Value = "TOTAL P/ISR"
+                'hoja.Cell(4, 58).Value = "INCAPACIDAD"
+                'hoja.Cell(4, 59).Value = "ISR"
+                'hoja.Cell(4, 60).Value = "IMSS"
+                'hoja.Cell(4, 61).Value = "INFOVAVIT"
+                'hoja.Cell(4, 62).Value = "INF BIN ANT"
+                'hoja.Cell(4, 63).Value = "AJUSTE INFONAVIT"
+                'hoja.Cell(4, 64).Value = "PENSION ALIM"
+                'hoja.Cell(4, 65).Value = "PRESTAMO"
+                'hoja.Cell(4, 66).Value = "FONACOT"
+                'hoja.Cell(4, 67).Value = "T NO LAB"
+                'hoja.Cell(4, 68).Value = "CUOTA SINDICAL"
+                'hoja.Cell(4, 69).Value = "SUBSIDIO GENERADO"
+                'hoja.Cell(4, 70).Value = "SUBSIDIO APLICADO"
+                'hoja.Cell(4, 71).Value = "NETO SA"
+                'hoja.Cell(4, 72).Value = "PRESTAMO EXCEDENTE"
+                'hoja.Cell(4, 73).Value = "ADEUDO INF EXCEDENTE"
+                'hoja.Cell(4, 74).Value = "PA E"
+                'hoja.Cell(4, 75).Value = "EXCEDENTE"
+                'hoja.Cell(4, 76).Value = "PRIMA EXCEDENTE"
+                'hoja.Cell(4, 77).Value = "POR COMISION"
+                'hoja.Cell(4, 78).Value = "COMISION A"
+                'hoja.Cell(4, 79).Value = "COMISION B"
+                'hoja.Cell(4, 80).Value = "IMSS_CS"
+                'hoja.Cell(4, 81).Value = "RCV_CS"
+                'hoja.Cell(4, 82).Value = "INFONAVIT_CS"
+                'hoja.Cell(4, 83).Value = "ISN_CS"
+                'hoja.Cell(4, 84).Value = "TCS"
+                'hoja.Cell(4, 85).Value = "VALES"
+                'hoja.Cell(4, 85).Value = "EXCENTE MONTO"
 
                 filaExcel = 5
                 ' contadorfacturas = 1
