@@ -961,9 +961,9 @@ Public Class frmnominasmarinos
                     dsPeriodo.Tables("Tabla").Rows.Add(fila)
 
                 Next
-                
 
-                
+
+
 
 
                 dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
@@ -971,12 +971,12 @@ Public Class frmnominasmarinos
                 MATGRID()
 
 
-               
+
                 If tiponom = "" Then
                     MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 End If
-               
+
 
             Else
 
@@ -991,9 +991,9 @@ Public Class frmnominasmarinos
                         sql &= " order by cCodigoEmpleado"
 
                     ElseIf cboserie.SelectedIndex > 0 Or cboserie.SelectedIndex - 1 Then
-                        
+
                     End If
-                    
+
                     Dim rwDatosEmpleados As DataRow() = nConsulta(sql)
                     If rwDatosEmpleados Is Nothing = False Then
                         dsPeriodo.Tables("Tabla").Rows.Clear()
@@ -1120,7 +1120,7 @@ Public Class frmnominasmarinos
 
                         Next
 
-                       
+
 
 
                         dtgDatos.DataSource = dsPeriodo.Tables("Tabla")
@@ -1157,7 +1157,7 @@ Public Class frmnominasmarinos
                 End If
 
 
-                
+
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -1202,7 +1202,7 @@ Public Class frmnominasmarinos
                     Return cadena
                 End If
 
-                
+
             Else
                 Return "Ninguno"
 
@@ -1211,7 +1211,7 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
-        
+
     End Function
 
     Private Function NumDiasIncapacidad(idempleado As String, periodo As Integer) As String
@@ -1292,7 +1292,7 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
-        
+
     End Function
 
 
@@ -1447,7 +1447,7 @@ Public Class frmnominasmarinos
                     'End If
 
 
-                   
+
                     If chkCalSoloMarcados.Checked = True And dtgDatos.Rows(x).Cells(4).Tag = "1" Then
                         'activo para borrar los datos de esse trabajador y calcularlo despues
 
@@ -1744,7 +1744,7 @@ Public Class frmnominasmarinos
                         sql &= "','" & Date.Now.ToShortDateString & "'"
 
 
-                       
+
 
 
                         If nExecute(sql) = False Then
@@ -1753,7 +1753,7 @@ Public Class frmnominasmarinos
                             Exit Sub
                         End If
 
-                        
+
                     End If
 
 
@@ -1766,7 +1766,7 @@ Public Class frmnominasmarinos
 
                 MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                
+
 
 
             End If
@@ -1777,7 +1777,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    
+
     Private Sub cmdcalcular_Click(sender As Object, e As EventArgs) Handles cmdcalcular.Click
         Dim sql2 As String
         Dim sql3 As String
@@ -2006,7 +2006,7 @@ Public Class frmnominasmarinos
                     plantaoNO = dtgDatos.Rows(x).Cells(5).Value
                 End If
                 'verificar
-            
+
                 'verificamos los sueldos
                 'sql = "Select salariod,sbc,salariodTopado,sbcTopado from costosocial inner join puestos on costosocial.fkiIdPuesto=puestos.iIdPuesto "
                 'sql &= " where cNombre = '" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
@@ -2167,7 +2167,7 @@ Public Class frmnominasmarinos
                     If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
 
-                        
+
 
 
 
@@ -2269,7 +2269,7 @@ Public Class frmnominasmarinos
                                         'Calculamos la prima
 
                                         dias = (DateDiff("y", FechaBuscar, FechaFinPeriodo)) + 1
-                                        
+
                                         BanPeriodo = True
 
                                     ElseIf FechaBuscar.CompareTo(FechaFinPeriodo) <= 0 Then
@@ -2434,7 +2434,7 @@ Public Class frmnominasmarinos
                                     dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
                                 End If
                             End If
-                            
+
 
 
                             'sumar Para ISR
@@ -2723,7 +2723,7 @@ Public Class frmnominasmarinos
             Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
 
 
-           
+
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -2997,10 +2997,10 @@ Public Class frmnominasmarinos
             dias = 0
             If rwPeriodo Is Nothing = False Then
                 FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
-                
+
                 dias = DateTime.DaysInMonth(Year(FechaInicioPeriodo1), Month(FechaInicioPeriodo1))
 
-                
+
 
 
 
@@ -3048,7 +3048,7 @@ Public Class frmnominasmarinos
                         FechaFinPeriodo2 = Date.Parse(rwPeriodo(0)("dFechaFin"))
                         'DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo1, FechaFinPeriodo2) + 1
 
-                        
+
 
 
 
@@ -3091,7 +3091,7 @@ Public Class frmnominasmarinos
 
 
 
-                        
+
 
 
                         DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo1, FechaFinPeriodo2) + 1
@@ -3109,8 +3109,8 @@ Public Class frmnominasmarinos
 
                         End If
 
-                        
-                        
+
+
 
 
                         sql = "select * from Salario "
@@ -3179,7 +3179,7 @@ Public Class frmnominasmarinos
             Dim FechaFinPeriodo1 As Date
             Dim FechaInicioPeriodo2 As Date
             Dim FechaFinPeriodo2 As Date
-            
+
             Dim ValorInfonavitTabla As Double
 
             'Validamos si el trabajador tiene o no activo el infonavit
@@ -3192,7 +3192,7 @@ Public Class frmnominasmarinos
 
                     If rwPeriodo Is Nothing = False Then
                         FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
-                        
+
 
 
 
@@ -3242,7 +3242,7 @@ Public Class frmnominasmarinos
                         If rwValorInfonavit Is Nothing = False Then
                             ValorInfonavitTabla = rwValorInfonavit(0)("infonavit")
                         Else
-                            
+
                         End If
 
 
@@ -3283,7 +3283,7 @@ Public Class frmnominasmarinos
                         sql &= "," & valorinfonavit
                         'Estatus
                         sql &= ",1"
-                        
+
 
 
 
@@ -3773,7 +3773,7 @@ Public Class frmnominasmarinos
             'Else
 
             'End If
-            
+
             If subsidio > isr Then
 
                 dtgDatos.Rows(fila).Cells(68).Value = Math.Round(Double.Parse(subsidio)).ToString("###,##0.00")
@@ -3805,9 +3805,9 @@ Public Class frmnominasmarinos
                     Return 0
                 End If
             End If
-            
 
-            
+
+
 
         Catch ex As Exception
 
@@ -4143,7 +4143,7 @@ Public Class frmnominasmarinos
     Private Sub cmdguardarfinal_Click(sender As Object, e As EventArgs) Handles cmdguardarfinal.Click
         Try
             Dim sql As String
-           
+
 
             sql = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
             sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
@@ -4244,7 +4244,7 @@ Public Class frmnominasmarinos
                     End If
 
 
-                   
+
 
 
                     pgbProgreso.Value += 1
@@ -4274,7 +4274,7 @@ Public Class frmnominasmarinos
                 aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
             End If
 
-            
+
         Catch ex As Exception
 
         End Try
@@ -4316,7 +4316,7 @@ Public Class frmnominasmarinos
     Private Sub btnReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReporte.Click
         Try
 
-            
+
         Catch ex As Exception
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
@@ -4926,7 +4926,7 @@ Public Class frmnominasmarinos
                     sql = " delete from DetalleFonacot"
                     sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iSerie=" & cboserie.SelectedIndex
-                    
+
                     If nExecute(sql) = False Then
                         MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'pnlProgreso.Visible = False
@@ -4950,7 +4950,7 @@ Public Class frmnominasmarinos
                     sql = " delete from PagoPrestamoSA"
                     sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iSerie=" & cboserie.SelectedIndex
-                    
+
                     If nExecute(sql) = False Then
                         MessageBox.Show("Ocurrio un error borrando Prestamo Sa. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'pnlProgreso.Visible = False
@@ -4961,7 +4961,7 @@ Public Class frmnominasmarinos
                     sql = " delete from DetallePensionAlimenticia"
                     sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iSerie=" & cboserie.SelectedIndex
-                    
+
                     If nExecute(sql) = False Then
                         MessageBox.Show("Ocurrio un error borrando Pension. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'pnlProgreso.Visible = False
@@ -5190,7 +5190,7 @@ Public Class frmnominasmarinos
                     contador = 1
                     sRenglon = ""
                     For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                        
+
 
                         'BANCO RECEPTOR 
 
@@ -5216,7 +5216,7 @@ Public Class frmnominasmarinos
                         sRenglon &= ","
                         sRenglon &= dtgDatos.Rows(x).Cells(70).Value
                         sRenglon &= ",,PAGODENOMINA,1234567"
-                        
+
 
                         strStreamWriter.WriteLine(sRenglon)
                         contador = contador + 1
@@ -5675,7 +5675,7 @@ Public Class frmnominasmarinos
 
 
 
-                
+
 
                 ids = Forma.gidEmpleados.Split(",")
                 If dtgDatos.Rows.Count > 0 Then
@@ -5828,7 +5828,7 @@ Public Class frmnominasmarinos
 
                     Next
 
-                    
+
 
                     'Agregar a la tabla los datos que vienen de la busqueda de empleados
                     For x As Integer = 0 To ids.Length - 1
@@ -5988,7 +5988,7 @@ Public Class frmnominasmarinos
 
                     End If
 
-                    
+
 
 
 
@@ -6791,7 +6791,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-   Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
+    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
         Try
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
