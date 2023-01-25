@@ -222,8 +222,6 @@ Public Class frmSubirIncidencias
     Private Sub tsbGuardar_Click(sender As System.Object, e As System.EventArgs) Handles tsbGuardar.Click
         Try
 
-
-            
             'Application.DoEvents()
             'preguntar si los datos son correctos
             Dim resultado As Integer = MessageBox.Show("se actualizaran los datos de " & cboIncidencia.Text & ",¿Desea continuar?", "Pregunta", MessageBoxButtons.YesNo)

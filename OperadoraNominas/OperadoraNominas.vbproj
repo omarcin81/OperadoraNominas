@@ -73,7 +73,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logooperadora.ico</ApplicationIcon>
+    <ApplicationIcon>Nomina.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -455,6 +455,7 @@
   <ItemGroup>
     <Content Include="logooperadora.ico" />
     <Content Include="LOGO_NAVIGATOR.ico" />
+    <Content Include="Nomina.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />

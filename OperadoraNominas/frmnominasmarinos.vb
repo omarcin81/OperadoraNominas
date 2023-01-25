@@ -2316,9 +2316,9 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
-                                If dtgDatos.Rows(x).Cells(2).Value = "42" Then
-                                    MsgBox("llego")
-                                End If
+                                'If dtgDatos.Rows(x).Cells(2).Value = "42" Then
+                                '    MsgBox("llego")
+                                'End If
 
                                 dtgDatos.Rows(x).Cells(26).Value = "7"
                                 If diastrabajados = 7 Then
