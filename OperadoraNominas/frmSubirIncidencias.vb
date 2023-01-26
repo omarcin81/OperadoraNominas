@@ -267,7 +267,7 @@ Public Class frmSubirIncidencias
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
-                                                Dim horasextrasdobles As Integer = Integer.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fTExtra2V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fTExtra2V").ToString)
                                                 SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
                                                 If nExecute(SQL) = False Then
@@ -316,7 +316,7 @@ Public Class frmSubirIncidencias
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
-                                                Dim horasextrasdobles As Integer = Integer.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fTExtra3V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fTExtra3V").ToString)
                                                 SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
                                                 If nExecute(SQL) = False Then
@@ -984,8 +984,6 @@ Public Class frmSubirIncidencias
                     pnlProgreso.Visible = False
                     MessageBox.Show("Incidencias procesadas", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-
-
                 
             End If
 

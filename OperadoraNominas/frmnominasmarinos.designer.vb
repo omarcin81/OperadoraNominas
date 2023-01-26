@@ -740,7 +740,6 @@ Partial Class frmnominasmarinos
         Me.layoutTimbrado.Text = "Layout Timbrado SA"
         Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.layoutTimbrado.UseVisualStyleBackColor = True
-        Me.layoutTimbrado.Visible = False
         '
         'cmdInfonavit
         '

@@ -916,7 +916,7 @@ Public Class frmEmpleados
         Dim dialogo As New SaveFileDialog()
         Dim idtipo As Integer
 
-        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus "
+        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad"
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
         SQL &= " order by cNombreLargo"
         Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -934,6 +934,11 @@ Public Class frmEmpleados
             hoja.Column("I").Width = 25
             hoja.Column("J").Width = 30
             hoja.Column("K").Width = 30
+            hoja.Column("L").Width = 25
+            hoja.Column("M").Width = 30
+            hoja.Column("N").Width = 30
+            hoja.Column("O").Width = 30
+
 
             hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
 
@@ -941,14 +946,14 @@ Public Class frmEmpleados
             'hoja.Cell(3, 2).Value = ":"
             'hoja.Cell(3, 3).Value = ""
 
-            hoja.Range(4, 1, 4, 11).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 11).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            hoja.Range(4, 1, 4, 15).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 15).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 15).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
             'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 11).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 11).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+            hoja.Range(4, 1, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
             'hoja.Cell(4, 1).Value = "Num"
             hoja.Cell(4, 1).Value = "Id"
@@ -962,7 +967,10 @@ Public Class frmEmpleados
             hoja.Cell(4, 9).Value = "CUENTA"
             hoja.Cell(4, 10).Value = "CLABE"
             hoja.Cell(4, 11).Value = "ESTATUS"
-
+            hoja.Cell(4, 12).Value = "SUELDO BASE"
+            hoja.Cell(4, 13).Value = "SBC"
+            hoja.Cell(4, 14).Value = "SUELDO BRUTO"
+            hoja.Cell(4, 15).Value = "FECHA ANTIGUEDAD"
 
 
             filaExcel = 4
@@ -979,7 +987,10 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 9).Value = "'" & Fila.Item("NumCuenta")
                 hoja.Cell(filaExcel, 10).Value = "'" & Fila.Item("Clabe")
                 hoja.Cell(filaExcel, 11).Value = IIf(Fila.Item("iEstatus") = 1, "ACTIVO", "BAJA")
-
+                hoja.Cell(filaExcel, 12).Value = Fila.Item("fSueldoBase")
+                hoja.Cell(filaExcel, 13).Value = Fila.Item("fSueldoIntegrado")
+                hoja.Cell(filaExcel, 14).Value = Fila.Item("fSueldoOrd")
+                hoja.Cell(filaExcel, 15).Value = Fila.Item("dFechaAntiguedad")
 
             Next
 

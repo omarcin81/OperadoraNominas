@@ -336,7 +336,7 @@ Public Class frmnominasmarinos
         dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         'Dias_Trabajados
         dtgDatos.Columns(26).Width = 150
-        dtgDatos.Columns(26).ReadOnly = True
+        'dtgDatos.Columns(26).ReadOnly = True
         dtgDatos.Columns(26).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         'Tipo_Incapacidad
         dtgDatos.Columns(27).Width = 150
@@ -2312,8 +2312,8 @@ Public Class frmnominasmarinos
                             End If
                             'solo falta injustificada juega para el septimo dia
                             If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
-                                dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * 15, 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(26).Value = "15"
+                                dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * Integer.Parse(dtgDatos.Rows(x).Cells(26).Value), 2).ToString("###,##0.00")
+                                'dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
                                 If dtgDatos.Rows(x).Cells(2).Value = "42" Then
@@ -2641,7 +2641,8 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(67).Value = Math.Round((SUELDOBRUTON + SEPTIMO) * 0.015).ToString("###,##0.00")
 
                                 'SUELDOBRUTON = Double.Parse(IIf(dtgDatos.Rows(x).Cells(29).Value = "", 0, dtgDatos.Rows(x).Cells(29).Value))
-
+                            Else
+                                dtgDatos.Rows(x).Cells(67).Value = "0.00"
                             End If
 
 
