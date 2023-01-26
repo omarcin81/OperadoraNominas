@@ -2338,7 +2338,12 @@ Public Class frmnominasmarinos
 
                                         End If
                                         'sacar factor de septimo dia solo en el caso de falta injustifica 
-                                        dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO * (0.166 * (diastrabajados - FINJUSTIFICADA)), 2).ToString("###,##0.00")
+                                        If (diastrabajados - FINJUSTIFICADA) = 6 Then
+                                            dtgDatos.Rows(x).Cells(30).Value = SDEMPLEADO
+                                        Else
+                                            dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO * (0.166 * (diastrabajados - FINJUSTIFICADA)), 2).ToString("###,##0.00")
+                                        End If
+
 
                                         If PERMISOSINGOCEDESUELDO = 7 Then
                                             dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO, 2).ToString("###,##0.00")
