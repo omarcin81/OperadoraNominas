@@ -297,7 +297,7 @@ Partial Class frmnominasmarinos
         Me.cmdAcumuladoOperadora.Name = "cmdAcumuladoOperadora"
         Me.cmdAcumuladoOperadora.Size = New System.Drawing.Size(129, 26)
         Me.cmdAcumuladoOperadora.TabIndex = 33
-        Me.cmdAcumuladoOperadora.Text = "Acumulado Mary"
+        Me.cmdAcumuladoOperadora.Text = "Sumatorias"
         Me.cmdAcumuladoOperadora.UseVisualStyleBackColor = True
         '
         'cmdBuscarOtraNom
