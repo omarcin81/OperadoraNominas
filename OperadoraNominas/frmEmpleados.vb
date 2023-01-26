@@ -461,8 +461,10 @@ Public Class frmEmpleados
             cbopertenece.SelectedIndex = 0
             'Limpiar(Me)
         Else
+            MsgBox("avisar de este mensaje al administrador, empleado mostrar")
+
             blnNuevo = False
-            MostrarEmpleado()
+            'MostrarEmpleado()
         End If
     End Sub
 
@@ -618,126 +620,126 @@ Public Class frmEmpleados
     '    'nCargaCBO(cboClientes, SQL, "nombre", "iIdCliente")
     '    'cboClientes.SelectedValue = gIdCliente
     'End Sub
-    Private Sub MostrarEmpleado()
-        SQL = "select * from empleados where iIdEmpleado = " & gIdEmpleado
-        Dim rwFilas As DataRow() = nConsulta(SQL)
-        Try
-            If rwFilas Is Nothing = False Then
+    'Private Sub MostrarEmpleado()
+    '    SQL = "select * from empleados where iIdEmpleado = " & gIdEmpleado
+    '    Dim rwFilas As DataRow() = nConsulta(SQL)
+    '    Try
+    '        If rwFilas Is Nothing = False Then
 
-                Dim Fila As DataRow = rwFilas(0)
-                cbostatus.SelectedIndex = IIf(Fila.Item("iEstatus") = 1, 0, 1)
-                txtcodigo.Text = Fila.Item("cCodigoEmpleado")
-                txtnombre.Text = Fila.Item("cNombre")
-                txtpaterno.Text = Fila.Item("cApellidoP")
-                txtmaterno.Text = Fila.Item("cApellidoM")
-                Dim fechanac As Date
-                fechanac = Fila.Item("dFechaNac")
-                dtpfechanac.Value = Fila.Item("dFechaNac")
-                Dim edad As Integer = DateDiff(DateInterval.Year, fechanac, Date.Today)
-                txtedad.Text = edad.ToString()
+    '            Dim Fila As DataRow = rwFilas(0)
+    '            cbostatus.SelectedIndex = IIf(Fila.Item("iEstatus") = 1, 0, 1)
+    '            txtcodigo.Text = Fila.Item("cCodigoEmpleado")
+    '            txtnombre.Text = Fila.Item("cNombre")
+    '            txtpaterno.Text = Fila.Item("cApellidoP")
+    '            txtmaterno.Text = Fila.Item("cApellidoM")
+    '            Dim fechanac As Date
+    '            fechanac = Fila.Item("dFechaNac")
+    '            dtpfechanac.Value = Fila.Item("dFechaNac")
+    '            Dim edad As Integer = DateDiff(DateInterval.Year, fechanac, Date.Today)
+    '            txtedad.Text = edad.ToString()
 
-                Dim sexo As String = IIf(Fila.Item("iSexo") = "0", "Femenino", "Masculino")
-                cbosexo.SelectedIndex = Fila.Item("iSexo")
-                'item.SubItems.Add("" & sexo)
-                'Dim civil As String = IIf(Fila.Item("iOrigen") = "0", "Soltero", "Casado")
-                cboedocivil.SelectedIndex = Fila.Item("iOrigen")
-                'item.SubItems.Add("" & civil)
+    '            Dim sexo As String = IIf(Fila.Item("iSexo") = "0", "Femenino", "Masculino")
+    '            cbosexo.SelectedIndex = Fila.Item("iSexo")
+    '            'item.SubItems.Add("" & sexo)
+    '            'Dim civil As String = IIf(Fila.Item("iOrigen") = "0", "Soltero", "Casado")
+    '            cboedocivil.SelectedIndex = Fila.Item("cInicioEmbarque")
+    '            'item.SubItems.Add("" & civil)
 
-                'item.SubItems.Add("" & Fila.Item("cPuesto"))
-                txtfunciones.Text = Fila.Item("cFuncionesPuesto")
-                'item.SubItems.Add("" & Fila.Item("cFuncionesPuesto"))
-                cbocategoria.SelectedIndex = Fila.Item("iCategoria")
-                'Dim Categoria As String = IIf(Fila.Item("iCategoria") = "0", "A", "B")
-                'item.SubItems.Add("" & Categoria)
-                dtppatrona.Value = Fila.Item("dFechaPatrona")
-                'item.SubItems.Add("" & Fila.Item("dFechaPatrona"))
-                dtpsindicato.Value = Fila.Item("dFechaSindicato")
-                'item.SubItems.Add("" & Fila.Item("dFechaSindicato"))
-                txtintegrar.Text = Fila.Item("cIntegrar")
-                'item.SubItems.Add("" & Fila.Item("cIntegrar"))
-                txtsd.Text = Fila.Item("fSueldoBase")
-                'item.SubItems.Add("" & Fila.Item("fSueldoBase"))
-                txtsdi.Text = Fila.Item("fSueldoIntegrado")
-                'item.SubItems.Add("" & Fila.Item("fSueldoIntegrado"))
+    '            'item.SubItems.Add("" & Fila.Item("cPuesto"))
+    '            txtfunciones.Text = Fila.Item("cFuncionesPuesto")
+    '            'item.SubItems.Add("" & Fila.Item("cFuncionesPuesto"))
+    '            cbocategoria.SelectedIndex = Fila.Item("iCategoria")
+    '            'Dim Categoria As String = IIf(Fila.Item("iCategoria") = "0", "A", "B")
+    '            'item.SubItems.Add("" & Categoria)
+    '            dtppatrona.Value = Fila.Item("dFechaPatrona")
+    '            'item.SubItems.Add("" & Fila.Item("dFechaPatrona"))
+    '            dtpsindicato.Value = Fila.Item("dFechaSindicato")
+    '            'item.SubItems.Add("" & Fila.Item("dFechaSindicato"))
+    '            txtintegrar.Text = Fila.Item("cIntegrar")
+    '            'item.SubItems.Add("" & Fila.Item("cIntegrar"))
+    '            txtsd.Text = Fila.Item("fSueldoBase")
+    '            'item.SubItems.Add("" & Fila.Item("fSueldoBase"))
+    '            txtsdi.Text = Fila.Item("fSueldoIntegrado")
+    '            'item.SubItems.Add("" & Fila.Item("fSueldoIntegrado"))
 
-                'item.SubItems.Add("" & Fila.Item("dFechaNac"))
-                txtcurp.Text = Fila.Item("cCURP")
-                'item.SubItems.Add("" & Fila.Item("cCURP"))
-                txtrfc.Text = Fila.Item("cRFC")
-                'item.SubItems.Add("" & Fila.Item("cRFC"))
-                txtimss.Text = Fila.Item("cIMSS")
-                'item.SubItems.Add("" & Fila.Item("cIMSS"))
-                chkInfonavit.Checked = IIf(Fila.Item("iPermanente") = "1", True, False)
-                'item.SubItems.Add("" & IIf(Fila.Item("iPermanente") = "0", "No", "Si"))
-                txtcredito.Text = Fila.Item("cInfonavit")
-                'item.SubItems.Add("" & Fila.Item("cInfonavit"))
-                cbotipofactor.Text = Fila.Item("cTipoFactor")
-                'item.SubItems.Add("" & Fila.Item("cTipoFactor"))
-                txtfactor.Text = Fila.Item("fFactor")
-                'item.SubItems.Add("" & Fila.Item("fFactor"))
-                txtcuenta.Text = Fila.Item("NumCuenta")
-                'item.SubItems.Add("" & Fila.Item("NumCuenta"))
-                txtclabe.Text = Fila.Item("Clabe")
-                'item.SubItems.Add("" & Fila.Item("Clabe"))
+    '            'item.SubItems.Add("" & Fila.Item("dFechaNac"))
+    '            txtcurp.Text = Fila.Item("cCURP")
+    '            'item.SubItems.Add("" & Fila.Item("cCURP"))
+    '            txtrfc.Text = Fila.Item("cRFC")
+    '            'item.SubItems.Add("" & Fila.Item("cRFC"))
+    '            txtimss.Text = Fila.Item("cIMSS")
+    '            'item.SubItems.Add("" & Fila.Item("cIMSS"))
+    '            chkInfonavit.Checked = IIf(Fila.Item("iPermanente") = "1", True, False)
+    '            'item.SubItems.Add("" & IIf(Fila.Item("iPermanente") = "0", "No", "Si"))
+    '            txtcredito.Text = Fila.Item("cInfonavit")
+    '            'item.SubItems.Add("" & Fila.Item("cInfonavit"))
+    '            cbotipofactor.Text = Fila.Item("cTipoFactor")
+    '            'item.SubItems.Add("" & Fila.Item("cTipoFactor"))
+    '            txtfactor.Text = Fila.Item("fFactor")
+    '            'item.SubItems.Add("" & Fila.Item("fFactor"))
+    '            txtcuenta.Text = Fila.Item("NumCuenta")
+    '            'item.SubItems.Add("" & Fila.Item("NumCuenta"))
+    '            txtclabe.Text = Fila.Item("Clabe")
+    '            'item.SubItems.Add("" & Fila.Item("Clabe"))
 
-                SQL = "select * from bancos where iIdBanco=" & Fila.Item("fkiIdBanco")
-                Dim Banco As DataRow() = nConsulta(SQL)
-                cbobanco.SelectedValue = Banco(0).Item("iIdBanco")
-                'item.SubItems.Add("" & Banco(0).Item("cBanco"))
-                txtnacionalidad.Text = Fila.Item("cNacionalidad")
-                'item.SubItems.Add("" & Fila.Item("cNacionalidad"))
-                txtdireccion.Text = Fila.Item("cDireccion")
-                'item.SubItems.Add("" & Fila.Item("cDireccion"))
-                txtciudad.Text = Fila.Item("cCiudadL")
-                'item.SubItems.Add("" & Fila.Item("cCiudadL"))
+    '            SQL = "select * from bancos where iIdBanco=" & Fila.Item("fkiIdBanco")
+    '            Dim Banco As DataRow() = nConsulta(SQL)
+    '            cbobanco.SelectedValue = Banco(0).Item("iIdBanco")
+    '            'item.SubItems.Add("" & Banco(0).Item("cBanco"))
+    '            txtnacionalidad.Text = Fila.Item("cNacionalidad")
+    '            'item.SubItems.Add("" & Fila.Item("cNacionalidad"))
+    '            txtdireccion.Text = Fila.Item("cDireccion")
+    '            'item.SubItems.Add("" & Fila.Item("cDireccion"))
+    '            txtciudad.Text = Fila.Item("cCiudadL")
+    '            'item.SubItems.Add("" & Fila.Item("cCiudadL"))
 
-                SQL = "select * from Cat_Estados where iIdEstado=" & Fila.Item("fkiIdEstado")
-                Dim Estado As DataRow() = nConsulta(SQL)
-                cboestado.SelectedValue = Estado(0).Item("iIdEstado")
-                'item.SubItems.Add("" & Estado(0).Item("cEstado"))
-                txtcp.Text = Fila.Item("cCP")
-                'item.SubItems.Add("" & Fila.Item("cCP"))
-                dtpantiguedad.Value = Fila.Item("dFechaAntiguedad")
-                'item.SubItems.Add("" & Fila.Item("dFechaAntiguedad"))
-                txtdireccionP.Text = Fila.Item("cDireccionP")
-                txtciudadP.Text = Fila.Item("cCiudadP")
-                txtcp2.Text = Fila.Item("cCPP")
-                'item.SubItems.Add("" & Fila.Item("cDireccionP") & "" & Fila.Item("cCiudadP"))
-                txtduracion.Text = Fila.Item("cDuracion")
-                'item.SubItems.Add("" & Fila.Item("cDuracion"))
-                cbojornada.Text = Fila.Item("cJornada")
-                'item.SubItems.Add("" & Fila.Item("cJornada"))
-                txtcomentarios.Text = Fila.Item("cObservaciones")
-                'item.SubItems.Add("" & Fila.Item("cObservaciones"))
-                txtcorreo.Text = Fila.Item("cCorreo")
-                'item.SubItems.Add("" & Fila.Item("cCorreo"))
-                txthorario.Text = Fila.Item("cHorario")
-                'item.SubItems.Add("" & Fila.Item("cHorario"))
-                txthoras.Text = Fila.Item("cHoras")
-                'item.SubItems.Add("" & Fila.Item("cHoras"))
-                txtdescanso.Text = Fila.Item("cDescanso")
-                'item.SubItems.Add("" & Fila.Item("cDescanso"))
-                'cboClientes.SelectedValue = Fila.Item("fkiIdClienteInter")
-                cbopuesto.SelectedValue = Fila.Item("fkiIdPuesto")
-                cbodepartamento.SelectedValue = Fila.Item("fkiIdDepartamento")
+    '            SQL = "select * from Cat_Estados where iIdEstado=" & Fila.Item("fkiIdEstado")
+    '            Dim Estado As DataRow() = nConsulta(SQL)
+    '            cboestado.SelectedValue = Estado(0).Item("iIdEstado")
+    '            'item.SubItems.Add("" & Estado(0).Item("cEstado"))
+    '            txtcp.Text = Fila.Item("cCP")
+    '            'item.SubItems.Add("" & Fila.Item("cCP"))
+    '            dtpantiguedad.Value = Fila.Item("dFechaAntiguedad")
+    '            'item.SubItems.Add("" & Fila.Item("dFechaAntiguedad"))
+    '            txtdireccionP.Text = Fila.Item("cDireccionP")
+    '            txtciudadP.Text = Fila.Item("cCiudadP")
+    '            txtcp2.Text = Fila.Item("cCPP")
+    '            'item.SubItems.Add("" & Fila.Item("cDireccionP") & "" & Fila.Item("cCiudadP"))
+    '            txtduracion.Text = Fila.Item("cDuracion")
+    '            'item.SubItems.Add("" & Fila.Item("cDuracion"))
+    '            cbojornada.Text = Fila.Item("cJornada")
+    '            'item.SubItems.Add("" & Fila.Item("cJornada"))
+    '            txtcomentarios.Text = Fila.Item("cObservaciones")
+    '            'item.SubItems.Add("" & Fila.Item("cObservaciones"))
+    '            txtcorreo.Text = Fila.Item("cCorreo")
+    '            'item.SubItems.Add("" & Fila.Item("cCorreo"))
+    '            txthorario.Text = Fila.Item("cHorario")
+    '            'item.SubItems.Add("" & Fila.Item("cHorario"))
+    '            txthoras.Text = Fila.Item("cHoras")
+    '            'item.SubItems.Add("" & Fila.Item("cHoras"))
+    '            txtdescanso.Text = Fila.Item("cDescanso")
+    '            'item.SubItems.Add("" & Fila.Item("cDescanso"))
+    '            'cboClientes.SelectedValue = Fila.Item("fkiIdClienteInter")
+    '            cbopuesto.SelectedValue = Fila.Item("fkiIdPuesto")
+    '            cbodepartamento.SelectedValue = Fila.Item("fkiIdDepartamento")
 
 
-                txtcuenta.Text = Fila.Item("cuenta2")
-                'item.SubItems.Add("" & Fila.Item("NumCuenta"))
-                txtclabe.Text = Fila.Item("clabe2")
-                'item.SubItems.Add("" & Fila.Item("Clabe"))
+    '            txtcuenta.Text = Fila.Item("cuenta2")
+    '            'item.SubItems.Add("" & Fila.Item("NumCuenta"))
+    '            txtclabe.Text = Fila.Item("clabe2")
+    '            'item.SubItems.Add("" & Fila.Item("Clabe"))
 
-                SQL = "select * from bancos where iIdBanco=" & Fila.Item("fkiIdBanco2")
-                Dim Banco2 As DataRow() = nConsulta(SQL)
-                cbobanco2.SelectedValue = Banco2(0).Item("iIdBanco")
-                dtpFinContrato.Value = Fila.Item("dFechaFin")
+    '            SQL = "select * from bancos where iIdBanco=" & Fila.Item("fkiIdBanco2")
+    '            Dim Banco2 As DataRow() = nConsulta(SQL)
+    '            cbobanco2.SelectedValue = Banco2(0).Item("iIdBanco")
+    '            dtpFinContrato.Value = Fila.Item("dFechaFin")
 
-                blnNuevo = False
-            End If
-        Catch ex As Exception
+    '            blnNuevo = False
+    '        End If
+    '    Catch ex As Exception
 
-        End Try
-    End Sub
+    '    End Try
+    'End Sub
 
     Private Sub MostrarBancos()
         SQL = "Select * from bancos order by cBanco"
@@ -914,7 +916,7 @@ Public Class frmEmpleados
         Dim dialogo As New SaveFileDialog()
         Dim idtipo As Integer
 
-        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus "
+        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad"
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
         SQL &= " order by cNombreLargo"
         Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -932,6 +934,11 @@ Public Class frmEmpleados
             hoja.Column("I").Width = 25
             hoja.Column("J").Width = 30
             hoja.Column("K").Width = 30
+            hoja.Column("L").Width = 25
+            hoja.Column("M").Width = 30
+            hoja.Column("N").Width = 30
+            hoja.Column("O").Width = 30
+
 
             hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
 
@@ -939,14 +946,14 @@ Public Class frmEmpleados
             'hoja.Cell(3, 2).Value = ":"
             'hoja.Cell(3, 3).Value = ""
 
-            hoja.Range(4, 1, 4, 11).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 11).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            hoja.Range(4, 1, 4, 15).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 15).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 15).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
             'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 11).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 11).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+            hoja.Range(4, 1, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
             'hoja.Cell(4, 1).Value = "Num"
             hoja.Cell(4, 1).Value = "Id"
@@ -960,7 +967,10 @@ Public Class frmEmpleados
             hoja.Cell(4, 9).Value = "CUENTA"
             hoja.Cell(4, 10).Value = "CLABE"
             hoja.Cell(4, 11).Value = "ESTATUS"
-
+            hoja.Cell(4, 12).Value = "SUELDO BASE"
+            hoja.Cell(4, 13).Value = "SBC"
+            hoja.Cell(4, 14).Value = "SUELDO BRUTO"
+            hoja.Cell(4, 15).Value = "FECHA ANTIGUEDAD"
 
 
             filaExcel = 4
@@ -977,7 +987,10 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 9).Value = "'" & Fila.Item("NumCuenta")
                 hoja.Cell(filaExcel, 10).Value = "'" & Fila.Item("Clabe")
                 hoja.Cell(filaExcel, 11).Value = IIf(Fila.Item("iEstatus") = 1, "ACTIVO", "BAJA")
-
+                hoja.Cell(filaExcel, 12).Value = Fila.Item("fSueldoBase")
+                hoja.Cell(filaExcel, 13).Value = Fila.Item("fSueldoIntegrado")
+                hoja.Cell(filaExcel, 14).Value = Fila.Item("fSueldoOrd")
+                hoja.Cell(filaExcel, 15).Value = Fila.Item("dFechaAntiguedad")
 
             Next
 

@@ -1198,7 +1198,7 @@ Partial Class frmEmpleados
         'cbopertenece
         '
         Me.cbopertenece.FormattingEnabled = True
-        Me.cbopertenece.Items.AddRange(New Object() {"Interino", "Planta"})
+        Me.cbopertenece.Items.AddRange(New Object() {"Confianza", "Sindicalizado"})
         Me.cbopertenece.Location = New System.Drawing.Point(260, 39)
         Me.cbopertenece.Name = "cbopertenece"
         Me.cbopertenece.Size = New System.Drawing.Size(143, 26)
