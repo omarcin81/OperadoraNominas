@@ -7039,7 +7039,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 51).Value = dtgDatos.Rows(x).Cells(50).Value
                     hoja.Cell(filaExcel + x, 52).Value = dtgDatos.Rows(x).Cells(51).Value
                     hoja.Cell(filaExcel + x, 53).Value = dtgDatos.Rows(x).Cells(52).Value
-                    hoja.Cell(filaExcel + x, 54).Value = dtgDatos.Rows(x).Cells(53).Value
+                    hoja.Cell(filaExcel + x, 54).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(53).Value 'TOTAL PRIMA
                     hoja.Cell(filaExcel + x, 55).Value = dtgDatos.Rows(x).Cells(54).Value
                     hoja.Cell(filaExcel + x, 56).Value = dtgDatos.Rows(x).Cells(55).Value
                     hoja.Cell(filaExcel + x, 57).Value = dtgDatos.Rows(x).Cells(56).Value
