@@ -323,16 +323,16 @@ Public Class frmnominasmarinos
 
         'Sueldo_Base
         dtgDatos.Columns(23).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dtgDatos.Columns(23).ReadOnly = True
+        'dtgDatos.Columns(23).ReadOnly = True
         dtgDatos.Columns(23).Width = 150
 
         'Salario_Diario
         dtgDatos.Columns(24).Width = 150
-        dtgDatos.Columns(24).ReadOnly = True
+        'dtgDatos.Columns(24).ReadOnly = True
         dtgDatos.Columns(24).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         'Salario_Cotización
         dtgDatos.Columns(25).Width = 150
-        dtgDatos.Columns(25).ReadOnly = True
+        'dtgDatos.Columns(25).ReadOnly = True
         dtgDatos.Columns(25).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         'Dias_Trabajados
         dtgDatos.Columns(26).Width = 150
@@ -5017,6 +5017,8 @@ Public Class frmnominasmarinos
         Try
             If e.ColumnIndex = 0 Then
                 dtgDatos.Rows(e.RowIndex).Cells(0).Value = Not dtgDatos.Rows(e.RowIndex).Cells(0).Value
+
+              
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -5621,6 +5623,7 @@ Public Class frmnominasmarinos
     Private Sub dtgDatos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dtgDatos.CellContentClick
         Try
             If e.RowIndex = -1 And e.ColumnIndex = 0 Then
+
                 Return
             End If
         Catch ex As Exception
@@ -6904,94 +6907,7 @@ Public Class frmnominasmarinos
 
 
 
-                'Format = ("$ #,###,##0.00")
-                'hoja.Cell(4, 1).Value = "Num"
-                'hoja.Cell(4, 2).Value = "CONSECUTIVO"
-                'hoja.Cell(4, 3).Value = "IDEMPLEADO"
-                'hoja.Cell(4, 4).Value = "CODIGOEMPLEADO"
-                'hoja.Cell(4, 5).Value = "NOMBRE"
-                'hoja.Cell(4, 6).Value = "STATUS"
-                'hoja.Cell(4, 7).Value = "RFC"
-                'hoja.Cell(4, 8).Value = "CURP"
-                'hoja.Cell(4, 9).Value = "NUM IMSS"
-                'hoja.Cell(4, 10).Value = "FECHA NAC"
-                'hoja.Cell(4, 11).Value = "EDAD"
-                'hoja.Cell(4, 12).Value = "PUESTO"
-                'hoja.Cell(4, 13).Value = "DEPTO"
-                'hoja.Cell(4, 14).Value = "TIPO INFONAVIT"
-                'hoja.Cell(4, 15).Value = "VALOR INFONAVIT"
-                'hoja.Cell(4, 16).Value = "HE2V"
-                'hoja.Cell(4, 17).Value = "HE3V"
-                'hoja.Cell(4, 18).Value = "DESC LAB V"
-                'hoja.Cell(4, 19).Value = "DIA FESTIVO V"
-                'hoja.Cell(4, 20).Value = "PRIMA DOM V"
-                'hoja.Cell(4, 21).Value = "FINJ V"
-                'hoja.Cell(4, 22).Value = "PSGS V"
-                'hoja.Cell(4, 23).Value = "T NO LAB V"
-                'hoja.Cell(4, 24).Value = "SUELDO BASE"
-                'hoja.Cell(4, 25).Value = "SALARIO DIARIO"
-                'hoja.Cell(4, 26).Value = "SBC"
-                'hoja.Cell(4, 27).Value = "DIAS TRAB"
-                'hoja.Cell(4, 28).Value = "TIPO INCAPAC"
-                'hoja.Cell(4, 29).Value = "NUM DIAS"
-                'hoja.Cell(4, 30).Value = "SUELDO BRUTO"
-                'hoja.Cell(4, 31).Value = "SEPTIMO DIA"
-                'hoja.Cell(4, 32).Value = "PDG"
-                'hoja.Cell(4, 33).Value = "PDE"
-                'hoja.Cell(4, 34).Value = "TE2G"
-                'hoja.Cell(4, 35).Value = "TE2E"
-                'hoja.Cell(4, 36).Value = "TE3"
-                'hoja.Cell(4, 37).Value = "DESCANSO LABORADO"
-                'hoja.Cell(4, 38).Value = "DIA FESTIVO"
-                'hoja.Cell(4, 39).Value = "B ASISTENCIA"
-                'hoja.Cell(4, 40).Value = "B PRODUCTIVIDA"
-                'hoja.Cell(4, 41).Value = "B POLIVALENCIA"
-                'hoja.Cell(4, 42).Value = "B ESPECIALIDAD"
-                'hoja.Cell(4, 43).Value = "B CALIDAD"
-                'hoja.Cell(4, 44).Value = "CONPENSACION"
-                'hoja.Cell(4, 45).Value = "SEMANA FONDO"
-                'hoja.Cell(4, 46).Value = "FALTA INJUSTIFICADA"
-                'hoja.Cell(4, 47).Value = "PERMISO S GOCE"
-                'hoja.Cell(4, 48).Value = "I RET"
-                'hoja.Cell(4, 49).Value = "VACACIONES PRO"
-                'hoja.Cell(4, 50).Value = "AGUINADO G"
-                'hoja.Cell(4, 51).Value = "AGUINALDO E"
-                'hoja.Cell(4, 52).Value = "T AGUINALDO"
-                'hoja.Cell(4, 53).Value = "PRIM GRAV"
-                'hoja.Cell(4, 54).Value = "PRIM EXE"
-                'hoja.Cell(4, 55).Value = "T PRIMA"
-                'hoja.Cell(4, 56).Value = "TOTAL PERCEPCIONES"
-                'hoja.Cell(4, 57).Value = "TOTAL P/ISR"
-                'hoja.Cell(4, 58).Value = "INCAPACIDAD"
-                'hoja.Cell(4, 59).Value = "ISR"
-                'hoja.Cell(4, 60).Value = "IMSS"
-                'hoja.Cell(4, 61).Value = "INFOVAVIT"
-                'hoja.Cell(4, 62).Value = "INF BIN ANT"
-                'hoja.Cell(4, 63).Value = "AJUSTE INFONAVIT"
-                'hoja.Cell(4, 64).Value = "PENSION ALIM"
-                'hoja.Cell(4, 65).Value = "PRESTAMO"
-                'hoja.Cell(4, 66).Value = "FONACOT"
-                'hoja.Cell(4, 67).Value = "T NO LAB"
-                'hoja.Cell(4, 68).Value = "CUOTA SINDICAL"
-                'hoja.Cell(4, 69).Value = "SUBSIDIO GENERADO"
-                'hoja.Cell(4, 70).Value = "SUBSIDIO APLICADO"
-                'hoja.Cell(4, 71).Value = "NETO SA"
-                'hoja.Cell(4, 72).Value = "PRESTAMO EXCEDENTE"
-                'hoja.Cell(4, 73).Value = "ADEUDO INF EXCEDENTE"
-                'hoja.Cell(4, 74).Value = "PA E"
-                'hoja.Cell(4, 75).Value = "EXCEDENTE"
-                'hoja.Cell(4, 76).Value = "PRIMA EXCEDENTE"
-                'hoja.Cell(4, 77).Value = "POR COMISION"
-                'hoja.Cell(4, 78).Value = "COMISION A"
-                'hoja.Cell(4, 79).Value = "COMISION B"
-                'hoja.Cell(4, 80).Value = "IMSS_CS"
-                'hoja.Cell(4, 81).Value = "RCV_CS"
-                'hoja.Cell(4, 82).Value = "INFONAVIT_CS"
-                'hoja.Cell(4, 83).Value = "ISN_CS"
-                'hoja.Cell(4, 84).Value = "TCS"
-                'hoja.Cell(4, 85).Value = "VALES"
-                'hoja.Cell(4, 85).Value = "EXCENTE MONTO"
-
+              
                 filaExcel = 5
                 ' contadorfacturas = 1
 
@@ -7238,6 +7154,83 @@ Public Class frmnominasmarinos
 
 
                 hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 85).Style.Font.SetBold(True)
+
+
+
+                ''Fact prev y Depositos
+                Dim totalf As Integer = dtgDatos.Rows.Count + 1
+                Dim espace As Integer = filaExcel + totalf + 3
+                Dim totalbuq As Integer = filaExcel + totalf
+
+                hoja.Cell(espace, "E").Value = "COSTO CLIENTE"
+                hoja.Range(espace, 5, espace, 6).Merge()
+                hoja.Range(espace, 5, espace, 6).Style.Font.FontColor = XLColor.White
+                hoja.Range(espace, 5, espace, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
+                hoja.Range(espace, 5, espace + 9, 6).Style.Font.FontName = "Century Gothic"
+                hoja.Range(espace, 5, espace + 9, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 5, espace + 9, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+
+                hoja.Range(espace + 7, 5, espace + 9, 6).Style.Font.Bold = True
+                hoja.Range(espace + 7, 5, espace + 9, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+                hoja.Cell(espace + 9, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                hoja.Cell(espace + 9, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+
+                hoja.Range(espace, 6, espace + 10, 6).Style.NumberFormat.Format = " #,##0.00"
+                hoja.Cell(espace + 2, "E").Value = "NÓMINA SA"
+                hoja.Cell(espace + 3, "E").Value = "BENEFICIOSOCIAL"
+                hoja.Cell(espace + 4, "E").Value = "PPP"
+                hoja.Cell(espace + 5, "E").Value = "VALES DE DESPENSA"
+                hoja.Cell(espace + 6, "E").Value = "COSTO SOCIAL"
+
+                hoja.Cell(espace + 7, "E").Value = "Comision"
+                hoja.Cell(espace + 8, "E").Value = "IVA"
+                hoja.Cell(espace + 9, "E").Value = "Total"
+
+                hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
+                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq & ",""SIND"",CE5:CE" & totalbuq & ")"
+                hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq & ",""PPP"",CE5:CE" & totalbuq & ")"
+                hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
+                hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+
+                hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & ")*0.06"
+                hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
+                hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
+
+               
+                hoja.Cell(espace + 11, "E").Value = "Deposito Cuenta SA"
+                hoja.Cell(espace + 12, "E").Value = "Deposito cuenta GROESSINGER"
+                hoja.Cell(espace + 11, "F").FormulaA1 = "=F" & espace + 2
+                hoja.Cell(espace + 12, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+
+                'RETENCIONES
+
+
+                hoja.Range(espace, 8, espace, 9).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
+                hoja.Range(espace + 2, 8, espace + 6, 9).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 8, espace + 6, 9).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 8, espace + 6, 9).Style.Font.FontName = " Century Gothic"
+                hoja.Range(espace, 8, espace + 6, 8).Style.Font.Bold = True
+                hoja.Cell(espace, "H").Style.Font.FontColor = XLColor.White
+                hoja.Range(espace, 8, espace + 6, 9).Style.NumberFormat.Format = " #,##0.00"
+
+                hoja.Cell(espace, "H").Value = "RETENCIONES"
+                hoja.Cell(espace + 2, "H").Value = "ISR"
+                hoja.Cell(espace + 3, "H").Value = "INFONAVIT"
+                hoja.Cell(espace + 4, "H").Value = "PENSIO"
+                hoja.Cell(espace + 5, "H").Value = "FONACOT"
+                hoja.Cell(espace + 6, "H").Value = "TOTAL"
+
+                hoja.Cell(espace + 2, "I").FormulaA1 = "=+BG" & totalbuq
+                hoja.Cell(espace + 3, "I").FormulaA1 = "=+BI" & totalbuq & "+BJ" & totalbuq
+                hoja.Cell(espace + 4, "I").FormulaA1 = "=+BL" & totalbuq
+                hoja.Cell(espace + 5, "I").FormulaA1 = "=+BN" & totalbuq
+                hoja.Cell(espace + 6, "I").FormulaA1 = "=+I" & espace + 2 & "+I" & espace + 3 & "+I" & espace + 4 & "+I" & espace + 5
+
+
+                '' Calculos x Buque
+
+                ' Dim sep As Integer = filaExcel + totalf + 8
+                'hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
@@ -10325,5 +10318,11 @@ Public Class frmnominasmarinos
 
     Private Sub layoutTimbrado_Click(sender As System.Object, e As System.EventArgs) Handles layoutTimbrado.Click
 
+    End Sub
+
+    Private Sub dtgDatos_CellMouseClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dtgDatos.CellMouseClick
+       
+        dtgDatos.Rows(e.RowIndex).Selected = True
+               
     End Sub
 End Class
