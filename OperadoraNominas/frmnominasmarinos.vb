@@ -887,7 +887,7 @@ Public Class frmnominasmarinos
                     fila.Item("Salario_Diario") = rwNominaGuardada(x)("fSalarioDiario").ToString
                     'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                     fila.Item("Salario_Cotización") = rwNominaGuardada(x)("fSalarioBC").ToString
-                    fila.Item("Dias_Trabajados") = IIf(diasperiodo > 7, 15, diasperiodo)
+                    fila.Item("Dias_Trabajados") = rwNominaGuardada(x)("iDiasTrabajados").ToString
                     fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwNominaGuardada(x)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                     fila.Item("Número_días") = NumDiasIncapacidad(rwNominaGuardada(x)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                     fila.Item("Sueldo_Bruto") = rwNominaGuardada(x)("fSueldoBruto").ToString
@@ -2186,7 +2186,7 @@ Public Class frmnominasmarinos
 
                         'Empieza el calculo normal
                     Else
-                        diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value))
+                        diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value.ToString))
                         Dim SUELDOBRUTON As Double
                         Dim SEPTIMO As Double
                         Dim PRIDOMGRAVADA As Double
@@ -2312,7 +2312,7 @@ Public Class frmnominasmarinos
                             End If
                             'solo falta injustificada juega para el septimo dia
                             If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
-                                dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * Integer.Parse(dtgDatos.Rows(x).Cells(26).Value), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2).ToString("###,##0.00")
                                 'dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
@@ -2426,7 +2426,7 @@ Public Class frmnominasmarinos
 
                             'Calcular la prima
                             If chkPrimaVacacional.Checked = False Then
-                                If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                                If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                                     dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 1, SDEMPLEADO, ValorUMA)), 2)
                                     dtgDatos.Rows(x).Cells(53).Value = Math.Round(Double.Parse(CalculoPrimaSA(dtgDatos.Rows(x).Cells(2).Value, 1, 50, 2, SDEMPLEADO, ValorUMA)), 2)
                                     dtgDatos.Rows(x).Cells(54).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(52).Value) + Double.Parse(dtgDatos.Rows(x).Cells(53).Value), 2)
@@ -2486,7 +2486,8 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                             ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
                                 TipoPeriodoinfoonavit = 2
-                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SDEMPLEADO * 30, 1, x) / 30 * (DiasCadaPeriodo - Integer.Parse(dtgDatos.Rows(x).Cells(28).Value))), 2).ToString("###,##0.00")
+
+                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SDEMPLEADO * 30, 1, x) / 30 * (15 - Integer.Parse(dtgDatos.Rows(x).Cells(28).Value))), 2).ToString("###,##0.00")
                             Else
                                 TipoPeriodoinfoonavit = 1
                             End If
@@ -2679,7 +2680,13 @@ Public Class frmnominasmarinos
                             Dim rwDatos As DataRow() = nConsulta(sql)
                             If rwDatos Is Nothing = False Then
                                 If Double.Parse(rwDatos(0)("fsindicatoExtra").ToString) > 0 Then
-                                    dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
+
+                                    If DiasCadaPeriodo > 7 Then
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * 15, 2)
+                                    Else
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
+                                    End If
+
                                 End If
 
                             End If
@@ -5660,7 +5667,52 @@ Public Class frmnominasmarinos
     End Sub
 
     Private Sub cmdrecibosA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdActualizarS.Click
+        Try
+            pnlProgreso.Visible = True
 
+            Application.DoEvents()
+            pnlCatalogo.Enabled = False
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+
+
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                sql = "select *"
+                sql &= " from empleadosC"
+                sql &= " where fkiIdEmpresa=" & gIdEmpresa & " and iIdempleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+
+                Dim rwDatosBanco As DataRow() = nConsulta(sql)
+
+
+                If rwDatosBanco Is Nothing = False Then
+                    dtgDatos.Rows(x).Cells(24).Value = rwDatosBanco(0)("fSueldoBase")
+                    dtgDatos.Rows(x).Cells(25).Value = rwDatosBanco(0)("fSueldoIntegrado")
+                    
+                End If
+                
+                
+
+
+
+                pgbProgreso.Value += 1
+                Application.DoEvents()
+            Next
+
+            'verificar costo social
+
+            Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
+
+
+
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+            MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 
@@ -5892,7 +5944,7 @@ Public Class frmnominasmarinos
                             fila.Item("Salario_Diario") = rwEmpleado(0)("fSueldoBase").ToString
                             'fila.Item("Salario_Diario") = rwDatosEmpleados(x)("fFactorIntegracion").ToString
                             fila.Item("Salario_Cotización") = rwEmpleado(0)("fSueldoIntegrado").ToString
-                            fila.Item("Dias_Trabajados") = "7"
+                            fila.Item("Dias_Trabajados") = IIf(diasperiodo > 7, 15, diasperiodo)
                             fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwEmpleado(0)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                             fila.Item("Número_días") = NumDiasIncapacidad(rwEmpleado(0)("iIdEmpleadoc").ToString, cboperiodo.SelectedValue)
                             fila.Item("Sueldo_Bruto") = ""
