@@ -7260,6 +7260,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 91).FormulaA1 = "=SUM(CM" & filaExcel & ":CM" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 92).FormulaA1 = "=SUM(CN" & filaExcel & ":CN" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 93).FormulaA1 = "=SUM(CO" & filaExcel & ":CO" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 94).FormulaA1 = "=SUM(CP" & filaExcel & ":CP" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
 
 
                 hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 85).Style.Font.SetBold(True)
@@ -7398,7 +7399,7 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " SEM " & cboperiodo.SelectedIndex + 1 & periodo & " " & iejercicio
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 &
                 hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 3
                 hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 4
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 5
