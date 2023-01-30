@@ -2490,9 +2490,14 @@ Public Class frmnominasmarinos
                                 Dim incapa As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(28).Value)
                                 Dim falta As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(20).Value)
                                 Dim permiso As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(21).Value)
+
+
                                 Dim ISRT As Double = Double.Parse(isrmontodado(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
                                 Dim ISRA As Double = Double.Parse(isrmontodado(ADICIONALES, 1, x))
                                 dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
+
+
+
 
 
                             Else
