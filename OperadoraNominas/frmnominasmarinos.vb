@@ -7120,13 +7120,8 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 51).Value = dtgDatos.Rows(x).Cells(50).Value
                     hoja.Cell(filaExcel + x, 52).Value = dtgDatos.Rows(x).Cells(51).Value
                     hoja.Cell(filaExcel + x, 53).Value = dtgDatos.Rows(x).Cells(52).Value
-<<<<<<< HEAD
                     hoja.Cell(filaExcel + x, 54).FormulaA1 = dtgDatos.Rows(x).Cells(53).Value 'PRIMA EXE
                     hoja.Cell(filaExcel + x, 55).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(54).Value TOTAL PRIMA
-=======
-                    hoja.Cell(filaExcel + x, 54).Value = dtgDatos.Rows(x).Cells(53).Value
-                    hoja.Cell(filaExcel + x, 55).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(53).Value 'TOTAL PRIMA
->>>>>>> origin/main
                     hoja.Cell(filaExcel + x, 56).Value = dtgDatos.Rows(x).Cells(55).Value
                     hoja.Cell(filaExcel + x, 57).Value = dtgDatos.Rows(x).Cells(56).Value
                     hoja.Cell(filaExcel + x, 58).Value = dtgDatos.Rows(x).Cells(57).Value
@@ -7187,7 +7182,7 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
-                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BZ" & filaExcel + x & "=""PPP"",Y" & filaExcel + x & "*30.4*0.03,0)"
+                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",Y" & filaExcel + x & "*30.4*0.03,0)"
 
 
                 Next
@@ -7409,7 +7404,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 5
                 hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 6
                 hoja3.Cell("H7").FormulaA1 = "=+(H4+H5+H6+H7)*G8"
-                hoja3.Cell("H8").FormulaA1 = EmpresaN.ToUpper
+                hoja3.Cell("H8").Value = EmpresaN.ToUpper
 
                 '<<<<<CARGAR>>>>>
                 pnlProgreso.Visible = False
@@ -10681,7 +10676,7 @@ Public Class frmnominasmarinos
                
     End Sub
 
-<<<<<<< HEAD
+
     Private Function registropatronal(empresa As String) As String
         Select Case empresa
             Case "ADEMSA"
@@ -10703,7 +10698,7 @@ Public Class frmnominasmarinos
 
     End Function
 
-=======
+
     Private Sub cmdsoloisr_Click(sender As System.Object, e As System.EventArgs) Handles cmdsoloisr.Click
         Try
             Dim SUELDOBRUTON As Double
@@ -10903,5 +10898,5 @@ Public Class frmnominasmarinos
             MsgBox(ex.ToString)
         End Try
     End Sub
->>>>>>> origin/main
+
 End Class
