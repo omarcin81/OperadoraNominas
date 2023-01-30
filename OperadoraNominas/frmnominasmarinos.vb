@@ -4,7 +4,7 @@ Imports System.Xml
 
 Public Class frmnominasmarinos
     Private m_currentControl As Control = Nothing
-    Public gIdEmpresa As String = 1
+    Public gIdEmpresa As String
     Public gIdTipoPeriodo As String
     Public gNombrePeriodo As String
     Dim Ruta As String
@@ -6808,7 +6808,7 @@ Public Class frmnominasmarinos
             Dim pilotin As Boolean
             Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
             Dim tiponomina, sueldodescanso As String
-
+            Dim filaexcelnomtotal As Integer = 0
 
 
             pnlProgreso.Visible = True
@@ -6829,13 +6829,13 @@ Public Class frmnominasmarinos
 
                 book.Worksheet(1).CopyTo(libro, "NOMINA")
                 book.Worksheet(2).CopyTo(libro, "DETALLE")
-                ' book.Worksheet(3).CopyTo(libro, "FACT")
+                book.Worksheet(3).CopyTo(libro, "FACT")
                 ' book.Worksheets(4).CopyTo(libro, "PENSION ALIMENTICIA")
 
 
                 Dim hoja As IXLWorksheet = libro.Worksheets(0)
                 Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
-                'Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
+                Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 'Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
 
                 Dim fecha, iejercicio As String
@@ -6955,8 +6955,8 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 51).Value = dtgDatos.Rows(x).Cells(50).Value
                     hoja.Cell(filaExcel + x, 52).Value = dtgDatos.Rows(x).Cells(51).Value
                     hoja.Cell(filaExcel + x, 53).Value = dtgDatos.Rows(x).Cells(52).Value
-                    hoja.Cell(filaExcel + x, 54).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(53).Value 'TOTAL PRIMA
-                    hoja.Cell(filaExcel + x, 55).Value = dtgDatos.Rows(x).Cells(54).Value
+                    hoja.Cell(filaExcel + x, 54).FormulaA1 = dtgDatos.Rows(x).Cells(53).Value 'PRIMA EXE
+                    hoja.Cell(filaExcel + x, 55).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(54).Value TOTAL PRIMA
                     hoja.Cell(filaExcel + x, 56).Value = dtgDatos.Rows(x).Cells(55).Value
                     hoja.Cell(filaExcel + x, 57).Value = dtgDatos.Rows(x).Cells(56).Value
                     hoja.Cell(filaExcel + x, 58).Value = dtgDatos.Rows(x).Cells(57).Value
@@ -7103,7 +7103,7 @@ Public Class frmnominasmarinos
 
                 hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 85).Style.Font.SetBold(True)
 
-
+                filaexcelnomtotal = filaExcel + dtgDatos.Rows.Count + 1
 
                 ''Fact prev y Depositos
                 Dim totalf As Integer = dtgDatos.Rows.Count + 1
@@ -7154,7 +7154,7 @@ Public Class frmnominasmarinos
 
 
                 hoja.Range(espace, 8, espace, 9).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
-                hoja.Range(espace + 2, 8, espace + 6, 9).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 8, espace + 6, 9).Style.Border.InsideBorder = XLBorderStyleValues.Thick
                 hoja.Range(espace, 8, espace + 6, 9).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
                 hoja.Range(espace, 8, espace + 6, 9).Style.Font.FontName = " Century Gothic"
                 hoja.Range(espace, 8, espace + 6, 8).Style.Font.Bold = True
@@ -7162,6 +7162,7 @@ Public Class frmnominasmarinos
                 hoja.Range(espace, 8, espace + 6, 9).Style.NumberFormat.Format = " #,##0.00"
 
                 hoja.Cell(espace, "H").Value = "RETENCIONES"
+                hoja.Range(espace, 9, espace, 8).Merge()
                 hoja.Cell(espace + 2, "H").Value = "ISR"
                 hoja.Cell(espace + 3, "H").Value = "INFONAVIT"
                 hoja.Cell(espace + 4, "H").Value = "PENSIO"
@@ -7199,6 +7200,7 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontSize(8)
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
+                    hoja2.Cell("H5").Value = gIdEmpresa
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
@@ -7233,10 +7235,23 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 2, 9).FormulaA1 = "=SUM(I6:I" & filaExcel & ")"
 
 
+                ' <<<<<<<<<FACT>>>>>>>>>>>
+
+                hoja3.Cell("G2").Value = "TMM " & gIdEmpresa.ToUpper & " SEM " & cboperiodo.SelectedIndex + 1 & periodo & " " & iejercicio
+                hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 3
+                hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 4
+                hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 5
+                hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 6
+                hoja3.Cell("H7").FormulaA1 = "=+(H4+H5+H6+H7)*G8"
+                hoja3.Cell("H8").FormulaA1 = gIdEmpresa.ToUpper
+
+                '<<<<<CARGAR>>>>>
                 pnlProgreso.Visible = False
                 pnlCatalogo.Enabled = True
 
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
+
+
                 dialogo.FileName = "NOMINA " & " " & fecha & " " & iejercicio & " SERIE " & cboserie.SelectedItem
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
@@ -10265,7 +10280,233 @@ Public Class frmnominasmarinos
 
 
     Private Sub layoutTimbrado_Click(sender As System.Object, e As System.EventArgs) Handles layoutTimbrado.Click
+        Try
+            Dim ejercicio As String
+            Dim mesperiodo As String
+            Dim mesid As String
+            Dim fechapagoletra As String
+            Dim filaExcel As Integer = 2
+            Dim dialogo As New SaveFileDialog()
 
+            Dim pilotin As Boolean = False
+            Dim pilotinF As Boolean = False
+
+            Dim PFB_CORTO_PLAZO As Double = 0
+
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+
+                mesperiodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                mesid = rwPeriodo0(0).Item("iMes")
+                ejercicio = rwPeriodo0(0).Item("iEjercicio")
+                fechapagoletra = Date.Parse(rwPeriodo0(0).Item("dFechaFin")).ToLongDateString()
+                'fechadepago = rwPeriodo0(0).Item("dFechaFin")
+            End If
+
+            If dtgDatos.Rows.Count > 0 Then
+
+
+                'Abrimos el machote
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbradosSQ.xlsx"
+
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+
+
+                book.Worksheet(1).CopyTo(libro, "Generales")
+                book.Worksheet(2).CopyTo(libro, "Percepciones")
+                book.Worksheet(3).CopyTo(libro, "Deducciones")
+                book.Worksheet(4).CopyTo(libro, "Otros Pagos")
+
+
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+                Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
+                Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
+                Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
+
+
+
+                '' filaExcel = 6
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+
+                    Dim cuenta, clavebanco, fechainiciorelaboral, cCP, nombrecompleto, correo As String
+
+                        If (dtgDatos.Rows(x).Cells(3).Value Is Nothing = False) Then
+                            Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
+                            If rwEmpleado Is Nothing = False Then
+
+                                cuenta = rwEmpleado(0).Item("Clabe")
+                            correo = rwEmpleado(0).Item("cCorreo")
+                            fechainiciorelaboral = rwEmpleado(0).Item("dFechaAntiguedad")
+                                cCP = rwEmpleado(0).Item("cCP")
+                                nombrecompleto = rwEmpleado(0).Item("cNombre").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoP").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoM").ToString.Trim
+                                Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
+
+                                clavebanco = rwBanco(0).Item("clave")
+                            End If
+
+                        End If
+                        hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 8, filaExcel, 8).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 13, filaExcel, 13).Style.NumberFormat.Format = "@"
+                        hoja.Range(2, 29, filaExcel, 29).Style.NumberFormat.Format = "@"
+
+
+                        If dtgDatos.Rows(x).Cells(3).Value <> "" Then
+
+                            ''Generales
+
+                        hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'No Empleado
+                        hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                        hoja.Cell(filaExcel, 3).Value = nombrecompleto 'Nombre
+                        hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
+                        hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
+                        hoja.Cell(filaExcel, 6).Value = cuenta 'cuenta bancaria
+                        hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
+                        hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(16).Value 'SDI
+                        hoja.Cell(filaExcel, 9).Value = registropatronal(gIdEmpresa)
+                        hoja.Cell(filaExcel, 10).Value = "DIF" 'ent federativa
+                        hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                        hoja.Cell(filaExcel, 13).Value = "1" 'Tipo Contrato 
+                        hoja.Cell(filaExcel, 14).Value = ""
+                        hoja.Cell(filaExcel, 15).Value = ""
+                        hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
+                        hoja.Cell(filaExcel, 17).Value = ""
+                        hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
+                        hoja.Cell(filaExcel, 19).Value = ""
+                        hoja.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'puesto
+                        hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'departamento
+                        hoja.Cell(filaExcel, 22).Value = "4" 'riesgo puesto
+                        hoja.Cell(filaExcel, 23).Value = ""
+                        hoja.Cell(filaExcel, 24).Value = IIf(dtgDatos.Rows(x).Cells(26).Value = "7", "2", "4")  'periocidad pago
+                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 26).Value = clavebanco 'BANCO
+                        hoja.Cell(filaExcel, 27).Value = ""
+                        hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
+                        hoja.Cell(filaExcel, 29).Value = correo  'CORREO
+                            
+                            filaExcel = filaExcel + 1
+                        End If
+
+
+                        pgbProgreso.Value += 1
+                        Application.DoEvents()
+                Next
+
+
+                filaExcel = 4
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    Dim nombrecompleto As String
+                    If dtgDatos.Rows(x).Cells(3).Value Is Nothing = False Then
+                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
+                        If rwEmpleado Is Nothing = False Then
+                            nombrecompleto = rwEmpleado(0).Item("cNombre").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoP").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoM").ToString.Trim
+                            Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
+                        End If
+
+                        'Percepcioness
+                        hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                        hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                        hoja2.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(30).Value)   ' Septimo dia gravado
+                        hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia exento
+                        hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) ' Sueldo Base Gravado
+                        hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base exento
+                        hoja2.Cell(filaExcel, 7).Value = "" ' Aguinaldo Gravado
+                        hoja2.Cell(filaExcel, 8).Value = "" ' Aguinaldo Exento
+                        hoja2.Cell(filaExcel, 9).Value = CDbl(dtgDatos.Rows(x).Cells(35).Value)  ' Horas Triples importe gravado
+                        hoja2.Cell(filaExcel, 10).Value = "" ' Horas Triples importe exedente
+                        hoja2.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(16).Value) / 3 ' Horas Triples valor dias
+                        hoja2.Cell(filaExcel, 12).Value ="2"
+                        hoja2.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(16).Value) 'Horas Triples valor 
+                        hoja2.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(35).Value) ' Horas Triples importa
+                        hoja2.Cell(filaExcel, 15).Value = ""
+                        hoja2.Cell(filaExcel, 16).Value = ""
+                        hoja2.Cell(filaExcel, 17).Value = ""
+                        hoja2.Cell(filaExcel, 18).Value = ""
+                        hoja2.Cell(filaExcel, 19).Value = ""
+                        hoja2.Cell(filaExcel, 20).Value = ""
+                        hoja2.Cell(filaExcel, 21).Value = ""
+                        hoja2.Cell(filaExcel, 22).Value = ""
+                        hoja2.Cell(filaExcel, 23).Value = ""
+                        hoja2.Cell(filaExcel, 24).Value = ""
+                        'If dtgDatos.Rows(x).Cells(3).Value = 3958 Then
+                        '    MsgBox(dtgDatos.Rows(x).Cells(3).Value.ToString)
+                        'End If
+                        Dim IKE_PENSION As Double = IIf(dtgDatos.Rows(x).Cells(49).Value > 0, (CDbl(dtgDatos.Rows(x).Cells(49).Value) * 2), 0)
+
+                        If dtgDatos.Rows(x).Cells(10).Value > 55 Then
+                            PFB_CORTO_PLAZO = 0
+                        Else
+                            PFB_CORTO_PLAZO = CDbl(dtgDatos.Rows(x).Cells(50).Value)
+                        End If
+                       
+                        hoja2.Cell(filaExcel, 25).Value = (CDbl(PFB_CORTO_PLAZO) * 2) + IKE_PENSION ''PREVISION_PFB GRAVADO
+                            hoja2.Cell(filaExcel, 26).Value = ""
+                            hoja2.Cell(filaExcel, 27).Value = 0 'APORT PATRONAL PLAN FELX LP GRAVADO
+
+
+                        ''Deducciones
+                        hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                        hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                        hoja3.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(37).Value ' IMSS
+                        hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(36).Value)  'ISR
+
+                        hoja3.Cell(filaExcel, 5).Value = 0 'PLAN FLEX LP
+                        hoja3.Cell(filaExcel, 6).Value = 0 'APOR PATRON PLAN FLEX LP
+
+
+                        hoja3.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(42).Value)  'PRESTAMO
+                        hoja3.Cell(filaExcel, 8).Value = "" 'INCAPACIDAD, DIAS
+                        hoja3.Cell(filaExcel, 9).Value = "" ' TIPO
+                        hoja3.Cell(filaExcel, 10).Value = CDbl(dtgDatos.Rows(x).Cells(35).Value)   'IMPORTE
+                        hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(41).Value) + IKE_PENSION  'PENSION ALIMENTICIA IMPORTE
+
+                        hoja3.Cell(filaExcel, 12).Value = CDbl(validateInfonavit(dtgDatos.Rows(x).Cells(39).Value, dtgDatos.Rows(x).Cells(38).Value))
+
+                        hoja3.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value) 'Fonacot
+
+                        ''Otros Pagos
+                        hoja4.Columns("A").Width = 20
+                        hoja4.Columns("B").Width = 20
+                        hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                        hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                        hoja4.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(45).Value) ' SUBSIDIO IMPORTE
+                        hoja4.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(44).Value) ' SUBSIDIO CUSADO
+
+                        filaExcel = filaExcel + 1
+
+                    End If
+
+                Next
+
+                'Se guarda
+                libro.SaveAs(ruta)
+                libro = Nothing
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+            Else
+
+                MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+
+        Catch ex As Exception
+
+            MessageBox.Show(ex.Message.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        End Try
     End Sub
 
     Private Sub dtgDatos_CellMouseClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dtgDatos.CellMouseClick
@@ -10273,4 +10514,26 @@ Public Class frmnominasmarinos
         dtgDatos.Rows(e.RowIndex).Selected = True
                
     End Sub
+
+    Private Function registropatronal(empresa As String) As String
+        Select Case empresa
+            Case "ADEMSA"
+                Return "Y5013112106"
+            Case "Almacenadora"
+                Return "Y5059744101"
+            Case "IDN"
+                Return "M5311355104"
+            Case "Transportacion"
+                Return "Y6470199107"
+            Case "TMMDC"
+                Return "A1128963101"
+            Case "Logistic"
+                Return "Y6440770102"
+            Case "Logistic Q"
+                Return "Y6440770102"
+
+        End Select
+
+    End Function
+
 End Class

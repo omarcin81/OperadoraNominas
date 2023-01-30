@@ -2,6 +2,7 @@
 Imports System.IO
 Public Class frmPrincipal
     Dim SQL As String
+    Public EmpresaN As String
     Private Sub frmPrincipal_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         If sender Is Nothing = False Then
             Dim Forma As Form = CType(sender, Form)
@@ -76,6 +77,7 @@ Public Class frmPrincipal
                     Try
                         If Usuario.Perfil = "1" Then
                             Dim Forma As New frmnominasmarinos
+                            Forma.gIdEmpresa = EmpresaN
                             Forma.ShowDialog()
                         Else
                             MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -693,8 +695,5 @@ Public Class frmPrincipal
         End Try
     End Sub
 
-    Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
-
-    End Sub
 End Class
 

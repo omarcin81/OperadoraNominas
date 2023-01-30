@@ -20,6 +20,8 @@
         End If
 
 
+
+
     End Sub
 
     Private Sub lsvUsuario_ItemActivate(sender As Object, e As System.EventArgs) Handles lsvUsuario.ItemActivate
@@ -45,7 +47,10 @@
                     Usuario.IdSeccion = ""
                     Usuario.Id = lsvUsuario.SelectedItems(0).Tag
                     idUsuario = Usuario.Id
+
+                    Dim rwEmpresaN As DataRow() = nConsulta("SELECT * FROM USUARIOS WHERE fkidperfil=10")
                     Dim frmPrincipal As New frmPrincipal
+                    frmPrincipal.EmpresaN = rwEmpresaN(0)("Nombre").ToString
                     frmPrincipal.ShowDialog()
                     End
                 Else
