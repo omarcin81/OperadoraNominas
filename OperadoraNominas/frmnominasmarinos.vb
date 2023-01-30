@@ -10493,7 +10493,14 @@ Public Class frmnominasmarinos
             Dim dias As Integer
             Dim BanPeriodo As Boolean
 
-            
+            pnlProgreso.Visible = True
+
+            Application.DoEvents()
+            pnlCatalogo.Enabled = False
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
 
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -10578,7 +10585,10 @@ Public Class frmnominasmarinos
                     Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
                     Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
                     Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                    If dtgDatos.Rows(x).Cells(2).Value = "58" Then
+                        MsgBox("llego")
 
+                    End If
                     If Subsidioaparte > ISRT Then
 
                         dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
@@ -10604,7 +10614,7 @@ Public Class frmnominasmarinos
                     End If
 
                     Dim ISRA As Double
-
+                    ISRA = 0
                     If ADICIONALES > 0 Then
                         ISRA = Double.Parse(isrmontodadosinsubsidio(ADICIONALES, 1, x))
                     End If
@@ -10615,8 +10625,12 @@ Public Class frmnominasmarinos
                 Else
                     TipoPeriodoinfoonavit = 1
                 End If
-            Next
 
+                pgbProgreso.Value += 1
+                Application.DoEvents()
+            Next
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
             MessageBox.Show("Calculo terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Catch ex As Exception
