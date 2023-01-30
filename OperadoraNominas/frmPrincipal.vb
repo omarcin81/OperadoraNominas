@@ -77,7 +77,7 @@ Public Class frmPrincipal
                     Try
                         If Usuario.Perfil = "1" Then
                             Dim Forma As New frmnominasmarinos
-                            Forma.gIdEmpresa = EmpresaN
+                            Forma.EmpresaN = EmpresaN
                             Forma.ShowDialog()
                         Else
                             MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)

@@ -5,6 +5,7 @@ Imports System.Xml
 Public Class frmnominasmarinos
     Private m_currentControl As Control = Nothing
     Public gIdEmpresa As String
+    Public EmpresaN As String
     Public gIdTipoPeriodo As String
     Public gNombrePeriodo As String
     Dim Ruta As String
@@ -6847,9 +6848,9 @@ Public Class frmnominasmarinos
                     periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
                     fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
                     iejercicio = rwPeriodo0(0).Item("iEjercicio")
-                    hoja.Cell(10, 2).Style.Font.SetBold(True)
-                    hoja.Cell(10, 2).Style.NumberFormat.Format = "@"
-                    hoja.Cell(10, 2).Value = periodo
+                    '  hoja.Cell(10, 2).Style.Font.SetBold(True)
+                    'hoja.Cell(10, 2).Style.NumberFormat.Format = "@"
+                    ' hoja.Cell(10, 2).Value = periodo
                     ' hoja.Cell("V2").Value = Usuario.Nombre.ToUpper
                 End If
 
@@ -6978,25 +6979,21 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                     hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value
 
-                    hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value
-                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(75).Value
-                    hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(76).Value
-                    hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(77).Value
-                    hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(78).Value
-                    hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(79).Value
-                    hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(80).Value
-                    hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
-                    hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
-                    hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
-                    sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-
-
-
+                    ' hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value
+                    'hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(75).Value
+                    ' hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(76).Value
+                    ' hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(77).Value
+                    'hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(78).Value
+                    'hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(79).Value
+                    'hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(80).Value
+                    'hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
+                    '  hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
+                    'hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
+                    ' sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
                     'hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(84).Value
                     'hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(86).Value
                     'hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(86).Value
-
 
                     'exedente
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXEDENTE
@@ -7021,7 +7018,7 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
-
+                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BZ" & filaExcel + x & "=""PPP"",Y" & filaExcel + x & "*30.4*0.03,0)"
 
 
                 Next
@@ -7237,13 +7234,13 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
-                hoja3.Cell("G2").Value = "TMM " & gIdEmpresa.ToUpper & " SEM " & cboperiodo.SelectedIndex + 1 & periodo & " " & iejercicio
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " SEM " & cboperiodo.SelectedIndex + 1 & periodo & " " & iejercicio
                 hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 3
                 hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 4
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 5
                 hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 6
                 hoja3.Cell("H7").FormulaA1 = "=+(H4+H5+H6+H7)*G8"
-                hoja3.Cell("H8").FormulaA1 = gIdEmpresa.ToUpper
+                hoja3.Cell("H8").FormulaA1 = EmpresaN.ToUpper
 
                 '<<<<<CARGAR>>>>>
                 pnlProgreso.Visible = False
@@ -7252,7 +7249,7 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
 
-                dialogo.FileName = "NOMINA " & " " & fecha & " " & iejercicio & " SERIE " & cboserie.SelectedItem
+                dialogo.FileName = "NOMINA " & EmpresaN & " " & fecha & " "
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -10375,7 +10372,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 6).Value = cuenta 'cuenta bancaria
                         hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
                         hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(16).Value 'SDI
-                        hoja.Cell(filaExcel, 9).Value = registropatronal(gIdEmpresa)
+                        hoja.Cell(filaExcel, 9).Value = registropatronal(EmpresaN)
                         hoja.Cell(filaExcel, 10).Value = "DIF" 'ent federativa
                         hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
                         hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
