@@ -2487,13 +2487,58 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                             ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                                 TipoPeriodoinfoonavit = 2
-                                Dim diastra As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(26).Value)
-                                Dim incapa As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(28).Value)
-                                Dim falta As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(20).Value)
-                                Dim permiso As Integer = Integer.Parse(dtgDatos.Rows(x).Cells(21).Value)
-                                Dim ISRT As Double = Double.Parse(isrmontodado(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
-                                Dim ISRA As Double = Double.Parse(isrmontodado(ADICIONALES, 1, x))
-                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
+                                If EmpresaN = "ADEMSA" Then
+                                    Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
+                                    Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
+                                    Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)
+                                    Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
+                                    Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                                    Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                                    If dtgDatos.Rows(x).Cells(2).Value = "58" Then
+                                        MsgBox("llego")
+
+                                    End If
+                                    If Subsidioaparte > ISRT Then
+
+                                        dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
+                                        If Subsidioaparte > 0 Then
+                                            dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte - ISRT)).ToString("###,##0.00")
+                                        End If
+
+                                    Else
+                                        dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                                        If Subsidioaparte > 0 Then
+                                            dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                                        Else
+                                            dtgDatos.Rows(x).Cells(69).Value = "0.00"
+                                        End If
+
+                                    End If
+
+
+                                    If ISRT > Subsidioaparte Then
+                                        ISRT = ISRT - Subsidioaparte
+                                    Else
+                                        ISRT = 0
+                                    End If
+
+                                    Dim ISRA As Double
+                                    ISRA = 0
+                                    If ADICIONALES > 0 Then
+                                        ISRA = Double.Parse(isrmontodadosinsubsidio(ADICIONALES, 1, x))
+                                    End If
+
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
+                                Else
+                                    'todos menos ademsa
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                                End If
+
+
+                               
+
+
+
 
 
                             Else
@@ -7003,7 +7048,7 @@ Public Class frmnominasmarinos
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 'Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
 
-                Dim fecha, iejercicio As String
+                Dim fecha, iejercicio, idias As String
 
                 ' <<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -7012,7 +7057,7 @@ Public Class frmnominasmarinos
                     periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
                     fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
                     iejercicio = rwPeriodo0(0).Item("iEjercicio")
-                    '  hoja.Cell(10, 2).Style.Font.SetBold(True)
+                    idias = rwPeriodo0(0).Item("iDiasPago")
                     'hoja.Cell(10, 2).Style.NumberFormat.Format = "@"
                     ' hoja.Cell(10, 2).Value = periodo
                     ' hoja.Cell("V2").Value = Usuario.Nombre.ToUpper
@@ -7120,7 +7165,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 51).Value = dtgDatos.Rows(x).Cells(50).Value
                     hoja.Cell(filaExcel + x, 52).Value = dtgDatos.Rows(x).Cells(51).Value
                     hoja.Cell(filaExcel + x, 53).Value = dtgDatos.Rows(x).Cells(52).Value
-                    hoja.Cell(filaExcel + x, 54).FormulaA1 = dtgDatos.Rows(x).Cells(53).Value 'PRIMA EXE
+                    hoja.Cell(filaExcel + x, 54).Value = dtgDatos.Rows(x).Cells(53).Value 'PRIMA EXE
                     hoja.Cell(filaExcel + x, 55).FormulaA1 = "=BA" & filaExcel + x & "+BB" & filaExcel + x ' dtgDatos.Rows(x).Cells(54).Value TOTAL PRIMA
                     hoja.Cell(filaExcel + x, 56).Value = dtgDatos.Rows(x).Cells(55).Value
                     hoja.Cell(filaExcel + x, 57).Value = dtgDatos.Rows(x).Cells(56).Value
@@ -7270,7 +7315,7 @@ Public Class frmnominasmarinos
                 ''Fact prev y Depositos
                 Dim totalf As Integer = dtgDatos.Rows.Count + 1
                 Dim espace As Integer = filaExcel + totalf + 3
-                Dim totalbuq As Integer = filaExcel + totalf
+                Dim totalbuq As Integer = totalf + filaExcel
 
                 hoja.Cell(espace, "E").Value = "COSTO CLIENTE"
                 hoja.Range(espace, 5, espace, 6).Merge()
@@ -7297,8 +7342,8 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 9, "E").Value = "Total"
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
-                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq & ",""SIND"",CE5:CE" & totalbuq & ")"
-                hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq & ",""PPP"",CE5:CE" & totalbuq & ")"
+                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
+                hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                 hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
 
@@ -7362,7 +7407,7 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontSize(8)
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
                     hoja2.Range(filaExcel, 2, filaExcel, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
-                    hoja2.Cell("H5").Value = gIdEmpresa
+                    hoja2.Cell("H5").Value = EmpresaN
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
@@ -7399,12 +7444,12 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 &
-                hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 3
-                hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 4
-                hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 5
-                hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 6
-                hoja3.Cell("H7").FormulaA1 = "=+(H4+H5+H6+H7)*G8"
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ")
+                hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
+                hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
+                hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
+                hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 5
+                hoja3.Cell("H7").FormulaA1 = "=(H3+H4+H5+H6)*G7"
                 hoja3.Cell("H8").Value = EmpresaN.ToUpper
 
                 '<<<<<CARGAR>>>>>
@@ -7414,7 +7459,7 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
 
-                dialogo.FileName = "NOMINA " & EmpresaN & " " & fecha & " "
+                dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodo
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -10702,6 +10747,7 @@ Public Class frmnominasmarinos
 
     Private Sub cmdsoloisr_Click(sender As System.Object, e As System.EventArgs) Handles cmdsoloisr.Click
         Try
+            Dim ValorIncapacidad As Double
             Dim SUELDOBRUTON As Double
             Dim SEPTIMO As Double
             Dim PRIDOMGRAVADA As Double
@@ -10804,6 +10850,14 @@ Public Class frmnominasmarinos
 
                 End If
 
+                'Incapacidad
+                ValorIncapacidad = 0.0
+                If dtgDatos.Rows(x).Cells(27).Value <> "Ninguno" Then
+
+                    ValorIncapacidad = dtgDatos.Rows(x).Cells(28).Value * SDEMPLEADO
+
+                End If
+
                 SUELDOBRUTON = Double.Parse(IIf(dtgDatos.Rows(x).Cells(29).Value = "", 0, dtgDatos.Rows(x).Cells(29).Value))
                 SEPTIMO = Double.Parse(IIf(dtgDatos.Rows(x).Cells(30).Value = "", 0, dtgDatos.Rows(x).Cells(30).Value))
                 PRIDOMGRAVADA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(31).Value = "", 0, dtgDatos.Rows(x).Cells(31).Value))
@@ -10828,6 +10882,12 @@ Public Class frmnominasmarinos
                 AGUINALDOEXEN = Double.Parse(IIf(dtgDatos.Rows(x).Cells(50).Value = "", 0, dtgDatos.Rows(x).Cells(50).Value))
                 PRIMAVACGRA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(52).Value = "", 0, dtgDatos.Rows(x).Cells(52).Value))
                 PRIMAVACEXEN = Double.Parse(IIf(dtgDatos.Rows(x).Cells(53).Value = "", 0, dtgDatos.Rows(x).Cells(53).Value))
+                SUMAPERCEPCIONES = SUELDOBRUTON + SEPTIMO + PRIDOMGRAVADA + PRIDOMEXENTA + TE2G + TE2E + TE3 + DESCANSOLABORADO + FESTIVOTRAB
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION + SEMANAFONDO
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO + INCREMENTORETENIDO + VACACIONESPRO + AGUINALDOGRA + AGUINALDOEXEN
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + PRIMAVACGRA + PRIMAVACEXEN - ValorIncapacidad
+                dtgDatos.Rows(x).Cells(55).Value = Math.Round(SUMAPERCEPCIONES, 2).ToString("###,##0.00")
+                SUMAPERCEPCIONESPISR = SUMAPERCEPCIONES - PRIDOMEXENTA - TE2E - AGUINALDOEXEN - PRIMAVACEXEN
 
 
                 SDEMPLEADO = Double.Parse(dtgDatos.Rows(x).Cells(24).Value)
@@ -10841,47 +10901,56 @@ Public Class frmnominasmarinos
                     dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                 ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                     TipoPeriodoinfoonavit = 2
-                    Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
-                    Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
-                    Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)
-                    Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
-                    Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
-                    Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
-                    If dtgDatos.Rows(x).Cells(2).Value = "58" Then
-                        MsgBox("llego")
+                    If EmpresaN = "ADEMSA" Then
+                        Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
+                        Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
+                        Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)
+                        Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
+                        Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                        Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                        If dtgDatos.Rows(x).Cells(2).Value = "58" Then
+                            MsgBox("llego")
 
-                    End If
-                    If Subsidioaparte > ISRT Then
-
-                        dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
-                        If Subsidioaparte > 0 Then
-                            dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte - ISRT)).ToString("###,##0.00")
                         End If
+                        If Subsidioaparte > ISRT Then
 
-                    Else
-                        dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
-                        If Subsidioaparte > 0 Then
-                            dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                            dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
+                            If Subsidioaparte > 0 Then
+                                dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte - ISRT)).ToString("###,##0.00")
+                            End If
+
                         Else
-                            dtgDatos.Rows(x).Cells(69).Value = "0.00"
+                            dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                            If Subsidioaparte > 0 Then
+                                dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                            Else
+                                dtgDatos.Rows(x).Cells(69).Value = "0.00"
+                            End If
+
                         End If
 
-                    End If
 
+                        If ISRT > Subsidioaparte Then
+                            ISRT = ISRT - Subsidioaparte
+                        Else
+                            ISRT = 0
+                        End If
 
-                    If ISRT > Subsidioaparte Then
-                        ISRT = ISRT - Subsidioaparte
+                        Dim ISRA As Double
+                        ISRA = 0
+                        If ADICIONALES > 0 Then
+                            ISRA = Double.Parse(isrmontodadosinsubsidio(ADICIONALES, 1, x))
+                        End If
+
+                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
                     Else
-                        ISRT = 0
+                        'todos menos ademsa
+                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                     End If
 
-                    Dim ISRA As Double
-                    ISRA = 0
-                    If ADICIONALES > 0 Then
-                        ISRA = Double.Parse(isrmontodadosinsubsidio(ADICIONALES, 1, x))
-                    End If
 
-                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
+
+                    
 
 
                 Else
