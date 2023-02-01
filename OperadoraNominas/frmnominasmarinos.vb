@@ -7312,7 +7312,7 @@ Public Class frmnominasmarinos
 
                 filaexcelnomtotal = filaExcel + dtgDatos.Rows.Count + 1
 
-                ''Fact prev y Depositos
+                ''FACT PREV/ DEPOSITOS
                 Dim totalf As Integer = dtgDatos.Rows.Count + 1
                 Dim espace As Integer = filaExcel + totalf + 3
                 Dim totalbuq As Integer = totalf + filaExcel
@@ -7333,7 +7333,7 @@ Public Class frmnominasmarinos
                 hoja.Range(espace, 6, espace + 10, 6).Style.NumberFormat.Format = " #,##0.00"
                 hoja.Cell(espace + 2, "E").Value = "NÓMINA SA"
                 hoja.Cell(espace + 3, "E").Value = "BENEFICIOSOCIAL"
-                hoja.Cell(espace + 4, "E").Value = "PPP"
+                'hoja.Cell(espace + 4, "E").Value = "PPP"
                 hoja.Cell(espace + 5, "E").Value = "VALES DE DESPENSA"
                 hoja.Cell(espace + 6, "E").Value = "COSTO SOCIAL"
 
@@ -7343,7 +7343,7 @@ Public Class frmnominasmarinos
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
                 hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
-                hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
+                ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                 hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
 
@@ -7351,14 +7351,46 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
                 hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
 
-               
-                hoja.Cell(espace + 11, "E").Value = "Deposito Cuenta SA"
-                hoja.Cell(espace + 12, "E").Value = "Deposito cuenta GROESSINGER"
-                hoja.Cell(espace + 11, "F").FormulaA1 = "=F" & espace + 2
-                hoja.Cell(espace + 12, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+
+
+                'IKE FACT
+                If diasperiodo > 15 Then
+
+                    hoja.Cell(espace + 14, "E").Value = "IKE "
+                    hoja.Range(espace + 14, 5, espace + 14, 6).Merge()
+                    hoja.Range(espace + 14, 5, espace + 24, 6).Style.Font.FontColor = XLColor.White
+                    hoja.Range(espace + 14, 5, espace + 14, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
+                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Font.FontName = "Century Gothic"
+                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+
+                    hoja.Cell(espace + 15, "E").Value = "PPP"
+                    hoja.Cell(espace + 16, "E").Value = "3% Largo Plazo (ahorro)"
+                    hoja.Cell(espace + 17, "E").Value = "IKE Deposito 1"
+                    hoja.Cell(espace + 18, "E").Value = "-"
+                    hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
+                    hoja.Cell(espace + 20, "E").Value = "IVA"
+                    hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
+
+                    hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
+                    hoja.Cell(espace + 16, "F").FormulaA1 = "=CP" & totalbuq
+                    hoja.Cell(espace + 17, "F").FormulaA1 = "=F" & espace + 15 & "+F" & espace + 16
+                    hoja.Cell(espace + 18, "F").Value = "-"
+                    hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
+                    hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
+                    hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 19 & "+F" & espace + 20
+
+
+                End If
+
+                hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
+                hoja.Cell(espace + 24, "E").Value = "Deposito cuenta GROESSINGER"
+                hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
+                hoja.Cell(espace + 23, "F").FormulaA1 = "=F" & espace + 2
+                hoja.Cell(espace + 24, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+                hoja.Cell(espace + 25, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 'RETENCIONES
-
 
                 hoja.Range(espace, 8, espace, 9).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
                 hoja.Range(espace, 8, espace + 6, 9).Style.Border.InsideBorder = XLBorderStyleValues.Thick
@@ -7383,10 +7415,9 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 6, "I").FormulaA1 = "=+I" & espace + 2 & "+I" & espace + 3 & "+I" & espace + 4 & "+I" & espace + 5
 
 
-                '' Calculos x Buque
 
-                ' Dim sep As Integer = filaExcel + totalf + 8
-                'hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
+
+
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
@@ -7444,7 +7475,7 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ")
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodo
                 hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
                 hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
