@@ -2317,9 +2317,9 @@ Public Class frmnominasmarinos
                                 'dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
-                                If dtgDatos.Rows(x).Cells(2).Value = "42" Then
-                                    MsgBox("llego")
-                                End If
+                                'If dtgDatos.Rows(x).Cells(2).Value = "42" Then
+                                'MsgBox("llego")
+                                ' End If
 
                                 dtgDatos.Rows(x).Cells(26).Value = "7"
                                 If diastrabajados = 7 Then
@@ -2494,10 +2494,10 @@ Public Class frmnominasmarinos
                                     Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
                                     Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
                                     Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
-                                    If dtgDatos.Rows(x).Cells(2).Value = "58" Then
-                                        MsgBox("llego")
+                                    'If dtgDatos.Rows(x).Cells(2).Value = "58" Then
+                                    '    MsgBox("llego")
 
-                                    End If
+                                    'End If
                                     If Subsidioaparte > ISRT Then
 
                                         dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
@@ -7048,7 +7048,7 @@ Public Class frmnominasmarinos
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 'Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
 
-                Dim fecha, iejercicio, idias As String
+                Dim fecha, iejercicio, idias, periodom As String
 
                 ' <<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -7058,9 +7058,7 @@ Public Class frmnominasmarinos
                     fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
                     iejercicio = rwPeriodo0(0).Item("iEjercicio")
                     idias = rwPeriodo0(0).Item("iDiasPago")
-                    'hoja.Cell(10, 2).Style.NumberFormat.Format = "@"
-                    ' hoja.Cell(10, 2).Value = periodo
-                    ' hoja.Cell("V2").Value = Usuario.Nombre.ToUpper
+                    periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
                 End If
 
 
@@ -7319,6 +7317,7 @@ Public Class frmnominasmarinos
 
                 hoja.Cell(espace, "E").Value = "COSTO CLIENTE"
                 hoja.Range(espace, 5, espace, 6).Merge()
+                hoja.Cell(espace, "E").Style.Font.Bold = True
                 hoja.Range(espace, 5, espace, 6).Style.Font.FontColor = XLColor.White
                 hoja.Range(espace, 5, espace, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
                 hoja.Range(espace, 5, espace + 9, 6).Style.Font.FontName = "Century Gothic"
@@ -7354,15 +7353,26 @@ Public Class frmnominasmarinos
 
 
                 'IKE FACT
-                If diasperiodo > 15 Then
+                If diasperiodo > 14 Then
 
                     hoja.Cell(espace + 14, "E").Value = "IKE "
+                    hoja.Cell(espace + 14, "E").Style.Font.Bold = True
                     hoja.Range(espace + 14, 5, espace + 14, 6).Merge()
-                    hoja.Range(espace + 14, 5, espace + 24, 6).Style.Font.FontColor = XLColor.White
+                    hoja.Range(espace + 14, 5, espace + 14, 6).Style.Font.FontColor = XLColor.White
                     hoja.Range(espace + 14, 5, espace + 14, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
                     hoja.Range(espace + 14, 5, espace + 21, 6).Style.Font.FontName = "Century Gothic"
                     hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
                     hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+
+                    hoja.Range(espace + 17, 5, espace + 17, 6).Style.Font.Bold = True
+                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Font.Bold = True
+                    hoja.Cell(espace + 17, "E").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+                    hoja.Range(espace + 20, 5, espace + 21, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+
+                    hoja.Cell(espace + 17, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    hoja.Cell(espace + 17, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+                    hoja.Cell(espace + 21, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    hoja.Cell(espace + 21, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
 
                     hoja.Cell(espace + 15, "E").Value = "PPP"
                     hoja.Cell(espace + 16, "E").Value = "3% Largo Plazo (ahorro)"
@@ -7371,6 +7381,8 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
                     hoja.Cell(espace + 20, "E").Value = "IVA"
                     hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
+
+                    hoja.Range(espace + 15, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 16, "F").FormulaA1 = "=CP" & totalbuq
@@ -7382,6 +7394,10 @@ Public Class frmnominasmarinos
 
 
                 End If
+
+                hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
+                hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
+                hoja.Range(espace + 23, 6, espace + 25, 6).Style.NumberFormat.Format = " #,##0.00"
 
                 hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
                 hoja.Cell(espace + 24, "E").Value = "Deposito cuenta GROESSINGER"
@@ -7426,7 +7442,7 @@ Public Class frmnominasmarinos
 
                 Dim cuenta, banco, clabe, nombrecompleto As String
 
-
+                hoja2.Cell(4, 2).Value = "PERIODO " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodom
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     hoja2.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
