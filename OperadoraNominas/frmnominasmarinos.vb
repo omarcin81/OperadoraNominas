@@ -2240,7 +2240,7 @@ Public Class frmnominasmarinos
                         Dim SUMADEDUCCIONES As Double
                         Dim dias As Integer
                         Dim BanPeriodo As Boolean
-                        If diastrabajados = 0 Then
+                        If diastrabajados = -10 Then
 
 
                         Else
@@ -2270,7 +2270,7 @@ Public Class frmnominasmarinos
                                         'Calculamos la prima
 
                                         dias = (DateDiff("y", FechaBuscar, FechaFinPeriodo)) + 1
-                                        
+
                                         BanPeriodo = True
 
                                     ElseIf FechaBuscar.CompareTo(FechaFinPeriodo) <= 0 Then
@@ -2313,6 +2313,9 @@ Public Class frmnominasmarinos
                             End If
                             'solo falta injustificada juega para el septimo dia
                             If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                                If dtgDatos.Rows(x).Cells(2).Value = "35" Then
+                                    MsgBox("llego")
+                                End If
                                 dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2).ToString("###,##0.00")
                                 'dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
@@ -2440,7 +2443,7 @@ Public Class frmnominasmarinos
                                     dtgDatos.Rows(x).Cells(75).Value = IIf(Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2) > 0.03, Math.Round(Double.Parse(CalculoPrimaExcedente(dtgDatos.Rows(x).Cells(2).Value, 1, 25)) - Double.Parse(dtgDatos.Rows(x).Cells(54).Value), 2), 0)
                                 End If
                             End If
-                            
+
 
 
                             'sumar Para ISR
@@ -2487,7 +2490,7 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                             ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                                 TipoPeriodoinfoonavit = 2
-                                If EmpresaN = "ADEMSA" Then
+                                If EmpresaN = "NOSEOCUPARA" Then
                                     Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
                                     Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
                                     Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)
@@ -2535,7 +2538,7 @@ Public Class frmnominasmarinos
                                 End If
 
 
-                               
+
 
 
 
@@ -2735,7 +2738,7 @@ Public Class frmnominasmarinos
                                 If Double.Parse(rwDatos(0)("fsindicatoExtra").ToString) > 0 Then
 
                                     If DiasCadaPeriodo > 7 Then
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * 15, 2)
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados, 2)
                                     Else
                                         dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
                                     End If
@@ -2744,14 +2747,25 @@ Public Class frmnominasmarinos
 
                             End If
 
+                            If chkDiasCS.Checked = True Then
+                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
 
-                            dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
 
-                            dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
-                            dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
-                            dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
-                            dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
+                            Else
+                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
 
+                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
+
+                            End If
+
+                            
 
                         End If
 
@@ -5039,6 +5053,7 @@ Public Class frmnominasmarinos
         Try
             Dim Forma As New frmSubirIncidencias
             Forma.gIdPeriodo = cboperiodo.SelectedValue
+            Forma.gAnioActual = aniocostosocial
             Forma.ShowDialog()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -6338,7 +6353,7 @@ Public Class frmnominasmarinos
                             fila.Item("Adeudo_Infonavit_A") = ""
                             fila.Item("PA_A") = ""
                             fila.Item("SINDICATO/PPP") = ""
-                            fila.Item("Retenciones") = ""
+                            fila.Item("PRIMA_EXCEN") = ""
                             fila.Item("%_Comisión") = ""
                             fila.Item("Comisión_SA") = ""
                             fila.Item("Comisión_Beneficio") = ""
@@ -10948,7 +10963,7 @@ Public Class frmnominasmarinos
                     dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
                 ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                     TipoPeriodoinfoonavit = 2
-                    If EmpresaN = "ADEMSA" Then
+                    If EmpresaN = "NOSEOCUPARA" Then
                         Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
                         Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
                         Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)

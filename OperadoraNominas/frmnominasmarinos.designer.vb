@@ -42,7 +42,7 @@ Partial Class frmnominasmarinos
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
         Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
-        Me.chkNofonacot = New System.Windows.Forms.CheckBox()
+        Me.chkDiasCS = New System.Windows.Forms.CheckBox()
         Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
         Me.chkPrimaVacacional = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
@@ -205,7 +205,7 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cmdAcumuladoOperadora)
         Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
         Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
-        Me.pnlCatalogo.Controls.Add(Me.chkNofonacot)
+        Me.pnlCatalogo.Controls.Add(Me.chkDiasCS)
         Me.pnlCatalogo.Controls.Add(Me.chkCalSoloMarcados)
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaVacacional)
         Me.pnlCatalogo.Controls.Add(Me.cmdResumenInfo)
@@ -252,7 +252,7 @@ Partial Class frmnominasmarinos
         Me.chkPrestamoSA.AutoSize = True
         Me.chkPrestamoSA.BackColor = System.Drawing.Color.Transparent
         Me.chkPrestamoSA.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamoSA.Location = New System.Drawing.Point(223, 70)
+        Me.chkPrestamoSA.Location = New System.Drawing.Point(270, 70)
         Me.chkPrestamoSA.Name = "chkPrestamoSA"
         Me.chkPrestamoSA.Size = New System.Drawing.Size(123, 22)
         Me.chkPrestamoSA.TabIndex = 37
@@ -323,18 +323,17 @@ Partial Class frmnominasmarinos
         Me.chkSoloCostoSocial.UseVisualStyleBackColor = False
         Me.chkSoloCostoSocial.Visible = False
         '
-        'chkNofonacot
+        'chkDiasCS
         '
-        Me.chkNofonacot.AutoSize = True
-        Me.chkNofonacot.BackColor = System.Drawing.Color.Transparent
-        Me.chkNofonacot.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNofonacot.Location = New System.Drawing.Point(126, 69)
-        Me.chkNofonacot.Name = "chkNofonacot"
-        Me.chkNofonacot.Size = New System.Drawing.Size(95, 22)
-        Me.chkNofonacot.TabIndex = 30
-        Me.chkNofonacot.Text = "No fonacot"
-        Me.chkNofonacot.UseVisualStyleBackColor = False
-        Me.chkNofonacot.Visible = False
+        Me.chkDiasCS.AutoSize = True
+        Me.chkDiasCS.BackColor = System.Drawing.Color.Transparent
+        Me.chkDiasCS.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkDiasCS.Location = New System.Drawing.Point(126, 69)
+        Me.chkDiasCS.Name = "chkDiasCS"
+        Me.chkDiasCS.Size = New System.Drawing.Size(135, 22)
+        Me.chkDiasCS.TabIndex = 30
+        Me.chkDiasCS.Text = "DT COSTO SOCIAL"
+        Me.chkDiasCS.UseVisualStyleBackColor = False
         '
         'chkCalSoloMarcados
         '
@@ -937,7 +936,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkCalSoloMarcados As System.Windows.Forms.CheckBox
     Friend WithEvents SoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarSoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents chkNofonacot As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDiasCS As System.Windows.Forms.CheckBox
     Friend WithEvents RegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarRegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkSoloCostoSocial As System.Windows.Forms.CheckBox
