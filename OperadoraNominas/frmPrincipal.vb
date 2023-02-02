@@ -29,7 +29,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        lblUsuario.Text = Usuario.Nombre
+        lblUsuario.Text = Usuario.Nombre & " - " & EmpresaN
         clsConfiguracion.Actualizar()
         lsvPanel.Items.Item(0).Text = "Nomina " '& Servidor.Base.ToString.Substring(0, 3)
     End Sub
