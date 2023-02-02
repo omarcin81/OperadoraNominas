@@ -12,6 +12,7 @@ Public Class frmSubirIncidencias
     Dim ini, fin As String
     Dim rutita As String
     Dim fechadepago As String
+    Public gAnioActual As String
     Private Sub frmSubirIncidencias_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
 
@@ -978,7 +979,126 @@ Public Class frmSubirIncidencias
                                 'mandar el reporte
                             Next
 
+                        Case 15
+                            'FONACOT
+                            If chkIncidencia0.Checked Then
+                                SQL = " update nomina set fFonacot=0"
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                If nExecute(SQL) = False Then
+                                    MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                    'pnlProgreso.Visible = False
+                                    Exit Sub
+                                End If
+                            End If
 
+                            For Each producto As ListViewItem In lsvLista.CheckedItems
+                                If producto.Index >= (CInt(NudFilaI.Value) - 1) And producto.Index <= (CInt(NudFilaF.Value) - 1) Then
+                                    If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
+                                        SQL = "select * from EmpleadosC where cCodigoEmpleado=" & IIf(producto.SubItems(CInt(NudColumnaN.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaN.Value)).Text)
+
+                                        Dim rwEmpleado As DataRow() = nConsulta(SQL)
+                                        If rwEmpleado Is Nothing = False Then
+                                            SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
+                                            If rwEmpleadoNomina Is Nothing = False Then
+                                                'verificar si se quiere actualizar a 0
+
+                                                Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                SQL = " update nomina set fFonacot=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fFonacot").ToString)
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                If nExecute(SQL) = False Then
+                                                    MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                    'pnlProgreso.Visible = False
+                                                    Exit Sub
+                                                End If
+                                            Else
+                                                MessageBox.Show("El empleado " & rwEmpleado(0)("cNombreLargo").ToString & " no esta en la nomina, verique el alta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            End If
+
+
+
+                                        End If
+
+                                    End If
+
+
+                                End If
+                                pgbProgreso.Value += 1
+                                'Application.DoEvents()
+                                'mandar el reporte
+                            Next
+
+                        Case 16
+                            'PRIMA DOMINICAL IMPORTES
+                            SQL = " update nomina set fPrimaDomGravada=0,fPrimaDomExenta=0"
+                            SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                            If nExecute(SQL) = False Then
+                                MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                'pnlProgreso.Visible = False
+                                Exit Sub
+                            End If
+
+                            For Each producto As ListViewItem In lsvLista.CheckedItems
+                                If producto.Index >= (CInt(NudFilaI.Value) - 1) And producto.Index <= (CInt(NudFilaF.Value) - 1) Then
+                                    If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
+                                        SQL = "select * from EmpleadosC where cCodigoEmpleado=" & IIf(producto.SubItems(CInt(NudColumnaN.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaN.Value)).Text)
+
+                                        Dim rwEmpleado As DataRow() = nConsulta(SQL)
+                                        If rwEmpleado Is Nothing = False Then
+                                            SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
+                                            If rwEmpleadoNomina Is Nothing = False Then
+                                                'verificar si se quiere actualizar a 0
+                                                Dim valortotal As Double = CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                ' obtener uma
+                                                Dim ValorUMA As Double
+                                                Dim PrimaDGra As Double
+                                                Dim PrimaDExe As Double
+                                                SQL = "select * from Salario "
+                                                SQL &= " where Anio=" & gAnioActual
+                                                SQL &= " and iEstatus=1"
+                                                Dim rwValorUMA As DataRow() = nConsulta(SQL)
+                                                If rwValorUMA Is Nothing = False Then
+                                                    ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                                                Else
+                                                    ValorUMA = 0
+                                                    MessageBox.Show("No se encontro valor para UMA en el año: " & gAnioActual)
+                                                End If
+                                                PrimaDGra = 0
+                                                PrimaDExe = 0
+                                                If valortotal > ValorUMA Then
+                                                    PrimaDGra = ValorUMA
+                                                    PrimaDExe = valortotal - ValorUMA
+                                                Else
+                                                    PrimaDGra = 0
+                                                    PrimaDExe = ValorUMA
+                                                End If
+                                                'Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                SQL = " update nomina set fPrimaDomGravada=" & PrimaDGra & ",fPrimaDomExenta=" & PrimaDExe
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                If nExecute(SQL) = False Then
+                                                    MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                    'pnlProgreso.Visible = False
+                                                    Exit Sub
+                                                End If
+                                            Else
+                                                MessageBox.Show("El empleado " & rwEmpleado(0)("cNombreLargo").ToString & " no esta en la nomina, verique el alta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            End If
+
+
+
+                                        End If
+
+                                    End If
+
+
+                                End If
+                                pgbProgreso.Value += 1
+                                'Application.DoEvents()
+                                'mandar el reporte
+                            Next
                     End Select
                     tsbCancelar_Click(sender, e)
                     pnlProgreso.Visible = False
