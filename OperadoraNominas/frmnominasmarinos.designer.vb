@@ -35,7 +35,7 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
-        Me.chkPrestamoSA = New System.Windows.Forms.CheckBox()
+        Me.chkDias = New System.Windows.Forms.CheckBox()
         Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
@@ -198,7 +198,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
-        Me.pnlCatalogo.Controls.Add(Me.chkPrestamoSA)
+        Me.pnlCatalogo.Controls.Add(Me.chkDias)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
         Me.pnlCatalogo.Controls.Add(Me.Button1)
         Me.pnlCatalogo.Controls.Add(Me.cmdCalculoSoloInfonavit)
@@ -247,18 +247,17 @@ Partial Class frmnominasmarinos
         Me.chkPrimaDominical.Text = "No Calcular PRIMA D"
         Me.chkPrimaDominical.UseVisualStyleBackColor = False
         '
-        'chkPrestamoSA
+        'chkDias
         '
-        Me.chkPrestamoSA.AutoSize = True
-        Me.chkPrestamoSA.BackColor = System.Drawing.Color.Transparent
-        Me.chkPrestamoSA.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamoSA.Location = New System.Drawing.Point(270, 70)
-        Me.chkPrestamoSA.Name = "chkPrestamoSA"
-        Me.chkPrestamoSA.Size = New System.Drawing.Size(123, 22)
-        Me.chkPrestamoSA.TabIndex = 37
-        Me.chkPrestamoSA.Text = "No CAL PRES SA"
-        Me.chkPrestamoSA.UseVisualStyleBackColor = False
-        Me.chkPrestamoSA.Visible = False
+        Me.chkDias.AutoSize = True
+        Me.chkDias.BackColor = System.Drawing.Color.Transparent
+        Me.chkDias.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkDias.Location = New System.Drawing.Point(270, 70)
+        Me.chkDias.Name = "chkDias"
+        Me.chkDias.Size = New System.Drawing.Size(135, 22)
+        Me.chkDias.TabIndex = 37
+        Me.chkDias.Text = "No actualizar dias"
+        Me.chkDias.UseVisualStyleBackColor = False
         '
         'cmdsoloisr
         '
@@ -618,7 +617,7 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem, Me.CostoCeroToolStripMenuItem, Me.DesactivarCostoCeroToolStripMenuItem, Me.NoCalcularCostoSocialToolStripMenuItem, Me.DesactivarNoCalcularCostoSocialToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(255, 400)
+        Me.cMenu.Size = New System.Drawing.Size(255, 422)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -642,7 +641,7 @@ Partial Class frmnominasmarinos
         '
         Me.NoCalcularInofnavitToolStripMenuItem.Name = "NoCalcularInofnavitToolStripMenuItem"
         Me.NoCalcularInofnavitToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularInofnavitToolStripMenuItem.Text = "No Calcular inofnavit"
+        Me.NoCalcularInofnavitToolStripMenuItem.Text = "Calcular"
         '
         'ActicarCalculoInfonavitToolStripMenuItem
         '
@@ -952,7 +951,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents NoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
-    Friend WithEvents chkPrestamoSA As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDias As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
 
 
