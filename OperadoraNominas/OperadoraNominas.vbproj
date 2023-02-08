@@ -318,6 +318,12 @@
     <Compile Include="prestamo\frmFonacot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Resources\SeleccionarPeriodo.Designer.vb">
+      <DependentUpon>SeleccionarPeriodo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SeleccionarPeriodo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ruta.Designer.vb">
       <DependentUpon>ruta.vb</DependentUpon>
     </Compile>
@@ -428,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="prestamo\frmFonacot.resx">
       <DependentUpon>frmFonacot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SeleccionarPeriodo.resx">
+      <DependentUpon>SeleccionarPeriodo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ruta.resx">
       <DependentUpon>ruta.vb</DependentUpon>
