@@ -1224,9 +1224,9 @@ Public Class frmnominasmarinos
             Dim rwPeriodo As DataRow() = nConsulta(sql)
 
             If rwPeriodo Is Nothing = False Then
-                If idempleado = 42 Then
-                    MsgBox("llege")
-                End If
+                'If idempleado = 42 Then
+                '    MsgBox("llege")
+                'End If
 
                 sql = "select * from incapacidad where iIdIncapacidad= "
                 sql &= " (select Max(iIdIncapacidad) from incapacidad where iEstatus=1 and fkiIdEmpleado=" & idempleado & ") "
