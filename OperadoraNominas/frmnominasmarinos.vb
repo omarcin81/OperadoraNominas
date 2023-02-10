@@ -11979,213 +11979,279 @@ Public Class frmnominasmarinos
                 Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
                 Dim tiponomina, sueldodescanso As String
                 Dim filaexcelnomtotal As Integer = 0
+                Dim diasCadPeriodo
 
+                'dias prov
+                Dim DiasCadaPeriodo As Integer
+                Dim FechaInicioPeriodo As Date
+                Dim FechaFinPeriodo As Date
+                Dim FechaAntiguedad As Date
+                Dim FechaBuscar As Date
+                Dim TipoPeriodoinfoonavit As Integer
 
+                Dim ValorUMA As Double
                 pnlProgreso.Visible = True
                 pnlCatalogo.Enabled = False
                 Application.DoEvents()
 
+
+
+
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonomina.xlsx"
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+
+                book.Worksheet(1).CopyTo(libro, "NOMINA")
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+
+
+                sql = "	select"
+                sql &= " fkiIdPeriodo,"
+                sql &= " EmpleadosC.cCodigoEmpleado,"
+                sql &= " EmpleadosC.cNombreLargo,"
+                sql &= " Nomina.Depto, Nomina.Puesto,"
+                sql &= " EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe, "
+                sql &= "fTExtra2V, "
+                sql &= "fTExtra3V, "
+                sql &= "fDescansoLV , "
+                sql &= "fDiaFestivoLV , "
+                sql &= "fHoras_extras_dobles_V , "
+                sql &= "fHoras_extras_triples_V , "
+                sql &= "fDescanso_Laborado_V , "
+                sql &= "fDia_Festivo_laborado_V , "
+                sql &= "fPrima_Dominical_V , "
+                sql &= "fFalta_Injustificada_V, "
+                sql &= "fPermiso_Sin_GS_V , "
+                sql &= "fT_No_laborado_V , "
+                sql &= "fSalarioBase , "
+                sql &= "fSalarioDiario, "
+                sql &= "fSalarioBC , "
+                sql &= "iDiasTrabajados , "
+                sql &= "fSueldoBruto, "
+                sql &= "fSeptimoDia, "
+                sql &= "fPrimaDomGravada, "
+                sql &= "fPrimaDomExenta, "
+                sql &= "fTExtra2Gravado, "
+                sql &= "fTExtra2Exento, "
+                sql &= "fTExtra3, "
+                sql &= "fDescansoL, "
+                sql &= "fDiaFestivoL, "
+                sql &= "fBonoAsistencia, "
+                sql &= "fBonoProductividad, "
+                sql &= "fBonoPolivalencia, "
+                sql &= "fBonoEspecialidad, "
+                sql &= "fBonoCalidad, "
+                sql &= "fCompensacion, "
+                sql &= "fSemanaFondo, "
+                sql &= "fFaltaInjustificada, "
+                sql &= "fPermisoSinGS, "
+                sql &= "fIncrementoRetenido, "
+                sql &= "fVacacionesProporcionales, "
+                sql &= "fAguinaldoGravado, "
+                sql &= "fAguinaldoExento, "
+                sql &= "fPrimaVacacionalGravado, "
+                sql &= "fPrimaVacacionalExento, "
+                sql &= "fTotalPercepciones, "
+                sql &= "fTotalPercepcionesISR, "
+                sql &= "fIncapacidad, "
+                sql &= "fIsr, "
+                sql &= "fImss, "
+                sql &= "fInfonavit, "
+                sql &= "fInfonavitBanterior, "
+                sql &= "fAjusteInfonavit, "
+                sql &= "fPensionAlimenticia, "
+                sql &= "fPrestamo, "
+                sql &= "fFonacot, "
+                sql &= "fT_No_laborado, "
+                sql &= "fCuotaSindical, "
+                sql &= "fSubsidioGenerado, "
+                sql &= "fSubsidioAplicado, "
+                sql &= "fOperadora AS NETO_SA, "
+                sql &= "fPrestamoPerA, "
+                sql &= "fAdeudoInfonavitA, "
+                sql &= "fDiferenciaInfonavitA, "
+                sql &= "fAsimilados AS EXCEDENTE, "
+                sql &= "fRetencionOperadora AS fRetencion, "
+                sql &= "fPorComision, "
+                sql &= "fComisionOperadora, "
+                sql &= "fComisionAsimilados, "
+                sql &= "fImssCS, "
+                sql &= "fRcvCS, "
+                sql &= "fInfonavitCS, "
+                sql &= "fInsCS, "
+                sql &= "fTotalCostoSocial"
+                sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
+                sql &= " where	Nomina.fkiIdEmpresa	=	1	And	fkiIdPeriodo between " & Forma.gInicial
+                sql &= " and " & Forma.gFinal & " and	Nomina.iEstatus=1	and	iEstatusEmpleado=0	and	iTipoNomina=0"
+                sql &= " ORDER	BY	fkiIdPeriodo,fkiIdEmpleadoC,	EmpleadosC.cCodigoEmpleado,	EmpleadosC.cNombreLargo, Nomina.Depto, Nomina.Puesto, "
+                sql &= "EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe"
+
+                Dim rwFilas As DataRow() = nConsulta(sql)
+
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
-                pgbProgreso.Maximum = dtgDatos.Rows.Count
+                pgbProgreso.Maximum = rwFilas.Count
 
-                If dtgDatos.Rows.Count > 0 Then
-
-                    Dim ruta As String
-                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonomina.xlsx"
-                    Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
-                    Dim libro As New ClosedXML.Excel.XLWorkbook
-
-                    book.Worksheet(1).CopyTo(libro, "NOMINA")
-                    Dim hoja As IXLWorksheet = libro.Worksheets(0)
-
-                    sql = "	select"
-                    sql &= " fkiIdPeriodo,"
-                    sql &= " EmpleadosC.cCodigoEmpleado,"
-                    sql &= " EmpleadosC.cNombreLargo,"
-                    sql &= " Nomina.Depto, Nomina.Puesto,"
-                    sql &= " EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe, "
-                    sql &= " SUM (fTExtra2V)	AS	fTExtra2V,"
-                    sql &= " SUM (fTExtra3V)	AS	fTExtra3V,"
-                    sql &= " SUM (fDescansoLV)	AS	fDescansoLV,"
-                    sql &= " SUM (fDiaFestivoLV)	AS	fDiaFestivoLV,"
-                    sql &= " SUM (fHoras_extras_dobles_V)	AS	fHoras_extras_dobles_V,"
-                    sql &= " SUM (fHoras_extras_triples_V)	AS	fHoras_extras_triples_V,"
-                    sql &= " SUM (fDescanso_Laborado_V)	AS	fDescanso_Laborado_V,"
-                    sql &= " SUM (fDia_Festivo_laborado_V)	AS	fDia_Festivo_laborado_V,"
-                    sql &= " SUM (fPrima_Dominical_V)	AS	fPrima_Dominical_V,"
-                    sql &= " SUM (fFalta_Injustificada_V)	AS	fFalta_Injustificada_V,"
-                    sql &= " SUM (fPermiso_Sin_GS_V)	AS	fPermiso_Sin_GS_V,"
-                    sql &= " SUM (fT_No_laborado_V)	AS	fT_No_laborado_V,"
-                    sql &= " SUM (fSalarioBase)	AS	fSalarioBase,"
-                    sql &= " SUM (fSalarioDiario)	AS	fSalarioDiario,"
-                    sql &= " SUM (fSalarioBC)	AS	fSalarioBC,"
-                    sql &= " SUM (iDiasTrabajados)	AS	iDiasTrabajados,"
-                    sql &= " SUM (fSueldoBruto)	AS	fSueldoBruto,"
-                    sql &= " SUM (fSeptimoDia)	AS	fSeptimoDia,"
-                    sql &= " SUM (fPrimaDomGravada)	AS	fPrimaDomGravada,"
-                    sql &= " SUM (fPrimaDomExenta)	AS	fPrimaDomExenta,"
-                    sql &= " SUM (fTExtra2Gravado)	AS	fTExtra2Gravado,"
-                    sql &= " SUM (fTExtra2Exento)	AS	fTExtra2Exento,"
-                    sql &= " SUM (fTExtra3)	AS	fTExtra3,"
-                    sql &= " SUM (fDescansoL)	AS	fDescansoL,"
-                    sql &= " SUM (fDiaFestivoL)	AS	fDiaFestivoL,"
-                    sql &= " SUM (fBonoAsistencia)	AS	fBonoAsistencia,"
-                    sql &= " SUM (fBonoProductividad)	AS	fBonoProductividad,"
-                    sql &= " SUM (fBonoPolivalencia)	AS	fBonoPolivalencia,"
-                    sql &= " SUM (fBonoEspecialidad)	AS	fBonoEspecialidad,"
-                    sql &= " SUM (fBonoCalidad)	AS	fBonoCalidad,"
-                    sql &= " SUM (fCompensacion)	AS	fCompensacion,"
-                    sql &= " SUM (fSemanaFondo)	AS	fSemanaFondo,"
-                    sql &= " SUM (fFaltaInjustificada)	AS	fFaltaInjustificada,"
-                    sql &= " SUM (fPermisoSinGS)	AS	fPermisoSinGS,"
-                    sql &= " SUM (fIncrementoRetenido)	AS	fIncrementoRetenido,"
-                    sql &= " SUM (fVacacionesProporcionales)	AS	fVacacionesProporcionales,"
-                    sql &= " SUM (fAguinaldoGravado)	AS	fAguinaldoGravado,"
-                    sql &= " SUM (fAguinaldoExento)	AS	fAguinaldoExento,"
-                    sql &= " SUM (fPrimaVacacionalGravado)	AS	fPrimaVacacionalGravado,"
-                    sql &= " SUM (fPrimaVacacionalExento)	AS	fPrimaVacacionalExento,"
-                    sql &= " SUM (fTotalPercepciones)	AS	fTotalPercepciones,"
-                    sql &= " SUM (fTotalPercepcionesISR)	AS	fTotalPercepcionesISR,"
-                    sql &= " SUM (fIncapacidad)	AS	fIncapacidad,"
-                    sql &= " SUM (fIsr)	AS	fIsr,"
-                    sql &= " SUM (fImss)	AS	fImss,"
-                    sql &= " SUM (fInfonavit)	AS	fInfonavit,"
-                    sql &= " SUM (fInfonavitBanterior)	AS	fInfonavitBanterior,"
-                    sql &= " SUM (fAjusteInfonavit)	AS	fAjusteInfonavit,"
-                    sql &= " SUM (fPensionAlimenticia)	AS	fPensionAlimenticia,"
-                    sql &= " SUM (fPrestamo)	AS	fPrestamo,"
-                    sql &= " SUM (fFonacot)	AS	fFonacot,"
-                    sql &= " SUM (fT_No_laborado)	AS	fT_No_laborado,"
-                    sql &= " SUM (fCuotaSindical)	AS	fCuotaSindical,"
-                    sql &= " SUM (fSubsidioGenerado)	AS	fSubsidioGenerado,"
-                    sql &= " SUM (fSubsidioAplicado)	AS	fSubsidioAplicado,"
-                    sql &= " SUM (fOperadora)	AS	fOperadora,"
-                    sql &= " SUM (fPrestamoPerA)	AS	fPrestamoPerA,"
-                    sql &= " SUM (fAdeudoInfonavitA)	AS	fAdeudoInfonavitA,"
-                    sql &= " SUM (fDiferenciaInfonavitA)	AS	fDiferenciaInfonavitA,"
-                    sql &= " SUM (fAsimilados)	AS	fAsimilados,"
-                    sql &= " SUM (fRetencionOperadora)	AS	fRetencionOperadora,"
-                    sql &= " SUM (fPorComision)	AS	fPorComision,"
-                    sql &= " SUM (fComisionOperadora)	AS	fComisionOperadora,"
-                    sql &= " SUM (fComisionAsimilados)	AS	fComisionAsimilados,"
-                    sql &= " SUM (fImssCS)	AS	fImssCS,"
-                    sql &= " SUM (fRcvCS)	AS	fRcvCS,"
-                    sql &= " SUM (fInfonavitCS)	AS	fInfonavitCS,"
-                    sql &= " SUM (fInsCS)	AS	fInsCS,"
-                    sql &= " SUM (fTotalCostoSocial)	AS	fTotalCostoSocial "
-                    sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
-                    sql &= " where	Nomina.fkiIdEmpresa	=	1	And	fkiIdPeriodo in(" & Forma.gInicial
-                    sql &= "," & Forma.gFinal & ")and	Nomina.iEstatus=1	and	iEstatusEmpleado=0	and	iTipoNomina=0"
-                    sql &= " Group	BY	fkiIdPeriodo,fkiIdEmpleadoC,	EmpleadosC.cCodigoEmpleado,	EmpleadosC.cNombreLargo, Nomina.Depto, Nomina.Puesto, "
-                    sql &= "EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe"
-
-                    Dim rwFilas As DataRow() = nConsulta(sql)
-                    filaExcel = 2
-                    If rwFilas Is Nothing = False Then
-                        For x As Integer = 0 To rwFilas.Count - 1
-
-                            'fechasperioodo
-                            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.gInicial)
-                            If rwPeriodo0 Is Nothing = False Then
-                                periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
-                                mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
-                                iejercicio = rwPeriodo0(0).Item("iEjercicio")
-                                idias = rwPeriodo0(0).Item("iDiasPago")
-                                periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
-                            End If
-                            hoja.Range("P1", "P" & rwFilas.Count - 1).Style.NumberFormat.Format = "@"
-
-                            hoja.Cell(filaExcel + x, 1).Value = mes 'MES
-                            hoja.Cell(filaExcel + x, 2).Value = idias 'PERIOD0
-                            hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
-                            hoja.Cell(filaExcel + x, 4).Value = rwFilas(x).Item("cNombreLargo")
-                            hoja.Cell(filaExcel + x, 5).Value = EmpresaN
-                            hoja.Cell(filaExcel + x, 6).Value = "LIMITADO"
-                            hoja.Cell(filaExcel + x, 7).Value = rwFilas(x).Item("Puesto")
-                            hoja.Cell(filaExcel + x, 8).Value = rwFilas(x).Item("Depto")
-                            hoja.Cell(filaExcel + x, 9).Value = rwFilas(x).Item("fkiIdPeriodo")
-                            hoja.Cell(filaExcel + x, 10).Value = "OTRO"
-                            hoja.Cell(filaExcel + x, 11).Value = rwFilas(x).Item("cRFC")
-                            hoja.Cell(filaExcel + x, 12).Value = rwFilas(x).Item("cIMSS")
-                            hoja.Cell(filaExcel + x, 13).Value = rwFilas(x).Item("cCURP")
-                            hoja.Cell(filaExcel + x, 14).Value = rwFilas(x).Item("dFechaAntiguedad")
-                            hoja.Cell(filaExcel + x, 15).FormulaA1 = "=LEFT(P" & filaExcel + x & ",3)"
-                            hoja.Cell(filaExcel + x, 16).Value = rwFilas(x).Item("clabe")
-                            hoja.Cell(filaExcel + x, 17).Value = rwFilas(x).Item("fTExtra2V")
-                            hoja.Cell(filaExcel + x, 18).Value = rwFilas(x).Item("fTExtra3V")
-                            hoja.Cell(filaExcel + x, 19).Value = rwFilas(x).Item("fDescansoLV")
-                            hoja.Cell(filaExcel + x, 20).Value = rwFilas(x).Item("fDiaFestivoLV")
-                            hoja.Cell(filaExcel + x, 21).Value = rwFilas(x).Item("fHoras_extras_dobles_V")
-                            hoja.Cell(filaExcel + x, 22).Value = rwFilas(x).Item("fHoras_extras_triples_V")
-                            hoja.Cell(filaExcel + x, 23).Value = rwFilas(x).Item("fDescanso_Laborado_V")
-                            hoja.Cell(filaExcel + x, 24).Value = rwFilas(x).Item("fDia_Festivo_laborado_V")
-                            hoja.Cell(filaExcel + x, 25).Value = rwFilas(x).Item("fPrima_Dominical_V")
-                            hoja.Cell(filaExcel + x, 26).Value = rwFilas(x).Item("fFalta_Injustificada_V")
-                            hoja.Cell(filaExcel + x, 27).Value = rwFilas(x).Item("fPermiso_Sin_GS_V")
-                            hoja.Cell(filaExcel + x, 28).Value = rwFilas(x).Item("fT_No_laborado_V")
-                            hoja.Cell(filaExcel + x, 29).Value = rwFilas(x).Item("fSalarioBase")
-                            hoja.Cell(filaExcel + x, 30).Value = rwFilas(x).Item("fSalarioDiario")
-                            hoja.Cell(filaExcel + x, 31).Value = rwFilas(x).Item("fSalarioBC")
-                            hoja.Cell(filaExcel + x, 32).Value = rwFilas(x).Item("iDiasTrabajados")
-                            hoja.Cell(filaExcel + x, 33).Value = rwFilas(x).Item("fSueldoBruto")
-                            hoja.Cell(filaExcel + x, 34).Value = rwFilas(x).Item("fSeptimoDia")
-                            hoja.Cell(filaExcel + x, 35).Value = rwFilas(x).Item("fPrimaDomGravada")
-                            hoja.Cell(filaExcel + x, 36).Value = rwFilas(x).Item("fPrimaDomExenta")
-                            hoja.Cell(filaExcel + x, 37).Value = rwFilas(x).Item("fTExtra2Gravado")
-                            hoja.Cell(filaExcel + x, 38).Value = rwFilas(x).Item("fTExtra2Exento")
-                            hoja.Cell(filaExcel + x, 39).Value = rwFilas(x).Item("fTExtra3")
-                            hoja.Cell(filaExcel + x, 40).Value = rwFilas(x).Item("fDescansoL")
-                            hoja.Cell(filaExcel + x, 41).Value = rwFilas(x).Item("fDiaFestivoL")
-                            hoja.Cell(filaExcel + x, 42).Value = rwFilas(x).Item("fBonoAsistencia")
-                            hoja.Cell(filaExcel + x, 43).Value = rwFilas(x).Item("fBonoProductividad")
-                            hoja.Cell(filaExcel + x, 44).Value = rwFilas(x).Item("fBonoPolivalencia")
-                            hoja.Cell(filaExcel + x, 45).Value = rwFilas(x).Item("fBonoEspecialidad")
-                            hoja.Cell(filaExcel + x, 46).Value = rwFilas(x).Item("fBonoCalidad")
-                            hoja.Cell(filaExcel + x, 47).Value = rwFilas(x).Item("fCompensacion")
-                            hoja.Cell(filaExcel + x, 48).Value = rwFilas(x).Item("fSemanaFondo")
-                            hoja.Cell(filaExcel + x, 49).Value = rwFilas(x).Item("fFaltaInjustificada")
-                            hoja.Cell(filaExcel + x, 50).Value = rwFilas(x).Item("fPermisoSinGS")
-                            hoja.Cell(filaExcel + x, 51).Value = rwFilas(x).Item("fIncrementoRetenido")
-                            hoja.Cell(filaExcel + x, 52).Value = rwFilas(x).Item("fVacacionesProporcionales")
-                            hoja.Cell(filaExcel + x, 53).Value = rwFilas(x).Item("fAguinaldoGravado")
-                            hoja.Cell(filaExcel + x, 54).Value = rwFilas(x).Item("fAguinaldoExento")
-                            hoja.Cell(filaExcel + x, 55).Value = rwFilas(x).Item("fPrimaVacacionalGravado")
-                            hoja.Cell(filaExcel + x, 56).Value = rwFilas(x).Item("fPrimaVacacionalExento")
-                            hoja.Cell(filaExcel + x, 57).Value = rwFilas(x).Item("fTotalPercepciones")
-                            hoja.Cell(filaExcel + x, 58).Value = rwFilas(x).Item("fTotalPercepcionesISR")
-                            hoja.Cell(filaExcel + x, 59).Value = rwFilas(x).Item("fIncapacidad")
-                            hoja.Cell(filaExcel + x, 60).Value = rwFilas(x).Item("fIsr")
-                            hoja.Cell(filaExcel + x, 61).Value = rwFilas(x).Item("fImss")
-                            hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("fInfonavit")
-                            hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fInfonavitBanterior")
-                            hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fAjusteInfonavit")
-                            hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fPensionAlimenticia")
-                            hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fPrestamo")
-                            hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fFonacot")
-                            hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fT_No_laborado")
-                            hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fCuotaSindical")
-                            hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fSubsidioGenerado")
-                            hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fSubsidioAplicado")
-                            hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fOperadora")
-                            hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fPrestamoPerA")
-                            hoja.Cell(filaExcel + x, 74).Value = rwFilas(x).Item("fAdeudoInfonavitA")
-                            hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("fDiferenciaInfonavitA")
-                            hoja.Cell(filaExcel + x, 76).Value = rwFilas(x).Item("fAsimilados")
-                            hoja.Cell(filaExcel + x, 77).Value = rwFilas(x).Item("fRetencionOperadora")
-                            hoja.Cell(filaExcel + x, 78).Value = rwFilas(x).Item("fPorComision")
-                            hoja.Cell(filaExcel + x, 79).Value = rwFilas(x).Item("fComisionOperadora")
-                            hoja.Cell(filaExcel + x, 80).Value = rwFilas(x).Item("fComisionAsimilados")
-                            hoja.Cell(filaExcel + x, 81).Value = rwFilas(x).Item("fImssCS")
-                            hoja.Cell(filaExcel + x, 82).Value = rwFilas(x).Item("fRcvCS")
-                            hoja.Cell(filaExcel + x, 83).Value = rwFilas(x).Item("fInfonavitCS")
-                            hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fInsCS")
-                            hoja.Cell(filaExcel + x, 85).Value = rwFilas(x).Item("fTotalCostoSocial")
+                filaExcel = 2
+                Dim pInicial, pFinal As Integer
+                pInicial = Forma.gInicial
+                pFinal = Forma.gFinal
+                If rwFilas Is Nothing = False Then
 
 
-                            ' filaExcel = filaExcel + 1
-                        Next x
-                    End If
+
+                    For x As Integer = 0 To rwFilas.Count - 1
+
+                        'PERIODOS para PROV
+                        Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwFilas(x).Item("fkiIdPeriodo"))
+                        FechaInicioPeriodo = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                        FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                        DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
+
+                        Dim rwValorUMA As DataRow() = nConsulta("select * from Salario where Anio=" & aniocostosocial & " and iEstatus=1")
+                        If rwValorUMA Is Nothing = False Then
+                            ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                        Else
+                            ValorUMA = 0
+                            MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+                        End If
+
+                        'fechasperioodo
+                        Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.gInicial)
+                        If rwPeriodo0 Is Nothing = False Then
+                            periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+                            mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                            iejercicio = rwPeriodo0(0).Item("iEjercicio")
+                            idias = rwPeriodo0(0).Item("iDiasPago")
+                            periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
+                        End If
+                        hoja.Range("P1", "P" & rwFilas.Count - 1).Style.NumberFormat.Format = "@"
+
+
+                        Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
+
+                        hoja.Cell(filaExcel + x, 1).Value = mes 'MES
+                        hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
+                        hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
+                        hoja.Cell(filaExcel + x, 4).Value = ""
+                        hoja.Cell(filaExcel + x, 5).Value = rwFilas(x).Item("cNombreLargo")
+                        hoja.Cell(filaExcel + x, 6).Value = EmpresaN
+                        hoja.Cell(filaExcel + x, 7).Value = "LIMITADO"
+                        hoja.Cell(filaExcel + x, 8).Value = rwFilas(x).Item("Puesto")
+                        hoja.Cell(filaExcel + x, 9).Value = rwFilas(x).Item("Depto")
+                        hoja.Cell(filaExcel + x, 10).Value = rwFilas(x).Item("fkiIdPeriodo")
+                        hoja.Cell(filaExcel + x, 11).Value = "OTRO"
+                        hoja.Cell(filaExcel + x, 12).Value = rwFilas(x).Item("cRFC")
+                        hoja.Cell(filaExcel + x, 13).Value = rwFilas(x).Item("cIMSS")
+                        hoja.Cell(filaExcel + x, 14).Value = rwFilas(x).Item("cCURP")
+                        hoja.Cell(filaExcel + x, 15).Value = rwFilas(x).Item("dFechaAntiguedad")
+                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "=LEFT(Q" & filaExcel + x & ")"
+                        hoja.Cell(filaExcel + x, 17).Value = rwFilas(x).Item("clabe")
+                        hoja.Cell(filaExcel + x, 18).Value = rwFilas(x).Item("fTExtra2V")
+                        hoja.Cell(filaExcel + x, 19).Value = rwFilas(x).Item("fTExtra3V")
+                        hoja.Cell(filaExcel + x, 20).Value = rwFilas(x).Item("fDescansoLV")
+                        hoja.Cell(filaExcel + x, 21).Value = rwFilas(x).Item("fDiaFestivoLV")
+                        hoja.Cell(filaExcel + x, 22).Value = rwFilas(x).Item("fHoras_extras_dobles_V")
+                        hoja.Cell(filaExcel + x, 23).Value = rwFilas(x).Item("fHoras_extras_triples_V")
+                        hoja.Cell(filaExcel + x, 24).Value = rwFilas(x).Item("fDescanso_Laborado_V")
+                        hoja.Cell(filaExcel + x, 25).Value = rwFilas(x).Item("fDia_Festivo_laborado_V")
+                        hoja.Cell(filaExcel + x, 26).Value = rwFilas(x).Item("fPrima_Dominical_V")
+                        hoja.Cell(filaExcel + x, 27).Value = rwFilas(x).Item("fFalta_Injustificada_V")
+                        hoja.Cell(filaExcel + x, 28).Value = rwFilas(x).Item("fPermiso_Sin_GS_V")
+                        hoja.Cell(filaExcel + x, 29).Value = rwFilas(x).Item("fT_No_laborado_V")
+                        hoja.Cell(filaExcel + x, 30).Value = rwFilas(x).Item("fSalarioBase")
+                        hoja.Cell(filaExcel + x, 31).Value = rwFilas(x).Item("fSalarioDiario")
+                        hoja.Cell(filaExcel + x, 32).Value = rwFilas(x).Item("fSalarioBC")
+                        hoja.Cell(filaExcel + x, 33).Value = rwFilas(x).Item("iDiasTrabajados")
+                        hoja.Cell(filaExcel + x, 34).Value = rwFilas(x).Item("fSueldoBruto")
+                        hoja.Cell(filaExcel + x, 35).Value = rwFilas(x).Item("fSeptimoDia")
+                        hoja.Cell(filaExcel + x, 36).Value = rwFilas(x).Item("fPrimaDomGravada")
+                        hoja.Cell(filaExcel + x, 37).Value = rwFilas(x).Item("fPrimaDomExenta")
+                        hoja.Cell(filaExcel + x, 38).Value = rwFilas(x).Item("fTExtra2Gravado")
+                        hoja.Cell(filaExcel + x, 39).Value = rwFilas(x).Item("fTExtra2Exento")
+                        hoja.Cell(filaExcel + x, 40).Value = rwFilas(x).Item("fTExtra3")
+                        hoja.Cell(filaExcel + x, 41).Value = rwFilas(x).Item("fDescansoL")
+                        hoja.Cell(filaExcel + x, 42).Value = rwFilas(x).Item("fDiaFestivoL")
+                        hoja.Cell(filaExcel + x, 43).Value = rwFilas(x).Item("fBonoAsistencia")
+                        hoja.Cell(filaExcel + x, 44).Value = rwFilas(x).Item("fBonoProductividad")
+                        hoja.Cell(filaExcel + x, 45).Value = rwFilas(x).Item("fBonoPolivalencia")
+                        hoja.Cell(filaExcel + x, 46).Value = rwFilas(x).Item("fBonoEspecialidad")
+                        hoja.Cell(filaExcel + x, 47).Value = rwFilas(x).Item("fBonoCalidad")
+                        hoja.Cell(filaExcel + x, 48).Value = rwFilas(x).Item("fCompensacion")
+                        hoja.Cell(filaExcel + x, 49).Value = rwFilas(x).Item("fSemanaFondo")
+                        hoja.Cell(filaExcel + x, 50).Value = rwFilas(x).Item("fFaltaInjustificada")
+                        hoja.Cell(filaExcel + x, 51).Value = rwFilas(x).Item("fPermisoSinGS")
+                        hoja.Cell(filaExcel + x, 52).Value = rwFilas(x).Item("fIncrementoRetenido")
+                        hoja.Cell(filaExcel + x, 53).Value = rwFilas(x).Item("fVacacionesProporcionales")
+                        hoja.Cell(filaExcel + x, 54).Value = rwFilas(x).Item("fAguinaldoGravado")
+                        hoja.Cell(filaExcel + x, 55).Value = rwFilas(x).Item("fAguinaldoExento")
+                        hoja.Cell(filaExcel + x, 56).Value = rwFilas(x).Item("fPrimaVacacionalGravado")
+                        hoja.Cell(filaExcel + x, 57).Value = rwFilas(x).Item("fPrimaVacacionalExento")
+                        hoja.Cell(filaExcel + x, 58).Value = rwFilas(x).Item("fTotalPercepciones")
+                        hoja.Cell(filaExcel + x, 59).Value = rwFilas(x).Item("fTotalPercepcionesISR")
+                        hoja.Cell(filaExcel + x, 60).Value = CDbl(rwFilas(x).Item("fTotalPercepciones")) - CDbl(rwFilas(x).Item("fTotalPercepcionesISR")) 'total percep no grava		
+                        hoja.Cell(filaExcel + x, 61).Value = rwFilas(x).Item("fIncapacidad")
+                        hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("fIsr")
+                        hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fImss")
+                        hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fInfonavit")
+                        hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fInfonavitBanterior")
+                        hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fAjusteInfonavit")
+                        hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fPensionAlimenticia")
+                        hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fPrestamo")
+                        hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fFonacot")
+                        hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fT_No_laborado")
+                        hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fCuotaSindical")
+                        hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fSubsidioGenerado")
+                        hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioAplicado")
+                        hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
+                        hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
+                        hoja.Cell(filaExcel + x, 76).Value = rwFilas(x).Item("fPrestamoPerA")
+                        hoja.Cell(filaExcel + x, 77).Value = rwFilas(x).Item("fAdeudoInfonavitA")
+                        hoja.Cell(filaExcel + x, 78).Value = rwFilas(x).Item("fDiferenciaInfonavitA")
+                        hoja.Cell(filaExcel + x, 79).Value = rwFilas(x).Item("EXCEDENTE")
+                        hoja.Cell(filaExcel + x, 80).Value = rwFilas(x).Item("fRetencion")
+                        hoja.Cell(filaExcel + x, 81).Value = rwFilas(x).Item("fPorComision")
+                        hoja.Cell(filaExcel + x, 82).Value = rwFilas(x).Item("fComisionOperadora")
+                        hoja.Cell(filaExcel + x, 83).Value = rwFilas(x).Item("fComisionAsimilados")
+                        hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
+                        hoja.Cell(filaExcel + x, 85).Value = rwFilas(x).Item("fRcvCS")
+                        hoja.Cell(filaExcel + x, 86).Value = rwFilas(x).Item("fInfonavitCS")
+                        hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fInsCS")
+                        hoja.Cell(filaExcel + x, 88).FormulaA1 = "=+CF" & filaExcel + x & "+CG" & filaExcel + x & "+CH" & filaExcel + x & "+CI" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fTotalCostoSocial")
+                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=+((AC" & filaExcel + x & "*15)/365)*A" & filaExcel + x, "=+((AC" & filaExcel + x & "*30/365)*A" & filaExcel + x) 'pro agui
+
+                        If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
+
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(dtgDatos.Rows(x).Cells(2).Value, 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
+                        ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
+
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(dtgDatos.Rows(x).Cells(2).Value, 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
+                        End If
+
+
+                        If x = rwFilas.Count - 2 Then
+                            MsgBox("cache")
+                        End If
+
+
+                        pgbProgreso.Value = x
+                    Next x
+
 
                     '<<<<<CARGAR>>>>>
                     pnlProgreso.Visible = False
@@ -12194,7 +12260,7 @@ Public Class frmnominasmarinos
                     '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
 
-                    dialogo.FileName = "CONCENTRADO  " & EmpresaN.ToUpper & " " & Forma.gInicial & "-" & Forma.gFinal & IIf(idias = "15", " Q ", " SEM ") & periodo
+                    dialogo.FileName = "CONCENTRADO " & EmpresaN.ToUpper & " " & Forma.gInicial & "-" & Forma.gFinal & IIf(idias = "15", " Q ", " SEM ") & periodo
                     dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                     ''  dialogo.ShowDialog()
 
@@ -12211,11 +12277,90 @@ Public Class frmnominasmarinos
                 End If
 
 
-                
+
             End If
 
         Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString)
         End Try
         
     End Sub
+
+    Function CalculoPrimaPROV(ByVal idempleado As String, ByVal idempresa As String, porcentajeprima As Double, sd As Double, pSem As Integer) As String
+        'Agregar el banco y el tipo de cuenta ya sea a terceros o interbancaria
+        'Buscamos el banco y verificarmos el tipo de cuenta a tercero o interbancaria
+        Dim Sql As String
+        Dim cadenabanco As String
+        Dim dia As String
+        Dim mes As String
+        Dim anio As String
+        Dim anios As Integer
+        Dim sueldodiario As Double
+        Dim dias As Integer
+        Dim BaseExento As Double
+        Dim Excento As Double
+        Dim gravado As Double
+        Dim Prima As String
+
+
+        cadenabanco = ""
+
+
+        Sql = "select *"
+        Sql &= " from empleadosC"
+        Sql &= " where fkiIdEmpresa=" & gIdEmpresa & " and iIdempleadoC=" & idempleado
+
+        Dim rwDatosBanco As DataRow() = nConsulta(Sql)
+
+        cadenabanco = "@"
+        Prima = "0"
+        If rwDatosBanco Is Nothing = False Then
+
+            If Double.Parse(rwDatosBanco(0)("fsueldoOrd")) > 0 Then
+                dia = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad").ToString).Day.ToString("00")
+                mes = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad").ToString).Month.ToString("00")
+                anio = Date.Today.Year
+                'verificar el periodo para saber si queda entre el rango de fecha
+
+                sueldodiario = Double.Parse(rwDatosBanco(0)("fsueldoOrd")) / diasperiodo
+
+                Sql = "select * from periodos where iIdPeriodo= " & pSem
+                Dim rwPeriodo As DataRow() = nConsulta(Sql)
+
+                If rwPeriodo Is Nothing = False Then
+                    Dim FechaBuscar As Date = Date.Parse(dia & "/" & mes & "/" & anio)
+                    Dim FechaInicial As Date = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                    Dim FechaFinal As Date = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                    Dim FechaAntiguedad As Date = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad"))
+
+                    If FechaBuscar.CompareTo(FechaInicial) >= 0 And FechaBuscar.CompareTo(FechaFinal) <= 0 Then
+                        'Estamos dentro del rango 
+                        'Calculamos la prima
+
+                        anios = DateDiff("yyyy", FechaAntiguedad, FechaBuscar)
+
+                        dias = CalculoDiasVacaciones(anios)
+
+                        'Calcular prima
+
+                        Prima = Math.Round(sd * dias * (porcentajeprima / 100), 2).ToString()
+
+
+
+                    End If
+
+
+                End If
+
+
+            End If
+
+
+        End If
+
+
+        Return Prima
+
+
+    End Function
 End Class
