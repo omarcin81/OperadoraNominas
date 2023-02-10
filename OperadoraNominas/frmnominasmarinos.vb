@@ -12008,7 +12008,7 @@ Public Class frmnominasmarinos
 
 
                 sql = "	select"
-                sql &= " fkiIdPeriodo,"
+                sql &= " iIdEmpleadoC, fkiIdPeriodo,"
                 sql &= " EmpleadosC.cCodigoEmpleado,"
                 sql &= " EmpleadosC.cNombreLargo,"
                 sql &= " Nomina.Depto, Nomina.Puesto,"
@@ -12127,7 +12127,7 @@ Public Class frmnominasmarinos
                             idias = rwPeriodo0(0).Item("iDiasPago")
                             periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
                         End If
-                        hoja.Range("P1", "P" & rwFilas.Count - 1).Style.NumberFormat.Format = "@"
+                        hoja.Range("Q1", "Q" & rwFilas.Count - 1).Style.NumberFormat.Format = "@"
 
 
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
@@ -12221,11 +12221,11 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fInsCS")
                         hoja.Cell(filaExcel + x, 88).FormulaA1 = "=+CF" & filaExcel + x & "+CG" & filaExcel + x & "+CH" & filaExcel + x & "+CI" & filaExcel + x
                         hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fTotalCostoSocial")
-                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=+((AC" & filaExcel + x & "*15)/365)*A" & filaExcel + x, "=+((AC" & filaExcel + x & "*30/365)*A" & filaExcel + x) 'pro agui
+                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=(AC" & filaExcel + x & "*15)/365)*A" & filaExcel + x, "=+(AC" & filaExcel + x & "*30/365)*A" & filaExcel + x) 'pro agui
 
                         If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(dtgDatos.Rows(x).Cells(2).Value, 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
                             hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
                             hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
                             hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
@@ -12234,7 +12234,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
                         ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(dtgDatos.Rows(x).Cells(2).Value, 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
                             hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
                             hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
                             hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
@@ -12244,10 +12244,7 @@ Public Class frmnominasmarinos
                         End If
 
 
-                        If x = rwFilas.Count - 2 Then
-                            MsgBox("cache")
-                        End If
-
+                    
 
                         pgbProgreso.Value = x
                     Next x
