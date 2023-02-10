@@ -5,6 +5,7 @@
    
     Private Sub SeleccionarPeriodo_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cargarperiodosinicial()
+        cargarperiodosfinal()
     End Sub
 
     Private Sub cargarperiodosinicial()
@@ -33,8 +34,8 @@
 
     Private Sub btnAceptar_Click(sender As System.Object, e As System.EventArgs) Handles btnAceptar.Click
         Try
-            gInicial = cbInicial.SelectedIndex
-            gFinal = cbFinal.SelectedIndex
+            gInicial = cbInicial.SelectedIndex + 1
+            gFinal = cbFinal.SelectedIndex + 1
 
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
