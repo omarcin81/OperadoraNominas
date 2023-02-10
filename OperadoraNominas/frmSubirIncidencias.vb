@@ -1069,11 +1069,11 @@ Public Class frmSubirIncidencias
                                                 PrimaDGra = 0
                                                 PrimaDExe = 0
                                                 If valortotal > ValorUMA Then
-                                                    PrimaDGra = ValorUMA
-                                                    PrimaDExe = valortotal - ValorUMA
+                                                    PrimaDGra = valortotal - ValorUMA
+                                                    PrimaDExe = ValorUMA
                                                 Else
                                                     PrimaDGra = 0
-                                                    PrimaDExe = ValorUMA
+                                                    PrimaDExe = valortotal
                                                 End If
                                                 'Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fPrimaDomGravada=" & PrimaDGra & ",fPrimaDomExenta=" & PrimaDExe
