@@ -2383,8 +2383,8 @@ Public Class frmnominasmarinos
                                 If Double.Parse(IIf(dtgDatos.Rows(x).Cells(19).Value = "", 0, dtgDatos.Rows(x).Cells(19).Value)) > 0 Then
                                     PRIMADOMINICAL = Double.Parse(dtgDatos.Rows(x).Cells(19).Value) * SDEMPLEADO * 0.25
                                     If PRIMADOMINICAL > ValorUMA Then
-                                        dtgDatos.Rows(x).Cells(31).Value = Math.Round(ValorUMA, 2).ToString("###,##0.00")
-                                        dtgDatos.Rows(x).Cells(32).Value = Math.Round(PRIMADOMINICAL - ValorUMA, 2).ToString("###,##0.00")
+                                        dtgDatos.Rows(x).Cells(31).Value = Math.Round(PRIMADOMINICAL - ValorUMA, 2).ToString("###,##0.00")
+                                        dtgDatos.Rows(x).Cells(32).Value = Math.Round(ValorUMA, 2).ToString("###,##0.00")
                                     Else
                                         dtgDatos.Rows(x).Cells(31).Value = "0.00"
                                         dtgDatos.Rows(x).Cells(32).Value = Math.Round(PRIMADOMINICAL, 2).ToString("###,##0.00")
