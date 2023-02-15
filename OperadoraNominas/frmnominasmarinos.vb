@@ -984,7 +984,8 @@ Public Class frmnominasmarinos
                 If 0 = 0 Then
                     If cboserie.SelectedIndex = 0 Then
                         'Buscamos los datos de sindicato solamente
-                        sql = "select  * from empleadosC where fkiIdClienteInter=1"
+                        sql = "select  * from empleadosC where fkiIdClienteInter=1 "
+                        'sql &= " iEstatus= " & 1
                         'sql = "select  * from empleadosTMM where fkiIdClienteInter=-1"
                         'sql = "select iIdEmpleadoC,NumCuenta, (cApellidoP + ' ' + cApellidoM + ' ' + cNombre) as nombre, fkiIdEmpresa,fSueldoOrd,fCosto from empleadosC"
                         'sql &= " where empleadosC.iOrigen=2 and empleadosC.iEstatus=1"
@@ -7069,8 +7070,11 @@ Public Class frmnominasmarinos
                 'Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
 
                 Dim fecha, iejercicio, idias, periodom As String
-
-                ' <<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                Dim DiasCadaPeriodo As Integer
+                Dim DiasCadaPeriodo2 As Integer
+                Dim FechaInicioPeriodo As Date
+                Dim FechaFinPeriodo As Date
+                ' <<<<<<<<<<<<<<<<<<<<<<Noina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo0 Is Nothing = False Then
@@ -7079,6 +7083,11 @@ Public Class frmnominasmarinos
                     iejercicio = rwPeriodo0(0).Item("iEjercicio")
                     idias = rwPeriodo0(0).Item("iDiasPago")
                     periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
+
+                    FechaInicioPeriodo = Date.Parse(rwPeriodo0(0)("dFechaInicio"))
+
+                    FechaFinPeriodo = Date.Parse(rwPeriodo0(0)("dFechaFin"))
+                    DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
                 End If
 
 
@@ -7104,15 +7113,15 @@ Public Class frmnominasmarinos
 
                         'VALES DE DESPEMSA 
 
-                        Dim DiasCadaPeriodo As Integer
-                        Dim DiasCadaPeriodo2 As Integer
-                        Dim numperiodo As Integer
+
+                        Dim numperiodo As Integer = cboperiodo.SelectedValue
                         'verificar los datos de los trabajadores
-                        If DiasCadaPeriodo2 = 15 Or DiasCadaPeriodo2 = 16 Then
+                        If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
                             If numperiodo Mod 2 = 1 Then
                                 'le toca tener vales de despensa
                                 'quincena
-                                valesDespensa = "=ROUNDUP((IF((X" & filaExcel + x & "*9%)>=2925.00,2925.00,(X" & filaExcel + x & "*9%))),0)" 'VALES
+                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+
                             Else
                                 valesDespensa = "0.0"
                             End If
@@ -7120,7 +7129,8 @@ Public Class frmnominasmarinos
                         ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
                             If numperiodo Mod 4 = 0 Then
                                 'le toca tener vales de despensa
-                                valesDespensa = "=ROUNDUP((IF((X" & filaExcel + x & "*9%)>=2925.00,2925.00,(X" & filaExcel + x & "*9%))),0)" 'VALES
+                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+
                             Else
                                 valesDespensa = "0.0"
                             End If
@@ -7245,7 +7255,7 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
-                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",Y" & filaExcel + x & "*30.4*0.03,0)"
+                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
 
 
                 Next
@@ -7461,8 +7471,9 @@ Public Class frmnominasmarinos
                 Dim filatmp As Integer = 5
 
                 Dim cuenta, banco, clabe, nombrecompleto As String
+                Dim numperiodo2 As Int16 = CInt(cboperiodo.SelectedValue) Mod 1
 
-                hoja2.Cell(4, 2).Value = "PERIODO " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodom
+                hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 + 1 & IIf(idias = "15", "Q ", " SEM ") & periodom
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     hoja2.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
@@ -7511,7 +7522,7 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodo
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & IIf(idias = "15", numperiodo2 & "Q ", cboperiodo.SelectedIndex + 1 & " SEM ") & periodo
                 hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
                 hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
@@ -7526,7 +7537,7 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
 
-                dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & cboperiodo.SelectedIndex + 1 & IIf(idias = "15", "Q ", " SEM ") & periodo
+                dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & IIf(idias = "15", numperiodo2 & "Q ", cboperiodo.SelectedIndex + 1 & " SEM ") & periodo
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -12147,7 +12158,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 13).Value = rwFilas(x).Item("cIMSS")
                         hoja.Cell(filaExcel + x, 14).Value = rwFilas(x).Item("cCURP")
                         hoja.Cell(filaExcel + x, 15).Value = rwFilas(x).Item("dFechaAntiguedad")
-                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "=LEFT(Q" & filaExcel + x & ")"
+                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "=LEFT(Q" & filaExcel + x & ",3)"
                         hoja.Cell(filaExcel + x, 17).Value = rwFilas(x).Item("clabe")
                         hoja.Cell(filaExcel + x, 18).Value = rwFilas(x).Item("fTExtra2V")
                         hoja.Cell(filaExcel + x, 19).Value = rwFilas(x).Item("fTExtra3V")
@@ -12164,7 +12175,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 30).Value = rwFilas(x).Item("fSalarioBase")
                         hoja.Cell(filaExcel + x, 31).Value = rwFilas(x).Item("fSalarioDiario")
                         hoja.Cell(filaExcel + x, 32).Value = rwFilas(x).Item("fSalarioBC")
-                        hoja.Cell(filaExcel + x, 33).Value = rwFilas(x).Item("iDiasTrabajados")
+                        hoja.Cell(filaExcel + x, 33).Value = rwFilas(x).Item("iDiasTrabajados") 'dias trabajsdos
                         hoja.Cell(filaExcel + x, 34).Value = rwFilas(x).Item("fSueldoBruto")
                         hoja.Cell(filaExcel + x, 35).Value = rwFilas(x).Item("fSeptimoDia")
                         hoja.Cell(filaExcel + x, 36).Value = rwFilas(x).Item("fPrimaDomGravada")
@@ -12221,11 +12232,11 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fInsCS")
                         hoja.Cell(filaExcel + x, 88).FormulaA1 = "=+CF" & filaExcel + x & "+CG" & filaExcel + x & "+CH" & filaExcel + x & "+CI" & filaExcel + x
                         hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fTotalCostoSocial")
-                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=(AC" & filaExcel + x & "*15)/365)*A" & filaExcel + x, "=+(AC" & filaExcel + x & "*30/365)*A" & filaExcel + x) 'pro agui
+                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
 
                         If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                             hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
                             hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
                             hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
@@ -12234,7 +12245,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
                         ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                             hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
                             hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
                             hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
@@ -12330,21 +12341,21 @@ Public Class frmnominasmarinos
                     Dim FechaFinal As Date = Date.Parse(rwPeriodo(0)("dFechaFin"))
                     Dim FechaAntiguedad As Date = Date.Parse(rwDatosBanco(0)("dFechaAntiguedad"))
 
-                    If FechaBuscar.CompareTo(FechaInicial) >= 0 And FechaBuscar.CompareTo(FechaFinal) <= 0 Then
-                        'Estamos dentro del rango 
-                        'Calculamos la prima
+                    '  If FechaBuscar.CompareTo(FechaInicial) >= 0 And FechaBuscar.CompareTo(FechaFinal) <= 0 Then
+                    'Estamos dentro del rango 
+                    'Calculamos la prima
 
-                        anios = DateDiff("yyyy", FechaAntiguedad, FechaBuscar)
+                    anios = DateDiff("yyyy", FechaAntiguedad, FechaBuscar)
 
-                        dias = CalculoDiasVacaciones(anios)
+                    dias = CalculoDiasVacaciones(anios)
 
-                        'Calcular prima
+                    'Calcular prima
 
-                        Prima = Math.Round(sd * dias * (porcentajeprima / 100), 2).ToString()
+                    Prima = Math.Round(sd * dias * (porcentajeprima / 100), 2).ToString()
 
 
 
-                    End If
+                    'End If
 
 
                 End If
