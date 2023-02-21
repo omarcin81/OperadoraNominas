@@ -21,6 +21,7 @@ Public Class frmnominasmarinos
     Dim dsPeriodo As New DataSet
     Dim dsPeriodo2 As New DataSet
     Dim Agregartrabajadores As Boolean
+    Dim NombrePeriodo As String
 
 
     
@@ -94,12 +95,14 @@ Public Class frmnominasmarinos
             Me.dtgDatos.ContextMenuStrip = Me.cMenu
             cboserie.SelectedIndex = 0
 
-            Sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+            sql = "select * from periodos inner join tipos_periodos2 on periodos.fkiIdTipoPeriodo = tipos_periodos2.iIdTipoperiodo2     where iIdPeriodo=" & cboperiodo.SelectedValue
             Dim rwPeriodo As DataRow() = nConsulta(sql)
             If rwPeriodo Is Nothing = False Then
 
                 aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
                 diasperiodo = Integer.Parse(rwPeriodo(0)("iDiasPago").ToString)
+                NombrePeriodo = rwPeriodo(0)("nombre").ToString
+
             End If
             Agregartrabajadores = False
             campoordenamiento = "cCodigoEmpleado"
@@ -2733,8 +2736,15 @@ Public Class frmnominasmarinos
 
 
                             'Verificar si tiene excedente y de que tipo
-                            SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
-                            dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                            If NombrePeriodo = "semanal" And EmpresaN = "IDN" Then
+                                SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
+                                dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                            Else
+                                SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
+                                dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                            End If
+
+                            
 
 
 
@@ -5074,7 +5084,7 @@ Public Class frmnominasmarinos
             If resultado = DialogResult.Yes Then
 
                 sql = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=0" '& cboserie.SelectedIndex
+                sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
                 sql &= " and iTipoNomina=0"
 
                 Dim rwNominaGuardadaFinal As DataRow() = nConsulta(sql)
@@ -8225,7 +8235,7 @@ Public Class frmnominasmarinos
         End If
     End Sub
 
-    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
+    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Try
         Dim iFila As Integer = Me.dtgDatos.CurrentRow.Index
         '    iFila.Tag = "1"
@@ -9148,7 +9158,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
+    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = ""
@@ -9371,7 +9381,9 @@ Public Class frmnominasmarinos
 
 
 
-    Private Sub NoCalcularPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularPresAsiToolStripMenuItem.Click
+
+    Private Sub NoCalcularPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(2).Tag = "1"
@@ -9381,13 +9393,13 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub ActivaCalculoPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActivaCalculoPresAsiToolStripMenuItem.Click
+    Private Sub ActivaCalculoPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(2).Tag = ""
         iFila.Cells(2).Style.BackColor = Color.White
     End Sub
 
-    Private Sub NoCalcularPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularPresSAToolStripMenuItem.Click
+    Private Sub NoCalcularPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(3).Tag = "1"
@@ -9397,7 +9409,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub ActivarCaluloPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActivarCaluloPresSAToolStripMenuItem.Click
+    Private Sub ActivarCaluloPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(3).Tag = ""
         iFila.Cells(3).Style.BackColor = Color.White
@@ -9679,7 +9691,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub SoloRegistroACalcularToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SoloRegistroACalcularToolStripMenuItem.Click
+    Private Sub SoloRegistroACalcularToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(4).Tag = "1"
@@ -9691,13 +9703,13 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub DesactivarSoloRegistroACalcularToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DesactivarSoloRegistroACalcularToolStripMenuItem.Click
+    Private Sub DesactivarSoloRegistroACalcularToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(4).Tag = ""
         iFila.Cells(4).Style.BackColor = Color.White
     End Sub
 
-    Private Sub RegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RegistroTotalDiasToolStripMenuItem.Click
+    Private Sub RegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(5).Tag = "1"
@@ -9709,7 +9721,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub DesactivarRegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DesactivarRegistroTotalDiasToolStripMenuItem.Click
+    Private Sub DesactivarRegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(5).Tag = ""
         iFila.Cells(5).Style.BackColor = Color.White
@@ -9719,7 +9731,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub EliminarDeLaBaseToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EliminarDeLaBaseToolStripMenuItem.Click
+    Private Sub EliminarDeLaBaseToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         'borramos el registro completamente
 
         Try
@@ -9827,7 +9839,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub CostoCeroToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CostoCeroToolStripMenuItem.Click
+    Private Sub CostoCeroToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(6).Tag = "1"
@@ -9839,7 +9851,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub DesactivarCostoCeroToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DesactivarCostoCeroToolStripMenuItem.Click
+    Private Sub DesactivarCostoCeroToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(6).Tag = ""
         iFila.Cells(6).Style.BackColor = Color.White
@@ -11379,7 +11391,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub NoCalcularCostoSocialToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularCostoSocialToolStripMenuItem.Click
+    Private Sub NoCalcularCostoSocialToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Cells(7).Tag = "1"
@@ -11391,7 +11403,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub DesactivarNoCalcularCostoSocialToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DesactivarNoCalcularCostoSocialToolStripMenuItem.Click
+    Private Sub DesactivarNoCalcularCostoSocialToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(7).Tag = ""
         iFila.Cells(7).Style.BackColor = Color.White
@@ -12461,5 +12473,9 @@ Public Class frmnominasmarinos
 
     End Function
 
-   
+
+    Private Sub EditarEmpleadoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+
+    End Sub
+
 End Class
