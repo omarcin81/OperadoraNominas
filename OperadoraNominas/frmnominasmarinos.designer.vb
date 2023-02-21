@@ -25,6 +25,14 @@ Partial Class frmnominasmarinos
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmnominasmarinos))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
+        Me.tsbPeriodos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbdeptos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
+        Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.chkDias = New System.Windows.Forms.CheckBox()
@@ -65,22 +73,6 @@ Partial Class frmnominasmarinos
         Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NoCalcularInofnavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActicarCalculoInfonavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NoCalcularPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActivaCalculoPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NoCalcularPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActivarCaluloPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarRegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarCostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
@@ -90,14 +82,6 @@ Partial Class frmnominasmarinos
         Me.cmdKioskoSove = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
-        Me.tsbPeriodos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbdeptos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
-        Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,6 +99,81 @@ Partial Class frmnominasmarinos
         Me.ToolStrip1.Size = New System.Drawing.Size(1357, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tsbEmpleados
+        '
+        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
+        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEmpleados.Name = "tsbEmpleados"
+        Me.tsbEmpleados.Size = New System.Drawing.Size(118, 51)
+        Me.tsbEmpleados.Text = "Importar Empleados"
+        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbPeriodos
+        '
+        Me.tsbPeriodos.Image = CType(resources.GetObject("tsbPeriodos.Image"), System.Drawing.Image)
+        Me.tsbPeriodos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbPeriodos.Name = "tsbPeriodos"
+        Me.tsbPeriodos.Size = New System.Drawing.Size(106, 51)
+        Me.tsbPeriodos.Text = "Importar Períodos"
+        Me.tsbPeriodos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbpuestos
+        '
+        Me.tsbpuestos.Image = CType(resources.GetObject("tsbpuestos.Image"), System.Drawing.Image)
+        Me.tsbpuestos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbpuestos.Name = "tsbpuestos"
+        Me.tsbpuestos.Size = New System.Drawing.Size(101, 51)
+        Me.tsbpuestos.Text = "Importar Puestos"
+        Me.tsbpuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbdeptos
+        '
+        Me.tsbdeptos.Image = CType(resources.GetObject("tsbdeptos.Image"), System.Drawing.Image)
+        Me.tsbdeptos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbdeptos.Name = "tsbdeptos"
+        Me.tsbdeptos.Size = New System.Drawing.Size(96, 51)
+        Me.tsbdeptos.Text = "Importar deptos"
+        Me.tsbdeptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbImportar
+        '
+        Me.tsbImportar.Image = CType(resources.GetObject("tsbImportar.Image"), System.Drawing.Image)
+        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbImportar.Name = "tsbImportar"
+        Me.tsbImportar.Size = New System.Drawing.Size(70, 51)
+        Me.tsbImportar.Text = "Incidencias"
+        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbImportar.ToolTipText = "Importar incidencias"
+        '
+        'tsbIEmpleados
+        '
+        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
+        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbIEmpleados.Name = "tsbIEmpleados"
+        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
+        Me.tsbIEmpleados.Text = "Empleados"
+        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbbuscar
+        '
+        Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
+        Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbbuscar.Name = "tsbbuscar"
+        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
+        Me.tsbbuscar.Text = "Buscar"
+        Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbLayout
+        '
+        Me.tsbLayout.AutoSize = False
+        Me.tsbLayout.Image = CType(resources.GetObject("tsbLayout.Image"), System.Drawing.Image)
+        Me.tsbLayout.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbLayout.Name = "tsbLayout"
+        Me.tsbLayout.Size = New System.Drawing.Size(90, 51)
+        Me.tsbLayout.Text = "Layouts"
+        Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbLayout.Visible = False
         '
         'pnlCatalogo
         '
@@ -541,9 +600,9 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem, Me.CostoCeroToolStripMenuItem, Me.DesactivarCostoCeroToolStripMenuItem, Me.NoCalcularCostoSocialToolStripMenuItem, Me.DesactivarNoCalcularCostoSocialToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(255, 422)
+        Me.cMenu.Size = New System.Drawing.Size(186, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -556,102 +615,6 @@ Partial Class frmnominasmarinos
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
         Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
-        '
-        'EditarEmpleadoToolStripMenuItem
-        '
-        Me.EditarEmpleadoToolStripMenuItem.Name = "EditarEmpleadoToolStripMenuItem"
-        Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
-        '
-        'NoCalcularInofnavitToolStripMenuItem
-        '
-        Me.NoCalcularInofnavitToolStripMenuItem.Name = "NoCalcularInofnavitToolStripMenuItem"
-        Me.NoCalcularInofnavitToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularInofnavitToolStripMenuItem.Text = "Calcular"
-        '
-        'ActicarCalculoInfonavitToolStripMenuItem
-        '
-        Me.ActicarCalculoInfonavitToolStripMenuItem.Name = "ActicarCalculoInfonavitToolStripMenuItem"
-        Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.ActicarCalculoInfonavitToolStripMenuItem.Text = "Activar Calculo Infonavit"
-        '
-        'NoCalcularPresAsiToolStripMenuItem
-        '
-        Me.NoCalcularPresAsiToolStripMenuItem.Name = "NoCalcularPresAsiToolStripMenuItem"
-        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularPresAsiToolStripMenuItem.Text = "No Calcular Pres Asi"
-        '
-        'ActivaCalculoPresAsiToolStripMenuItem
-        '
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Name = "ActivaCalculoPresAsiToolStripMenuItem"
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Text = "Activa Calculo Pres Asi"
-        '
-        'NoCalcularPresSAToolStripMenuItem
-        '
-        Me.NoCalcularPresSAToolStripMenuItem.Name = "NoCalcularPresSAToolStripMenuItem"
-        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularPresSAToolStripMenuItem.Text = "No Calcular Pres SA"
-        '
-        'ActivarCaluloPresSAToolStripMenuItem
-        '
-        Me.ActivarCaluloPresSAToolStripMenuItem.Name = "ActivarCaluloPresSAToolStripMenuItem"
-        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.ActivarCaluloPresSAToolStripMenuItem.Text = "Activar Calulo Pres SA"
-        '
-        'SoloRegistroACalcularToolStripMenuItem
-        '
-        Me.SoloRegistroACalcularToolStripMenuItem.Name = "SoloRegistroACalcularToolStripMenuItem"
-        Me.SoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.SoloRegistroACalcularToolStripMenuItem.Text = "Solo registro a calcular"
-        '
-        'DesactivarSoloRegistroACalcularToolStripMenuItem
-        '
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Name = "DesactivarSoloRegistroACalcularToolStripMenuItem"
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Text = "Desactivar solo registro a calcular"
-        '
-        'RegistroTotalDiasToolStripMenuItem
-        '
-        Me.RegistroTotalDiasToolStripMenuItem.Name = "RegistroTotalDiasToolStripMenuItem"
-        Me.RegistroTotalDiasToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.RegistroTotalDiasToolStripMenuItem.Text = "Registro Total dias"
-        '
-        'DesactivarRegistroTotalDiasToolStripMenuItem
-        '
-        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Name = "DesactivarRegistroTotalDiasToolStripMenuItem"
-        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Text = "Desactivar registro total dias"
-        '
-        'EliminarDeLaBaseToolStripMenuItem
-        '
-        Me.EliminarDeLaBaseToolStripMenuItem.Name = "EliminarDeLaBaseToolStripMenuItem"
-        Me.EliminarDeLaBaseToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.EliminarDeLaBaseToolStripMenuItem.Text = "Eliminar de la base"
-        '
-        'CostoCeroToolStripMenuItem
-        '
-        Me.CostoCeroToolStripMenuItem.Name = "CostoCeroToolStripMenuItem"
-        Me.CostoCeroToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.CostoCeroToolStripMenuItem.Text = "Costo cero"
-        '
-        'DesactivarCostoCeroToolStripMenuItem
-        '
-        Me.DesactivarCostoCeroToolStripMenuItem.Name = "DesactivarCostoCeroToolStripMenuItem"
-        Me.DesactivarCostoCeroToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.DesactivarCostoCeroToolStripMenuItem.Text = "Desactivar costo cero"
-        '
-        'NoCalcularCostoSocialToolStripMenuItem
-        '
-        Me.NoCalcularCostoSocialToolStripMenuItem.Name = "NoCalcularCostoSocialToolStripMenuItem"
-        Me.NoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularCostoSocialToolStripMenuItem.Text = "No calcular Costo Social"
-        '
-        'DesactivarNoCalcularCostoSocialToolStripMenuItem
-        '
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Name = "DesactivarNoCalcularCostoSocialToolStripMenuItem"
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Text = "Desactivar no calcular costo social"
         '
         'layoutTimbrado
         '
@@ -764,81 +727,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'tsbEmpleados
-        '
-        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
-        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbEmpleados.Name = "tsbEmpleados"
-        Me.tsbEmpleados.Size = New System.Drawing.Size(118, 51)
-        Me.tsbEmpleados.Text = "Importar Empleados"
-        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbPeriodos
-        '
-        Me.tsbPeriodos.Image = CType(resources.GetObject("tsbPeriodos.Image"), System.Drawing.Image)
-        Me.tsbPeriodos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbPeriodos.Name = "tsbPeriodos"
-        Me.tsbPeriodos.Size = New System.Drawing.Size(106, 51)
-        Me.tsbPeriodos.Text = "Importar Períodos"
-        Me.tsbPeriodos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbpuestos
-        '
-        Me.tsbpuestos.Image = CType(resources.GetObject("tsbpuestos.Image"), System.Drawing.Image)
-        Me.tsbpuestos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbpuestos.Name = "tsbpuestos"
-        Me.tsbpuestos.Size = New System.Drawing.Size(101, 51)
-        Me.tsbpuestos.Text = "Importar Puestos"
-        Me.tsbpuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbdeptos
-        '
-        Me.tsbdeptos.Image = CType(resources.GetObject("tsbdeptos.Image"), System.Drawing.Image)
-        Me.tsbdeptos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbdeptos.Name = "tsbdeptos"
-        Me.tsbdeptos.Size = New System.Drawing.Size(96, 51)
-        Me.tsbdeptos.Text = "Importar deptos"
-        Me.tsbdeptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbImportar
-        '
-        Me.tsbImportar.Image = CType(resources.GetObject("tsbImportar.Image"), System.Drawing.Image)
-        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbImportar.Name = "tsbImportar"
-        Me.tsbImportar.Size = New System.Drawing.Size(70, 51)
-        Me.tsbImportar.Text = "Incidencias"
-        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbImportar.ToolTipText = "Importar incidencias"
-        '
-        'tsbIEmpleados
-        '
-        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
-        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbIEmpleados.Name = "tsbIEmpleados"
-        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
-        Me.tsbIEmpleados.Text = "Empleados"
-        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbbuscar
-        '
-        Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
-        Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbbuscar.Name = "tsbbuscar"
-        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
-        Me.tsbbuscar.Text = "Buscar"
-        Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbLayout
-        '
-        Me.tsbLayout.AutoSize = False
-        Me.tsbLayout.Image = CType(resources.GetObject("tsbLayout.Image"), System.Drawing.Image)
-        Me.tsbLayout.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbLayout.Name = "tsbLayout"
-        Me.tsbLayout.Size = New System.Drawing.Size(90, 51)
-        Me.tsbLayout.Text = "Layouts"
-        Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbLayout.Visible = False
-        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -905,7 +793,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents EliminarDeLaListaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EditarEmpleadoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AgregarTrabajadoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
@@ -919,38 +806,23 @@ Partial Class frmnominasmarinos
 
     Friend WithEvents btnAcumualdos As System.Windows.Forms.Button
 
-    Friend WithEvents NoCalcularInofnavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ActicarCalculoInfonavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
     Friend WithEvents chkPrimaVacacional As System.Windows.Forms.CheckBox
-    Friend WithEvents NoCalcularPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ActivarCaluloPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdKioskoSove As System.Windows.Forms.Button
     Friend WithEvents cmdConcentradoFonacot As System.Windows.Forms.Button
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
     Friend WithEvents tsbbuscar As System.Windows.Forms.ToolStripButton
     Friend WithEvents chkCalSoloMarcados As System.Windows.Forms.CheckBox
-    Friend WithEvents SoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DesactivarSoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkDiasCS As System.Windows.Forms.CheckBox
-    Friend WithEvents RegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DesactivarRegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkSoloCostoSocial As System.Windows.Forms.CheckBox
-    Friend WithEvents EliminarDeLaBaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DesactivarCostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladoOperadora As System.Windows.Forms.Button
     Friend WithEvents cmdCalculoSoloInfonavit As System.Windows.Forms.Button
 
     Friend WithEvents Button1 As System.Windows.Forms.Button
 
-    Friend WithEvents NoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
     Friend WithEvents chkDias As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
