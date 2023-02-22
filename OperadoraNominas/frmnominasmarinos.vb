@@ -3019,10 +3019,18 @@ Public Class frmnominasmarinos
                     totaltotalt = infonavitp
                 ElseIf tipo = 5 Then
                     totaltotalt = impuestonomina
+
+                ElseIf tipo = 6 Then
+                    totaltotalt = retiro
+
+
+                ElseIf tipo = 7 Then
+                    totaltotalt = vejezp
                 End If
-                Return totaltotalt
+
+            Return totaltotalt
             Else
-                MsgBox("No hay datos")
+            MsgBox("No hay datos")
             End If
 
 
@@ -5068,6 +5076,7 @@ Public Class frmnominasmarinos
         Try
             Dim Forma As New frmSubirIncidencias
             Forma.gIdPeriodo = cboperiodo.SelectedValue
+            Forma.gIdSerie = cboserie.SelectedValue
             Forma.gAnioActual = aniocostosocial
             Forma.ShowDialog()
         Catch ex As Exception

@@ -166,9 +166,9 @@ Partial Class frmEmpleados
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(8, 633)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(48, 18)
+        Me.Label48.Size = New System.Drawing.Size(46, 18)
         Me.Label48.TabIndex = 195
-        Me.Label48.Text = "Buque"
+        Me.Label48.Text = "Depto"
         '
         'cbodepartamento
         '
@@ -1049,9 +1049,9 @@ Partial Class frmEmpleados
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(535, 156)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 18)
+        Me.Label9.Size = New System.Drawing.Size(44, 18)
         Me.Label9.TabIndex = 127
-        Me.Label9.Text = "Desc. Buque"
+        Me.Label9.Text = "Desc. "
         '
         'txtfunciones
         '
@@ -1240,9 +1240,9 @@ Partial Class frmEmpleados
         Me.Label50.AutoSize = True
         Me.Label50.Location = New System.Drawing.Point(148, 681)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(43, 18)
+        Me.Label50.Size = New System.Drawing.Size(44, 18)
         Me.Label50.TabIndex = 200
-        Me.Label50.Text = "Clabe"
+        Me.Label50.Text = "CE CO"
         '
         'Label51
         '

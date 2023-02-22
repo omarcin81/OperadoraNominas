@@ -5,7 +5,7 @@ Imports System.Net.Mime.MediaTypeNames
 
 Public Class frmSubirIncidencias
     Public gIdPeriodo As String
-
+    Public gIdSerie As String
     Dim sheetIndex As Integer = -1
     Dim SQL As String
     Dim contacolumna As Integer
@@ -18,6 +18,7 @@ Public Class frmSubirIncidencias
 
             cargarperiodos()
             cboperiodo.SelectedValue = gIdPeriodo
+            cboserie.SelectedValue = gIdPeriodo
             cboIncidencia.SelectedIndex = 0
         Catch ex As Exception
             MsgBox(ex.ToString)
@@ -228,7 +229,7 @@ Public Class frmSubirIncidencias
             Dim resultado As Integer = MessageBox.Show("se actualizaran los datos de " & cboIncidencia.Text & ",¿Desea continuar?", "Pregunta", MessageBoxButtons.YesNo)
             If resultado = DialogResult.Yes Then
                 SQL = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                SQL &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=0" '& cboserie.SelectedIndex
+                SQL &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
                 SQL &= " and iTipoNomina=0"
 
                 Dim rwNominaGuardadaFinal As DataRow() = nConsulta(SQL)
@@ -247,7 +248,7 @@ Public Class frmSubirIncidencias
                             'tiempo extra doble
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fTExtra2V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -263,14 +264,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fTExtra2V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fTExtra2V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -296,7 +297,7 @@ Public Class frmSubirIncidencias
                             'tiempo extra triple
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fTExtra3V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -312,14 +313,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fTExtra3V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fTExtra3V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -345,7 +346,7 @@ Public Class frmSubirIncidencias
                             'descanso laborado
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fDescansoLV=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -361,14 +362,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Integer = Integer.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fDescansoLV=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fDescansoLV").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -394,7 +395,7 @@ Public Class frmSubirIncidencias
                             'descanso laborado
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fDiaFestivoLV=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -410,14 +411,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Integer = Integer.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fDiaFestivoLV=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fDiaFestivoLV").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -443,7 +444,7 @@ Public Class frmSubirIncidencias
                             'prima dominical valor
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fPrima_Dominical_V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -459,14 +460,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Integer = Integer.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fPrima_Dominical_V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fPrima_Dominical_V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -492,7 +493,7 @@ Public Class frmSubirIncidencias
                             'Bono asistencia
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fBonoAsistencia=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -508,14 +509,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fBonoAsistencia=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fBonoAsistencia").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -541,7 +542,7 @@ Public Class frmSubirIncidencias
                             'Bono productividad
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fBonoProductividad=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -557,14 +558,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fBonoProductividad=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fBonoProductividad").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -590,7 +591,7 @@ Public Class frmSubirIncidencias
                             'Bono polivalencia
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fBonoPolivalencia=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -606,14 +607,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fBonoPolivalencia=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fBonoPolivalencia").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -639,7 +640,7 @@ Public Class frmSubirIncidencias
                             'Bono especialidad
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fBonoEspecialidad=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -655,14 +656,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fBonoEspecialidad=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fBonoEspecialidad").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -688,7 +689,7 @@ Public Class frmSubirIncidencias
                             'Bono CALIDAD
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fBonoCalidad=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -704,14 +705,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fBonoCalidad=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fBonoCalidad").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -737,7 +738,7 @@ Public Class frmSubirIncidencias
                             'TIEMPO NO LABORADO
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fT_No_laborado_V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -753,14 +754,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fT_No_laborado_V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fT_No_laborado_V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -786,7 +787,7 @@ Public Class frmSubirIncidencias
                             'FALTAS INJUSTIFICADA
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fFalta_Injustificada_V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -802,14 +803,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fFalta_Injustificada_V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fFalta_Injustificada_V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -835,7 +836,7 @@ Public Class frmSubirIncidencias
                             'PERMISO CON GOCE DE SUELDO
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fPermiso_Sin_GS_V=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -851,14 +852,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fPermiso_Sin_GS_V=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fPermiso_Sin_GS_V").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -884,7 +885,7 @@ Public Class frmSubirIncidencias
                             'SUELDO PENDIENTE
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fSemanaFondo=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -900,14 +901,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fSemanaFondo=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fSemanaFondo").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -933,7 +934,7 @@ Public Class frmSubirIncidencias
                             'COMPENSACION
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fCompensacion=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -949,14 +950,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fCompensacion=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fCompensacion").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -983,7 +984,7 @@ Public Class frmSubirIncidencias
                             'FONACOT
                             If chkIncidencia0.Checked Then
                                 SQL = " update nomina set fFonacot=0"
-                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                 If nExecute(SQL) = False Then
                                     MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                     'pnlProgreso.Visible = False
@@ -999,14 +1000,14 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
 
                                                 Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fFonacot=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fFonacot").ToString)
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
@@ -1032,7 +1033,7 @@ Public Class frmSubirIncidencias
                         Case 16
                             'PRIMA DOMINICAL IMPORTES
                             SQL = " update nomina set fPrimaDomGravada=0,fPrimaDomExenta=0"
-                            SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                            SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                             If nExecute(SQL) = False Then
                                 MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                 'pnlProgreso.Visible = False
@@ -1047,7 +1048,7 @@ Public Class frmSubirIncidencias
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
                                         If rwEmpleado Is Nothing = False Then
                                             SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
-                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                             Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
                                             If rwEmpleadoNomina Is Nothing = False Then
                                                 'verificar si se quiere actualizar a 0
@@ -1077,7 +1078,54 @@ Public Class frmSubirIncidencias
                                                 End If
                                                 'Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
                                                 SQL = " update nomina set fPrimaDomGravada=" & PrimaDGra & ",fPrimaDomExenta=" & PrimaDExe
-                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                                                If nExecute(SQL) = False Then
+                                                    MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                    'pnlProgreso.Visible = False
+                                                    Exit Sub
+                                                End If
+                                            Else
+                                                MessageBox.Show("El empleado " & rwEmpleado(0)("cNombreLargo").ToString & " no esta en la nomina, verique el alta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            End If
+
+
+
+                                        End If
+
+                                    End If
+
+
+                                End If
+                                pgbProgreso.Value += 1
+                                'Application.DoEvents()
+                                'mandar el reporte
+                            Next
+                        Case 17
+                            'PRESTAMO IMPORTE
+                            SQL = " update nomina set fPrestamo=0"
+                            SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                            If nExecute(SQL) = False Then
+                                MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                'pnlProgreso.Visible = False
+                                Exit Sub
+                            End If
+
+                            For Each producto As ListViewItem In lsvLista.CheckedItems
+                                If producto.Index >= (CInt(NudFilaI.Value) - 1) And producto.Index <= (CInt(NudFilaF.Value) - 1) Then
+                                   If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
+                                        SQL = "select * from EmpleadosC where cCodigoEmpleado=" & IIf(producto.SubItems(CInt(NudColumnaN.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaN.Value)).Text)
+
+                                        Dim rwEmpleado As DataRow() = nConsulta(SQL)
+                                        If rwEmpleado Is Nothing = False Then
+                                            SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                                            Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
+                                            If rwEmpleadoNomina Is Nothing = False Then
+                                                'verificar si se quiere actualizar a 0
+
+                                                Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                SQL = " update nomina set fPrestamo=" & horasextrasdobles + Double.Parse(rwEmpleadoNomina(0)("fPrestamo").ToString)
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
                                                 If nExecute(SQL) = False Then
                                                     MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                                     'pnlProgreso.Visible = False
