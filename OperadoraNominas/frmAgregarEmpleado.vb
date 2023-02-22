@@ -5,7 +5,7 @@
         Dim SQL As String, Alter As Boolean = False
         Try
             SQL = "select iIdEmpleadoC, cCodigoEmpleado, cNombre, cApellidoP,cApellidoM,cRFC,cCURP,cIMSS from empleadosC "
-            SQL &= " where (cNombreLargo like '%" & txtbuscar.Text & "%') and fkiIdEmpresa=1" '& gIdEmpresa
+            SQL &= " where (cNombreLargo like '%" & txtbuscar.Text & "%') " 'and fkiIdEmpresa=1" '& gIdEmpresa
             'If SoloActivo Then
             SQL &= " AND fkiIdClienteInter=1"
             'End If

@@ -1,3 +1,7 @@
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
@@ -14,6 +18,7 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNom
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmImportarEmpleadosAlta.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmIncapacidad.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmJuridico.resources
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
@@ -32,14 +37,10 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNom
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+<<<<<<< HEAD
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
@@ -82,3 +83,5 @@ E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraN
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
+=======
+>>>>>>> origin/main
