@@ -12328,31 +12328,33 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 82).Value = rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
-                        hoja.Cell(filaExcel + x, 85).Value = rwFilas(x).Item("fRcvCS")
-                        hoja.Cell(filaExcel + x, 86).Value = rwFilas(x).Item("fInfonavitCS")
-                        hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fInsCS")
-                        hoja.Cell(filaExcel + x, 88).FormulaA1 = "=+CF" & filaExcel + x & "+CG" & filaExcel + x & "+CH" & filaExcel + x & "+CI" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fTotalCostoSocial")
-                        hoja.Cell(filaExcel + x, 90).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
+                        hoja.Cell(filaExcel + x, 85).Value = rwFilas(x).Item("fRcvCS") '"2%  SAR RETIRO 
+                        hoja.Cell(filaExcel + x, 86).Value = rwFilas(x).Item("fRcvCS")  'VEJEZ PROP
+                        hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fInfonavitCS")
+                        hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fInsCS")
+                        hoja.Cell(filaExcel + x, 89).FormulaA1 = "=+CF" & filaExcel + x & "+CG" & filaExcel + x & "+CH" & filaExcel + x & "+CI" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fTotalCostoSocial")
+                        hoja.Cell(filaExcel + x, 91).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
 
                         If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
+                            hoja.Cell(filaExcel + x, 92).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 94).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'pro PE NOD
+
                         ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
 
-                            hoja.Cell(filaExcel + x, 91).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 92).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 94).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'pro PE NOD
+                            hoja.Cell(filaExcel + x, 92).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 93).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 94).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'pro PE NOD
                         End If
 
 
