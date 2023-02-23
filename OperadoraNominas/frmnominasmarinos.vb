@@ -2736,7 +2736,7 @@ Public Class frmnominasmarinos
 
 
                             'Verificar si tiene excedente y de que tipo
-                            If NombrePeriodo = "semanal" And EmpresaN = "IDN" Then
+                            If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                                 SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
                                 dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
                             Else
@@ -2824,6 +2824,7 @@ Public Class frmnominasmarinos
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
             pnlCatalogo.Enabled = True
@@ -5892,7 +5893,7 @@ Public Class frmnominasmarinos
                 If rwDatosBanco Is Nothing = False Then
                     dtgDatos.Rows(x).Cells(24).Value = rwDatosBanco(0)("fSueldoBase")
                     dtgDatos.Rows(x).Cells(25).Value = rwDatosBanco(0)("fSueldoIntegrado")
-
+                    dtgDatos.Rows(x).Cells(25).Value = rwDatosBanco(0)("fSueldoOrd")
                 End If
 
 
@@ -10160,9 +10161,18 @@ Public Class frmnominasmarinos
 
 
                     'Verificar si tiene excedente y de que tipo
-                    SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
-                    dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                    'SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
+                    'dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
 
+
+                    'Verificar si tiene excedente y de que tipo
+                    If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                        SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
+                        dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                    Else
+                        SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
+                        dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
+                    End If
 
                 End If
 

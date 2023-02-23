@@ -1,7 +1,3 @@
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
@@ -37,6 +33,10 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNom
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
