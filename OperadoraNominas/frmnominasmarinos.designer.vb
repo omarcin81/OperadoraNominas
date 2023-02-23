@@ -511,13 +511,15 @@ Partial Class frmnominasmarinos
         '
         'cmdguardarnomina
         '
+        Me.cmdguardarnomina.BackColor = System.Drawing.SystemColors.Highlight
         Me.cmdguardarnomina.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdguardarnomina.ForeColor = System.Drawing.Color.Black
         Me.cmdguardarnomina.Location = New System.Drawing.Point(722, 3)
         Me.cmdguardarnomina.Name = "cmdguardarnomina"
         Me.cmdguardarnomina.Size = New System.Drawing.Size(63, 27)
         Me.cmdguardarnomina.TabIndex = 8
         Me.cmdguardarnomina.Text = "Guardar"
-        Me.cmdguardarnomina.UseVisualStyleBackColor = True
+        Me.cmdguardarnomina.UseVisualStyleBackColor = False
         '
         'cmdcalcular
         '
@@ -607,13 +609,13 @@ Partial Class frmnominasmarinos
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'layoutTimbrado
@@ -669,7 +671,7 @@ Partial Class frmnominasmarinos
         '
         Me.btnAcumualdos.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAcumualdos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAcumualdos.Location = New System.Drawing.Point(141, 511)
+        Me.btnAcumualdos.Location = New System.Drawing.Point(161, 514)
         Me.btnAcumualdos.Name = "btnAcumualdos"
         Me.btnAcumualdos.Size = New System.Drawing.Size(141, 28)
         Me.btnAcumualdos.TabIndex = 32
