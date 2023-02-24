@@ -7249,21 +7249,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                     hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value
 
-                    ' hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value
-                    'hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(75).Value
-                    ' hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(76).Value
-                    ' hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(77).Value
-                    'hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(78).Value
-                    'hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(79).Value
-                    'hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(80).Value
-                    'hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
-                    '  hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
-                    'hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
-                    ' sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-
-                    'hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(84).Value
-                    'hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(86).Value
-                    'hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(86).Value
+                   
 
                     'exedente
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXEDENTE
@@ -7288,8 +7274,14 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
-                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
+                    If NombrePeriodo = "Quincenal" Then
+                        hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
+                    Else
+                        recorrerFilasColumnas(hoja, 1, filaExcel + x, 124, "clear", 94)
+                        hoja.Cell(filaExcel + x, 94).Value = "NA"
+                    End If
 
+                    recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 95)
 
                 Next
 
@@ -7621,7 +7613,7 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
                 Dim textoperiodo As String
-                If NombrePeriodo = "Mes" Then
+                If NombrePeriodo = "Quincenal" Then
                     If cboperiodo.SelectedValue Mod 2 = 0 Then
                         textoperiodo = "2 QNA "
                     Else
