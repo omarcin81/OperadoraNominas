@@ -916,7 +916,8 @@ Public Class frmEmpleados
         Dim dialogo As New SaveFileDialog()
         Dim idtipo As Integer
 
-        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad"
+        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad, "
+        SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2"
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
         SQL &= " order by cNombreLargo"
         Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -934,10 +935,16 @@ Public Class frmEmpleados
             hoja.Column("I").Width = 25
             hoja.Column("J").Width = 30
             hoja.Column("K").Width = 30
-            hoja.Column("L").Width = 25
-            hoja.Column("M").Width = 30
-            hoja.Column("N").Width = 30
+            hoja.Column("L").Width = 10
+            hoja.Column("M").Width = 10
+            hoja.Column("N").Width = 10
             hoja.Column("O").Width = 30
+            hoja.Column("P").Width = 30
+            hoja.Column("T").Width = 50
+            hoja.Column("U").Width = 30
+            hoja.Column("V").Width = 50
+            hoja.Column("W").Width = 50
+            hoja.Column("X").Width = 30
 
 
             hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
@@ -946,14 +953,14 @@ Public Class frmEmpleados
             'hoja.Cell(3, 2).Value = ":"
             'hoja.Cell(3, 3).Value = ""
 
-            hoja.Range(4, 1, 4, 15).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 15).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 15).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            hoja.Range(4, 1, 4, 24).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 24).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 24).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 24).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 24).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
             'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+            hoja.Range(4, 1, 4, 24).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 24).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
             'hoja.Cell(4, 1).Value = "Num"
             hoja.Cell(4, 1).Value = "Id"
@@ -971,10 +978,22 @@ Public Class frmEmpleados
             hoja.Cell(4, 13).Value = "SBC"
             hoja.Cell(4, 14).Value = "SUELDO BRUTO"
             hoja.Cell(4, 15).Value = "FECHA ANTIGUEDAD"
-
+            hoja.Cell(4, 16).Value = "SEXO"
+            hoja.Cell(4, 17).Value = "fkiIdPuesto"
+            hoja.Cell(4, 18).Value = "PUESTO"
+            hoja.Cell(4, 19).Value = "fkiIdDepartamento"
+            hoja.Cell(4, 20).Value = "DEPTO"
+            hoja.Cell(4, 21).Value = "cPuesto"
+            hoja.Cell(4, 22).Value = "cFuncionesPuesto"
+            hoja.Cell(4, 23).Value = "cCorreo"
+            hoja.Cell(4, 24).Value = "CE CO"
 
             filaExcel = 4
             For Each Fila In rwFilas
+
+                Dim rwPuesto As DataRow() = nConsulta("SELECT * FROM puestos where iIdPuesto=" & Fila.Item("fkiIdPuesto"))
+                Dim rwDepto As DataRow() = nConsulta("SELECT * FROM departamentos where iIdDepartamento=" & Fila.Item("fkiIdDepartamento"))
+
                 filaExcel = filaExcel + 1
                 hoja.Cell(filaExcel, 1).Value = "'" & Fila.Item("cCodigoEmpleado").ToString
                 hoja.Cell(filaExcel, 2).Value = Fila.Item("cApellidoP")
@@ -991,7 +1010,15 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 13).Value = Fila.Item("fSueldoIntegrado")
                 hoja.Cell(filaExcel, 14).Value = Fila.Item("fSueldoOrd")
                 hoja.Cell(filaExcel, 15).Value = Fila.Item("dFechaAntiguedad")
-
+                hoja.Cell(filaExcel, 16).Value = IIf(Fila.Item("iSexo") = 1, "FEMENINO", "MASCULINO")
+                hoja.Cell(filaExcel, 17).Value = Fila.Item("fkiIdPuesto")
+                hoja.Cell(filaExcel, 18).Value = rwPuesto(0)("cNombre")
+                hoja.Cell(filaExcel, 19).Value = Fila.Item("fkiIdDepartamento")
+                hoja.Cell(filaExcel, 20).Value = rwDepto(0)("cNombre")
+                hoja.Cell(filaExcel, 21).Value = Fila.Item("cPuesto")
+                hoja.Cell(filaExcel, 22).Value = Fila.Item("cFuncionesPuesto")
+                hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
+                hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
             Next
 
             dialogo.DefaultExt = "*.xlsx"

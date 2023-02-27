@@ -2319,12 +2319,12 @@ Public Class frmnominasmarinos
                                 diastrabajados = dias - 1
                             End If
                             'solo falta injustificada juega para el septimo dia
-                            If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
+                            If NombrePeriodo = "Quincenal" Then
 
                                 dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2).ToString("###,##0.00")
                                 'dtgDatos.Rows(x).Cells(26).Value = "15"
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
-                            ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
+                            ElseIf NombrePeriodo = "Semanal" Then
 
                                 'If dtgDatos.Rows(x).Cells(2).Value = "42" Then
                                 'MsgBox("llego")
@@ -7095,6 +7095,8 @@ Public Class frmnominasmarinos
                 Dim DiasCadaPeriodo2 As Integer
                 Dim FechaInicioPeriodo As Date
                 Dim FechaFinPeriodo As Date
+                Dim tipoperiodos2 As String
+
                 ' <<<<<<<<<<<<<<<<<<<<<<Noina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
@@ -7109,6 +7111,8 @@ Public Class frmnominasmarinos
 
                     FechaFinPeriodo = Date.Parse(rwPeriodo0(0)("dFechaFin"))
                     DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
+                    tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+
                 End If
 
 
@@ -7132,37 +7136,40 @@ Public Class frmnominasmarinos
 
                         End If
 
-                        'VALES DE DESPEMSA 
+                    End If
+                    'VALES DE DESPEMSA 
+                    Dim numperiodo As Integer = cboperiodo.SelectedValue
 
-
-                        Dim numperiodo As Integer = cboperiodo.SelectedValue
-                        'verificar los datos de los trabajadores
-                        If validarSiSeCalculanVales(EmpresaN) Then
-
-                        
-                        End If
-
-                        If DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Then
-                            If numperiodo Mod 2 = 1 Then
-                                'le toca tener vales de despensa
-                                'quincena
-                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-
+                    If validarSiSeCalculanVales(EmpresaN, tipoperiodos2) Then
+                        If tipoperiodos2 = 2 Then
+                            If cboperiodo.SelectedValue Mod 2 = 0 Then
+                                valesDespensa = 0
                             Else
-                                valesDespensa = "0.0"
+                                'VALIDAR SI SE LE PAGA NETO
+                                If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+
+                                End If
+                                
                             End If
 
-                        ElseIf DiasCadaPeriodo = 6 Or DiasCadaPeriodo = 7 Then
-                            If numperiodo Mod 4 = 0 Then
-                                'le toca tener vales de despensa
-                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                        ElseIf tipoperiodos2 = 3 Then
+                            If cboperiodo.SelectedValue Mod 4 = 0 Then
+
+                                'VALIDAR SI SE LE PAGA NETO
+                                If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                End If
 
                             Else
-                                valesDespensa = "0.0"
+                                valesDespensa = 0
                             End If
-
+                        Else
+                            valesDespensa = 0
                         End If
 
+                    Else
+                        valesDespensa = "0.0"
                     End If
 
                     'Llenar EXCEL
@@ -7242,21 +7249,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                     hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value
 
-                    ' hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value
-                    'hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(75).Value
-                    ' hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(76).Value
-                    ' hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(77).Value
-                    'hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(78).Value
-                    'hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(79).Value
-                    'hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(80).Value
-                    'hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(81).Value
-                    '  hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(82).Value
-                    'hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(83).Value
-                    ' sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-
-                    'hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(84).Value
-                    'hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(86).Value
-                    'hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(86).Value
+                   
 
                     'exedente
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXEDENTE
@@ -7281,8 +7274,14 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'exedente monto
-                    hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
+                    If NombrePeriodo = "Quincenal" Then
+                        hoja.Cell(filaExcel + x, 94).FormulaA1 = "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
+                    Else
+                        recorrerFilasColumnas(hoja, 1, filaExcel + x, 124, "clear", 94)
+                        hoja.Cell(filaExcel + x, 94).Value = "NA"
+                    End If
 
+                    recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 95)
 
                 Next
 
@@ -7604,7 +7603,7 @@ Public Class frmnominasmarinos
 
                     filatmp = filatmp + 1
                 Next x
-
+               
                 hoja4.Cell(filaExcel + dtgDatos.Rows.Count + 1, 8).FormulaA1 = "=SUM(H2:M" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
 
                 '<<<<<CARGAR>>>>>
@@ -7613,8 +7612,21 @@ Public Class frmnominasmarinos
 
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
+                Dim textoperiodo As String
+                If NombrePeriodo = "Quincenal" Then
+                    If cboperiodo.SelectedValue Mod 2 = 0 Then
+                        textoperiodo = "2 QNA "
+                    Else
+                        textoperiodo = "1 QNA "
+                    End If
 
-                dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & IIf(idias = "15", numperiodo2 & "Q ", cboperiodo.SelectedIndex + 1 & " SEM ") & periodo
+
+                ElseIf NombrePeriodo = "Semanal" Then
+
+                    textoperiodo = "SEMANA " & cboperiodo.SelectedValue
+                End If
+
+                dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & textoperiodo & " " & periodo
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -7641,18 +7653,42 @@ Public Class frmnominasmarinos
     End Sub
 
 
-    Function validarSiSeCalculanVales(ByVal empresa As String) As Boolean
-        Dim flang As Boolean
-        If empresa = "IDN" Then
-            flang = True
-        End If
-        If empresa = "ADEMSA" Then
-            flang = True
-        End If
-        If empresa = "ALMACENADORA" Then
-            flang = True
-        End If
-        Return flang
+    Function validarSiSeCalculanVales(ByVal empresa As String, ByVal tipoperiodo As String) As Boolean
+        ' tipoperiodo 2 Quincenal
+        ' tipoperiodo 3 Semanal
+        Dim tienevales As Boolean
+        Select Case empresa.ToUpper
+            Case "IDN"
+                If tipoperiodo = 2 Then
+                    tienevales = True
+                ElseIf tipoperiodo = 3 Then
+                    tienevales = False
+                End If
+            Case "LOGISTIC"
+                If tipoperiodo = 2 Then
+                    tienevales = True
+                ElseIf tipoperiodo = 3 Then
+                    tienevales = True
+                End If
+            Case "ADEMSA"
+                If tipoperiodo = 2 Then
+                    tienevales = True
+                ElseIf tipoperiodo = 3 Then
+                    tienevales = False
+                End If
+            Case "ALMACENADORA"
+                tienevales = True
+            Case "TMMDC"
+                tienevales = True
+            Case "TMM"
+                tienevales = True
+            Case "TMMDC Logistic"
+                tienevales = True
+            Case Else
+                tienevales = False
+        End Select
+       
+        Return tienevales
     End Function
 
     Private Function buscarBanco(id As String, dato As String) As String
@@ -12110,7 +12146,7 @@ Public Class frmnominasmarinos
                 Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
                 Dim tiponomina, sueldodescanso As String
                 Dim filaexcelnomtotal As Integer = 0
-                Dim diasCadPeriodo
+                Dim valesDespensa As String
 
                 'dias prov
                 Dim DiasCadaPeriodo As Integer
@@ -12241,16 +12277,9 @@ Public Class frmnominasmarinos
                         FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
                         DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
 
-                        Dim rwValorUMA As DataRow() = nConsulta("select * from Salario where Anio=" & aniocostosocial & " and iEstatus=1")
-                        If rwValorUMA Is Nothing = False Then
-                            ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
-                        Else
-                            ValorUMA = 0
-                            MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
-                        End If
-
+                       
                         'fechasperioodo
-                        Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.gInicial)
+                        Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & rwFilas(x).Item("fkiIdPeriodo"))
                         If rwPeriodo0 Is Nothing = False Then
                             periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
                             mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
@@ -12259,11 +12288,54 @@ Public Class frmnominasmarinos
                             periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
                             tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
                         End If
+
+                        'UMAS
+                        Dim rwValorUMA As DataRow() = nConsulta("select * from Salario where Anio=" & aniocostosocial & " and iEstatus=1")
+                        If rwValorUMA Is Nothing = False Then
+                            If rwFilas(x).Item("fkiIdPeriodo") = 1 Then
+                                ValorUMA = 96.22
+                            Else
+                                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                            End If
+                        Else
+                            ValorUMA = 0
+                            MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+                        End If
+
+                        'VALES DE DESPEMSA 
+                        Dim numperiodo As Integer = cboperiodo.SelectedValue
+
+                        If validarSiSeCalculanVales(EmpresaN, tipoperiodos2) Then
+                            If tipoperiodos2 = 2 Then
+                                If rwFilas(x).Item("fkiIdPeriodo") Mod 2 = 0 Then
+                                    valesDespensa = 0
+                                Else
+                                    valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+
+                                End If
+
+                            ElseIf tipoperiodos2 = 3 Then
+                                If rwFilas(x).Item("fkiIdPeriodo") Mod 4 = 0 Then
+                                    valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                Else
+                                    valesDespensa = 0
+                                End If
+                            Else
+                                valesDespensa = 0
+                            End If
+
+                        Else
+                            valesDespensa = "0.0"
+                        End If
+
+
                         hoja.Range("Q2", "Q" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-
+                        If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
+                            'MsgBox("lol")
+                        End If
                         hoja.Cell(filaExcel + x, 1).Value = mes 'MES
                         hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                         hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
@@ -12340,7 +12412,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
                         hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
                         hoja.Cell(filaExcel + x, 76).Value = 0 ' rwFilas(x).Item("fPrestamoPerA") 'FONDO PFB 3%
-                        hoja.Cell(filaExcel + x, 77).Value = 0 'rwFilas(x).Item("fAdeudoInfonavitA")
+                        hoja.Cell(filaExcel + x, 77).FormulaA1 = valesDespensa 'rwFilas(x).Item("fAdeudoInfonavitA")
                         hoja.Cell(filaExcel + x, 78).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
                         hoja.Cell(filaExcel + x, 79).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, rwFilas(x).Item("EXCEDENTE"), 0)
                         hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "NA") 'rwFilas(x).Item("fRetencion")
@@ -12348,8 +12420,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
-                        hoja.Cell(filaExcel + x, 85).Value = Math.Round(calculoimss(rwFilas(x).Item("fSalarioBC"), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, rwFilas(x).Item("iDiasTrabajados"), 3), 2) '"2%  SAR RETIRO 
-                        hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(rwFilas(x).Item("fSalarioBC"), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, rwFilas(x).Item("iDiasTrabajados"), 3), 2)  'VEJEZ PROP
+                        hoja.Cell(filaExcel + x, 85).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
+                        hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                         hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fRcvCS")
                         hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fInfonavitCS")
                         hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInsCS")
@@ -12507,5 +12579,31 @@ Public Class frmnominasmarinos
     Private Sub EditarEmpleadoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
 
     End Sub
+
+    Private Function validarTopeSalarioBC(fsalario As Double, mes As String) As Double
+        Dim fsalarioBc As Double
+
+        If mes = "ENERO" Then
+            If EmpresaN <> "Transportacion" Then
+                If CDbl(fsalario) > 2405.5 Then
+                    fsalarioBc = 2405.5
+                Else
+                    fsalarioBc = fsalario
+                End If
+            Else
+                fsalarioBc = fsalario
+            End If
+
+
+        Else
+            If CDbl(fsalario) > 2593.5 Then
+                fsalarioBc = 2593.5
+            Else
+                fsalarioBc = fsalario
+            End If
+        End If
+
+            Return fsalarioBc
+    End Function
 
 End Class
