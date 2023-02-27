@@ -2300,7 +2300,13 @@ Public Class frmnominasmarinos
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value)) > 0 Then
                                 'diastrabajados = diastrabajados - 1
                                 FINJUSTIFICADA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value))
-                                diastrabajados = 6
+                                If NombrePeriodo = "Quincenal" Then
+                                    diastrabajados = diastrabajados - FINJUSTIFICADA
+                                Else
+
+                                    diastrabajados = 6
+                                End If
+
                                 dtgDatos.Rows(x).Cells(45).Value = "-" + Math.Round(SDEMPLEADO * FINJUSTIFICADA, 2).ToString("###,##0.00")
                                 'Mandar la falta a la resta
                             Else
@@ -2310,7 +2316,12 @@ Public Class frmnominasmarinos
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", 0, dtgDatos.Rows(x).Cells(21).Value)) > 0 Then
                                 'diastrabajados = diastrabajados - 1
                                 PERMISOSINGOCEDESUELDO = Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", 0, dtgDatos.Rows(x).Cells(21).Value))
-                                diastrabajados = 6
+                                If NombrePeriodo = "Quincenal" Then
+                                    diastrabajados = diastrabajados - PERMISOSINGOCEDESUELDO
+                                Else
+
+                                    diastrabajados = 6
+                                End If
                                 dtgDatos.Rows(x).Cells(46).Value = "-" + Math.Round(SDEMPLEADO * PERMISOSINGOCEDESUELDO, 2).ToString("###,##0.00")
                             Else
                                 dtgDatos.Rows(x).Cells(46).Value = 0.0
@@ -2753,9 +2764,24 @@ Public Class frmnominasmarinos
                             Dim rwDatos As DataRow() = nConsulta(sql)
                             If rwDatos Is Nothing = False Then
                                 If Double.Parse(rwDatos(0)("fsindicatoExtra").ToString) > 0 Then
-
+                                    Dim sumadescuentosexcedente As Double
+                                    Dim excedenteperiodo As Double
+                                    sumadescuentosexcedente = 0
+                                    excedenteperiodo = 0
                                     If DiasCadaPeriodo > 7 Then
+                                        excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
+
                                         dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados, 2)
+                                        sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(71).Value = "", 0, dtgDatos.Rows(x).Cells(71).Value))
+                                        sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(72).Value = "", 0, dtgDatos.Rows(x).Cells(72).Value))
+                                        sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
+
+                                        If sumadescuentosexcedente > excedenteperiodo Then
+                                            MessageBox.Show("Los descuentos por excendente son mas que el mismo excedente, verifica ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                        Else
+                                            excedenteperiodo = excedenteperiodo - sumadescuentosexcedente
+                                            dtgDatos.Rows(x).Cells(74).Value = Math.Round(excedenteperiodo, 2)
+                                        End If
                                     Else
                                         dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
                                     End If
