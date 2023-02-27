@@ -5893,7 +5893,7 @@ Public Class frmnominasmarinos
                 If rwDatosBanco Is Nothing = False Then
                     dtgDatos.Rows(x).Cells(24).Value = rwDatosBanco(0)("fSueldoBase")
                     dtgDatos.Rows(x).Cells(25).Value = rwDatosBanco(0)("fSueldoIntegrado")
-                    dtgDatos.Rows(x).Cells(25).Value = rwDatosBanco(0)("fSueldoOrd")
+                    dtgDatos.Rows(x).Cells(23).Value = rwDatosBanco(0)("fSueldoOrd")
                 End If
 
 
