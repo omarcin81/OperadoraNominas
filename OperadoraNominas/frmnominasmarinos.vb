@@ -5105,7 +5105,7 @@ Public Class frmnominasmarinos
         Try
             Dim Forma As New frmSubirIncidencias
             Forma.gIdPeriodo = cboperiodo.SelectedValue
-            Forma.gIdSerie = cboserie.SelectedValue
+            Forma.gIdSerie = cboserie.SelectedIndex
             Forma.gAnioActual = aniocostosocial
             Forma.ShowDialog()
         Catch ex As Exception

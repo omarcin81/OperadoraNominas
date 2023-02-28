@@ -18,7 +18,7 @@ Public Class frmSubirIncidencias
 
             cargarperiodos()
             cboperiodo.SelectedValue = gIdPeriodo
-            cboserie.SelectedValue = gIdPeriodo
+            cboserie.SelectedIndex = gIdSerie
             cboIncidencia.SelectedIndex = 0
         Catch ex As Exception
             MsgBox(ex.ToString)
