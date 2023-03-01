@@ -2685,7 +2685,7 @@ Public Class frmnominasmarinos
 
 
                             If chkNoinfonavit.Checked = False Then
-                            
+
 
 
                                 If dtgDatos.Rows(x).Tag = "" Then
@@ -2755,7 +2755,7 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(70).Value = Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2)
                             End If
 
-                            
+
 
 
 
@@ -7524,12 +7524,29 @@ Public Class frmnominasmarinos
                 Dim cuenta, banco, clabe, nombrecompleto As String
                 Dim codesanta As String = "ND"
                 Dim numperiodo2 As Int16 = CInt(cboperiodo.SelectedValue) Mod 2
-
+                Dim textoperiodo As String
                 'LIMPIAR FILAS
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 1, "clear")
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 60, "clear", 14)
 
-                hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 & IIf(idias = "15", "Q ", " SEM ") & periodom
+                If tipoperiodos2 = 2 Then
+
+                    If cboperiodo.SelectedItem Mod 2 = 0 Then
+
+                        hoja2.Cell(4, 2).Value = "PERIODO " & "2QNA " & periodom
+                        textoperiodo = "PERIODO " & "2QNA " & periodom
+
+                    Else
+                        hoja2.Cell(4, 2).Value = "PERIODO " & "1QNA " & periodom
+                        textoperiodo = "PERIODO " & "1QNA " & periodom
+                    End If
+
+                ElseIf tipoperiodos2 = 3 Then
+                    textoperiodo = "PERIODO " & numperiodo2 & "SEM" & periodom
+                    hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 & "SEM" & periodom
+                End If
+
+
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     hoja2.Cell(filaExcel, 9).Style.NumberFormat.Format = "@"
@@ -7584,8 +7601,9 @@ Public Class frmnominasmarinos
 
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
+                
 
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & IIf(idias = "15", numperiodo2 & "Q ", cboperiodo.SelectedIndex + 1 & " SEM ") & periodo
+                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & textoperiodo
                 hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
                 hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
                 hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
@@ -7638,7 +7656,7 @@ Public Class frmnominasmarinos
 
                 '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
-                Dim textoperiodo As String
+                'Dim textoperiodo As String
                 If NombrePeriodo = "Quincenal" Then
                     If cboperiodo.SelectedValue Mod 2 = 0 Then
                         textoperiodo = "2 QNA "
