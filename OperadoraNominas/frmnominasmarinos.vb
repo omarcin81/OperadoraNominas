@@ -12464,34 +12464,35 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
-                        hoja.Cell(filaExcel + x, 85).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
-                        hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
-                        hoja.Cell(filaExcel + x, 87).Value = rwFilas(x).Item("fRcvCS")
-                        hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fInfonavitCS")
-                        hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInsCS")
-                        hoja.Cell(filaExcel + x, 90).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x & "+CJ" & filaExcel + x & "+CK" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 91).Value = rwFilas(x).Item("fTotalCostoSocial")
-                        hoja.Cell(filaExcel + x, 92).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
+                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x 'cuota imss
+                        hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
+                        hoja.Cell(filaExcel + x, 87).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                        hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fRcvCS")
+                        hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInfonavitCS")
+                        hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fInsCS")
+                        hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CF" & filaExcel + x & "+CJ" & filaExcel + x & "+Ck" & filaExcel + x & "+CL" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 92).Value = rwFilas(x).Item("fTotalCostoSocial")
+                        hoja.Cell(filaExcel + x, 93).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
 
                         If tipoperiodos2 = 2 Then
 
-                            hoja.Cell(filaExcel + x, 93).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 94).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'pro PE NOD
+                            hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
 
                         ElseIf tipoperiodos2 = 3 Then
 
-                            hoja.Cell(filaExcel + x, 93).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 94).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'pro PE NOD
+                            hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
+                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
+                            hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
+                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
+                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
+                            hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
                         End If
 
                         pgbProgreso.Value = x
