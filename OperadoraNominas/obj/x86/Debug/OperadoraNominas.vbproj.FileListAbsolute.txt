@@ -83,4 +83,3 @@ E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraN
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache

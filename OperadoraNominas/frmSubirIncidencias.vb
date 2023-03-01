@@ -196,6 +196,7 @@ Public Class frmSubirIncidencias
             End If
 
         Catch ex As Exception
+            tsbNuevo.Enabled = True
             tsbCancelar_Click(sender, e)
             MessageBox.Show(ex.Message.ToString)
             Me.Close()

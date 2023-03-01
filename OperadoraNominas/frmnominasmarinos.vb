@@ -2375,9 +2375,9 @@ Public Class frmnominasmarinos
 
                             'Incapacidad
                             ValorIncapacidad = 0.0
-                            If dtgDatos.Rows(x).Cells(2).Value = 91 Then
-                                MsgBox("lol")
-                            End If
+                            'If dtgDatos.Rows(x).Cells(2).Value = 91 Then
+                            '    'MsgBox("lol")
+                            'End If
                             If dtgDatos.Rows(x).Cells(27).Value <> "Ninguno" Then
 
                                 ValorIncapacidad = dtgDatos.Rows(x).Cells(28).Value * SDEMPLEADO
@@ -12251,7 +12251,7 @@ Public Class frmnominasmarinos
                 sql &= "fTotalCostoSocial"
                 sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
                 sql &= " where	Nomina.fkiIdEmpresa	=	1	And	fkiIdPeriodo between " & Forma.gInicial
-                sql &= " and " & Forma.gFinal & " and	Nomina.iEstatus=1 and	iTipoNomina=0"
+                sql &= " and " & Forma.gFinal & " and	Nomina.iEstatus=1 and	iTipoNomina=0 AND iEstatusEmpleado=" & Forma.gSerie
                 sql &= " ORDER	BY	fkiIdPeriodo,fkiIdEmpleadoC,	EmpleadosC.cCodigoEmpleado,	EmpleadosC.cNombreLargo, Nomina.Depto, Nomina.Puesto, "
                 sql &= "EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe"
 
