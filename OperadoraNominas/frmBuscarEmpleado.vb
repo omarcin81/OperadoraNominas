@@ -8,7 +8,7 @@
             SQL = "select iIdEmpleadoC, cNombre, cApellidoP,cApellidoM,cRFC,cCURP,cIMSS from empleadosC "
             SQL &= " where (cNombreLargo like '%" & txtbuscar.Text & "%')" ' and fkiIdEmpresa=1" '& gIdEmpresa
             'If SoloActivo Then
-            SQL &= " AND fkiIdClienteInter = 1"
+            'SQL &= " AND fkiIdClienteInter = 1"
             'End If
             SQL &= " order by cNombreLargo"
             Dim rwFilas As DataRow() = nConsulta(SQL)
