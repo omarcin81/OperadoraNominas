@@ -1,7 +1,7 @@
 ﻿Public Class SeleccionarPeriodo
     Public gInicial As Integer
     Public gFinal As Integer
-
+    Public gSerie As Integer
    
     Private Sub SeleccionarPeriodo_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cargarperiodosinicial()
@@ -36,7 +36,7 @@
         Try
             gInicial = cbInicial.SelectedIndex + 1
             gFinal = cbFinal.SelectedIndex + 1
-
+            gSerie = cboserie.SelectedIndex
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
 
@@ -44,4 +44,6 @@
 
         End Try
     End Sub
+
+   
 End Class
