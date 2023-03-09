@@ -77,6 +77,7 @@ Public Class frmPrincipal
                     Try
                         If Usuario.Perfil = "1" Then
                             Dim Forma As New frmnominasmarinos
+                            Forma.gTipoCalculo = "1"
                             Forma.EmpresaN = EmpresaN
                             Forma.ShowDialog()
                         Else
@@ -183,6 +184,22 @@ Public Class frmPrincipal
                     Try
                         If Usuario.Perfil = "1" Then
                             Dim Forma As New frmAdministrativos
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+
+
+                    Catch ex As Exception
+                        ShowError(ex, Me.Text)
+                    End Try
+                    '
+                Case "Nomina Excedente"
+                    Try
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmnominasmarinos
+                            Forma.gTipoCalculo = "2"
+                            Forma.EmpresaN = EmpresaN
                             Forma.ShowDialog()
                         Else
                             MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -695,5 +712,8 @@ Public Class frmPrincipal
         End Try
     End Sub
 
+    Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
+
+    End Sub
 End Class
 
