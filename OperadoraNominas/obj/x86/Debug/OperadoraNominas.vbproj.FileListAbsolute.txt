@@ -47,7 +47,6 @@ E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraN
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
-E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
@@ -84,3 +83,4 @@ E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraN
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
 E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaExcedente.resources
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache

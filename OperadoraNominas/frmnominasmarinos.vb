@@ -2706,7 +2706,12 @@ Public Class frmnominasmarinos
                                     If VerificarCalculoInfonavit(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)) = 2 Then
                                         Dim MontoInfonavit As Double = CalcularInfonavitMonto(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(25).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
                                         If MontoInfonavit > 0 Then
-                                            dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                            If NombrePeriodo = "Semanal" Then
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                            Else
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit, 2).ToString("###,##0.00")
+                                            End If
+
                                         Else
                                             dtgDatos.Rows(x).Cells(60).Value = "0.00"
                                         End If
@@ -3970,6 +3975,17 @@ Public Class frmnominasmarinos
                 'patron
                 If tope22 > Double.Parse(uma) Then
                     vejezp = (tope22 * (Double.Parse(rwIMSS(0)("cesantiap").ToString) / 100)) * Double.Parse(diasimss)
+
+                    SQL = "select * from CesantiaVejez where ((" & tope22 & ">=CesantiaVejez.Inicio and " & tope22 & "<=CesantiaVejez.Fin2)"
+                    SQL &= " or (" & tope22 & ">=CesantiaVejez.Inicio and CesantiaVejez.Fin2=0)) And anio = " & aniocostosocial
+                    Dim rwCV As DataRow() = nConsulta(SQL)
+                    If rwCV Is Nothing = False Then
+                        vejezp = (tope22 * (Double.Parse(rwCV(0)("tasa").ToString) / 100)) * Double.Parse(diasimss)
+                    Else
+                        MessageBox.Show("No se encontro el año, por favor verique su tabla")
+                    End If
+
+
                 Else
                     vejezp = (tope22 * ((Double.Parse(rwIMSS(0)("cesantiat").ToString) / 100) + (Double.Parse(rwIMSS(0)("invalidezt").ToString) / 100))) * Double.Parse(diasimss)
                 End If
@@ -4027,7 +4043,7 @@ Public Class frmnominasmarinos
 
 
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message)
         End Try
 
         Return 0
@@ -4557,8 +4573,12 @@ Public Class frmnominasmarinos
                             Return 0
 
                         End If
+                        If NombrePeriodo = "Semanal" Then
+                            Return valorinfonavit / numdias
+                        Else
+                            Return valorinfonavit / 4
+                        End If
 
-                        Return valorinfonavit / numdias
                     End If
                 Else
                     Return 0
