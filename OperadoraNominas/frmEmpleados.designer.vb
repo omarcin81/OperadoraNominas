@@ -156,6 +156,7 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
+        Me.cmCECO = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -237,6 +238,7 @@ Partial Class frmEmpleados
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.cmCECO)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.cmdInfonavit)
         Me.Panel1.Controls.Add(Me.cmdPrestam)
@@ -1361,6 +1363,19 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
         '
+        'cmCECO
+        '
+        Me.cmCECO.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cmCECO.Image = CType(resources.GetObject("cmCECO.Image"), System.Drawing.Image)
+        Me.cmCECO.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmCECO.Location = New System.Drawing.Point(104, 560)
+        Me.cmCECO.Name = "cmCECO"
+        Me.cmCECO.Size = New System.Drawing.Size(95, 72)
+        Me.cmCECO.TabIndex = 53
+        Me.cmCECO.Text = "CE CO"
+        Me.cmCECO.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmCECO.UseVisualStyleBackColor = True
+        '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1614,5 +1629,6 @@ Partial Class frmEmpleados
     Friend WithEvents cmdPrestam As System.Windows.Forms.Button
     Friend WithEvents cmdFonacot As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents cmCECO As System.Windows.Forms.Button
 
 End Class

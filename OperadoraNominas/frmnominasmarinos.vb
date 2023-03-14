@@ -831,7 +831,7 @@ Public Class frmnominasmarinos
 
             'verificamos que no sea una nomina ya guardada como final
             sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
-            sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & cboperiodo.SelectedValue
+            sql &= " where Nomina.fkiIdEmpresa = 1  " & IIf(chkPeriodosC.Checked = True, "And fkiIdPeriodo in (6,8)", "And fkiIdPeriodo =" & cboperiodo.SelectedValue)
             sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
             sql &= " and iTipoNomina=0"
             sql &= " order by " & campoordenamiento 'cNombreLargo"
@@ -5842,6 +5842,9 @@ Public Class frmnominasmarinos
         If anios >= 31 And anios <= 35 Then
             dias = 32
         End If
+        If anios >= 36 Then
+            dias = 32
+        End If
 
         Return dias
     End Function
@@ -7164,7 +7167,7 @@ Public Class frmnominasmarinos
 
                     End If
                     'VALES DE DESPEMSA 
-                    Dim numperiodo As Integer = cboperiodo.SelectedValue
+                    Dim numperiodo As Long = cboperiodo.SelectedValue
 
                     If validarSiSeCalculanVales(EmpresaN, tipoperiodos2) Then
                         If tipoperiodos2 = 2 Then
@@ -7176,7 +7179,7 @@ Public Class frmnominasmarinos
                                     valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
 
                                 End If
-                                
+
                             End If
 
                         ElseIf tipoperiodos2 = 3 Then
@@ -7306,6 +7309,7 @@ Public Class frmnominasmarinos
                         recorrerFilasColumnas(hoja, 1, filaExcel + x, 124, "clear", 94)
                         hoja.Cell(filaExcel + x, 94).Value = "NA"
                     End If
+
 
                     recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 95)
 
@@ -7523,7 +7527,7 @@ Public Class frmnominasmarinos
 
                 Dim cuenta, banco, clabe, nombrecompleto As String
                 Dim codesanta As String = "ND"
-                Dim numperiodo2 As Int16 = CInt(cboperiodo.SelectedValue) Mod 2
+                Dim numperiodo2 As Double = CInt(cboperiodo.SelectedValue) Mod 2
                 Dim textoperiodo As String
                 'LIMPIAR FILAS
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 1, "clear")
@@ -7531,7 +7535,7 @@ Public Class frmnominasmarinos
 
                 If tipoperiodos2 = 2 Then
 
-                    If cboperiodo.SelectedItem Mod 2 = 0 Then
+                    If cboperiodo.SelectedValue Mod 2 = 0 Then
 
                         hoja2.Cell(4, 2).Value = "PERIODO " & "2QNA " & periodom
                         textoperiodo = "PERIODO " & "2QNA " & periodom
@@ -7621,7 +7625,7 @@ Public Class frmnominasmarinos
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-                    If dtgDatos.Rows(x).Cells(63).Value > 0 Then
+                    If IIf(dtgDatos.Rows(x).Cells(63).Value = "", 0, CDbl(dtgDatos.Rows(x).Cells(63).Value)) > 0 Then
 
                         Dim pensionalimenticia As DataRow() = nConsulta("Select * from pensionAlimenticia where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value)
                         If pensionalimenticia Is Nothing = False Then
@@ -7828,113 +7832,7 @@ Public Class frmnominasmarinos
 
     End Function
 
-    Private Sub cmdInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavit.Click
-        Try
-            Dim filaExcel As Integer = 0
-            Dim dialogo As New SaveFileDialog()
-            Dim periodo As String
-
-            If dtgDatos.Rows.Count > 0 Then
-
-
-                Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\msexcel.xlsx"
-
-                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
-
-
-                Dim libro As New ClosedXML.Excel.XLWorkbook
-
-                book.Worksheet(1).CopyTo(libro, "IAS (93713)")
-
-                Dim hoja As IXLWorksheet = libro.Worksheets(0)
-
-                '<<<<<<<<<<<<<<<<<<<<<<IAS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                filaExcel = 17
-
-                Dim nombrebuque As String
-                Dim inicio As Integer = 0
-                Dim contadorexcelbuqueinicial As Integer = 0
-                Dim contadorexcelbuquefinal As Integer = 0
-                Dim total As Integer = dtgDatos.Rows.Count - 1
-                'Dim filatmp As Integer = 13 - 4
-                Dim fecha As String
-
-                hoja.Cell(filaExcel + 1, 1).InsertCellsAbove(total + filaExcel + 2)
-
-                recorrerFilasColumnas(hoja, filaExcel, filaExcel + total, 11, "clear", 2)
-
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-
-                    Dim cuenta, banco, clabe As String
-                    Dim nom, app, apm As String
-
-                    If (dtgDatos.Rows(x).Cells(3).Value Is Nothing = False) Then
-
-                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
-                        If rwEmpleado Is Nothing = False Then
-
-                            clabe = rwEmpleado(0).Item("Clabe")
-                            cuenta = rwEmpleado(0).Item("NumCuenta")
-                            nom = rwEmpleado(0).Item("cNombre")
-                            app = rwEmpleado(0).Item("cApellidoP")
-                            apm = rwEmpleado(0).Item("cApellidoM")
-
-                            Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
-
-                            banco = rwBanco(0).Item("cBanco")
-                        End If
-
-                    End If
-
-                    Dim asimilado As Double
-                    hoja.Cell(filaExcel + x, 8).Style.NumberFormat.Format = "@"
-
-                    asimilado = Double.Parse(dtgDatos.Rows(x).Cells(50).Value) + Double.Parse(dtgDatos.Rows(x).Cells(50).Value)
-
-
-                    hoja.Cell(filaExcel + x, 2).Value = app 'AP PATERNO
-                    hoja.Cell(filaExcel + x, 3).Value = apm 'AP MATERNO
-                    hoja.Cell(filaExcel + x, 4).Value = nom ' NOMBRE
-                    hoja.Cell(filaExcel + x, 5).Value = banco ' BANCO
-                    hoja.Cell(filaExcel + x, 6).Value = IIf(cuenta = 0, "SIN CTA", cuenta) 'CUENTA
-                    hoja.Cell(filaExcel + x, 7).Value = "SIN TJT" ' TARJETA
-                    hoja.Cell(filaExcel + x, 8).Value = clabe ' CLABE BANARIA
-                    hoja.Cell(filaExcel + x, 9).Value = asimilado 'ASIMILADOS
-                    hoja.Cell(filaExcel + x, 10).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
-                    hoja.Cell(filaExcel + x, 11).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                Next x
-
-                hoja.Cell("I" & total + filaExcel + 1).FormulaA1 = "=SUM(I17:I" & total & ")"
-
-                'STYLE
-                hoja.Range("A1", "L1").Style.Fill.BackgroundColor = XLColor.BlueGray
-
-
-                Dim fechacreacion As Date = Date.Now
-
-                dialogo.FileName = "Nomina_93713_msexcel_" & fechacreacion.ToString("ddMMyy")
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                ''  dialogo.ShowDialog()
-
-                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    ' OK button pressed
-                    libro.SaveAs(dialogo.FileName)
-                    libro = Nothing
-                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                End If
-
-            End If
-
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
+  
 
     Public Sub recorrerFilasColumnas(ByRef hoja As IXLWorksheet, ByRef filainicio As Integer, ByRef filafinal As Integer, ByRef colTotal As Integer, ByRef tipo As String, Optional ByVal inicioCol As Integer = 1)
 
@@ -11511,7 +11409,7 @@ Public Class frmnominasmarinos
 
 
 
-    Private Sub cmdKioskoSove_Click(sender As System.Object, e As System.EventArgs) Handles cmdKioskoSove.Click
+    Private Sub cmdKioskoSove_Click(sender As System.Object, e As System.EventArgs)
         Try
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
@@ -12459,7 +12357,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 77).FormulaA1 = valesDespensa 'rwFilas(x).Item("fAdeudoInfonavitA")
                         hoja.Cell(filaExcel + x, 78).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
                         hoja.Cell(filaExcel + x, 79).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, rwFilas(x).Item("EXCEDENTE"), 0)
-                        hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "NA") 'rwFilas(x).Item("fRetencion")
+                        hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0") 'rwFilas(x).Item("fRetencion")
                         hoja.Cell(filaExcel + x, 81).Value = 0 'rwFilas(x).Item("fPorComision")
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
@@ -12473,6 +12371,10 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CF" & filaExcel + x & "+CJ" & filaExcel + x & "+Ck" & filaExcel + x & "+CL" & filaExcel + x
                         hoja.Cell(filaExcel + x, 92).Value = rwFilas(x).Item("fTotalCostoSocial")
                         hoja.Cell(filaExcel + x, 93).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
+                        'If rwFilas(x).Item("cCodigoEmpleado") = 2200005 Then
+                        '    MsgBox("OCEJO")
+                        'End If
+
 
                         If tipoperiodos2 = 2 Then
 
@@ -12485,6 +12387,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
 
                         ElseIf tipoperiodos2 = 3 Then
+
 
                             hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                             hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
@@ -12592,10 +12495,16 @@ Public Class frmnominasmarinos
                     '  If FechaBuscar.CompareTo(FechaInicial) >= 0 And FechaBuscar.CompareTo(FechaFinal) <= 0 Then
                     'Estamos dentro del rango 
                     'Calculamos la prima
-
+                    '  If idempleado = 123 Then
+                    'MsgBox(".")
+                    ' End If
                     anios = DateDiff("yyyy", FechaAntiguedad, FechaBuscar)
+                    If anios < 1 Then
+                        dias = CalculoDiasVacaciones(1)
+                    Else
+                        dias = CalculoDiasVacaciones(anios)
+                    End If
 
-                    dias = CalculoDiasVacaciones(anios)
 
                     'Calcular prima
 
@@ -12651,4 +12560,54 @@ Public Class frmnominasmarinos
             Return fsalarioBc
     End Function
 
+    Private Sub cmdPolizas_Click(sender As System.Object, e As System.EventArgs) Handles cmdPolizas.Click
+        Try
+            Dim filaExcel As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim mes, periodo As String
+            Dim fecha, periodom, iejercicio, idias As String
+            Dim pilotin As Boolean
+            Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+            Dim tiponomina, sueldodescanso As String
+            Dim filaexcelnomtotal As Integer = 0
+            Dim valesDespensa As String
+
+            'dias prov
+            Dim DiasCadaPeriodo As Integer
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim FechaAntiguedad As Date
+            Dim FechaBuscar As Date
+            Dim TipoPeriodoinfoonavit As Integer
+            Dim tipoperiodos2 As String
+            Dim ValorUMA As Double
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            Dim ruta As String
+            ruta = My.Application.Info.DirectoryPath() & "\Archivos\poliza.xlsx"
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+
+            book.Worksheet(1).CopyTo(libro, "POLIZA")
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub cmdSubirNomF_Click(sender As System.Object, e As System.EventArgs) Handles cmdSubirNomF.Click
+        Try
+            Dim Forma As New frmSubirNominaFinal
+            Forma.gIdPeriodo = cboperiodo.SelectedValue
+            Forma.gIdSerie = cboserie.SelectedIndex
+            Forma.gAnioActual = aniocostosocial
+            Forma.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
 End Class

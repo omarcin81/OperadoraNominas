@@ -74,14 +74,13 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
-        Me.cmdInfonavit = New System.Windows.Forms.Button()
-        Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
+        Me.cmdPolizas = New System.Windows.Forms.Button()
+        Me.cmdSubirNomF = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAcumualdos = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
-        Me.cmdKioskoSove = New System.Windows.Forms.Button()
-        Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
+        Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -630,36 +629,33 @@ Partial Class frmnominasmarinos
         Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.layoutTimbrado.UseVisualStyleBackColor = True
         '
-        'cmdInfonavit
+        'cmdPolizas
         '
-        Me.cmdInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavit.Location = New System.Drawing.Point(324, 514)
-        Me.cmdInfonavit.Name = "cmdInfonavit"
-        Me.cmdInfonavit.Size = New System.Drawing.Size(112, 27)
-        Me.cmdInfonavit.TabIndex = 29
-        Me.cmdInfonavit.Text = "Reporte Infonavit"
-        Me.cmdInfonavit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdInfonavit.UseVisualStyleBackColor = True
-        Me.cmdInfonavit.Visible = False
+        Me.cmdPolizas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdPolizas.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPolizas.Location = New System.Drawing.Point(308, 514)
+        Me.cmdPolizas.Name = "cmdPolizas"
+        Me.cmdPolizas.Size = New System.Drawing.Size(112, 27)
+        Me.cmdPolizas.TabIndex = 29
+        Me.cmdPolizas.Text = "Polizas"
+        Me.cmdPolizas.UseVisualStyleBackColor = True
         '
-        'cmdReporteInfonavit
+        'cmdSubirNomF
         '
-        Me.cmdReporteInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdReporteInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdReporteInfonavit.Location = New System.Drawing.Point(442, 514)
-        Me.cmdReporteInfonavit.Name = "cmdReporteInfonavit"
-        Me.cmdReporteInfonavit.Size = New System.Drawing.Size(99, 27)
-        Me.cmdReporteInfonavit.TabIndex = 30
-        Me.cmdReporteInfonavit.Text = "Saldo Infonavit"
-        Me.cmdReporteInfonavit.UseVisualStyleBackColor = True
-        Me.cmdReporteInfonavit.Visible = False
+        Me.cmdSubirNomF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdSubirNomF.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSubirNomF.Location = New System.Drawing.Point(442, 514)
+        Me.cmdSubirNomF.Name = "cmdSubirNomF"
+        Me.cmdSubirNomF.Size = New System.Drawing.Size(127, 27)
+        Me.cmdSubirNomF.TabIndex = 30
+        Me.cmdSubirNomF.Text = "Subir Nomina Final"
+        Me.cmdSubirNomF.UseVisualStyleBackColor = True
         '
         'cmdComision
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(547, 514)
+        Me.cmdComision.Location = New System.Drawing.Point(575, 514)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -675,46 +671,21 @@ Partial Class frmnominasmarinos
         Me.btnAcumualdos.Name = "btnAcumualdos"
         Me.btnAcumualdos.Size = New System.Drawing.Size(141, 28)
         Me.btnAcumualdos.TabIndex = 32
-        Me.btnAcumualdos.TabStop = False
         Me.btnAcumualdos.Text = "Acumualdos Nomina"
-        Me.btnAcumualdos.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.btnAcumualdos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAcumualdos.UseVisualStyleBackColor = True
         '
         'cmdInfonavitNominaSerie
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(655, 514)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(680, 514)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         Me.cmdInfonavitNominaSerie.Visible = False
-        '
-        'cmdKioskoSove
-        '
-        Me.cmdKioskoSove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdKioskoSove.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdKioskoSove.Location = New System.Drawing.Point(864, 514)
-        Me.cmdKioskoSove.Name = "cmdKioskoSove"
-        Me.cmdKioskoSove.Size = New System.Drawing.Size(131, 27)
-        Me.cmdKioskoSove.TabIndex = 33
-        Me.cmdKioskoSove.Text = "Subis Kiosko"
-        Me.cmdKioskoSove.UseVisualStyleBackColor = True
-        Me.cmdKioskoSove.Visible = False
-        '
-        'cmdConcentradoFonacot
-        '
-        Me.cmdConcentradoFonacot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdConcentradoFonacot.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdConcentradoFonacot.Location = New System.Drawing.Point(1001, 514)
-        Me.cmdConcentradoFonacot.Name = "cmdConcentradoFonacot"
-        Me.cmdConcentradoFonacot.Size = New System.Drawing.Size(147, 28)
-        Me.cmdConcentradoFonacot.TabIndex = 34
-        Me.cmdConcentradoFonacot.Text = "Concentrado Fonacot"
-        Me.cmdConcentradoFonacot.UseVisualStyleBackColor = True
-        Me.cmdConcentradoFonacot.Visible = False
         '
         'chkNoinfonavit
         '
@@ -729,18 +700,31 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
+        'chkPeriodosC
+        '
+        Me.chkPeriodosC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkPeriodosC.AutoSize = True
+        Me.chkPeriodosC.BackColor = System.Drawing.Color.Transparent
+        Me.chkPeriodosC.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPeriodosC.Location = New System.Drawing.Point(1021, 520)
+        Me.chkPeriodosC.Name = "chkPeriodosC"
+        Me.chkPeriodosC.Size = New System.Drawing.Size(142, 22)
+        Me.chkPeriodosC.TabIndex = 34
+        Me.chkPeriodosC.Text = "Todos los periodos"
+        Me.chkPeriodosC.UseVisualStyleBackColor = False
+        Me.chkPeriodosC.Visible = False
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
-        Me.Controls.Add(Me.cmdConcentradoFonacot)
-        Me.Controls.Add(Me.cmdKioskoSove)
+        Me.Controls.Add(Me.chkPeriodosC)
         Me.Controls.Add(Me.chkNoinfonavit)
         Me.Controls.Add(Me.btnAcumualdos)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
-        Me.Controls.Add(Me.cmdReporteInfonavit)
-        Me.Controls.Add(Me.cmdInfonavit)
+        Me.Controls.Add(Me.cmdSubirNomF)
+        Me.Controls.Add(Me.cmdPolizas)
         Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
@@ -800,9 +784,9 @@ Partial Class frmnominasmarinos
     Friend WithEvents btnReporte As System.Windows.Forms.Button
     Friend WithEvents cmdSubirDatos As System.Windows.Forms.Button
     Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
-    Friend WithEvents cmdInfonavit As System.Windows.Forms.Button
+    Friend WithEvents cmdPolizas As System.Windows.Forms.Button
 
-    Friend WithEvents cmdReporteInfonavit As System.Windows.Forms.Button
+    Friend WithEvents cmdSubirNomF As System.Windows.Forms.Button
     Friend WithEvents cmdResumenInfo As System.Windows.Forms.Button
     Friend WithEvents cmdComision As System.Windows.Forms.Button
 
@@ -812,8 +796,6 @@ Partial Class frmnominasmarinos
 
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
     Friend WithEvents chkPrimaVacacional As System.Windows.Forms.CheckBox
-    Friend WithEvents cmdKioskoSove As System.Windows.Forms.Button
-    Friend WithEvents cmdConcentradoFonacot As System.Windows.Forms.Button
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
     Friend WithEvents tsbbuscar As System.Windows.Forms.ToolStripButton
     Friend WithEvents chkCalSoloMarcados As System.Windows.Forms.CheckBox
@@ -828,6 +810,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
     Friend WithEvents chkDias As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPeriodosC As System.Windows.Forms.CheckBox
 
 
 End Class
