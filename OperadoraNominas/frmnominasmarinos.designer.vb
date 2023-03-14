@@ -72,9 +72,9 @@ Partial Class frmnominasmarinos
         Me.btnAcumualdos = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-<<<<<<< HEAD
+
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
-=======
+
         Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.tsbPeriodos = New System.Windows.Forms.ToolStripButton()
         Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
@@ -83,7 +83,7 @@ Partial Class frmnominasmarinos
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
->>>>>>> origin/main
+
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -628,7 +628,7 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-<<<<<<< HEAD
+
         'chkPeriodosC
         '
         Me.chkPeriodosC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -642,7 +642,7 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.Text = "Todos los periodos"
         Me.chkPeriodosC.UseVisualStyleBackColor = False
         Me.chkPeriodosC.Visible = False
-=======
+
         'tsbEmpleados
         '
         Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
@@ -717,8 +717,7 @@ Partial Class frmnominasmarinos
         Me.tsbLayout.Text = "Layouts"
         Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbLayout.Visible = False
->>>>>>> origin/main
-        '
+
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
