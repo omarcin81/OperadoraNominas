@@ -4,7 +4,7 @@
 
     Private Sub frmBuscart_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtbuscar.TabIndex = 1
-        rdbCodigo.Checked = True
+        rdbNombre.Checked = True
     End Sub
 
     Private Sub cmdCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

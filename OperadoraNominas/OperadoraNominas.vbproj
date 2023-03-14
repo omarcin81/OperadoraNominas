@@ -111,6 +111,18 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmSubirNominaFinal.Designer.vb">
+      <DependentUpon>frmSubirNominaFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubirNominaFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubirCECO.Designer.vb">
+      <DependentUpon>frmSubirCECO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubirCECO.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Excel\frmNominaFinalE.Designer.vb">
       <DependentUpon>frmNominaFinalE.vb</DependentUpon>
     </Compile>
@@ -344,6 +356,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmSubirNominaFinal.resx">
+      <DependentUpon>frmSubirNominaFinal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubirCECO.resx">
+      <DependentUpon>frmSubirCECO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Excel\frmNominaFinalE.resx">
       <DependentUpon>frmNominaFinalE.vb</DependentUpon>
     </EmbeddedResource>

@@ -1128,4 +1128,20 @@ Public Class frmEmpleados
             MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+    Private Sub cmCECO_Click(sender As System.Object, e As System.EventArgs)
+
+    End Sub
+
+    Private Sub cmCECO_Click_1(sender As System.Object, e As System.EventArgs) Handles cmCECO.Click
+        Try
+
+            Dim Forma As New frmSubirCECO
+          
+            Forma.ShowDialog()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
