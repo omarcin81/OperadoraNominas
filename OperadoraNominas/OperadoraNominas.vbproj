@@ -220,6 +220,12 @@
     <Compile Include="frmJuridico.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNominaExcedente.Designer.vb">
+      <DependentUpon>frmNominaExcedente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNominaExcedente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmnominasmarinos.designer.vb">
       <DependentUpon>frmnominasmarinos.vb</DependentUpon>
     </Compile>
@@ -403,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmJuridico.resx">
       <DependentUpon>frmJuridico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNominaExcedente.resx">
+      <DependentUpon>frmNominaExcedente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmnominasmarinos.resx">
       <DependentUpon>frmnominasmarinos.vb</DependentUpon>
