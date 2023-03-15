@@ -25,6 +25,14 @@ Partial Class frmnominasmarinos
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmnominasmarinos))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
+        Me.tsbPeriodos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbdeptos = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
+        Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.chkDias = New System.Windows.Forms.CheckBox()
@@ -45,7 +53,7 @@ Partial Class frmnominasmarinos
         Me.chkgrupo = New System.Windows.Forms.CheckBox()
         Me.chkinter = New System.Windows.Forms.CheckBox()
         Me.cbobancos = New System.Windows.Forms.ComboBox()
-        Me.chkSindicato = New System.Windows.Forms.CheckBox()
+        Me.chkPensionExc = New System.Windows.Forms.CheckBox()
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.cmdreiniciar = New System.Windows.Forms.Button()
         Me.cmdincidencias = New System.Windows.Forms.Button()
@@ -72,18 +80,8 @@ Partial Class frmnominasmarinos
         Me.btnAcumualdos = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
-
-        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
-        Me.tsbPeriodos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbdeptos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
-        Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
-
+        Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,12 +100,88 @@ Partial Class frmnominasmarinos
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'tsbEmpleados
+        '
+        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
+        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEmpleados.Name = "tsbEmpleados"
+        Me.tsbEmpleados.Size = New System.Drawing.Size(118, 51)
+        Me.tsbEmpleados.Text = "Importar Empleados"
+        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbPeriodos
+        '
+        Me.tsbPeriodos.Image = CType(resources.GetObject("tsbPeriodos.Image"), System.Drawing.Image)
+        Me.tsbPeriodos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbPeriodos.Name = "tsbPeriodos"
+        Me.tsbPeriodos.Size = New System.Drawing.Size(106, 51)
+        Me.tsbPeriodos.Text = "Importar Períodos"
+        Me.tsbPeriodos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbpuestos
+        '
+        Me.tsbpuestos.Image = CType(resources.GetObject("tsbpuestos.Image"), System.Drawing.Image)
+        Me.tsbpuestos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbpuestos.Name = "tsbpuestos"
+        Me.tsbpuestos.Size = New System.Drawing.Size(101, 51)
+        Me.tsbpuestos.Text = "Importar Puestos"
+        Me.tsbpuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbdeptos
+        '
+        Me.tsbdeptos.Image = CType(resources.GetObject("tsbdeptos.Image"), System.Drawing.Image)
+        Me.tsbdeptos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbdeptos.Name = "tsbdeptos"
+        Me.tsbdeptos.Size = New System.Drawing.Size(96, 51)
+        Me.tsbdeptos.Text = "Importar deptos"
+        Me.tsbdeptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbImportar
+        '
+        Me.tsbImportar.Image = CType(resources.GetObject("tsbImportar.Image"), System.Drawing.Image)
+        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbImportar.Name = "tsbImportar"
+        Me.tsbImportar.Size = New System.Drawing.Size(70, 51)
+        Me.tsbImportar.Text = "Incidencias"
+        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbImportar.ToolTipText = "Importar incidencias"
+        '
+        'tsbIEmpleados
+        '
+        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
+        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbIEmpleados.Name = "tsbIEmpleados"
+        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
+        Me.tsbIEmpleados.Text = "Empleados"
+        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbbuscar
+        '
+        Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
+        Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbbuscar.Name = "tsbbuscar"
+        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
+        Me.tsbbuscar.Text = "Buscar"
+        Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbLayout
+        '
+        Me.tsbLayout.AutoSize = False
+        Me.tsbLayout.Image = CType(resources.GetObject("tsbLayout.Image"), System.Drawing.Image)
+        Me.tsbLayout.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbLayout.Name = "tsbLayout"
+        Me.tsbLayout.Size = New System.Drawing.Size(90, 51)
+        Me.tsbLayout.Text = "Layouts"
+        Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbLayout.Visible = False
+        '
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdSumatoriaE)
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
         Me.pnlCatalogo.Controls.Add(Me.chkDias)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
@@ -127,14 +201,13 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.chkgrupo)
         Me.pnlCatalogo.Controls.Add(Me.chkinter)
         Me.pnlCatalogo.Controls.Add(Me.cbobancos)
-        Me.pnlCatalogo.Controls.Add(Me.chkSindicato)
+        Me.pnlCatalogo.Controls.Add(Me.chkPensionExc)
         Me.pnlCatalogo.Controls.Add(Me.chkAll)
         Me.pnlCatalogo.Controls.Add(Me.cmdreiniciar)
         Me.pnlCatalogo.Controls.Add(Me.cmdincidencias)
         Me.pnlCatalogo.Controls.Add(Me.cmdexcel)
         Me.pnlCatalogo.Controls.Add(Me.cmdlayouts)
         Me.pnlCatalogo.Controls.Add(Me.cmdActualizarS)
-        Me.pnlCatalogo.Controls.Add(Me.cmdguardarfinal)
         Me.pnlCatalogo.Controls.Add(Me.cmdguardarnomina)
         Me.pnlCatalogo.Controls.Add(Me.cmdcalcular)
         Me.pnlCatalogo.Controls.Add(Me.dtgDatos)
@@ -203,9 +276,9 @@ Partial Class frmnominasmarinos
         'cmdAcumuladoOperadora
         '
         Me.cmdAcumuladoOperadora.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAcumuladoOperadora.Location = New System.Drawing.Point(1191, 68)
+        Me.cmdAcumuladoOperadora.Location = New System.Drawing.Point(1019, 3)
         Me.cmdAcumuladoOperadora.Name = "cmdAcumuladoOperadora"
-        Me.cmdAcumuladoOperadora.Size = New System.Drawing.Size(129, 26)
+        Me.cmdAcumuladoOperadora.Size = New System.Drawing.Size(98, 26)
         Me.cmdAcumuladoOperadora.TabIndex = 33
         Me.cmdAcumuladoOperadora.Text = "Sumatorias"
         Me.cmdAcumuladoOperadora.UseVisualStyleBackColor = True
@@ -351,18 +424,17 @@ Partial Class frmnominasmarinos
         Me.cbobancos.Size = New System.Drawing.Size(220, 27)
         Me.cbobancos.TabIndex = 17
         '
-        'chkSindicato
+        'chkPensionExc
         '
-        Me.chkSindicato.AutoSize = True
-        Me.chkSindicato.BackColor = System.Drawing.Color.Transparent
-        Me.chkSindicato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSindicato.Location = New System.Drawing.Point(356, 37)
-        Me.chkSindicato.Name = "chkSindicato"
-        Me.chkSindicato.Size = New System.Drawing.Size(84, 22)
-        Me.chkSindicato.TabIndex = 16
-        Me.chkSindicato.Text = "Sindicato"
-        Me.chkSindicato.UseVisualStyleBackColor = False
-        Me.chkSindicato.Visible = False
+        Me.chkPensionExc.AutoSize = True
+        Me.chkPensionExc.BackColor = System.Drawing.Color.Transparent
+        Me.chkPensionExc.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPensionExc.Location = New System.Drawing.Point(284, 37)
+        Me.chkPensionExc.Name = "chkPensionExc"
+        Me.chkPensionExc.Size = New System.Drawing.Size(121, 22)
+        Me.chkPensionExc.TabIndex = 16
+        Me.chkPensionExc.Text = "No Pension Exc"
+        Me.chkPensionExc.UseVisualStyleBackColor = False
         '
         'chkAll
         '
@@ -379,7 +451,7 @@ Partial Class frmnominasmarinos
         'cmdreiniciar
         '
         Me.cmdreiniciar.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdreiniciar.Location = New System.Drawing.Point(1228, 3)
+        Me.cmdreiniciar.Location = New System.Drawing.Point(1240, 3)
         Me.cmdreiniciar.Name = "cmdreiniciar"
         Me.cmdreiniciar.Size = New System.Drawing.Size(111, 27)
         Me.cmdreiniciar.TabIndex = 14
@@ -389,7 +461,7 @@ Partial Class frmnominasmarinos
         'cmdincidencias
         '
         Me.cmdincidencias.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdincidencias.Location = New System.Drawing.Point(1111, 3)
+        Me.cmdincidencias.Location = New System.Drawing.Point(1127, 3)
         Me.cmdincidencias.Name = "cmdincidencias"
         Me.cmdincidencias.Size = New System.Drawing.Size(111, 27)
         Me.cmdincidencias.TabIndex = 13
@@ -399,7 +471,7 @@ Partial Class frmnominasmarinos
         'cmdexcel
         '
         Me.cmdexcel.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdexcel.Location = New System.Drawing.Point(1012, 3)
+        Me.cmdexcel.Location = New System.Drawing.Point(791, 3)
         Me.cmdexcel.Name = "cmdexcel"
         Me.cmdexcel.Size = New System.Drawing.Size(93, 27)
         Me.cmdexcel.TabIndex = 12
@@ -429,7 +501,7 @@ Partial Class frmnominasmarinos
         'cmdguardarfinal
         '
         Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarfinal.Location = New System.Drawing.Point(789, 3)
+        Me.cmdguardarfinal.Location = New System.Drawing.Point(913, 514)
         Me.cmdguardarfinal.Name = "cmdguardarfinal"
         Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
         Me.cmdguardarfinal.TabIndex = 9
@@ -628,7 +700,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-
         'chkPeriodosC
         '
         Me.chkPeriodosC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -642,82 +713,17 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.Text = "Todos los periodos"
         Me.chkPeriodosC.UseVisualStyleBackColor = False
         Me.chkPeriodosC.Visible = False
-
-        'tsbEmpleados
         '
-        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
-        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbEmpleados.Name = "tsbEmpleados"
-        Me.tsbEmpleados.Size = New System.Drawing.Size(118, 51)
-        Me.tsbEmpleados.Text = "Importar Empleados"
-        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        'cmdSumatoriaE
         '
-        'tsbPeriodos
+        Me.cmdSumatoriaE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSumatoriaE.Location = New System.Drawing.Point(1191, 68)
+        Me.cmdSumatoriaE.Name = "cmdSumatoriaE"
+        Me.cmdSumatoriaE.Size = New System.Drawing.Size(98, 26)
+        Me.cmdSumatoriaE.TabIndex = 38
+        Me.cmdSumatoriaE.Text = "Sumatorias E"
+        Me.cmdSumatoriaE.UseVisualStyleBackColor = True
         '
-        Me.tsbPeriodos.Image = CType(resources.GetObject("tsbPeriodos.Image"), System.Drawing.Image)
-        Me.tsbPeriodos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbPeriodos.Name = "tsbPeriodos"
-        Me.tsbPeriodos.Size = New System.Drawing.Size(106, 51)
-        Me.tsbPeriodos.Text = "Importar Períodos"
-        Me.tsbPeriodos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbpuestos
-        '
-        Me.tsbpuestos.Image = CType(resources.GetObject("tsbpuestos.Image"), System.Drawing.Image)
-        Me.tsbpuestos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbpuestos.Name = "tsbpuestos"
-        Me.tsbpuestos.Size = New System.Drawing.Size(101, 51)
-        Me.tsbpuestos.Text = "Importar Puestos"
-        Me.tsbpuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbdeptos
-        '
-        Me.tsbdeptos.Image = CType(resources.GetObject("tsbdeptos.Image"), System.Drawing.Image)
-        Me.tsbdeptos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbdeptos.Name = "tsbdeptos"
-        Me.tsbdeptos.Size = New System.Drawing.Size(96, 51)
-        Me.tsbdeptos.Text = "Importar deptos"
-        Me.tsbdeptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbImportar
-        '
-        Me.tsbImportar.Image = CType(resources.GetObject("tsbImportar.Image"), System.Drawing.Image)
-        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbImportar.Name = "tsbImportar"
-        Me.tsbImportar.Size = New System.Drawing.Size(70, 51)
-        Me.tsbImportar.Text = "Incidencias"
-        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbImportar.ToolTipText = "Importar incidencias"
-        '
-        'tsbIEmpleados
-        '
-        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
-        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbIEmpleados.Name = "tsbIEmpleados"
-        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
-        Me.tsbIEmpleados.Text = "Empleados"
-        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbbuscar
-        '
-        Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
-        Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbbuscar.Name = "tsbbuscar"
-        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
-        Me.tsbbuscar.Text = "Buscar"
-        Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbLayout
-        '
-        Me.tsbLayout.AutoSize = False
-        Me.tsbLayout.Image = CType(resources.GetObject("tsbLayout.Image"), System.Drawing.Image)
-        Me.tsbLayout.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbLayout.Name = "tsbLayout"
-        Me.tsbLayout.Size = New System.Drawing.Size(90, 51)
-        Me.tsbLayout.Text = "Layouts"
-        Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbLayout.Visible = False
-
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -733,6 +739,7 @@ Partial Class frmnominasmarinos
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.cmdguardarfinal)
         Me.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "frmnominasmarinos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -776,7 +783,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents tsbIEmpleados As ToolStripButton
     Friend WithEvents chkAll As CheckBox
     Friend WithEvents cbobancos As ComboBox
-    Friend WithEvents chkSindicato As CheckBox
+    Friend WithEvents chkPensionExc As CheckBox
     Friend WithEvents chkinter As CheckBox
     Friend WithEvents chkgrupo As CheckBox
     Friend WithEvents cboserie As System.Windows.Forms.ComboBox
@@ -815,6 +822,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkDias As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
     Friend WithEvents chkPeriodosC As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdSumatoriaE As System.Windows.Forms.Button
 
 
 End Class
