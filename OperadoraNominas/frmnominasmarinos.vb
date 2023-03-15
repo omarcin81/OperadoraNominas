@@ -8752,10 +8752,10 @@ Public Class frmnominasmarinos
                                 valesDespensa = 0
                             Else
                                 'VALIDAR SI SE LE PAGA NETO
-                                If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                'If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
 
-                                End If
+                                'End If
 
                             End If
 
@@ -8763,13 +8763,13 @@ Public Class frmnominasmarinos
                             If cboperiodo.SelectedValue Mod 4 = 0 Then
 
                                 'VALIDAR SI SE LE PAGA NETO
-                                If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                End If
+                                ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                'End If
 
-                            Else
-                                valesDespensa = 0
-                            End If
+                        Else
+                            valesDespensa = 0
+                        End If
                         Else
                             valesDespensa = 0
                         End If
@@ -9282,8 +9282,14 @@ Public Class frmnominasmarinos
         ' tipoperiodo 2 Quincenal
         ' tipoperiodo 3 Semanal
         Dim tienevales As Boolean
-        Select Case empresa.ToUpper
+        Select Case empresa
             Case "IDN"
+                If tipoperiodo = 2 Then
+                    tienevales = True
+                ElseIf tipoperiodo = 3 Then
+                    tienevales = False
+                End If
+            Case "TMM"
                 If tipoperiodo = 2 Then
                     tienevales = True
                 ElseIf tipoperiodo = 3 Then
@@ -9305,7 +9311,7 @@ Public Class frmnominasmarinos
                 tienevales = True
             Case "TMMDC"
                 tienevales = True
-            Case "TMM"
+            Case "Transportacion"
                 tienevales = True
             Case "TMMDC Logistic"
                 tienevales = True
