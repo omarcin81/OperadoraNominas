@@ -3354,9 +3354,9 @@ Public Class frmnominasmarinos
 
                             'Incapacidad
                             ValorIncapacidad = 0.0
-                            If dtgDatos.Rows(x).Cells(2).Value = 91 Then
-                                MsgBox("lol")
-                            End If
+                            'If dtgDatos.Rows(x).Cells(2).Value = 91 Then
+                            '    MsgBox("lol")
+                            'End If
                             If dtgDatos.Rows(x).Cells(27).Value <> "Ninguno" Then
 
                                 ValorIncapacidad = dtgDatos.Rows(x).Cells(28).Value * SDEMPLEADO
@@ -3663,7 +3663,11 @@ Public Class frmnominasmarinos
                                     If VerificarCalculoInfonavit(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)) = 2 Then
                                         Dim MontoInfonavit As Double = CalcularInfonavitMonto(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(25).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
                                         If MontoInfonavit > 0 Then
-                                            dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                            If NombrePeriodo = "Semanal" Then
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                            Else
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit, 2).ToString("###,##0.00")
+                                            End If
                                         Else
                                             dtgDatos.Rows(x).Cells(60).Value = "0.00"
                                         End If
@@ -14032,10 +14036,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CF" & filaExcel + x & "+CJ" & filaExcel + x & "+Ck" & filaExcel + x & "+CL" & filaExcel + x
                         hoja.Cell(filaExcel + x, 92).Value = rwFilas(x).Item("fTotalCostoSocial")
                         hoja.Cell(filaExcel + x, 93).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
-                        'If rwFilas(x).Item("cCodigoEmpleado") = 2200005 Then
-                        '    MsgBox("OCEJO")
-                        'End If
-
+                        
 
                         If tipoperiodos2 = 2 Then
 
