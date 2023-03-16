@@ -5900,9 +5900,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 82).Value = "0.0" 'TE3 E
                         hoja.Cell(filaExcel + x, 83).Value = "0.0" 'DESCANSO LABORADO E
                         hoja.Cell(filaExcel + x, 84).Value = "0.0" 'DIA FESTIVO E
-                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "-BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "+CE" & filaExcel + x & "+CF" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "-BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "+CE" & filaExcel + x & "+CF" & filaExcel + x
 
-                        hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(76).Value 'por comision
+                        hoja.Cell(filaExcel + x, 86).Value = 0 ' dtgDatos.Rows(x).Cells(76).Value 'por comision
                         hoja.Cell(filaExcel + x, 87).Value = 0 'dtgDatos.Rows(x).Cells(77).Value 'comision a
                         hoja.Cell(filaExcel + x, 88).Value = 0 'dtgDatos.Rows(x).Cells(78).Value 'comision b
 
@@ -5917,11 +5917,11 @@ Public Class frmnominasmarinos
                         If NombrePeriodo = "Quincenal" Then
                             hoja.Cell(filaExcel + x, 96).FormulaA1 = "=IF(CG" & filaExcel + x & ">0,if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0),0)"
                         Else
-                            recorrerFilasColumnas(hoja, 1, filaExcel + x, 124, "clear", 94)
+                            recorrerFilasColumnas(hoja, 1, filaExcel + x + 1, 124, "clear", 96)
                             hoja.Cell(filaExcel + x, 97).Value = "NA"
                         End If
 
-                        recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 95)
+                        recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 96)
 
                     End If
                    
@@ -6044,12 +6044,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
                     ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
-                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CO" & totalbuq
                 ElseIf gTipoCalculo = "2" Then
                     hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CG5:CG" & totalbuq - 2 & ")"
                     ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
-                    hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
-                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+                    hoja.Cell(espace + 5, "F").FormulaA1 = "=+CP" & totalbuq
+                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CO" & totalbuq
                 End If
                 
 
@@ -6217,14 +6217,15 @@ Public Class frmnominasmarinos
 
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
-
-                hoja3.Cell("G2").Value = "TMM " & EmpresaN.ToUpper & " " & IIf(idias = "15", numperiodo2 & "Q ", cboperiodo.SelectedIndex + 1 & " SEM ") & periodo
-                hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
-                hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
-                hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
-                hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 5
-                hoja3.Cell("H7").FormulaA1 = "=(H3+H4+H5+H6)*G7"
-                hoja3.Cell("H8").Value = EmpresaN.ToUpper
+               
+                    hoja3.Cell("H3").FormulaA1 = "=+NOMINA!F" & espace + 2
+                    hoja3.Cell("H4").FormulaA1 = "=+NOMINA!F" & espace + 3
+                    hoja3.Cell("H5").FormulaA1 = "=+NOMINA!F" & espace + 4
+                    hoja3.Cell("H6").FormulaA1 = "=+NOMINA!F" & espace + 5
+                    hoja3.Cell("H7").FormulaA1 = "=(H3+H4+H5+H6)*G7"
+                    hoja3.Cell("H8").Value = EmpresaN.ToUpper
+                
+                
 
 
                 ' <<<<<<<<<PENSION ALIEMENTICIA>>>>>>>>>>>
