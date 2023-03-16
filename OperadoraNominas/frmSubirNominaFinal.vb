@@ -246,7 +246,7 @@ Public Class frmSubirNominaFinal
                         If rwEmpleado Is Nothing = False Then
 
 
-                            SQL = "EXEC etConcentradoTimbradoInsertar  0,'"
+                            SQL = "EXEC setConcentradoTimbradoInsertar  0,'"
                             SQL &= producto.SubItems(CInt(NudColumnaN.Value)).Text & "'," ' CODIGO
                             SQL &= rwEmpleado(0)("iIdEmpleadoC").ToString & "', '" 'ID
                             SQL &= rwEmpleado(0)("cNombre").ToString & "', '"
@@ -258,9 +258,14 @@ Public Class frmSubirNominaFinal
                             SQL &= producto.SubItems(6).Text & "', '" 'clabe
                             SQL &= "0', '" 'gasto
                             SQL &= "0', '" 'costo
-                            SQL &= "0'," & producto.SubItems(33).Text & " '" '@Aguinaldo_G
-                            SQL &= "0', '" '@Aguinaldo_E
-
+                            SQL &= producto.SubItems(33).Text & " ', '" '@Aguinaldo_G
+                            SQL &= producto.SubItems(34).Text & " ', '"  '@Aguinaldo_E
+                            SQL &= producto.SubItems(74).Text & " ', '" '@APORPATRONPLANFLEXLP_G
+                            SQL &= producto.SubItems(76).Text & " ', '" '@APORPATRONPLANFLEXLP_E
+                            SQL &= producto.SubItems(57).Text & " ', '" '@Bonoasistencia_G
+                            SQL &= producto.SubItems(58).Text & " ', '" '@Bonoasistencia_E
+                            SQL &= producto.SubItems(59).Text & " ', '" '@BonoCalidad_G
+                            SQL &= producto.SubItems(60).Text & " ', '" '@BonoCalidad_E
 
                             If nExecute(SQL) = False Then
                                 MessageBox.Show("Error en el registro con los siguiente datos:   Empleado:  " & producto.SubItems(CInt(NudColumnaN.Value)).Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)

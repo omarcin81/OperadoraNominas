@@ -5899,7 +5899,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 82).Value = "0.0" 'TE3 E
                         hoja.Cell(filaExcel + x, 83).Value = "0.0" 'DESCANSO LABORADO E
                         hoja.Cell(filaExcel + x, 84).Value = "0.0" 'DIA FESTIVO E
-                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "+CE" & filaExcel + x & "+CF" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "-BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "+CE" & filaExcel + x & "+CF" & filaExcel + x
 
                         hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(76).Value 'por comision
                         hoja.Cell(filaExcel + x, 87).Value = 0 'dtgDatos.Rows(x).Cells(77).Value 'comision a
@@ -6038,10 +6038,19 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 9, "E").Value = "Total"
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
-                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
-                ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
-                hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
-                hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+
+                If gTipoCalculo = "1" Then
+                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
+                    ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
+                    hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
+                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+                ElseIf gTipoCalculo = "2" Then
+                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CG5:CG" & totalbuq - 2 & ")"
+                    ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
+                    hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
+                    hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+                End If
+                
 
                 hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & ")*0.06"
                 hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
@@ -6182,10 +6191,17 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 8).Value = codesanta
                     hoja2.Cell(filaExcel, 9).Value = clabe
                     hoja2.Cell(filaExcel, 10).Value = cuenta
-                    hoja2.Cell(filaExcel, 11).FormulaA1 = "=+'NOMINA'!BS" & filatmp 'sa
-                    hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CE" & filatmp 'excedente
-                    hoja2.Cell(filaExcel, 13).FormulaA1 = "=+NOMINA!CN" & filatmp 'vales
+                    If gTipoCalculo = "1" Then
+                        hoja2.Cell(filaExcel, 11).FormulaA1 = "=+'NOMINA'!BS" & filatmp 'sa
+                        hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CE" & filatmp 'excedente
+                        hoja2.Cell(filaExcel, 13).FormulaA1 = "=+NOMINA!CN" & filatmp 'vales
 
+                    ElseIf gTipoCalculo = "2" Then
+                        hoja2.Cell(filaExcel, 11).FormulaA1 = "=+'NOMINA'!BS" & filatmp 'sa
+                        hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CG" & filatmp 'excedente
+                        hoja2.Cell(filaExcel, 13).FormulaA1 = "=+NOMINA!CP" & filatmp 'vales
+                    End If
+                   
                     filaExcel = filaExcel + 1
                     filatmp = filatmp + 1
 
