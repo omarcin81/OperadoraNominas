@@ -3780,8 +3780,8 @@ Public Class frmnominasmarinos
                             'BONOCALIDAD = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", 0, dtgDatos.Rows(x).Cells(42).Value))
                             'COMPENSACION = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", 0, dtgDatos.Rows(x).Cells(43).Value))
 
-                            dtgDatos.Rows(x).Cells(74).Value = PRIDOMGRAVADA + PRIDOMEXENTA + TE2G + TE2E + TE3 + DESCANSOLABORADO + FESTIVOTRAB + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION
-
+                            dtgDatos.Rows(x).Cells(73).Value = Math.Round(PRIDOMGRAVADA + PRIDOMEXENTA + TE2G + TE2E + TE3 + DESCANSOLABORADO + FESTIVOTRAB + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION, 2)
+                            dtgDatos.Rows(x).Cells(74).Value = "0.00"
                             'sindicato ppp
                             sql = "select isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
@@ -3815,6 +3815,7 @@ Public Class frmnominasmarinos
                             End If
 
                             'pension alimenticia
+                            dtgDatos.Rows(x).Cells(76).Value = "0.00"
                             If chkPensionExc.Checked = False Then
                                 ' buscamos la pension
                                 PensionAntesVariable = 0
@@ -3824,7 +3825,7 @@ Public Class frmnominasmarinos
                                 If rwPensionAntes2 Is Nothing = False Then
 
 
-                                    Dim PensionExcedente As Double = Double.Parse(dtgDatos.Rows(x).Cells(74).Value)
+                                    Dim PensionExcedente As Double = Double.Parse(dtgDatos.Rows(x).Cells(73).Value)
 
                                     pension = 0
                                     For y As Integer = 0 To rwPensionAntes2.Length - 1
