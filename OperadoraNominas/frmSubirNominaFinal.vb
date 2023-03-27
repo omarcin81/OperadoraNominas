@@ -227,7 +227,7 @@ Public Class frmSubirNominaFinal
 
             'Application.DoEvents()
             'preguntar si los datos son correctos
-            Dim resultado As Integer = MessageBox.Show("Se agregaran datos del Concentrado Timbrado, ¿Desea continuar?", "Pregunta", MessageBoxButtons.YesNo)
+            Dim resultado As Integer = MessageBox.Show("se actualizaran los datos de " & cboTipo.Text & ",¿Desea continuar?", "Pregunta", MessageBoxButtons.YesNo)
             If resultado = DialogResult.Yes Then
 
 
@@ -247,7 +247,7 @@ Public Class frmSubirNominaFinal
 
 
                             SQL = "EXEC setConcentradoTimbradoInsertar  0,'"
-                            SQL &= producto.SubItems(CInt(NudColumnaN.Value)).Text & "', '" ' CODIGO
+                            SQL &= producto.SubItems(CInt(NudColumnaN.Value)).Text & "'," ' CODIGO
                             SQL &= rwEmpleado(0)("iIdEmpleadoC").ToString & "', '" 'ID
                             SQL &= rwEmpleado(0)("cNombre").ToString & "', '"
                             SQL &= rwEmpleado(0)("cApellidoP").ToString & "', '"
@@ -255,100 +255,17 @@ Public Class frmSubirNominaFinal
                             SQL &= producto.SubItems(2).Text & "', '" 'rfc
                             SQL &= producto.SubItems(4).Text & "', '" 'curp
                             SQL &= rwEmpleado(0)("clabe2").ToString & "', '"
-                            SQL &= producto.SubItems(6).Text & "', " 'clabe
-                            SQL &= "'0'," 'gasto
-                            SQL &= " '0'," 'costo
-                            SQL &= IIf(producto.SubItems(33).Text = "", 0, producto.SubItems(33).Text) & ","  '@Aguinaldo_G
-                            SQL &= IIf(producto.SubItems(34).Text = "", 0, producto.SubItems(34).Text) & ","   '@Aguinaldo_E
-                            SQL &= IIf(producto.SubItems(74).Text = "", 0, producto.SubItems(74).Text) & ","   '@APORPATRONPLANFLEXLP_G
-                            SQL &= IIf(producto.SubItems(76).Text = "", 0, producto.SubItems(76).Text) & ","   '@APORPATRONPLANFLEXLP_E
-                            SQL &= IIf(producto.SubItems(57).Text = "", 0, producto.SubItems(57).Text) & ","   '@Bonoasistencia_G
-                            SQL &= IIf(producto.SubItems(58).Text = "", 0, producto.SubItems(58).Text) & ","   '@Bonoasistencia_E
-                            SQL &= IIf(producto.SubItems(59).Text = "", 0, producto.SubItems(59).Text) & ","   '@BonoCalidad_G
-                            SQL &= IIf(producto.SubItems(60).Text = "", 0, producto.SubItems(60).Text) & ","  '@BonoCalidad_E
-                            SQL &= IIf(producto.SubItems(65).Text = "", 0, producto.SubItems(65).Text) & ","  '@Bonoespecialidad_G
-                            SQL &= IIf(producto.SubItems(66).Text = "", 0, producto.SubItems(66).Text) & ","   '@Bonoespecialidad_E
-                            SQL &= IIf(producto.SubItems(63).Text = "", 0, producto.SubItems(63).Text) & ","   '@Bonopolivalencia_G
-                            SQL &= IIf(producto.SubItems(64).Text = "", 0, producto.SubItems(64).Text) & ","   '@Bonopolivalencia_E
-                            SQL &= IIf(producto.SubItems(61).Text = "", 0, producto.SubItems(61).Text) & ","   '@Bonoproductividad_G
-                            SQL &= IIf(producto.SubItems(62).Text = "", 0, producto.SubItems(62).Text) & ","   '@Bonoproductividad_E
-                            SQL &= IIf(producto.SubItems(67).Text = "", 0, producto.SubItems(67).Text) & ","   '@Bonopuntualidad_G
-                            SQL &= IIf(producto.SubItems(68).Text = "", 0, producto.SubItems(68).Text) & ","   '@Bonopuntualidad_E
-                            SQL &= IIf(producto.SubItems(55).Text = "", 0, producto.SubItems(55).Text) & ","   '@Compensación_G
-                            SQL &= IIf(producto.SubItems(56).Text = "", 0, producto.SubItems(56).Text) & ","   '@Compensación_E
-                            SQL &= IIf(producto.SubItems(53).Text = "", 0, producto.SubItems(53).Text) & ","   '@Descansolaborado_G
-                            SQL &= IIf(producto.SubItems(54).Text = "", 0, producto.SubItems(54).Text) & ","   '@Descansolaborado_E
-                            SQL &= IIf(producto.SubItems(81).Text = "", 0, producto.SubItems(81).Text) & ","   '@Diafestivolaborado_G
-                            SQL &= IIf(producto.SubItems(82).Text = "", 0, producto.SubItems(82).Text) & ","   '@Diafestivolaborado_E
-                            SQL &= IIf(producto.SubItems(41).Text = "", 0, producto.SubItems(41).Text) & ","   '@HorasExtrasdoble_G
-                            SQL &= IIf(producto.SubItems(42).Text = "", 0, producto.SubItems(42).Text) & ","  '@HorasExtrasdoble_E
-                            SQL &= IIf(producto.SubItems(35).Text = "", 0, producto.SubItems(35).Text) & ","  '@Horasextratriples_G
-                            SQL &= IIf(producto.SubItems(36).Text = "", 0, producto.SubItems(36).Text) & ","   '@Horasextratriples_E
-                            SQL &= "0, " '@INDEMNIZACION_G
-                            SQL &= "0, " '@INDEMNIZACION_E
-                            SQL &= IIf(producto.SubItems(77).Text = "", 0, producto.SubItems(77).Text) & ","   '@PREVISION_PFB_G
-                            SQL &= IIf(producto.SubItems(78).Text = "", 0, producto.SubItems(78).Text) & ","     '@PREVISION_PFB_E"
-                            SQL &= "0, " '@PRIMADEANTIGÜEDAD_G
-                            SQL &= "0, " '@PRIMADEANTIGÜEDAD_E
-                            SQL &= IIf(producto.SubItems(49).Text = "", 0, producto.SubItems(49).Text) & ","  '@Primadominical_G
-                            SQL &= IIf(producto.SubItems(50).Text = "", 0, producto.SubItems(50).Text) & ","   '@Primadominical_E
-                            SQL &= IIf(producto.SubItems(51).Text = "", 0, producto.SubItems(51).Text) & ","   '@Primavacacional_G
-                            SQL &= IIf(producto.SubItems(52).Text = "", 0, producto.SubItems(52).Text) & ","   '@Primavacacional_E
-                            SQL &= "0, " '@SEPARACIONUNICA_G
-                            SQL &= "0, " '@SEPARACIONUNICA_E
-                            SQL &= IIf(producto.SubItems(29).Text = "", 0, producto.SubItems(29).Text) & ","   '@Septimodía_G
-                            SQL &= IIf(producto.SubItems(30).Text = "", 0, producto.SubItems(30).Text) & ","   '@Septimodía_E
-                            SQL &= IIf(producto.SubItems(31).Text = "", 0, producto.SubItems(31).Text) & ","   '@Sueldo_G
-                            SQL &= IIf(producto.SubItems(32).Text = "", 0, producto.SubItems(32).Text) & ","  '@Sueldo_E
-                            SQL &= IIf(producto.SubItems(71).Text = "", 0, producto.SubItems(71).Text) & ","   '@Sueldopendiente_G
-                            SQL &= IIf(producto.SubItems(72).Text = "", 0, producto.SubItems(72).Text) & ","   '@Sueldopendiente_E"
-                            SQL &= "0, " '@Vacacionespendientes_G
-                            SQL &= "0, " '@Vacacionespendientes_E
-                            SQL &= IIf(producto.SubItems(73).Text = "", 0, producto.SubItems(73).Text) & ","   '@Vacacionesproporcionales_G
-                            SQL &= IIf(producto.SubItems(74).Text = "", 0, producto.SubItems(74).Text) & ","  '@Vacacionesproporcionales_E
-                            SQL &= IIf(producto.SubItems(75).Text = "", 0, producto.SubItems(75).Text) & ","  '@Valesdedespensa_G
-                            SQL &= IIf(producto.SubItems(76).Text = "", 0, producto.SubItems(76).Text) & ","  '@Valesdedespensa_E
-                            SQL &= IIf(producto.SubItems(100).Text = "", 0, producto.SubItems(100).Text) & ","    '@Anticiposueldo_D"
-                            SQL &= "0, " '@AJUSTEALNETO_D
-                            SQL &= "0, " '@AJUSTEINFONAVIT_D
-                            SQL &= IIf(producto.SubItems(78).Text = "", 0, producto.SubItems(78).Text) & ","   '@APORPATRONPLANFLEXLP_D
-                            SQL &= IIf(producto.SubItems(101).Text = "", 0, producto.SubItems(101).Text) & ","     '@CuotaSindical_D
-                            SQL &= IIf(producto.SubItems(92).Text = "", 0, producto.SubItems(92).Text) & ","   '@Descuentoporincapacidad_D
-                            SQL &= IIf(producto.SubItems(102).Text = "", 0, producto.SubItems(102).Text) & ","    '@Faltasinjustificadas_D
-                            SQL &= IIf(producto.SubItems(99).Text = "", 0, producto.SubItems(99).Text) & ","  '@Fonacot_D
-                            SQL &= IIf(producto.SubItems(86).Text = "", 0, producto.SubItems(86).Text) & ","   '@ISR_D
-                            SQL &= IIf(producto.SubItems(85).Text = "", 0, producto.SubItems(85).Text) & ","   '@Imss_D
-                            SQL &= IIf(producto.SubItems(98).Text = "", 0, producto.SubItems(98).Text) & ","   '@PrestamoInfonavit_D
-                            SQL &= IIf(producto.SubItems(94).Text = "", 0, producto.SubItems(94).Text) & ","  '@InfonavitBimAnt_D
-                            SQL &= IIf(producto.SubItems(93).Text = "", 0, producto.SubItems(93).Text) & ","   '@Pensionalimenticia_D
-                            SQL &= IIf(producto.SubItems(88).Text = "", 0, producto.SubItems(88).Text) & ","   '@PLANFLEXLP_D
-                            SQL &= IIf(producto.SubItems(95).Text = "", 0, producto.SubItems(95).Text) & ","   '@Segurodevivienda_D
-                            SQL &= IIf(producto.SubItems(89).Text = "", 0, producto.SubItems(89).Text) & ","   '@Tiemponolaborado_D"
-                            SQL &= "0, " '@ISRAJUSTADOPORSUBSIDIO_O
-                            SQL &= "0, " '@Reembolsoinfonavit_O
-                            SQL &= IIf(producto.SubItems(104).Text = "", 0, producto.SubItems(104).Text) & ", " '@SubsidioEfectivo_O
-                            SQL &= IIf(producto.SubItems(105).Text = "", 0, producto.SubItems(105).Text) & " ," '@SubsidioCausado_O"
-                            SQL &= "0, " '@PROVISIONAGUINALDO
-                            SQL &= "0, " '@PROVISIONPRIMAVACACIONAL
-                            SQL &= "0, " '@PROVISIONPRIMAANTIGUEDAD
-                            SQL &= "0, " '@PROVISIONINDEMNIZACION
-                            SQL &= "0, " '@IMSS_CS
-                            SQL &= "0, " '@SAR2
-                            SQL &= "0, " '@VEJEZP
-                            SQL &= "0, " '@RCV_CS
-                            SQL &= "0, " '@INFONAVIT_CS
-                            SQL &= "0, " '@ISN_CS
-                            SQL &= "0, " '@CS
-                            SQL &= "0, " '@CS_IMSS
-                            SQL &= cboperiodo.SelectedIndex + 1 & ", " '@Periodo
-                            SQL &= cboserie.SelectedIndex + 1 & ", " '@DATO2
-                            SQL &= "0, " '@DATO3
-                            SQL &= "0, " '@DATO4
-                            SQL &= "0, " '@DATO5
-                            SQL &= "0, " '@DATO6
-                            SQL &= "1" '@iEstatus
-
-
+                            SQL &= producto.SubItems(6).Text & "', '" 'clabe
+                            SQL &= "0', '" 'gasto
+                            SQL &= "0', '" 'costo
+                            SQL &= producto.SubItems(33).Text & " ', '" '@Aguinaldo_G
+                            SQL &= producto.SubItems(34).Text & " ', '"  '@Aguinaldo_E
+                            SQL &= producto.SubItems(74).Text & " ', '" '@APORPATRONPLANFLEXLP_G
+                            SQL &= producto.SubItems(76).Text & " ', '" '@APORPATRONPLANFLEXLP_E
+                            SQL &= producto.SubItems(57).Text & " ', '" '@Bonoasistencia_G
+                            SQL &= producto.SubItems(58).Text & " ', '" '@Bonoasistencia_E
+                            SQL &= producto.SubItems(59).Text & " ', '" '@BonoCalidad_G
+                            SQL &= producto.SubItems(60).Text & " ', '" '@BonoCalidad_E
 
                             If nExecute(SQL) = False Then
                                 MessageBox.Show("Error en el registro con los siguiente datos:   Empleado:  " & producto.SubItems(CInt(NudColumnaN.Value)).Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -357,8 +274,7 @@ Public Class frmSubirNominaFinal
                                 Exit Sub
                             End If
                         End If
-                    Else
-                        MessageBox.Show("Seleccione algun dato", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
                     End If
 
 

@@ -28,6 +28,7 @@ Partial Class frmSubirNominaFinal
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.cboserie = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.chkIncidencia0 = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboperiodo = New System.Windows.Forms.ComboBox()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
@@ -69,7 +70,6 @@ Partial Class frmSubirNominaFinal
         Me.Label1.Size = New System.Drawing.Size(73, 19)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Actualizar"
-        Me.Label1.Visible = False
         '
         'cboTipo
         '
@@ -80,7 +80,6 @@ Partial Class frmSubirNominaFinal
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(191, 27)
         Me.cboTipo.TabIndex = 5
-        Me.cboTipo.Visible = False
         '
         'pnlCatalogo
         '
@@ -90,6 +89,7 @@ Partial Class frmSubirNominaFinal
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.cboserie)
         Me.pnlCatalogo.Controls.Add(Me.Label8)
+        Me.pnlCatalogo.Controls.Add(Me.chkIncidencia0)
         Me.pnlCatalogo.Controls.Add(Me.Label10)
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
         Me.pnlCatalogo.Controls.Add(Me.pnlProgreso)
@@ -113,6 +113,7 @@ Partial Class frmSubirNominaFinal
         '
         'cboserie
         '
+        Me.cboserie.Enabled = False
         Me.cboserie.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboserie.FormattingEnabled = True
         Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
@@ -131,6 +132,18 @@ Partial Class frmSubirNominaFinal
         Me.Label8.TabIndex = 28
         Me.Label8.Text = "Serie:"
         '
+        'chkIncidencia0
+        '
+        Me.chkIncidencia0.AutoSize = True
+        Me.chkIncidencia0.BackColor = System.Drawing.Color.Transparent
+        Me.chkIncidencia0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkIncidencia0.Location = New System.Drawing.Point(144, 47)
+        Me.chkIncidencia0.Name = "chkIncidencia0"
+        Me.chkIncidencia0.Size = New System.Drawing.Size(110, 22)
+        Me.chkIncidencia0.TabIndex = 27
+        Me.chkIncidencia0.Text = "Incidencia a 0"
+        Me.chkIncidencia0.UseVisualStyleBackColor = False
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -143,6 +156,7 @@ Partial Class frmSubirNominaFinal
         '
         'cboperiodo
         '
+        Me.cboperiodo.Enabled = False
         Me.cboperiodo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboperiodo.FormattingEnabled = True
         Me.cboperiodo.Location = New System.Drawing.Point(662, 7)
@@ -180,7 +194,7 @@ Partial Class frmSubirNominaFinal
         'NudColumnaC
         '
         Me.NudColumnaC.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaC.Location = New System.Drawing.Point(771, 48)
+        Me.NudColumnaC.Location = New System.Drawing.Point(909, 47)
         Me.NudColumnaC.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaC.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaC.Name = "NudColumnaC"
@@ -191,7 +205,7 @@ Partial Class frmSubirNominaFinal
         'NudColumnaN
         '
         Me.NudColumnaN.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaN.Location = New System.Drawing.Point(593, 48)
+        Me.NudColumnaN.Location = New System.Drawing.Point(731, 47)
         Me.NudColumnaN.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaN.Name = "NudColumnaN"
@@ -203,7 +217,7 @@ Partial Class frmSubirNominaFinal
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(640, 49)
+        Me.Label7.Location = New System.Drawing.Point(778, 48)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(106, 19)
         Me.Label7.TabIndex = 14
@@ -213,7 +227,7 @@ Partial Class frmSubirNominaFinal
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(444, 49)
+        Me.Label6.Location = New System.Drawing.Point(582, 48)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(146, 19)
         Me.Label6.TabIndex = 13
@@ -222,7 +236,7 @@ Partial Class frmSubirNominaFinal
         'NudFilaF
         '
         Me.NudFilaF.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaF.Location = New System.Drawing.Point(371, 48)
+        Me.NudFilaF.Location = New System.Drawing.Point(509, 47)
         Me.NudFilaF.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaF.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaF.Name = "NudFilaF"
@@ -234,7 +248,7 @@ Partial Class frmSubirNominaFinal
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(303, 49)
+        Me.Label5.Location = New System.Drawing.Point(441, 48)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(71, 19)
         Me.Label5.TabIndex = 11
@@ -244,7 +258,7 @@ Partial Class frmSubirNominaFinal
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(148, 49)
+        Me.Label4.Location = New System.Drawing.Point(286, 48)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 19)
         Me.Label4.TabIndex = 10
@@ -253,7 +267,7 @@ Partial Class frmSubirNominaFinal
         'NudFilaI
         '
         Me.NudFilaI.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaI.Location = New System.Drawing.Point(226, 48)
+        Me.NudFilaI.Location = New System.Drawing.Point(364, 47)
         Me.NudFilaI.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaI.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaI.Name = "NudFilaI"
@@ -388,7 +402,7 @@ Partial Class frmSubirNominaFinal
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Name = "frmSubirNominaFinal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Subir Timbrado"
+        Me.Text = "Subir incidencias"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlCatalogo.ResumeLayout(False)
         Me.pnlCatalogo.PerformLayout()
@@ -430,6 +444,7 @@ Partial Class frmSubirNominaFinal
     Friend WithEvents tsbCancelar As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblRuta As System.Windows.Forms.Label
     Friend WithEvents cmdCerrar As System.Windows.Forms.Button
+    Friend WithEvents chkIncidencia0 As System.Windows.Forms.CheckBox
     Friend WithEvents cboserie As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class
