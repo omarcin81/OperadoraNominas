@@ -348,6 +348,12 @@
     <Compile Include="ruta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SeleccionarPeriodoPoliza.Designer.vb">
+      <DependentUpon>SeleccionarPeriodoPoliza.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionarPeriodoPoliza.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Serie.Designer.vb">
       <DependentUpon>Serie.vb</DependentUpon>
     </Compile>

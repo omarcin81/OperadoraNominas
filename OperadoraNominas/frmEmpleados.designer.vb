@@ -33,6 +33,7 @@ Partial Class frmEmpleados
         Me.txtsalario = New System.Windows.Forms.TextBox()
         Me.cbojornada = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmCECO = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdPrestam = New System.Windows.Forms.Button()
@@ -139,7 +140,6 @@ Partial Class frmEmpleados
         Me.cbopertenece = New System.Windows.Forms.ComboBox()
         Me.cbobanco2 = New System.Windows.Forms.ComboBox()
         Me.txtclabe2 = New System.Windows.Forms.TextBox()
-        Me.txtcuenta2 = New System.Windows.Forms.TextBox()
         Me.Label47 = New System.Windows.Forms.Label()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.Label51 = New System.Windows.Forms.Label()
@@ -156,7 +156,7 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
-        Me.cmCECO = New System.Windows.Forms.Button()
+        Me.cboExcedente = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -260,6 +260,19 @@ Partial Class frmEmpleados
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
+        '
+        'cmCECO
+        '
+        Me.cmCECO.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cmCECO.Image = CType(resources.GetObject("cmCECO.Image"), System.Drawing.Image)
+        Me.cmCECO.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmCECO.Location = New System.Drawing.Point(104, 560)
+        Me.cmCECO.Name = "cmCECO"
+        Me.cmCECO.Size = New System.Drawing.Size(95, 72)
+        Me.cmCECO.TabIndex = 53
+        Me.cmCECO.Text = "CE CO"
+        Me.cmCECO.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmCECO.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -1221,13 +1234,6 @@ Partial Class frmEmpleados
         Me.txtclabe2.Size = New System.Drawing.Size(179, 26)
         Me.txtclabe2.TabIndex = 203
         '
-        'txtcuenta2
-        '
-        Me.txtcuenta2.Location = New System.Drawing.Point(12, 658)
-        Me.txtcuenta2.Name = "txtcuenta2"
-        Me.txtcuenta2.Size = New System.Drawing.Size(127, 26)
-        Me.txtcuenta2.TabIndex = 202
-        '
         'Label47
         '
         Me.Label47.AutoSize = True
@@ -1251,9 +1257,9 @@ Partial Class frmEmpleados
         Me.Label51.AutoSize = True
         Me.Label51.Location = New System.Drawing.Point(9, 681)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(104, 18)
+        Me.Label51.Size = New System.Drawing.Size(100, 18)
         Me.Label51.TabIndex = 199
-        Me.Label51.Text = "Numero cuenta"
+        Me.Label51.Text = "TipoExcedente"
         '
         'Label52
         '
@@ -1363,23 +1369,20 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
         '
-        'cmCECO
+        'cboExcedente
         '
-        Me.cmCECO.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.cmCECO.Image = CType(resources.GetObject("cmCECO.Image"), System.Drawing.Image)
-        Me.cmCECO.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmCECO.Location = New System.Drawing.Point(104, 560)
-        Me.cmCECO.Name = "cmCECO"
-        Me.cmCECO.Size = New System.Drawing.Size(95, 72)
-        Me.cmCECO.TabIndex = 53
-        Me.cmCECO.Text = "CE CO"
-        Me.cmCECO.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmCECO.UseVisualStyleBackColor = True
+        Me.cboExcedente.FormattingEnabled = True
+        Me.cboExcedente.Items.AddRange(New Object() {"Sindicato", "PPP"})
+        Me.cboExcedente.Location = New System.Drawing.Point(9, 658)
+        Me.cboExcedente.Name = "cboExcedente"
+        Me.cboExcedente.Size = New System.Drawing.Size(101, 26)
+        Me.cboExcedente.TabIndex = 218
         '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1077, 705)
+        Me.Controls.Add(Me.cboExcedente)
         Me.Controls.Add(Me.Label56)
         Me.Controls.Add(Me.dtpFinContrato)
         Me.Controls.Add(Me.Label55)
@@ -1395,7 +1398,6 @@ Partial Class frmEmpleados
         Me.Controls.Add(Me.Label52)
         Me.Controls.Add(Me.cbobanco2)
         Me.Controls.Add(Me.txtclabe2)
-        Me.Controls.Add(Me.txtcuenta2)
         Me.Controls.Add(Me.Label47)
         Me.Controls.Add(Me.Label50)
         Me.Controls.Add(Me.Label51)
@@ -1597,7 +1599,6 @@ Partial Class frmEmpleados
     Friend WithEvents cbopertenece As ComboBox
     Friend WithEvents cbobanco2 As ComboBox
     Friend WithEvents txtclabe2 As TextBox
-    Friend WithEvents txtcuenta2 As TextBox
     Friend WithEvents Label47 As Label
     Friend WithEvents Label50 As Label
     Friend WithEvents Label51 As Label
@@ -1630,5 +1631,6 @@ Partial Class frmEmpleados
     Friend WithEvents cmdFonacot As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents cmCECO As System.Windows.Forms.Button
+    Friend WithEvents cboExcedente As System.Windows.Forms.ComboBox
 
 End Class
