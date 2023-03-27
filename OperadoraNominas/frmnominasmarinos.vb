@@ -13868,10 +13868,10 @@ Public Class frmnominasmarinos
                             hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
                             hoja3.Cell(filaExcel, 5).Value = 0 'PLAN FLEX LP
                             hoja3.Cell(filaExcel, 6).Value = 0 'APOR PATRON PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(66).Value) * -1 'Tiempo NO Laborado
+                            hoja3.Cell(filaExcel, 7).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(66).Value) 'Tiempo NO Laborado
                             hoja3.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
                             hoja3.Cell(filaExcel, 9).FormulaA1 = IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
-                            hoja3.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
+                            hoja3.Cell(filaExcel, 10).Value = 0 ' dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
                             hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
                             hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
                             hoja3.Cell(filaExcel, 13).Value = 0 'SEGUROS DE VIVIENDA
@@ -13881,8 +13881,8 @@ Public Class frmnominasmarinos
                             hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
                             hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
                             hoja3.Cell(filaExcel, 19).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'Cuota Sindical
-                            hoja3.Cell(filaExcel, 20).Value = CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
-                            hoja3.Cell(filaExcel, 21).Value = CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
+                            hoja3.Cell(filaExcel, 20).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
+                            hoja3.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
 
                             'Validacion
                             hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":U" & filaExcel & ")"
@@ -13900,7 +13900,7 @@ Public Class frmnominasmarinos
                             hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
                             hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, dtgDatos.Rows(x).Cells(61).Value, 0) ' REEMBOLSO INFONAVIT
+                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
                         Else
                             ''<<<Otros Pagos>>>
                             hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
@@ -13914,7 +13914,7 @@ Public Class frmnominasmarinos
 
                         filaExcel = filaExcel + 1
 
-
+                    End If
 
                 Next
 

@@ -48,7 +48,6 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
-D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirNominaFinal.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirCECO.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
