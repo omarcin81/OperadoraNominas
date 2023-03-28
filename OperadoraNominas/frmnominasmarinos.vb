@@ -2978,7 +2978,7 @@ Public Class frmnominasmarinos
                                     If DiasCadaPeriodo > 7 Then
                                         excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
 
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados, 2)
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (diastrabajados), 2)
                                         'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(71).Value = "", 0, dtgDatos.Rows(x).Cells(71).Value))
                                         'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(72).Value = "", 0, dtgDatos.Rows(x).Cells(72).Value))
                                         ''sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
@@ -2990,7 +2990,10 @@ Public Class frmnominasmarinos
                                         '    dtgDatos.Rows(x).Cells(74).Value = Math.Round(excedenteperiodo, 2)
                                         'End If
                                     Else
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
+                                        'cambiar monto
+
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2)
+
                                     End If
 
                                 End If
@@ -4074,7 +4077,7 @@ Public Class frmnominasmarinos
                                         dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados, 2)
                                         sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(71).Value = "", 0, dtgDatos.Rows(x).Cells(71).Value))
                                         sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(72).Value = "", 0, dtgDatos.Rows(x).Cells(72).Value))
-                                        sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
+                                        'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
 
                                         If sumadescuentosexcedente > excedenteperiodo Then
                                             MessageBox.Show("Los descuentos por excendente son mas que el mismo excedente, verifica ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -4083,7 +4086,8 @@ Public Class frmnominasmarinos
                                             dtgDatos.Rows(x).Cells(74).Value = Math.Round(excedenteperiodo, 2)
                                         End If
                                     Else
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
+                                        'dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2)
                                     End If
 
                                 End If
