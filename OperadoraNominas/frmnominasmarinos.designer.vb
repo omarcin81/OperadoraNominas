@@ -82,6 +82,8 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
+        Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
+        Me.cmdAdiCalculo = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +98,7 @@ Partial Class frmnominasmarinos
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbEmpleados, Me.tsbPeriodos, Me.tsbpuestos, Me.tsbdeptos, Me.tsbImportar, Me.tsbIEmpleados, Me.tsbbuscar, Me.tsbLayout})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1357, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1438, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -181,6 +183,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdAdiCalculoEXC)
         Me.pnlCatalogo.Controls.Add(Me.cmdSumatoriaE)
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
         Me.pnlCatalogo.Controls.Add(Me.chkDias)
@@ -216,7 +219,7 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1438, 426)
         Me.pnlCatalogo.TabIndex = 26
         '
         'cmdSumatoriaE
@@ -542,7 +545,7 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(3, 104)
         Me.dtgDatos.Name = "dtgDatos"
-        Me.dtgDatos.Size = New System.Drawing.Size(1347, 340)
+        Me.dtgDatos.Size = New System.Drawing.Size(1428, 315)
         Me.dtgDatos.TabIndex = 6
         '
         'cmdverdatos
@@ -576,7 +579,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdguardarfinal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarfinal.Location = New System.Drawing.Point(913, 514)
+        Me.cmdguardarfinal.Location = New System.Drawing.Point(849, 489)
         Me.cmdguardarfinal.Name = "cmdguardarfinal"
         Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
         Me.cmdguardarfinal.TabIndex = 9
@@ -588,7 +591,7 @@ Partial Class frmnominasmarinos
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(596, 234)
+        Me.pnlProgreso.Location = New System.Drawing.Point(637, 222)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 27
@@ -632,7 +635,7 @@ Partial Class frmnominasmarinos
         '
         Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 514)
+        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 489)
         Me.layoutTimbrado.Name = "layoutTimbrado"
         Me.layoutTimbrado.Size = New System.Drawing.Size(123, 27)
         Me.layoutTimbrado.TabIndex = 28
@@ -644,7 +647,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdPolizas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdPolizas.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPolizas.Location = New System.Drawing.Point(308, 514)
+        Me.cmdPolizas.Location = New System.Drawing.Point(284, 489)
         Me.cmdPolizas.Name = "cmdPolizas"
         Me.cmdPolizas.Size = New System.Drawing.Size(112, 27)
         Me.cmdPolizas.TabIndex = 29
@@ -655,7 +658,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdSubirNomF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdSubirNomF.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSubirNomF.Location = New System.Drawing.Point(442, 514)
+        Me.cmdSubirNomF.Location = New System.Drawing.Point(400, 489)
         Me.cmdSubirNomF.Name = "cmdSubirNomF"
         Me.cmdSubirNomF.Size = New System.Drawing.Size(127, 27)
         Me.cmdSubirNomF.TabIndex = 30
@@ -666,7 +669,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(575, 514)
+        Me.cmdComision.Location = New System.Drawing.Point(535, 489)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -678,7 +681,7 @@ Partial Class frmnominasmarinos
         '
         Me.btnAcumualdos.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAcumualdos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAcumualdos.Location = New System.Drawing.Point(161, 514)
+        Me.btnAcumualdos.Location = New System.Drawing.Point(139, 489)
         Me.btnAcumualdos.Name = "btnAcumualdos"
         Me.btnAcumualdos.Size = New System.Drawing.Size(141, 28)
         Me.btnAcumualdos.TabIndex = 32
@@ -690,7 +693,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(680, 514)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(639, 489)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
@@ -704,7 +707,7 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.AutoSize = True
         Me.chkNoinfonavit.BackColor = System.Drawing.Color.Transparent
         Me.chkNoinfonavit.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNoinfonavit.Location = New System.Drawing.Point(1203, 519)
+        Me.chkNoinfonavit.Location = New System.Drawing.Point(1284, 494)
         Me.chkNoinfonavit.Name = "chkNoinfonavit"
         Me.chkNoinfonavit.Size = New System.Drawing.Size(154, 22)
         Me.chkNoinfonavit.TabIndex = 33
@@ -717,7 +720,7 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.AutoSize = True
         Me.chkPeriodosC.BackColor = System.Drawing.Color.Transparent
         Me.chkPeriodosC.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPeriodosC.Location = New System.Drawing.Point(1021, 520)
+        Me.chkPeriodosC.Location = New System.Drawing.Point(1102, 495)
         Me.chkPeriodosC.Name = "chkPeriodosC"
         Me.chkPeriodosC.Size = New System.Drawing.Size(142, 22)
         Me.chkPeriodosC.TabIndex = 34
@@ -725,10 +728,31 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.UseVisualStyleBackColor = False
         Me.chkPeriodosC.Visible = False
         '
+        'cmdAdiCalculoEXC
+        '
+        Me.cmdAdiCalculoEXC.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdAdiCalculoEXC.Location = New System.Drawing.Point(1295, 68)
+        Me.cmdAdiCalculoEXC.Name = "cmdAdiCalculoEXC"
+        Me.cmdAdiCalculoEXC.Size = New System.Drawing.Size(129, 26)
+        Me.cmdAdiCalculoEXC.TabIndex = 39
+        Me.cmdAdiCalculoEXC.Text = "Cal. Adic. Excedente"
+        Me.cmdAdiCalculoEXC.UseVisualStyleBackColor = True
+        '
+        'cmdAdiCalculo
+        '
+        Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdAdiCalculo.Location = New System.Drawing.Point(947, 489)
+        Me.cmdAdiCalculo.Name = "cmdAdiCalculo"
+        Me.cmdAdiCalculo.Size = New System.Drawing.Size(129, 26)
+        Me.cmdAdiCalculo.TabIndex = 40
+        Me.cmdAdiCalculo.Text = "Cal. Adicionales"
+        Me.cmdAdiCalculo.UseVisualStyleBackColor = True
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1357, 553)
+        Me.ClientSize = New System.Drawing.Size(1438, 528)
+        Me.Controls.Add(Me.cmdAdiCalculo)
         Me.Controls.Add(Me.chkPeriodosC)
         Me.Controls.Add(Me.chkNoinfonavit)
         Me.Controls.Add(Me.btnAcumualdos)
@@ -824,6 +848,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkPrimaDominical As System.Windows.Forms.CheckBox
     Friend WithEvents chkPeriodosC As System.Windows.Forms.CheckBox
     Friend WithEvents cmdSumatoriaE As System.Windows.Forms.Button
+    Friend WithEvents cmdAdiCalculoEXC As System.Windows.Forms.Button
+    Friend WithEvents cmdAdiCalculo As System.Windows.Forms.Button
 
 
 End Class
