@@ -480,8 +480,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="bin\Debug\Archivos\timbradosa.xlsx" />
-    <None Include="bin\Debug\Archivos\timbradosa2.xlsx" />
     <None Include="bin\Debug\Archivos\TMM.xlsx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
