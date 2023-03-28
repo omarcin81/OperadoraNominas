@@ -740,7 +740,11 @@ Partial Class frmnominasmarinos
         '
         'cmdAdiCalculo
         '
+<<<<<<< HEAD
         Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+=======
+        Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+>>>>>>> origin/main
         Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdAdiCalculo.Location = New System.Drawing.Point(947, 489)
         Me.cmdAdiCalculo.Name = "cmdAdiCalculo"
