@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
         Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.chkDias = New System.Windows.Forms.CheckBox()
@@ -82,7 +83,6 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
-        Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
         Me.cmdAdiCalculo = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -221,6 +221,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1438, 426)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdAdiCalculoEXC
+        '
+        Me.cmdAdiCalculoEXC.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdAdiCalculoEXC.Location = New System.Drawing.Point(1295, 68)
+        Me.cmdAdiCalculoEXC.Name = "cmdAdiCalculoEXC"
+        Me.cmdAdiCalculoEXC.Size = New System.Drawing.Size(129, 26)
+        Me.cmdAdiCalculoEXC.TabIndex = 39
+        Me.cmdAdiCalculoEXC.Text = "Cal. Adic. Excedente"
+        Me.cmdAdiCalculoEXC.UseVisualStyleBackColor = True
         '
         'cmdSumatoriaE
         '
@@ -728,18 +738,9 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.UseVisualStyleBackColor = False
         Me.chkPeriodosC.Visible = False
         '
-        'cmdAdiCalculoEXC
-        '
-        Me.cmdAdiCalculoEXC.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAdiCalculoEXC.Location = New System.Drawing.Point(1295, 68)
-        Me.cmdAdiCalculoEXC.Name = "cmdAdiCalculoEXC"
-        Me.cmdAdiCalculoEXC.Size = New System.Drawing.Size(129, 26)
-        Me.cmdAdiCalculoEXC.TabIndex = 39
-        Me.cmdAdiCalculoEXC.Text = "Cal. Adic. Excedente"
-        Me.cmdAdiCalculoEXC.UseVisualStyleBackColor = True
-        '
         'cmdAdiCalculo
         '
+        Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdAdiCalculo.Location = New System.Drawing.Point(947, 489)
         Me.cmdAdiCalculo.Name = "cmdAdiCalculo"
