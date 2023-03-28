@@ -348,6 +348,12 @@
     <Compile Include="ruta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SeleccionarPeriodoPoliza.Designer.vb">
+      <DependentUpon>SeleccionarPeriodoPoliza.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionarPeriodoPoliza.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Serie.Designer.vb">
       <DependentUpon>Serie.vb</DependentUpon>
     </Compile>
@@ -474,8 +480,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="bin\Debug\Archivos\timbradosa.xlsx" />
-    <None Include="bin\Debug\Archivos\timbradosa2.xlsx" />
     <None Include="bin\Debug\Archivos\TMM.xlsx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

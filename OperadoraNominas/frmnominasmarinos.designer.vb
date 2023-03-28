@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
         Me.chkDias = New System.Windows.Forms.CheckBox()
         Me.cmdsoloisr = New System.Windows.Forms.Button()
@@ -60,13 +61,13 @@ Partial Class frmnominasmarinos
         Me.cmdexcel = New System.Windows.Forms.Button()
         Me.cmdlayouts = New System.Windows.Forms.Button()
         Me.cmdActualizarS = New System.Windows.Forms.Button()
-        Me.cmdguardarfinal = New System.Windows.Forms.Button()
         Me.cmdguardarnomina = New System.Windows.Forms.Button()
         Me.cmdcalcular = New System.Windows.Forms.Button()
         Me.dtgDatos = New System.Windows.Forms.DataGridView()
         Me.cmdverdatos = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboperiodo = New System.Windows.Forms.ComboBox()
+        Me.cmdguardarfinal = New System.Windows.Forms.Button()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
@@ -81,7 +82,6 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
-        Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -218,6 +218,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdSumatoriaE
+        '
+        Me.cmdSumatoriaE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSumatoriaE.Location = New System.Drawing.Point(1191, 68)
+        Me.cmdSumatoriaE.Name = "cmdSumatoriaE"
+        Me.cmdSumatoriaE.Size = New System.Drawing.Size(98, 26)
+        Me.cmdSumatoriaE.TabIndex = 38
+        Me.cmdSumatoriaE.Text = "Sumatorias E"
+        Me.cmdSumatoriaE.UseVisualStyleBackColor = True
         '
         'chkPrimaDominical
         '
@@ -498,16 +508,6 @@ Partial Class frmnominasmarinos
         Me.cmdActualizarS.Text = "Actualizar SD"
         Me.cmdActualizarS.UseVisualStyleBackColor = True
         '
-        'cmdguardarfinal
-        '
-        Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarfinal.Location = New System.Drawing.Point(913, 514)
-        Me.cmdguardarfinal.Name = "cmdguardarfinal"
-        Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
-        Me.cmdguardarfinal.TabIndex = 9
-        Me.cmdguardarfinal.Text = "Guardar Final"
-        Me.cmdguardarfinal.UseVisualStyleBackColor = True
-        '
         'cmdguardarnomina
         '
         Me.cmdguardarnomina.BackColor = System.Drawing.SystemColors.Highlight
@@ -571,6 +571,17 @@ Partial Class frmnominasmarinos
         Me.cboperiodo.Name = "cboperiodo"
         Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
         Me.cboperiodo.TabIndex = 3
+        '
+        'cmdguardarfinal
+        '
+        Me.cmdguardarfinal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdguardarfinal.Location = New System.Drawing.Point(913, 514)
+        Me.cmdguardarfinal.Name = "cmdguardarfinal"
+        Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
+        Me.cmdguardarfinal.TabIndex = 9
+        Me.cmdguardarfinal.Text = "Guardar Final"
+        Me.cmdguardarfinal.UseVisualStyleBackColor = True
         '
         'pnlProgreso
         '
@@ -713,16 +724,6 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.Text = "Todos los periodos"
         Me.chkPeriodosC.UseVisualStyleBackColor = False
         Me.chkPeriodosC.Visible = False
-        '
-        'cmdSumatoriaE
-        '
-        Me.cmdSumatoriaE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSumatoriaE.Location = New System.Drawing.Point(1191, 68)
-        Me.cmdSumatoriaE.Name = "cmdSumatoriaE"
-        Me.cmdSumatoriaE.Size = New System.Drawing.Size(98, 26)
-        Me.cmdSumatoriaE.TabIndex = 38
-        Me.cmdSumatoriaE.Text = "Sumatorias E"
-        Me.cmdSumatoriaE.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '

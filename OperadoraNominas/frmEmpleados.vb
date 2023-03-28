@@ -129,7 +129,7 @@ Public Class frmEmpleados
                 SQL &= "," & cbopuesto.SelectedValue & "," & cbodepartamento.SelectedValue
                 SQL &= "," & cboedocivil.SelectedIndex
                 SQL &= "," & cbobanco2.SelectedValue
-                SQL &= ",'" & txtcuenta2.Text
+                SQL &= ",'" & cboExcedente.Text
                 SQL &= "','" & txtclabe2.Text & "'"
                 SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & txtInicio.Text & "','" & txtFin.Text & "'"
                 SQL &= ", '" & txtTelefono.Text & "','" & Format(dtpFinContrato.Value.Date, "yyyy/dd/MM") & "'"
@@ -157,7 +157,7 @@ Public Class frmEmpleados
                 SQL &= "," & cbopuesto.SelectedValue & "," & cbodepartamento.SelectedValue
                 SQL &= "," & cboedocivil.SelectedIndex
                 SQL &= "," & cbobanco2.SelectedValue
-                SQL &= ",'" & txtcuenta2.Text
+                SQL &= ",'" & cboExcedente.Text
                 SQL &= "','" & txtclabe2.Text & "'"
                 SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & txtInicio.Text & "','" & txtFin.Text & "'"
                 SQL &= ", '" & txtTelefono.Text & "','" & Format(dtpFinContrato.Value.Date, "yyyy/dd/MM") & "'"
@@ -352,7 +352,7 @@ Public Class frmEmpleados
                 cbopuesto.SelectedValue = Fila.Item("fkiIdPuesto")
                 cbodepartamento.SelectedValue = Fila.Item("fkiIdDepartamento")
 
-                txtcuenta2.Text = Fila.Item("cuenta2")
+                cboExcedente.Text = Fila.Item("cuenta2")
                 'item.SubItems.Add("" & Fila.Item("NumCuenta"))
                 txtclabe2.Text = Fila.Item("clabe2")
                 'item.SubItems.Add("" & Fila.Item("Clabe"))
@@ -523,7 +523,7 @@ Public Class frmEmpleados
         txtExtra.TabIndex = 52
         dtFecPlanta.TabIndex = 53
         dtpFinContrato.TabIndex = 54
-        txtcuenta2.TabIndex = 55
+        cboExcedente.TabIndex = 55
         txtclabe2.TabIndex = 56
         cbobanco2.TabIndex = 57
         txtInicio.TabIndex = 58

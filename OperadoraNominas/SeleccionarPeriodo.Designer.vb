@@ -106,6 +106,7 @@ Partial Class SeleccionarPeriodo
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cbInicial)
         Me.Name = "SeleccionarPeriodo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "SeleccionarPeriodo"
         Me.ResumeLayout(False)
         Me.PerformLayout()
