@@ -6130,7 +6130,7 @@ Public Class frmnominasmarinos
                             Else
                                 'VALIDAR SI SE LE PAGA NETO
                                 If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                    valesDespensa = dtgDatos.Rows(x).Cells(87).Value '"=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
 
                                 End If
 
@@ -6141,7 +6141,7 @@ Public Class frmnominasmarinos
 
                                 'VALIDAR SI SE LE PAGA NETO
                                 If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                    valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                    valesDespensa = dtgDatos.Rows(x).Cells(87).Value '"=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
                                 End If
 
                             Else
