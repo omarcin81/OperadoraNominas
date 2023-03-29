@@ -28,6 +28,8 @@ Partial Class frmSubirIncidencias
         Me.cboTipo = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cboserie = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.chkIncidencia0 = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboperiodo = New System.Windows.Forms.ComboBox()
@@ -52,8 +54,6 @@ Partial Class frmSubirIncidencias
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
-        Me.cboserie = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
         CType(Me.NudColumnaC, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,7 +77,7 @@ Partial Class frmSubirIncidencias
         '
         Me.cboIncidencia.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboIncidencia.FormattingEnabled = True
-        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL V", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "BONO CALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO SIN GOCE DE SUELDO", "SUELDO PENDIENTE", "COMPENSACION", "FONACOT", "PRIMA DOMINICAL IMPORTE", "PRESTAMO IMPORTE"})
+        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL V", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "BONO CALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO SIN GOCE DE SUELDO", "SUELDO PENDIENTE", "COMPENSACION", "FONACOT", "PRIMA DOMINICAL IMPORTE", "PRESTAMO IMPORTE", "INFONAVITBIMANTERIOR"})
         Me.cboIncidencia.Location = New System.Drawing.Point(126, 7)
         Me.cboIncidencia.Name = "cboIncidencia"
         Me.cboIncidencia.Size = New System.Drawing.Size(191, 27)
@@ -134,6 +134,27 @@ Partial Class frmSubirIncidencias
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1121, 535)
         Me.pnlCatalogo.TabIndex = 24
+        '
+        'cboserie
+        '
+        Me.cboserie.Enabled = False
+        Me.cboserie.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboserie.FormattingEnabled = True
+        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
+        Me.cboserie.Location = New System.Drawing.Point(924, 7)
+        Me.cboserie.Name = "cboserie"
+        Me.cboserie.Size = New System.Drawing.Size(59, 27)
+        Me.cboserie.TabIndex = 29
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(873, 11)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(45, 19)
+        Me.Label8.TabIndex = 28
+        Me.Label8.Text = "Serie:"
         '
         'chkIncidencia0
         '
@@ -394,27 +415,6 @@ Partial Class frmSubirIncidencias
         Me.cmdCerrar.Text = "Cerrar"
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
-        '
-        'cboserie
-        '
-        Me.cboserie.Enabled = False
-        Me.cboserie.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboserie.FormattingEnabled = True
-        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
-        Me.cboserie.Location = New System.Drawing.Point(924, 7)
-        Me.cboserie.Name = "cboserie"
-        Me.cboserie.Size = New System.Drawing.Size(59, 27)
-        Me.cboserie.TabIndex = 29
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(873, 11)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(45, 19)
-        Me.Label8.TabIndex = 28
-        Me.Label8.Text = "Serie:"
         '
         'frmSubirIncidencias
         '
