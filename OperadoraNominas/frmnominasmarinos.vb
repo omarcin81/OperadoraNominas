@@ -6257,7 +6257,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                         hoja.Cell(filaExcel + x, 74).FormulaA1 = "=AF" & filaExcel + x & "+AG" & filaExcel + x & "+AH" & filaExcel + x & "+AI" & filaExcel + x & "+AJ" & filaExcel + x & "+AK" & filaExcel + x & "+AL" & filaExcel + x & "+AM" & filaExcel + x & "+AN" & filaExcel + x & "+AO" & filaExcel + x & "+AP" & filaExcel + x & "+AQ" & filaExcel + x & "+AR" & filaExcel + x & "+AV" & filaExcel + x
                         hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCEDENTE
-                        hoja.Cell(filaExcel + x, 76).FormulaR1C1 = dtgDatos.Rows(x).Cells(86).Value '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                         hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value ' PRIMA EXCEDENTE
                         hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value ' PRIMA DOMINCAL EXCEDENTE
                         hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value 'Tiempo Extra Doble
