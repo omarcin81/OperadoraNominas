@@ -6127,6 +6127,7 @@ Public Class frmnominasmarinos
                 ' contadorfacturas = 1
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    dtgDatos.Rows(x).Cells(5).Style.BackColor = Color.Chartreuse
                     'CONSULTAS
                     Dim fSindicatoExtra As Double = 0.0
                     Dim valesDespensa As String = "0.00"
@@ -6201,12 +6202,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(21).Value
                     hoja.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(22).Value
                     hoja.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(23).Value
-                    hoja.Cell(filaExcel + x, 25).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(24).Value) 'sbc
-                    hoja.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(25).Value 'Dias
-                    hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'tipo incapacidad
-                    hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'num dias
-                    hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'sueldo bruto
-                    hoja.Cell(filaExcel + x, 30).Value = dtgDatos.Rows(x).Cells(29).Value 'septimo dia
+                    hoja.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(24).Value 's diario
+                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(25).Value) 'sbc 
+                    hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'dias traba
+                    hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'tipo incapacidad
+                    hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'num dias
+                    hoja.Cell(filaExcel + x, 30).Value = dtgDatos.Rows(x).Cells(29).Value 'sueldo bruto
                     hoja.Cell(filaExcel + x, 31).Value = dtgDatos.Rows(x).Cells(30).Value
                     hoja.Cell(filaExcel + x, 32).Value = dtgDatos.Rows(x).Cells(31).Value
                     hoja.Cell(filaExcel + x, 33).Value = dtgDatos.Rows(x).Cells(32).Value
@@ -6257,7 +6258,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                         hoja.Cell(filaExcel + x, 74).FormulaA1 = "=AF" & filaExcel + x & "+AG" & filaExcel + x & "+AH" & filaExcel + x & "+AI" & filaExcel + x & "+AJ" & filaExcel + x & "+AK" & filaExcel + x & "+AL" & filaExcel + x & "+AM" & filaExcel + x & "+AN" & filaExcel + x & "+AO" & filaExcel + x & "+AP" & filaExcel + x & "+AQ" & filaExcel + x & "+AR" & filaExcel + x & "+AV" & filaExcel + x
                         hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCEDENTE
-                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(87).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                         hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value ' PRIMA EXCEDENTE
                         hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value ' PRIMA DOMINCAL EXCEDENTE
                         hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value 'Tiempo Extra Doble
@@ -6276,13 +6277,13 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 90).Value = dtgDatos.Rows(x).Cells(82).Value 'ISN
                         hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CI" & filaExcel + x & "+CJ" & filaExcel + x & "+CK" & filaExcel + x & "+CL" & filaExcel + x  'TOTAL COSTO SOCIAL
 
-                        hoja.Cell(filaExcel + x, 92).FormulaA1 = valesDespensa 'VALES
+                        hoja.Cell(filaExcel + x, 92).Value = valesDespensa 'VALES
                         hoja.Cell(filaExcel + x, 93).Value = fSindicatoExtra 'EXCEDENTE MONTO
                         If NombrePeriodo = "Quincenal" Then
                             hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value ' "=IF(CE" & filaExcel + x & ">0,if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0),0)"
                         Else
                             recorrerFilasColumnas(hoja, 1, filaExcel + x, 124, "clear", 94)
-                            hoja.Cell(filaExcel + x, 94).Value = "NA"
+                            '  hoja.Cell(filaExcel + x, 94).Value = "NA"
                         End If
 
                     ElseIf gTipoCalculo = "2" Then
@@ -6290,7 +6291,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                         hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value 'EXCEDENTE VAR 'bv
                         hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCEDENTE
-                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value  '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(87).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                         hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value 'PRIMA EXCDENETE
                         hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(76).Value 'PENSION ALIME EXCE 'bz
                         hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(77).Value 'PENSION Manual 'ca
@@ -6317,9 +6318,10 @@ Public Class frmnominasmarinos
                         If NombrePeriodo = "Quincenal" Then
                             hoja.Cell(filaExcel + x, 96).Value = dtgDatos.Rows(x).Cells(88).Value ' "=IF(CG" & filaExcel + x & ">0,if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0),0)"
                         Else
-                            recorrerFilasColumnas(hoja, 1, filaExcel + x, 94, "clear", 94)
+                            ' recorrerFilasColumnas(hoja, 5, filaExcel + x, 96, "clear", 96)
                             recorrerFilasColumnas(hoja, 1, filaExcel + x, 130, "clear", 103)
-                            'hoja.Cell(filaExcel + x, 97).Value = "NA"
+
+                            hoja.Cell(filaExcel + x, 97).Value = "NA"
                         End If
                         hoja.Cell(filaExcel + x, 97).Value = dtgDatos.Rows(x).Cells(89).Value 'prov aguinald
                         hoja.Cell(filaExcel + x, 98).Value = dtgDatos.Rows(x).Cells(90).Value 'prov prima vac
@@ -6331,8 +6333,8 @@ Public Class frmnominasmarinos
                         recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 103)
 
                     End If
-                   
-                    
+
+
                 Next
 
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 16).FormulaA1 = "=SUM(P" & filaExcel & ":P" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
@@ -6409,7 +6411,15 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 92).FormulaA1 = "=SUM(CN" & filaExcel & ":CN" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 93).FormulaA1 = "=SUM(CO" & filaExcel & ":CO" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
                 hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 94).FormulaA1 = "=SUM(CP" & filaExcel & ":CP" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
-
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 95).FormulaA1 = "=SUM(CQ" & filaExcel & ":CQ" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 96).FormulaA1 = "=SUM(CR" & filaExcel & ":CR" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 97).FormulaA1 = "=SUM(CS" & filaExcel & ":CS" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 98).FormulaA1 = "=SUM(CT" & filaExcel & ":CT" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 99).FormulaA1 = "=SUM(CU" & filaExcel & ":CU" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 99).FormulaA1 = "=SUM(CU" & filaExcel & ":CU" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 100).FormulaA1 = "=SUM(CV" & filaExcel & ":CV" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 101).FormulaA1 = "=SUM(CW" & filaExcel & ":CW" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+                hoja.Cell(filaExcel + dtgDatos.Rows.Count + 1, 102).FormulaA1 = "=SUM(X" & filaExcel & ":CX" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
 
                 hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 85).Style.Font.SetBold(True)
 
@@ -6448,7 +6458,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
 
                 If gTipoCalculo = "1" Then
-                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
+                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SINDICATO"",CE5:CE" & totalbuq - 2 & ")"
                     ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                     hoja.Cell(espace + 6, "F").FormulaA1 = "=+CO" & totalbuq
@@ -6712,7 +6722,7 @@ Public Class frmnominasmarinos
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            pnlCatalogo.Enabled = True
         End Try
 
 
@@ -9443,11 +9453,11 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(21).Value
                     hoja.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(22).Value
                     hoja.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(23).Value
-                    hoja.Cell(filaExcel + x, 25).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(24).Value) 'sbc
-                    hoja.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(25).Value 'Dias
-                    hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'tipo incapacidad
-                    hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'num dias
-                    hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'sueldo bruto
+                    hoja.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(24).Value 's diario
+                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(25).Value) 'sbc 
+                    hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'dias traba
+                    hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'tipo incapacidad
+                    hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'num dias
                     hoja.Cell(filaExcel + x, 30).Value = dtgDatos.Rows(x).Cells(29).Value 'sueldo bruto
                     hoja.Cell(filaExcel + x, 31).Value = dtgDatos.Rows(x).Cells(30).Value
                     hoja.Cell(filaExcel + x, 32).Value = dtgDatos.Rows(x).Cells(31).Value
