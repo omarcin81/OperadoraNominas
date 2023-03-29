@@ -6258,7 +6258,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                         hoja.Cell(filaExcel + x, 74).FormulaA1 = "=AF" & filaExcel + x & "+AG" & filaExcel + x & "+AH" & filaExcel + x & "+AI" & filaExcel + x & "+AJ" & filaExcel + x & "+AK" & filaExcel + x & "+AL" & filaExcel + x & "+AM" & filaExcel + x & "+AN" & filaExcel + x & "+AO" & filaExcel + x & "+AP" & filaExcel + x & "+AQ" & filaExcel + x & "+AR" & filaExcel + x & "+AV" & filaExcel + x
                         hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCEDENTE
-                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(87).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                         hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value ' PRIMA EXCEDENTE
                         hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value ' PRIMA DOMINCAL EXCEDENTE
                         hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value 'Tiempo Extra Doble
@@ -6291,7 +6291,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
                         hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value 'EXCEDENTE VAR 'bv
                         hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCEDENTE
-                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(87).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                        hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                         hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value 'PRIMA EXCDENETE
                         hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(76).Value 'PENSION ALIME EXCE 'bz
                         hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(77).Value 'PENSION Manual 'ca
@@ -6463,7 +6463,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                     hoja.Cell(espace + 6, "F").FormulaA1 = "=+CO" & totalbuq
                 ElseIf gTipoCalculo = "2" Then
-                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CG5:CG" & totalbuq - 2 & ")"
+                    hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SINDICATO"",CG5:CG" & totalbuq - 2 & ")"
                     ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 5, "F").FormulaA1 = "=+CP" & totalbuq
                     hoja.Cell(espace + 6, "F").FormulaA1 = "=+CO" & totalbuq
