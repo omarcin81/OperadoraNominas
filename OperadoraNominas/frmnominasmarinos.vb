@@ -9498,7 +9498,7 @@ Public Class frmnominasmarinos
 
                     'exedente
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXEDENTE
-                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
+                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
                     hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value
                     hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value '"=CO" & filaExcel + x & "/30*T" & filaExcel + x & "*0.25" 'PRIMA DOMINCAL EXEDENTE
                     hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value '"=CO" & filaExcel + x & "/30/8*P" & filaExcel + x & "*2" 'Tiempo Extra Doble
@@ -9655,7 +9655,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 9, "E").Value = "Total"
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
-                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SIND"",CE5:CE" & totalbuq - 2 & ")"
+                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SINDICATO"",CE5:CE" & totalbuq - 2 & ")"
                 ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                 hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
@@ -14082,7 +14082,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(52).Value) 'PRIMA VACACIONAL GRAVADO
                             hoja2.Cell(filaExcel, 24).Value = CDbl(dtgDatos.Rows(x).Cells(53).Value) 'PRIMA VACACIONAL EXCENTO
                             hoja2.Cell(filaExcel, 25).Value = 0 'VALES DE DESPENSA GRAVADO
-                            hoja2.Cell(filaExcel, 26).Value = 0 'VALES DE DESPENSA EXCENTO
+                            hoja2.Cell(filaExcel, 26).Value = CDbl(dtgDatos.Rows(x).Cells(88).Value)  'VALES DE DESPENSA EXCENTO
                             hoja2.Cell(filaExcel, 27).Value = CDbl(dtgDatos.Rows(x).Cells(44).Value) 'SUELDO PENDIENTE GRAVADO/SEMANA DE FONDO
                             hoja2.Cell(filaExcel, 28).Value = "" 'SUELDO PENDIENTE EXCENTO
                             hoja2.Cell(filaExcel, 29).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
