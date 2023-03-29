@@ -6264,7 +6264,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(95).Value 'Tiempo Extra triple
                         hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(96).Value 'desncaso laborado
                         hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value 'dia festivo
-                        hoja.Cell(filaExcel + x, 83).FormulaA1 = "=BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 83).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-BT" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x
 
                         hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(76).Value 'por comision
                         hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(77).Value 'comision a
@@ -9505,7 +9505,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(95).Value '"=CO" & filaExcel + x & "/30/8*Q" & filaExcel + x & "*3" 'Tiempo Extra triple
                     hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(96).Value '"=CO" & filaExcel + x & "/30*R" & filaExcel + x & "*2" 'desncaso laborado
                     hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value '"=CO" & filaExcel + x & "/30*S" & filaExcel + x & "*2" 'dia festivo
-                    hoja.Cell(filaExcel + x, 83).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x
+                    hoja.Cell(filaExcel + x, 83).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-BT" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x
 
                     hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(76).Value 'POR COMISION
                     hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(77).Value 'COMISION A
