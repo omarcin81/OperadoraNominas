@@ -9311,7 +9311,7 @@ Public Class frmnominasmarinos
 
 
             pnlProgreso.Visible = True
-            pnlCatalogo.Enabled = False
+            'pnlCatalogo.Enabled = False
             Application.DoEvents()
 
             pgbProgreso.Minimum = 0
