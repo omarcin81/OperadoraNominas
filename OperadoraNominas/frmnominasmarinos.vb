@@ -9453,29 +9453,27 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 65).Value = dtgDatos.Rows(x).Cells(64).Value
                     hoja.Cell(filaExcel + x, 66).Value = dtgDatos.Rows(x).Cells(65).Value
                     hoja.Cell(filaExcel + x, 67).Value = dtgDatos.Rows(x).Cells(66).Value
-
                     hoja.Cell(filaExcel + x, 68).Value = dtgDatos.Rows(x).Cells(67).Value
+
                     hoja.Cell(filaExcel + x, 69).Value = dtgDatos.Rows(x).Cells(68).Value
                     hoja.Cell(filaExcel + x, 70).Value = dtgDatos.Rows(x).Cells(69).Value
-                    hoja.Cell(filaExcel + x, 71).Value = dtgDatos.Rows(x).Cells(70).Value
-                    hoja.Cell(filaExcel + x, 72).Value = dtgDatos.Rows(x).Cells(71).Value 'NETO SA
-                    hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(72).Value
-                    hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(73).Value
-
-                    'exedente
-                    hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(74).Value 'EXEDENTE
-                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper '"=IF(X" & filaExcel + x & ">40000,""PPP"",""SIND"")" 'SIND/PPP
-                    hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value
+                    hoja.Cell(filaExcel + x, 71).Value = IIf(dtgDatos.Rows(x).Cells(28).Value >= 7, 0, dtgDatos.Rows(x).Cells(70).Value) 'NETO SA
+                    'EXCEDENTE
+                    hoja.Cell(filaExcel + x, 72).Value = dtgDatos.Rows(x).Cells(86).Value.ToString.ToUpper 'SIND/PPP TIPO EXCDENTE  
+                    hoja.Cell(filaExcel + x, 73).Value = dtgDatos.Rows(x).Cells(71).Value 'PRESTAMO EXCEDENTE
+                    hoja.Cell(filaExcel + x, 74).Value = dtgDatos.Rows(x).Cells(72).Value 'ADEUDO INF EXCEDENTE
+                    hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(73).Value 'EXCEDENTE V
+                    hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCDENTE SUB
+                    hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value 'PRIMA EXCEDENTE
                     hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value '"=CO" & filaExcel + x & "/30*T" & filaExcel + x & "*0.25" 'PRIMA DOMINCAL EXEDENTE
                     hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value '"=CO" & filaExcel + x & "/30/8*P" & filaExcel + x & "*2" 'Tiempo Extra Doble
                     hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(95).Value '"=CO" & filaExcel + x & "/30/8*Q" & filaExcel + x & "*3" 'Tiempo Extra triple
                     hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(96).Value '"=CO" & filaExcel + x & "/30*R" & filaExcel + x & "*2" 'desncaso laborado
                     hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value '"=CO" & filaExcel + x & "/30*S" & filaExcel + x & "*2" 'dia festivo
-                    hoja.Cell(filaExcel + x, 83).FormulaA1 = "=+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-BT" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x
-
-                    hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(76).Value 'POR COMISION
-                    hoja.Cell(filaExcel + x, 85).Value = dtgDatos.Rows(x).Cells(77).Value 'COMISION A
-                    hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(78).Value 'COMISION B
+                    hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(76).Value 'PA EXCEDENTE
+                    hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(77).Value 'EXCDENETE M
+                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BX" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x  'TOTAL EXCEDENTE
+                    hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(78).Value 'COMISION BSS
 
                     hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(79).Value 'IMSS
                     hoja.Cell(filaExcel + x, 88).Value = dtgDatos.Rows(x).Cells(80).Value 'RCV
@@ -9624,7 +9622,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 9, "E").Value = "Total"
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
-                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""SINDICATO"",CE5:CE" & totalbuq - 2 & ")"
+                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CG5:CG" & totalbuq - 2 & ")"
                 ' hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                 hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
@@ -9779,14 +9777,14 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(2).Value
                     hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
                     hoja2.Cell(filaExcel, 4).Value = nombrecompleto.ToUpper 'EMPLEADONOMBRE
-                    hoja2.Cell(filaExcel, 5).FormulaA1 = "=+NOMINA!BX" & filatmp
+                    hoja2.Cell(filaExcel, 5).FormulaA1 = "=+NOMINA!BT" & filatmp
                     hoja2.Cell(filaExcel, 6).FormulaA1 = "=+NOMINA!G" & filatmp
                     hoja2.Cell(filaExcel, 7).Value = banco
                     hoja2.Cell(filaExcel, 8).Value = codesanta
                     hoja2.Cell(filaExcel, 9).Value = clabe
                     hoja2.Cell(filaExcel, 10).Value = cuenta
                     hoja2.Cell(filaExcel, 11).FormulaA1 = "=+'NOMINA'!BS" & filatmp 'sa
-                    hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CE" & filatmp 'excedente
+                    hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CG" & filatmp 'excedente
                     hoja2.Cell(filaExcel, 13).FormulaA1 = "=+NOMINA!CN" & filatmp 'vales
 
                     filaExcel = filaExcel + 1
