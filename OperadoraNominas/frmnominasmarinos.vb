@@ -13969,33 +13969,39 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                         hoja.Cell(filaExcel, 4).Value = nombrecompleto 'Nombre
                         hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
-                        hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
-                        hoja.Cell(filaExcel, 7).Value = cuenta 'cuenta bancaria
-                        hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
-                        hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
-                        hoja.Cell(filaExcel, 10).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
-                        hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
-                        hoja.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
-                        hoja.Cell(filaExcel, 13).Value = fechainiciorelaboral 'FechaInicioRelaboral
-                        hoja.Cell(filaExcel, 14).Value = "1" 'Tipo Contrato 
-                        hoja.Cell(filaExcel, 15).Value = "Contrato de trabajo por tiempo indeterminado"
-                        hoja.Cell(filaExcel, 16).Value = ""
-                        hoja.Cell(filaExcel, 17).Value = "1"  'Tipo Jornada
-                        hoja.Cell(filaExcel, 18).Value = "DIURNA"
-                        hoja.Cell(filaExcel, 19).Value = "2"  'Tipo Regimen
-                        hoja.Cell(filaExcel, 20).Value = "SUELDOS"
-                        hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
-                        hoja.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
-                        hoja.Cell(filaExcel, 23).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
-                        hoja.Cell(filaExcel, 24).Value = ""
-                        hoja.Cell(filaExcel, 25).Value = IIf(dtgDatos.Rows(x).Cells(26).Value = "7", "2", "4")  'periocidad pago
-                        hoja.Cell(filaExcel, 26).Value = ""
-                        hoja.Cell(filaExcel, 27).Value = clavebanco 'BANCO
-                        hoja.Cell(filaExcel, 28).Value = ""
-                        hoja.Cell(filaExcel, 29).Value = "" 'SUBCONTRATACION
-                        hoja.Cell(filaExcel, 30).Value = correo  'CORREO
+                        If dtgDatos.Rows(x).Cells(8).Value.ToString.Length = 11 Then
+                            hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
+                        Else
+                            hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
+                            hoja.Cell(filaExcel, 6).Style.Fill.BackgroundColor = XLColor.Aqua
+                        End If
 
-                        filaExcel = filaExcel + 1
+                            hoja.Cell(filaExcel, 7).Value = cuenta 'cuenta bancaria
+                            hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
+                            hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
+                            hoja.Cell(filaExcel, 10).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
+                            hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
+                            hoja.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                            hoja.Cell(filaExcel, 13).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                            hoja.Cell(filaExcel, 14).Value = "1" 'Tipo Contrato 
+                            hoja.Cell(filaExcel, 15).Value = "Contrato de trabajo por tiempo indeterminado"
+                            hoja.Cell(filaExcel, 16).Value = ""
+                            hoja.Cell(filaExcel, 17).Value = "1"  'Tipo Jornada
+                            hoja.Cell(filaExcel, 18).Value = "DIURNA"
+                            hoja.Cell(filaExcel, 19).Value = "2"  'Tipo Regimen
+                            hoja.Cell(filaExcel, 20).Value = "SUELDOS"
+                            hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
+                            hoja.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
+                            hoja.Cell(filaExcel, 23).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
+                            hoja.Cell(filaExcel, 24).Value = ""
+                            hoja.Cell(filaExcel, 25).Value = IIf(dtgDatos.Rows(x).Cells(26).Value = "7", "2", "4")  'periocidad pago
+                            hoja.Cell(filaExcel, 26).Value = ""
+                            hoja.Cell(filaExcel, 27).Value = clavebanco 'BANCO
+                            hoja.Cell(filaExcel, 28).Value = ""
+                            hoja.Cell(filaExcel, 29).Value = "" 'SUBCONTRATACION
+                            hoja.Cell(filaExcel, 30).Value = correo  'CORREO
+
+                            filaExcel = filaExcel + 1
                     End If
 
 
@@ -14148,12 +14154,12 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 42).Value = 0 'Bono especialidad EXCENTO
                             hoja2.Cell(filaExcel, 43).Value = 0 'Bono calidad
                             hoja2.Cell(filaExcel, 44).Value = 0 'Bono calidad
-                            hoja2.Cell(filaExcel, 45).Value = CDbl(dtgDatos.Rows(x).Cells(44).Value) 'SUELDO PENDIENTE GRAVADO/SEMANA DE FONDO
+                            hoja2.Cell(filaExcel, 45).Value = CDbl(dtgDatos.Rows(x).Cells(44).Value) 'SUELO PENDIENTE GRAVADO/SEMANA DE FONDO
                             hoja2.Cell(filaExcel, 46).Value = "" 'SUELDO PENDIENTE EXCENTO
-                            hoja2.Cell(filaExcel, 47).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
-                            hoja2.Cell(filaExcel, 48).Value = 0 'COMPENSACION EXENTO
-                            hoja2.Cell(filaExcel, 49).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 50).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 47).Value = 0   'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 48).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 49).Value = 0  'VALES DE DESPENSA GRAVADO  
+                            hoja2.Cell(filaExcel, 50).Value = CDbl(dtgDatos.Rows(x).Cells(88).Value) 'VALES DE DESPENSA EXCENTO
 
                             'validacion
                             hoja2.Cell(filaExcel, 51).FormulaA1 = "=C" & filaExcel & "+D" & filaExcel & "+E" & filaExcel & "+F" & filaExcel & "+G" & filaExcel & "+H" & filaExcel & "+I" & filaExcel & "+J" & filaExcel & "+K" & filaExcel & "+L" & filaExcel & "+Q" & filaExcel & "+R" & filaExcel & "+W" & filaExcel & "+X" & filaExcel & "+Y" & filaExcel & "+Z" & filaExcel & "+AA" & filaExcel & "+AB" & filaExcel & "+AC" & filaExcel & "+AD" & filaExcel & "+AE" & filaExcel & "+AF" & filaExcel & "+AG" & filaExcel & "+AH" & filaExcel & "+AI" & filaExcel & "+AJ" & filaExcel & "+AK" & filaExcel & "+AL" & filaExcel & "+AM" & filaExcel & "+AN" & filaExcel & "+AO" & filaExcel & "+AP" & filaExcel & "+AQ" & filaExcel & "+AR" & filaExcel & "+AS" & filaExcel & "+AT" & filaExcel & "+AU" & filaExcel & "+AV" & filaExcel & "+AW" & filaExcel & "+AX" & filaExcel
