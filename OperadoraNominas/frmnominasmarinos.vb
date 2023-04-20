@@ -13847,6 +13847,7 @@ Public Class frmnominasmarinos
             Dim idias As String
             Dim tipoperiodos2 As String
             Dim fechapagoletra As String
+
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
@@ -13921,7 +13922,7 @@ Public Class frmnominasmarinos
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
 
-                    Dim cuenta, clavebanco, fechainiciorelaboral, cCP, nombrecompleto, correo, ceco As String
+                    Dim cuenta, clavebanco, fechainiciorelaboral, cCP, nombrecompleto, correo, ceco, banco As String
 
                     If (dtgDatos.Rows(x).Cells(3).Value Is Nothing = False) Then
                         Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
@@ -13937,6 +13938,7 @@ Public Class frmnominasmarinos
                             Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
 
                             clavebanco = rwBanco(0).Item("clave")
+                            banco = rwBanco(0).Item("cBanco")
 
                         End If
 
@@ -13951,41 +13953,41 @@ Public Class frmnominasmarinos
 
                         ''Generales
                         hoja.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'No Empleado
-                        hoja.Cell(filaExcel, 2).Value = ceco
-                        hoja.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                        hoja.Cell(filaExcel, 4).Value = nombrecompleto 'Nombre
-                        hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
+                        ' hoja.Cell(filaExcel, 2).Value = ceco
+                        hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                        hoja.Cell(filaExcel, 3).Value = nombrecompleto 'Nombre
+                        hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
                         If dtgDatos.Rows(x).Cells(8).Value.ToString.Length = 11 Then
-                            hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
+                            hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
                         Else
-                            hoja.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
-                            hoja.Cell(filaExcel, 6).Style.Fill.BackgroundColor = XLColor.Aqua
+                            hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
+                            hoja.Cell(filaExcel, 5).Style.Fill.BackgroundColor = XLColor.Aqua
                         End If
 
-                        hoja.Cell(filaExcel, 7).Value = cuenta 'cuenta bancaria
-                        hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
-                        hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
-                        hoja.Cell(filaExcel, 10).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
-                        hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
-                        hoja.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
-                        hoja.Cell(filaExcel, 13).Value = fechainiciorelaboral 'FechaInicioRelaboral
-                        hoja.Cell(filaExcel, 14).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
-                        hoja.Cell(filaExcel, 15).Value = datosEmpresas(EmpresaN, 5)
-                        hoja.Cell(filaExcel, 16).Value = ""
-                        hoja.Cell(filaExcel, 17).Value = "1"  'Tipo Jornada
-                        hoja.Cell(filaExcel, 18).Value = "DIURNA"
-                        hoja.Cell(filaExcel, 19).Value = "2"  'Tipo Regimen
-                        hoja.Cell(filaExcel, 20).Value = "SUELDOS"
-                        hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
-                        hoja.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
-                        hoja.Cell(filaExcel, 23).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
-                        hoja.Cell(filaExcel, 24).Value = ""
-                        hoja.Cell(filaExcel, 25).Value = IIf(tipoperiodos2 = "3", "'02", "'04")  'periocidad pago
-                        hoja.Cell(filaExcel, 26).Value = ""
-                        hoja.Cell(filaExcel, 27).FormulaA1 = "=LEFT(G" & filaExcel & ",3)" 'BANCO
-                        hoja.Cell(filaExcel, 28).Value = ""
-                        hoja.Cell(filaExcel, 29).Value = "" 'SUBCONTRATACION
-                        hoja.Cell(filaExcel, 30).Value = correo  'CORREO
+                        hoja.Cell(filaExcel, 6).Value = cuenta 'cuenta bancaria
+                        hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
+                        hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
+                        hoja.Cell(filaExcel, 9).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
+                        hoja.Cell(filaExcel, 10).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
+                        hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                        hoja.Cell(filaExcel, 13).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
+                        hoja.Cell(filaExcel, 14).Value = datosEmpresas(EmpresaN, 5)
+                        hoja.Cell(filaExcel, 15).Value = ""
+                        hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
+                        hoja.Cell(filaExcel, 17).Value = "DIURNA"
+                        hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
+                        hoja.Cell(filaExcel, 19).Value = "SUELDOS"
+                        hoja.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
+                        hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
+                        hoja.Cell(filaExcel, 22).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
+                        hoja.Cell(filaExcel, 23).Value = ""
+                        hoja.Cell(filaExcel, 24).Value = IIf(tipoperiodos2 = "3", "'02", "'04")  'periocidad pago
+                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 26).FormulaA1 = "=LEFT(F" & filaExcel & ",3)" 'BANCO
+                        hoja.Cell(filaExcel, 27).Value = banco
+                        hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
+                        hoja.Cell(filaExcel, 29).Value = correo  'CORREO
 
                             filaExcel = filaExcel + 1
                     End If
@@ -14307,7 +14309,7 @@ Public Class frmnominasmarinos
 
                             hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
 
-                        ElseIf EmpresaN = "LOGISTIC" And tipoperiodos2 = 2 Then
+                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
                             'quincenal
                             hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                             hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
