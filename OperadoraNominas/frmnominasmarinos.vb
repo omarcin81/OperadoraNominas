@@ -3009,7 +3009,7 @@ Public Class frmnominasmarinos
                                     Else
                                         'cambiar monto
 
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2)
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", "0", dtgDatos.Rows(x).Cells(20).Value)) - Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", "0", dtgDatos.Rows(x).Cells(21).Value))), 2)
 
                                     End If
 
@@ -4089,6 +4089,9 @@ Public Class frmnominasmarinos
                                     Dim excedenteperiodo As Double
                                     sumadescuentosexcedente = 0
                                     excedenteperiodo = 0
+                                    If dtgDatos.Rows(x).Cells(2).Value = "74" Then
+                                        MsgBox("aqui")
+                                    End If
                                     If DiasCadaPeriodo > 7 Then
                                         excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
 
@@ -4105,7 +4108,7 @@ Public Class frmnominasmarinos
                                         End If
                                     Else
                                         'dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * DiasCadaPeriodo, 2)
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2)
+                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", "0", dtgDatos.Rows(x).Cells(20).Value)) - Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", "0", dtgDatos.Rows(x).Cells(21).Value))), 2)
                                     End If
 
                                 End If
@@ -9261,7 +9264,7 @@ Public Class frmnominasmarinos
 
 
             pnlProgreso.Visible = True
-            pnlCatalogo.Enabled = False
+            'pnlCatalogo.Enabled = False
             Application.DoEvents()
 
             pgbProgreso.Minimum = 0
