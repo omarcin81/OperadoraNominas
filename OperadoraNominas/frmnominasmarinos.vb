@@ -131,6 +131,21 @@ Public Class frmnominasmarinos
             dtgDatos.Columns.Clear()
             llenargridinicial()
 
+            'Validacion
+            If Usuario.Perfil <> 1 Then
+                cmdcalcular.Enabled = False
+                cmdguardarnomina.Enabled = False
+                cmdguardarfinal.Enabled = False
+
+                cmdreiniciar.Enabled = False
+                cmdSubirDatos.Enabled = False
+                cmdsoloisr.Enabled = False
+                cmdInfonavitNominaSerie.Enabled = False
+                cmdCalculoSoloInfonavit.Enabled = False
+                Button1.Enabled = False
+                cmdincidencias.Enabled = False
+
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -9299,7 +9314,7 @@ Public Class frmnominasmarinos
                 Dim FechaFinPeriodo As Date
                 Dim tipoperiodos2 As String
 
-                ' <<<<<<<<<<<<<<<<<<<<<<Noina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                ' <<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo0 Is Nothing = False Then
@@ -9372,10 +9387,11 @@ Public Class frmnominasmarinos
                     Else
                         valesDespensa = "0.0"
                     End If
+                    'recorrerFilasColumnas(hoja, 5, dtgDatos.Rows.Count + 5, 200, "text black")
                     recorrerFilasColumnas(hoja, 3, 3, 100, "black")
                     hoja.Range(5, 24, dtgDatos.Rows.Count - 1 + filaExcel + x, 25).Style.NumberFormat.Format = " #,##0.00"
                     hoja.Range(5, 27, dtgDatos.Rows.Count - 1 + filaExcel + x, 100).Style.NumberFormat.Format = " #,##0.00"
-
+                    recorrerFilasColumnas(hoja, filaExcel + x, 200, 100, "text black")
                     'Llenar EXCEL
                     hoja.Cell(filaExcel + x, 2).Value = x + 1 'CONSECUTIVO
                     hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(2).Value 'IDEMPLEADO
@@ -9582,7 +9598,7 @@ Public Class frmnominasmarinos
                 hoja.Range(filaExcel + dtgDatos.Rows.Count, 5, filaExcel + dtgDatos.Rows.Count, 101).Style.Font.SetBold(True)
 
                 filaexcelnomtotal = filaExcel + dtgDatos.Rows.Count + 1
-
+                recorrerFilasColumnas(hoja, 6, 200, 100, "text black")
                 ''FACT PREV/ DEPOSITOS
                 Dim totalf As Integer = dtgDatos.Rows.Count + 1
                 Dim espace As Integer = filaExcel + totalf + 3
@@ -13910,6 +13926,8 @@ Public Class frmnominasmarinos
                     ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_logistic_q.xlsx"
                 ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
                     ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_idn_s.xlsx"
+                ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_idn_q.xlsx"
                 ElseIf EmpresaN = "Transportacion" And tipoperiodos2 = 2 Then
                     ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_tmm_q.xlsx"
                 End If
@@ -14177,7 +14195,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 17).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(33).Value) 'Horas  Doble Gravado
                             hoja2.Cell(filaExcel, 18).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(34).Value) 'Horas  Doble Excento
                             hoja2.Cell(filaExcel, 19).FormulaA1 = 0 '"=IF(AND(T" & filaExcel & ">0, T" & filaExcel & "<=3),1,IF(AND(T" & filaExcel & ">3,T" & filaExcel & "<=6),2,IF(T" & filaExcel & ">6,3,0)))" 'horas dobles dia
-                            hoja2.Cell(filaExcel, 20).Value = "1" 'TIPO
+                            hoja2.Cell(filaExcel, 20).Value = "" 'TIPO
                             hoja2.Cell(filaExcel, 21).Value = 0 ' HORAS
                             hoja2.Cell(filaExcel, 22).Value = 0  'IMPORTE TOTAL HORAS EXTRAS
                             hoja2.Cell(filaExcel, 23).Value = 0 'PRIMA DOMINICAL GRAVADO
@@ -14213,7 +14231,9 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 51).FormulaA1 = "=C" & filaExcel & "+D" & filaExcel & "+E" & filaExcel & "+F" & filaExcel & "+G" & filaExcel & "+H" & filaExcel & "+I" & filaExcel & "+J" & filaExcel & "+K" & filaExcel & "+L" & filaExcel & "+Q" & filaExcel & "+R" & filaExcel & "+W" & filaExcel & "+X" & filaExcel & "+Y" & filaExcel & "+Z" & filaExcel & "+AA" & filaExcel & "+AB" & filaExcel & "+AC" & filaExcel & "+AD" & filaExcel & "+AE" & filaExcel & "+AF" & filaExcel & "+AG" & filaExcel & "+AH" & filaExcel & "+AI" & filaExcel & "+AJ" & filaExcel & "+AK" & filaExcel & "+AL" & filaExcel & "+AM" & filaExcel & "+AN" & filaExcel & "+AO" & filaExcel & "+AP" & filaExcel & "+AQ" & filaExcel & "+AR" & filaExcel & "+AS" & filaExcel & "+AT" & filaExcel & "+AU" & filaExcel & "+AV" & filaExcel & "+AW" & filaExcel & "+AX" & filaExcel
 
                         ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
-
+                            'If dtgDatos.Rows(x).Cells(6).Value = "AEMA7701197I6" Then
+                            '    MsgBox("AEMA7701197I6")
+                            'End If
                             '<<<<Percepcioness>>>>>
                             hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
@@ -14226,14 +14246,14 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) '' Aguinaldo Excento
                             hoja2.Cell(filaExcel, 9).Value = CDbl(dtgDatos.Rows(x).Cells(35).Value) '' Horas Triples importe gravado
                             hoja2.Cell(filaExcel, 10).Value = "" ' Horas Triples importe exedente
-                            hoja2.Cell(filaExcel, 11).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(16).Value) / 3, 0, MidpointRounding.AwayFromZero) ' Horas Triples valor dias
+                            hoja2.Cell(filaExcel, 11).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(16).Value) = 1, 1, IIf(CDbl(dtgDatos.Rows(x).Cells(16).Value) Mod 3 = 0, Math.Round(CDbl(dtgDatos.Rows(x).Cells(16).Value) / 3), 1)) ' Horas Triples valor dias
                             hoja2.Cell(filaExcel, 12).FormulaA1 = "=IF(N" & filaExcel & ">0,2,"""")"
                             hoja2.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(16).Value) 'Horas Triples valor 
                             hoja2.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(35).Value) ' Horas Triples importe
                             hoja2.Cell(filaExcel, 15).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value) 'Horas  Doble Gravado
                             hoja2.Cell(filaExcel, 16).Value = CDbl(dtgDatos.Rows(x).Cells(34).Value) 'Horas  Doble Excento
                             hoja2.Cell(filaExcel, 17).FormulaA1 = "IF(AND(S" & filaExcel & ">0, S" & filaExcel & "<=3),1,IF(AND(S" & filaExcel & ">3,S" & filaExcel & "<=6),2,IF(S" & filaExcel & ">6,3,0)))" 'horas dobles dia
-                            hoja2.Cell(filaExcel, 18).Value = "1" 'TIPO
+                            hoja2.Cell(filaExcel, 18).FormulaA1 = "=+IF(T" & filaExcel & ">0,1,"""")" 'TIPO
                             hoja2.Cell(filaExcel, 19).FormulaA1 = CDbl(dtgDatos.Rows(x).Cells(15).Value) ' HORAS
                             hoja2.Cell(filaExcel, 20).FormulaA1 = "=+O" & filaExcel & "+P" & filaExcel   'IMPORTE TOTAL HORAS EXTRAS
                             hoja2.Cell(filaExcel, 21).Value = CDbl(dtgDatos.Rows(x).Cells(31).Value) 'PRIMA DOMINICAL GRAVADO
@@ -14275,7 +14295,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja2.Cell(filaExcel, 3).Value = 0 ' Septimo dia gravado    
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia excento 
-                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + dtgDatos.Rows(x).Cells(57).Value - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) ' Sueldo Base Gravado   
+                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + dtgDatos.Rows(x).Cells(57).Value - CDbl(dtgDatos.Rows(x).Cells(66).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) ' Sueldo Base Gravado   
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) '' Aguinaldo Excento
@@ -14411,276 +14431,276 @@ Public Class frmnominasmarinos
                         End If
 
 
-                        '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Deducciones>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                            '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Deducciones>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                        If EmpresaN = "TMMDC" Then
+                            If EmpresaN = "TMMDC" Then
 
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(59).Value) ' IMSS
-                            hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
-                            hoja3.Cell(filaExcel, 6).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 7).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 8).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
-                            hoja3.Cell(filaExcel, 9).Value = 0 'SEGUROS DE VIVIENDA
-                            hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
-                            hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 12).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-                            hoja3.Cell(filaExcel, 13).Value = fondoPFB / 2 'PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 14).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(59).Value) ' IMSS
+                                hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                                hoja3.Cell(filaExcel, 6).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 7).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 8).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
+                                hoja3.Cell(filaExcel, 9).Value = 0 'SEGUROS DE VIVIENDA
+                                hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                                hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 12).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                                hoja3.Cell(filaExcel, 13).Value = fondoPFB / 2 'PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 14).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP
 
-                            'Validacion
-                            hoja3.Cell(filaExcel, 15).FormulaA1 = "=+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+F" & filaExcel & "+E" & filaExcel & "+D" & filaExcel
-                            hoja3.Cell(filaExcel, 16).FormulaA1 = "=+Percepciones!AP" & filaExcel & "-Deducciones!O" & filaExcel & "+'Otros Pagos'!E" & filaExcel
-                            hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'NETO
-                            hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(86).Value
-                            hoja3.Cell(filaExcel, 19).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
-                            hoja3.Cell(filaExcel, 20).Value = 0
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=P" & filaExcel & "-Q" & filaExcel & "-S" & filaExcel & "-T" & filaExcel
+                                'Validacion
+                                hoja3.Cell(filaExcel, 15).FormulaA1 = "=+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+F" & filaExcel & "+E" & filaExcel & "+D" & filaExcel
+                                hoja3.Cell(filaExcel, 16).FormulaA1 = "=+Percepciones!AP" & filaExcel & "-Deducciones!O" & filaExcel & "+'Otros Pagos'!E" & filaExcel
+                                hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'NETO
+                                hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(86).Value
+                                hoja3.Cell(filaExcel, 19).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
+                                hoja3.Cell(filaExcel, 20).Value = 0
+                                hoja3.Cell(filaExcel, 21).FormulaA1 = "=P" & filaExcel & "-Q" & filaExcel & "-S" & filaExcel & "-T" & filaExcel
 
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
 
-                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
-                            'quincenal
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 4).Value = fondoPFB / 2 'PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP 
-                            hoja3.Cell(filaExcel, 6).Value = 0 'Tiempo No laborado 
-                            hoja3.Cell(filaExcel, 7).Value = 0 'Dias incpacidad 
-                            hoja3.Cell(filaExcel, 8).Value = 0 'Tipo Incapacidad 
-                            hoja3.Cell(filaExcel, 9).Value = 0 'Importe 
-                            hoja3.Cell(filaExcel, 10).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA 
-                            hoja3.Cell(filaExcel, 11).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC 
-                            hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA   
-                            hoja3.Cell(filaExcel, 13).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT 
-                            hoja3.Cell(filaExcel, 16).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO 
-                            hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'CUOTA SINDICAL  dtgDatos.Rows(x).Cells(86).Value
-                            hoja3.Cell(filaExcel, 19).Value = 0 'PERMISO SIN GOCE DE SUELDO
-                            hoja3.Cell(filaExcel, 20).Value = 0 ' FALTA INJUSTIFICADA
+                            ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
+                                'quincenal
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 4).Value = fondoPFB / 2 'PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP 
+                                hoja3.Cell(filaExcel, 6).Value = 0 'Tiempo No laborado 
+                                hoja3.Cell(filaExcel, 7).Value = 0 'Dias incpacidad 
+                                hoja3.Cell(filaExcel, 8).Value = 0 'Tipo Incapacidad 
+                                hoja3.Cell(filaExcel, 9).Value = 0 'Importe 
+                                hoja3.Cell(filaExcel, 10).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA 
+                                hoja3.Cell(filaExcel, 11).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC 
+                                hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA   
+                                hoja3.Cell(filaExcel, 13).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT 
+                                hoja3.Cell(filaExcel, 16).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO 
+                                hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'CUOTA SINDICAL  dtgDatos.Rows(x).Cells(86).Value
+                                hoja3.Cell(filaExcel, 19).Value = 0 'PERMISO SIN GOCE DE SUELDO
+                                hoja3.Cell(filaExcel, 20).Value = 0 ' FALTA INJUSTIFICADA
 
-                            'Validaciones
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=SUM(C" & filaExcel & ":T" & filaExcel & ")"
-                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!U" & filaExcel & "+'Otros Pagos'!E" & filaExcel   'IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
-                            hoja3.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
-                            hoja3.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
-                            hoja3.Cell(filaExcel, 25).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
-                            hoja3.Cell(filaExcel, 26).Value = 0 'vales 
-                            hoja3.Cell(filaExcel, 27).FormulaA1 = "=+V" & filaExcel & "-W" & filaExcel & "-Y" & filaExcel & "-Z" & filaExcel
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 27).Style.NumberFormat.Format = " #,##0.00"
+                                'Validaciones
+                                hoja3.Cell(filaExcel, 21).FormulaA1 = "=SUM(C" & filaExcel & ":T" & filaExcel & ")"
+                                hoja3.Cell(filaExcel, 22).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!U" & filaExcel & "+'Otros Pagos'!E" & filaExcel   'IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
+                                hoja3.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
+                                hoja3.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
+                                hoja3.Cell(filaExcel, 25).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
+                                hoja3.Cell(filaExcel, 26).Value = 0 'vales 
+                                hoja3.Cell(filaExcel, 27).FormulaA1 = "=+V" & filaExcel & "-W" & filaExcel & "-Y" & filaExcel & "-Z" & filaExcel
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 27).Style.NumberFormat.Format = " #,##0.00"
 
-                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
-                            'semanal
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR 
-                            hoja3.Cell(filaExcel, 4).Value = 0 'Tiempo NO Laborado
-                            hoja3.Cell(filaExcel, 5).Value = 0 ' dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
-                            hoja3.Cell(filaExcel, 6).Value = 0 'IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
-                            hoja3.Cell(filaExcel, 7).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
-                            hoja3.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
-                            hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
-                            hoja3.Cell(filaExcel, 11).Value = 0 'SEGUROS DE VIVIENDA 
-                            hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA
-                            hoja3.Cell(filaExcel, 13).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
-                            hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 15).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 16).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-                            hoja3.Cell(filaExcel, 17).Value = 0 'Cuota Sindical
-                            hoja3.Cell(filaExcel, 18).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
-                            hoja3.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
+                            ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
+                                'semanal
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR 
+                                hoja3.Cell(filaExcel, 4).Value = 0 'Tiempo NO Laborado
+                                hoja3.Cell(filaExcel, 5).Value = 0 ' dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
+                                hoja3.Cell(filaExcel, 6).Value = 0 'IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
+                                hoja3.Cell(filaExcel, 7).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
+                                hoja3.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                                hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                                hoja3.Cell(filaExcel, 11).Value = 0 'SEGUROS DE VIVIENDA 
+                                hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA
+                                hoja3.Cell(filaExcel, 13).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
+                                hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 15).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 16).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                                hoja3.Cell(filaExcel, 17).Value = 0 'Cuota Sindical
+                                hoja3.Cell(filaExcel, 18).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
+                                hoja3.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
 
-                            'Validacion
-                            hoja3.Cell(filaExcel, 20).FormulaA1 = "=S" & filaExcel & "+R" & filaExcel & "+Q" & filaExcel & "+P" & filaExcel & "+O" & filaExcel & "+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+D" & filaExcel & "+C" & filaExcel
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=+Percepciones!AY" & filaExcel & "-Deducciones!T" & filaExcel & "+'Otros Pagos'!E" & filaExcel
+                                'Validacion
+                                hoja3.Cell(filaExcel, 20).FormulaA1 = "=S" & filaExcel & "+R" & filaExcel & "+Q" & filaExcel & "+P" & filaExcel & "+O" & filaExcel & "+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+D" & filaExcel & "+C" & filaExcel
+                                hoja3.Cell(filaExcel, 21).FormulaA1 = "=+Percepciones!AY" & filaExcel & "-Deducciones!T" & filaExcel & "+'Otros Pagos'!E" & filaExcel
 
-                            hoja3.Cell(filaExcel, 22).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value)
-                            hoja3.Cell(filaExcel, 23).FormulaA1 = "=u" & filaExcel & "-v" & filaExcel
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 23).Style.NumberFormat.Format = " #,##0.00"
+                                hoja3.Cell(filaExcel, 22).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value)
+                                hoja3.Cell(filaExcel, 23).FormulaA1 = "=u" & filaExcel & "-v" & filaExcel
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 23).Style.NumberFormat.Format = " #,##0.00"
 
-                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+                            ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
 
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
-                            hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 5).Value = 0 'PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 6).Value = 0 'APOR PATRON PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 7).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(66).Value) 'Tiempo NO Laborado
-                            hoja3.Cell(filaExcel, 8).Value = 0 'dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
-                            hoja3.Cell(filaExcel, 9).FormulaA1 = IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
-                            hoja3.Cell(filaExcel, 10).Value = 0 ' dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
-                            hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
-                            hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
-                            hoja3.Cell(filaExcel, 13).Value = 0 'SEGUROS DE VIVIENDA
-                            hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
-                            hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 16).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-                            hoja3.Cell(filaExcel, 19).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'Cuota Sindical
-                            hoja3.Cell(filaExcel, 20).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
-                            hoja3.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
+                                hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 5).Value = 0 'PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 6).Value = 0 'APOR PATRON PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 7).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(66).Value) 'Tiempo NO Laborado
+                                hoja3.Cell(filaExcel, 8).Value = 0 'dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
+                                hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
+                                hoja3.Cell(filaExcel, 10).Value = 0 ' dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
+                                hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                                hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                                hoja3.Cell(filaExcel, 13).Value = 0 'SEGUROS DE VIVIENDA
+                                hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
+                                hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 16).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                                hoja3.Cell(filaExcel, 19).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'Cuota Sindical
+                                hoja3.Cell(filaExcel, 20).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
+                                hoja3.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
 
-                            'Validacion
-                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":U" & filaExcel & ")"
-                            hoja3.Cell(filaExcel, 23).FormulaA1 = "=+Percepciones!AW" & filaExcel & "-Deducciones!V" & filaExcel & "+'Otros Pagos'!E" & filaExcel
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
+                                'Validacion
+                                hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":U" & filaExcel & ")"
+                                hoja3.Cell(filaExcel, 23).FormulaA1 = "=+Percepciones!AW" & filaExcel & "-Deducciones!V" & filaExcel & "+'Otros Pagos'!E" & filaExcel
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
 
-                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
-                            'Quincenal
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = 0 ' IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
-                            hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2  'PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 6).Value = fondoPFB / 2  'APOR PATRON PLAN FLEX LP
-                            hoja3.Cell(filaExcel, 7).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(66).Value) 'Tiempo NO Laborado
-                            hoja3.Cell(filaExcel, 8).Value = 0 'dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
-                            hoja3.Cell(filaExcel, 9).FormulaA1 = IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
-                            hoja3.Cell(filaExcel, 10).Value = 0 ' dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
-                            hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
-                            hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
-                            hoja3.Cell(filaExcel, 13).Value = 0 'SEGUROS DE VIVIENDA
-                            hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
-                            hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 16).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-                            hoja3.Cell(filaExcel, 19).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'Cuota Sindical
-                            hoja3.Cell(filaExcel, 20).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
-                            hoja3.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
+                            ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                                'Quincenal
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = 0 ' IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
+                                hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2  'PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 6).Value = fondoPFB / 2  'APOR PATRON PLAN FLEX LP
+                                hoja3.Cell(filaExcel, 7).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(66).Value) 'Tiempo NO Laborado
+                                hoja3.Cell(filaExcel, 8).Value = 0 'dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
+                                hoja3.Cell(filaExcel, 9).FormulaA1 = IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
+                                hoja3.Cell(filaExcel, 10).Value = 0 ' dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
+                                hoja3.Cell(filaExcel, 11).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                                hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                                hoja3.Cell(filaExcel, 13).Value = 0 'SEGUROS DE VIVIENDA
+                                hoja3.Cell(filaExcel, 14).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
+                                hoja3.Cell(filaExcel, 15).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 16).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                                hoja3.Cell(filaExcel, 19).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'Cuota Sindical
+                                hoja3.Cell(filaExcel, 20).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
+                                hoja3.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
 
-                            'Validacion
-                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":T" & filaExcel & ")"
-                            hoja3.Cell(filaExcel, 23).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!V" & filaExcel '& "+'Otros Pagos'!E" & filaExcel
-                            hoja3.Cell(filaExcel, 24).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
-                            hoja3.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
-                            hoja3.Cell(filaExcel, 26).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
-                            'hoja3.Cell(filaExcel, 27).Value = 0 'vales 
-                            hoja3.Cell(filaExcel, 28).FormulaA1 = "=+W" & filaExcel & "-X" & filaExcel & "-Z" & filaExcel '& "-AA" & filaExcel
-                            ' hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 27).Style.NumberFormat.Format = " #,##0.00"
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 28).Style.NumberFormat.Format = " #,##0.00"
-
-
-                        ElseIf EmpresaN = "Transportacion" Then
-
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(59).Value) ' IMSS
-                            hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2 'PLAN FLEX LP 
-                            hoja3.Cell(filaExcel, 6).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP 
-                            hoja3.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA 
-                            hoja3.Cell(filaExcel, 8).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF 
-                            hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD 
-                            hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC 
-                            hoja3.Cell(filaExcel, 11).Value = 0 'SEGUROS DE VIVIENDA 
-                            hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT  
-                            hoja3.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-
-                            'Validacion
-                            hoja3.Cell(filaExcel, 15).FormulaA1 = "=+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+F" & filaExcel & "+E" & filaExcel & "+D" & filaExcel
-                            hoja3.Cell(filaExcel, 16).FormulaA1 = "=+Percepciones!AP" & filaExcel & "-Deducciones!O" & filaExcel & "+'Otros Pagos'!E" & filaExcel
-                            hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'NETO
-                            hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(86).Value 'tipo
-                            hoja3.Cell(filaExcel, 19).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
-                            hoja3.Cell(filaExcel, 20).Value = 0 'vales
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=P" & filaExcel & "-Q" & filaExcel & "-S" & filaExcel & "-T" & filaExcel
-
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
+                                'Validacion
+                                hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":T" & filaExcel & ")"
+                                hoja3.Cell(filaExcel, 23).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!V" & filaExcel '& "+'Otros Pagos'!E" & filaExcel
+                                hoja3.Cell(filaExcel, 24).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
+                                hoja3.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
+                                hoja3.Cell(filaExcel, 26).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
+                                'hoja3.Cell(filaExcel, 27).Value = 0 'vales 
+                                hoja3.Cell(filaExcel, 28).FormulaA1 = "=+W" & filaExcel & "-X" & filaExcel & "-Z" & filaExcel '& "-AA" & filaExcel
+                                ' hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 27).Style.NumberFormat.Format = " #,##0.00"
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 28).Style.NumberFormat.Format = " #,##0.00"
 
 
-                        ElseIf EmpresaN = "ADEMSA" And tipoperiodos2 = 3 Then
+                            ElseIf EmpresaN = "Transportacion" Then
 
-                            hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
-                            hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja3.Cell(filaExcel, 3).Value = 0 'IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
-                            hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
-                            hoja3.Cell(filaExcel, 5).Value = 0 ' dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
-                            hoja3.Cell(filaExcel, 6).Value = 0 'IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
-                            hoja3.Cell(filaExcel, 7).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
-                            hoja3.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
-                            hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
-                            hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
-                            hoja3.Cell(filaExcel, 11).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
-                            hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA
-                            hoja3.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
-                            hoja3.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
-                            hoja3.Cell(filaExcel, 15).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
-                            hoja3.Cell(filaExcel, 16).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
-                            hoja3.Cell(filaExcel, 17).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
-                            'Validacion
-                            hoja3.Cell(filaExcel, 18).FormulaA1 = "=D" & filaExcel & "+H" & filaExcel & "+I" & filaExcel & "+J" & filaExcel & "+K" & filaExcel & "+L" & filaExcel & "+M" & filaExcel & "+N" & filaExcel & "+O" & filaExcel & "+P" & filaExcel & "+Q" & filaExcel & "+G" & filaExcel
-                            hoja3.Cell(filaExcel, 19).FormulaA1 = "=+Percepciones!W" & filaExcel & "-Deducciones!R" & filaExcel
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 19).Style.NumberFormat.Format = " #,##0.00"
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(59).Value) ' IMSS
+                                hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 5).Value = fondoPFB / 2 'PLAN FLEX LP 
+                                hoja3.Cell(filaExcel, 6).Value = fondoPFB / 2 'APOR PATRON PLAN FLEX LP 
+                                hoja3.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA 
+                                hoja3.Cell(filaExcel, 8).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF 
+                                hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD 
+                                hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC 
+                                hoja3.Cell(filaExcel, 11).Value = 0 'SEGUROS DE VIVIENDA 
+                                hoja3.Cell(filaExcel, 12).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT  
+                                hoja3.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+
+                                'Validacion
+                                hoja3.Cell(filaExcel, 15).FormulaA1 = "=+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+F" & filaExcel & "+E" & filaExcel & "+D" & filaExcel
+                                hoja3.Cell(filaExcel, 16).FormulaA1 = "=+Percepciones!AP" & filaExcel & "-Deducciones!O" & filaExcel & "+'Otros Pagos'!E" & filaExcel
+                                hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'NETO
+                                hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(86).Value 'tipo
+                                hoja3.Cell(filaExcel, 19).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
+                                hoja3.Cell(filaExcel, 20).Value = 0 'vales
+                                hoja3.Cell(filaExcel, 21).FormulaA1 = "=P" & filaExcel & "-Q" & filaExcel & "-S" & filaExcel & "-T" & filaExcel
+
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 21).Style.NumberFormat.Format = " #,##0.00"
+
+
+                            ElseIf EmpresaN = "ADEMSA" And tipoperiodos2 = 3 Then
+
+                                hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
+                                hoja3.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja3.Cell(filaExcel, 3).Value = 0 'IIf(dtgDatos.Rows(x).Cells(28).Value >= dtgDatos.Rows(x).Cells(26).Value, 0, CDbl(dtgDatos.Rows(x).Cells(59).Value)) ' IMSS
+                                hoja3.Cell(filaExcel, 4).Value = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                                hoja3.Cell(filaExcel, 5).Value = 0 ' dtgDatos.Rows(x).Cells(28).Value 'dias incpacidad
+                                hoja3.Cell(filaExcel, 6).Value = 0 'IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Enfermedad"), "'02", IIf(dtgDatos.Rows(x).Cells(27).Value.ToString.Contains("Maternidad"), "'03", "")) 'tipo incapacidad f
+                                hoja3.Cell(filaExcel, 7).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'importe inpacadcidad g
+                                hoja3.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                                hoja3.Cell(filaExcel, 9).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "VSM", dtgDatos.Rows(x).Cells(60).Value, 0) ' 'PRESTAMO INFONAVIT CF
+                                hoja3.Cell(filaExcel, 10).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "CUOTA FIJA", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT FD
+                                hoja3.Cell(filaExcel, 11).Value = IIf(dtgDatos.Rows(x).Cells(13).Value = "PORCENTAJE", dtgDatos.Rows(x).Cells(60).Value, 0) 'PRESTAMO INFONAVIT PORC
+                                hoja3.Cell(filaExcel, 12).Value = 0 'SEGUROS DE VIVIENDA
+                                hoja3.Cell(filaExcel, 13).Value = CDbl(dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                                hoja3.Cell(filaExcel, 14).Value = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                                hoja3.Cell(filaExcel, 15).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                                hoja3.Cell(filaExcel, 16).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
+                                hoja3.Cell(filaExcel, 17).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
+                                'Validacion
+                                hoja3.Cell(filaExcel, 18).FormulaA1 = "=D" & filaExcel & "+H" & filaExcel & "+I" & filaExcel & "+J" & filaExcel & "+K" & filaExcel & "+L" & filaExcel & "+M" & filaExcel & "+N" & filaExcel & "+O" & filaExcel & "+P" & filaExcel & "+Q" & filaExcel & "+G" & filaExcel
+                                hoja3.Cell(filaExcel, 19).FormulaA1 = "=+Percepciones!W" & filaExcel & "-Deducciones!R" & filaExcel
+                                hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 19).Style.NumberFormat.Format = " #,##0.00"
+
+                            End If
+
+                            ''<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Otros Pagos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                            If EmpresaN = "TMMDC" Then
+
+                                hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
+                                hoja4.Columns("A").Width = 20
+                                hoja4.Columns("B").Width = 20
+                                hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                                hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
+                                hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
+                                hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
+                            ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+                                ''<<<Otros Pagos>>>
+                                hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
+                                hoja4.Columns("A").Width = 20
+                                hoja4.Columns("B").Width = 20
+                                hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                                hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
+                                hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
+                                hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
+
+                            ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
+                                ''<<<Otros Pagos>>>
+                                hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
+                                hoja4.Columns("A").Width = 20
+                                hoja4.Columns("B").Width = 20
+                                hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                                hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
+                                hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
+                                hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
+                            ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                                ''<<<Otros Pagos>>>
+                                hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
+                                hoja4.Columns("A").Width = 20
+                                hoja4.Columns("B").Width = 20
+                                hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                                hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
+                                hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
+                                hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
+
+                            Else
+                                ''<<<Otros Pagos>>>
+                                hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
+                                hoja4.Columns("A").Width = 20
+                                hoja4.Columns("B").Width = 20
+                                hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                                hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
+                                hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
+                                hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
+                            End If
+
+                            filaExcel = filaExcel + 1
 
                         End If
-
-                        ''<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Otros Pagos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                        If EmpresaN = "TMMDC" Then
-
-                            hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
-                            hoja4.Columns("A").Width = 20
-                            hoja4.Columns("B").Width = 20
-                            hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                            hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
-                            hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
-                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
-                            ''<<<Otros Pagos>>>
-                            hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
-                            hoja4.Columns("A").Width = 20
-                            hoja4.Columns("B").Width = 20
-                            hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                            hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
-                            hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
-
-                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
-                            ''<<<Otros Pagos>>>
-                            hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
-                            hoja4.Columns("A").Width = 20
-                            hoja4.Columns("B").Width = 20
-                            hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                            hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
-                            hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
-                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
-                            ''<<<Otros Pagos>>>
-                            hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
-                            hoja4.Columns("A").Width = 20
-                            hoja4.Columns("B").Width = 20
-                            hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                            hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
-                            hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                            hoja4.Cell(filaExcel, 5).Value = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, CDbl(dtgDatos.Rows(x).Cells(61).Value) * -1, 0) ' REEMBOLSO INFONAVIT
-
-                        Else
-                            ''<<<Otros Pagos>>>
-                            hoja4.Range(4, 3, dtgDatos.Rows.Count + 4, 4).Style.NumberFormat.Format = " #,##0.00"
-                            hoja4.Columns("A").Width = 20
-                            hoja4.Columns("B").Width = 20
-                            hoja4.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                            hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(68).Value) ' SUBSIDIO IMPORTE
-                            hoja4.Cell(filaExcel, 4).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(69).Value) ' SUBSIDIO CUSADO
-                        End If
-
-                        filaExcel = filaExcel + 1
-
-                    End If
 
                 Next
 

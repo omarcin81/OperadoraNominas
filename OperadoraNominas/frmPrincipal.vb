@@ -75,7 +75,7 @@ Public Class frmPrincipal
                 
                 Case "Nomina " '& Servidor.Base.ToString.Substring(0, 3)
                     Try
-                        If Usuario.Perfil = "1" Then
+                        If Usuario.Perfil = "1" Or Usuario.Perfil = "2" Then
                             Dim Forma As New frmnominasmarinos
                             Forma.gTipoCalculo = "1"
                             Forma.EmpresaN = EmpresaN
@@ -101,7 +101,7 @@ Public Class frmPrincipal
                     End Try
                 Case "Empleados"
                     Try
-                        If Usuario.Perfil = "1" Then
+                        If Usuario.Perfil = "1" Or Usuario.Perfil = "2" Then
                             Dim Forma As New frmEmpleados
                             Forma.gIdTipoPuesto = 0
                             Forma.ShowDialog()
@@ -196,7 +196,7 @@ Public Class frmPrincipal
                     '
                 Case "Nomina Excedente"
                     Try
-                        If Usuario.Perfil = "1" Then
+                        If Usuario.Perfil = "1" Or Usuario.Perfil = "2" Then
                             Dim Forma As New frmnominasmarinos
                             Forma.gTipoCalculo = "2"
                             Forma.EmpresaN = EmpresaN
