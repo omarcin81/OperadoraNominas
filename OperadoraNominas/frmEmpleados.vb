@@ -861,8 +861,67 @@ Public Class frmEmpleados
     'End Sub
 
     Private Sub dtpfechanac_ValueChanged(sender As System.Object, e As System.EventArgs) Handles dtpfechanac.ValueChanged
-        Dim datenac As Date = CDate(dtpfechanac.Value)
-        txtedad.Text = DateTime.Now.Year - datenac.Year
+        ' Dim datenac As Date = CDate(dtpfechanac.Value)
+        'txtedad.Text = DateTime.Now.Year - datenac.Year
+
+        Dim canos As Integer
+        Dim cmes As Integer
+        Dim cdias As Integer
+        Dim actual As Date
+        Dim nacimiento As Date
+
+        Dim canos1 As Integer
+        Dim cmes1 As Integer
+        Dim cdias1 As Integer
+
+        Dim anos As Integer
+        Dim mes As Integer
+        Dim dias As Integer
+
+        Dim nacimientoanos As Integer
+        Dim nacimientomes As Integer
+        Dim nacimientodias As Integer
+        actual = DateTime.Now
+        nacimiento = CDate(dtpfechanac.Value)
+
+        canos = Year(actual)
+        cmes = Month(actual)
+        cdias = DateTime.Now.Day
+        nacimientoanos = Year(nacimiento)
+        nacimientomes = Month(nacimiento)
+        nacimientodias = nacimiento.Day
+
+        If cdias < nacimientodias Then
+            cdias1 = cdias + 30
+            Dias = cdias1 - nacimientodias
+
+            cmes = cmes - 1
+
+            'TextBox9 = Dias
+        Else
+            Dias = cdias - nacimientodias
+
+            'TextBox9 = Dias
+        End If
+
+        If cmes < nacimientomes Then
+            cmes1 = cmes + 12
+            mes = cmes1 - nacimientomes
+            canos = canos - 1
+            anos = canos - nacimientoanos
+            'TextBox8 = mes
+            'TextBox7 = anos
+
+        Else
+            mes = cmes - nacimientomes
+            anos = canos - nacimientoanos
+
+            'TextBox8 = mes
+            'TextBox7 = anos
+        End If
+        txtedad.Text = anos
+
+
     End Sub
 
   
@@ -953,14 +1012,14 @@ Public Class frmEmpleados
             'hoja.Cell(3, 2).Value = ":"
             'hoja.Cell(3, 3).Value = ""
 
-            hoja.Range(4, 1, 4, 24).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 24).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 24).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 24).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 24).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            hoja.Range(4, 1, 4, 25).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 25).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 25).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 25).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 25).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
             'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 24).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 24).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+            hoja.Range(4, 1, 4, 25).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 25).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
             'hoja.Cell(4, 1).Value = "Num"
             hoja.Cell(4, 1).Value = "Id"
@@ -987,6 +1046,7 @@ Public Class frmEmpleados
             hoja.Cell(4, 22).Value = "cFuncionesPuesto"
             hoja.Cell(4, 23).Value = "cCorreo"
             hoja.Cell(4, 24).Value = "CE CO"
+            hoja.Cell(4, 25).Value = "CODIGO POSTAL"
 
             filaExcel = 4
             For Each Fila In rwFilas
@@ -1019,6 +1079,7 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 22).Value = Fila.Item("cFuncionesPuesto")
                 hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
                 hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
+                hoja.Cell(filaExcel, 24).Value = Fila.Item("cCP")
             Next
 
             dialogo.DefaultExt = "*.xlsx"

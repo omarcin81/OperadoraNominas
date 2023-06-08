@@ -83,6 +83,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Update System\Operadora\Original Libreria\ClosedXML.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -336,6 +339,12 @@
     <Compile Include="prestamo\frmFonacot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="reporte\recibosfiscalvia.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>recibosfiscalvia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SeleccionarPeriodo.Designer.vb">
       <DependentUpon>SeleccionarPeriodo.vb</DependentUpon>
     </Compile>
@@ -468,6 +477,10 @@
     <EmbeddedResource Include="prestamo\frmFonacot.resx">
       <DependentUpon>frmFonacot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="reporte\recibosfiscalvia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>recibosfiscalvia.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SeleccionarPeriodo.resx">
       <DependentUpon>SeleccionarPeriodo.vb</DependentUpon>
     </EmbeddedResource>
@@ -538,6 +551,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
