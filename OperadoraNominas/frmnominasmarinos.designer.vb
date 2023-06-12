@@ -75,20 +75,25 @@ Partial Class frmnominasmarinos
         Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.layoutTimbrado = New System.Windows.Forms.Button()
-        Me.cmdPolizas = New System.Windows.Forms.Button()
         Me.cmdSubirNomF = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
-        Me.btnAcumualdos = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
         Me.cmdAdiCalculo = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ReporteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LayoutTimbradoSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AcumuladosNominaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecibosSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResumenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
         Me.cMenu.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -96,7 +101,7 @@ Partial Class frmnominasmarinos
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbEmpleados, Me.tsbPeriodos, Me.tsbpuestos, Me.tsbdeptos, Me.tsbImportar, Me.tsbIEmpleados, Me.tsbbuscar, Me.tsbLayout})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1438, 54)
         Me.ToolStrip1.TabIndex = 25
@@ -217,9 +222,9 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cmdverdatos)
         Me.pnlCatalogo.Controls.Add(Me.Label1)
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
-        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
+        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 81)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1438, 426)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1438, 396)
         Me.pnlCatalogo.TabIndex = 26
         '
         'cmdAdiCalculoEXC
@@ -555,7 +560,7 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(3, 104)
         Me.dtgDatos.Name = "dtgDatos"
-        Me.dtgDatos.Size = New System.Drawing.Size(1428, 315)
+        Me.dtgDatos.Size = New System.Drawing.Size(1428, 285)
         Me.dtgDatos.TabIndex = 6
         '
         'cmdverdatos
@@ -641,29 +646,6 @@ Partial Class frmnominasmarinos
         Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
-        'layoutTimbrado
-        '
-        Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 489)
-        Me.layoutTimbrado.Name = "layoutTimbrado"
-        Me.layoutTimbrado.Size = New System.Drawing.Size(123, 27)
-        Me.layoutTimbrado.TabIndex = 28
-        Me.layoutTimbrado.Text = "Layout Timbrado SA"
-        Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.layoutTimbrado.UseVisualStyleBackColor = True
-        '
-        'cmdPolizas
-        '
-        Me.cmdPolizas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdPolizas.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPolizas.Location = New System.Drawing.Point(284, 489)
-        Me.cmdPolizas.Name = "cmdPolizas"
-        Me.cmdPolizas.Size = New System.Drawing.Size(112, 27)
-        Me.cmdPolizas.TabIndex = 29
-        Me.cmdPolizas.Text = "Polizas"
-        Me.cmdPolizas.UseVisualStyleBackColor = True
-        '
         'cmdSubirNomF
         '
         Me.cmdSubirNomF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -686,18 +668,6 @@ Partial Class frmnominasmarinos
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
         Me.cmdComision.Visible = False
-        '
-        'btnAcumualdos
-        '
-        Me.btnAcumualdos.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnAcumualdos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAcumualdos.Location = New System.Drawing.Point(139, 489)
-        Me.btnAcumualdos.Name = "btnAcumualdos"
-        Me.btnAcumualdos.Size = New System.Drawing.Size(141, 28)
-        Me.btnAcumualdos.TabIndex = 32
-        Me.btnAcumualdos.Text = "Acumualdos Nomina"
-        Me.btnAcumualdos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAcumualdos.UseVisualStyleBackColor = True
         '
         'cmdInfonavitNominaSerie
         '
@@ -740,8 +710,6 @@ Partial Class frmnominasmarinos
         '
         'cmdAdiCalculo
         '
-
-        Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdAdiCalculo.Location = New System.Drawing.Point(947, 489)
@@ -751,6 +719,52 @@ Partial Class frmnominasmarinos
         Me.cmdAdiCalculo.Text = "Cal. Adicionales"
         Me.cmdAdiCalculo.UseVisualStyleBackColor = True
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1438, 24)
+        Me.MenuStrip1.TabIndex = 42
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ReporteToolStripMenuItem
+        '
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
+        Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
+        Me.ReporteToolStripMenuItem.Text = "Reporte"
+        '
+        'LayoutTimbradoSAToolStripMenuItem
+        '
+        Me.LayoutTimbradoSAToolStripMenuItem.Name = "LayoutTimbradoSAToolStripMenuItem"
+        Me.LayoutTimbradoSAToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.LayoutTimbradoSAToolStripMenuItem.Text = "Layout timbrado SA"
+        '
+        'AcumuladosNominaToolStripMenuItem
+        '
+        Me.AcumuladosNominaToolStripMenuItem.Name = "AcumuladosNominaToolStripMenuItem"
+        Me.AcumuladosNominaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.AcumuladosNominaToolStripMenuItem.Text = "Acumulados Nomina"
+        '
+        'PolizasToolStripMenuItem
+        '
+        Me.PolizasToolStripMenuItem.Name = "PolizasToolStripMenuItem"
+        Me.PolizasToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.PolizasToolStripMenuItem.Text = "Polizas"
+        '
+        'RecibosSAToolStripMenuItem
+        '
+        Me.RecibosSAToolStripMenuItem.Name = "RecibosSAToolStripMenuItem"
+        Me.RecibosSAToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.RecibosSAToolStripMenuItem.Text = "Recibos SA"
+        '
+        'ResumenToolStripMenuItem
+        '
+        Me.ResumenToolStripMenuItem.Name = "ResumenToolStripMenuItem"
+        Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.ResumenToolStripMenuItem.Text = "Resumen"
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -758,17 +772,17 @@ Partial Class frmnominasmarinos
         Me.Controls.Add(Me.cmdAdiCalculo)
         Me.Controls.Add(Me.chkPeriodosC)
         Me.Controls.Add(Me.chkNoinfonavit)
-        Me.Controls.Add(Me.btnAcumualdos)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
         Me.Controls.Add(Me.cmdSubirNomF)
-        Me.Controls.Add(Me.cmdPolizas)
-        Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.cmdguardarfinal)
         Me.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.IsMdiContainer = True
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmnominasmarinos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Nomina Operadora"
@@ -781,6 +795,8 @@ Partial Class frmnominasmarinos
         Me.pnlProgreso.ResumeLayout(False)
         Me.pnlProgreso.PerformLayout()
         Me.cMenu.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -822,14 +838,11 @@ Partial Class frmnominasmarinos
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
     Friend WithEvents cmdSubirDatos As System.Windows.Forms.Button
-    Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
-    Friend WithEvents cmdPolizas As System.Windows.Forms.Button
 
     Friend WithEvents cmdSubirNomF As System.Windows.Forms.Button
     Friend WithEvents cmdResumenInfo As System.Windows.Forms.Button
     Friend WithEvents cmdComision As System.Windows.Forms.Button
 
-    Friend WithEvents btnAcumualdos As System.Windows.Forms.Button
 
 
 
@@ -853,6 +866,13 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdSumatoriaE As System.Windows.Forms.Button
     Friend WithEvents cmdAdiCalculoEXC As System.Windows.Forms.Button
     Friend WithEvents cmdAdiCalculo As System.Windows.Forms.Button
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents ReporteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LayoutTimbradoSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AcumuladosNominaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PolizasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RecibosSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ResumenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class

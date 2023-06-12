@@ -88,3 +88,9 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNom
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+E:\c\systemw\proyectos\OperadoraNominasTEAM - copia\OperadoraNominasT\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
