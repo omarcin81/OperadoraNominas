@@ -14021,12 +14021,11 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 22).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
                         hoja.Cell(filaExcel, 23).Value = ""
                         hoja.Cell(filaExcel, 24).Value = IIf(tipoperiodos2 = "3", "'02", "'04")  'periocidad pago
-                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 25).Value = "" '
                         hoja.Cell(filaExcel, 26).FormulaA1 = "=LEFT(F" & filaExcel & ",3)" 'BANCO
                         hoja.Cell(filaExcel, 27).Value = banco
                         hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
                         hoja.Cell(filaExcel, 29).Value = correo  'CORREO
-
                             filaExcel = filaExcel + 1
                     End If
 
