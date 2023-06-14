@@ -75,11 +75,8 @@ Partial Class frmnominasmarinos
         Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.layoutTimbrado = New System.Windows.Forms.Button()
-        Me.cmdPolizas = New System.Windows.Forms.Button()
         Me.cmdSubirNomF = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
-        Me.btnAcumualdos = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.chkPeriodosC = New System.Windows.Forms.CheckBox()
@@ -652,29 +649,6 @@ Partial Class frmnominasmarinos
         Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
-        'layoutTimbrado
-        '
-        Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 489)
-        Me.layoutTimbrado.Name = "layoutTimbrado"
-        Me.layoutTimbrado.Size = New System.Drawing.Size(123, 27)
-        Me.layoutTimbrado.TabIndex = 28
-        Me.layoutTimbrado.Text = "Layout Timbrado SA"
-        Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.layoutTimbrado.UseVisualStyleBackColor = True
-        '
-        'cmdPolizas
-        '
-        Me.cmdPolizas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdPolizas.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPolizas.Location = New System.Drawing.Point(284, 489)
-        Me.cmdPolizas.Name = "cmdPolizas"
-        Me.cmdPolizas.Size = New System.Drawing.Size(112, 27)
-        Me.cmdPolizas.TabIndex = 29
-        Me.cmdPolizas.Text = "Polizas"
-        Me.cmdPolizas.UseVisualStyleBackColor = True
-        '
         'cmdSubirNomF
         '
         Me.cmdSubirNomF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -697,18 +671,6 @@ Partial Class frmnominasmarinos
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
         Me.cmdComision.Visible = False
-        '
-        'btnAcumualdos
-        '
-        Me.btnAcumualdos.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnAcumualdos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAcumualdos.Location = New System.Drawing.Point(139, 489)
-        Me.btnAcumualdos.Name = "btnAcumualdos"
-        Me.btnAcumualdos.Size = New System.Drawing.Size(141, 28)
-        Me.btnAcumualdos.TabIndex = 32
-        Me.btnAcumualdos.Text = "Acumualdos Nomina"
-        Me.btnAcumualdos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAcumualdos.UseVisualStyleBackColor = True
         '
         'cmdInfonavitNominaSerie
         '
@@ -832,12 +794,9 @@ Partial Class frmnominasmarinos
         Me.Controls.Add(Me.cmdAdiCalculo)
         Me.Controls.Add(Me.chkPeriodosC)
         Me.Controls.Add(Me.chkNoinfonavit)
-        Me.Controls.Add(Me.btnAcumualdos)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
         Me.Controls.Add(Me.cmdSubirNomF)
-        Me.Controls.Add(Me.cmdPolizas)
-        Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
@@ -901,14 +860,11 @@ Partial Class frmnominasmarinos
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
     Friend WithEvents cmdSubirDatos As System.Windows.Forms.Button
-    Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
-    Friend WithEvents cmdPolizas As System.Windows.Forms.Button
 
     Friend WithEvents cmdSubirNomF As System.Windows.Forms.Button
     Friend WithEvents cmdResumenInfo As System.Windows.Forms.Button
     Friend WithEvents cmdComision As System.Windows.Forms.Button
 
-    Friend WithEvents btnAcumualdos As System.Windows.Forms.Button
 
 
 
