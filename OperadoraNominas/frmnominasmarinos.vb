@@ -2930,7 +2930,12 @@ Public Class frmnominasmarinos
                                         Dim MontoInfonavit As Double = CalcularInfonavitMonto(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(25).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
                                         If MontoInfonavit > 0 Then
                                             If NombrePeriodo = "Semanal" Then
-                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                                ValorIncapacidad = IIf(dtgDatos.Rows(x).Cells(28).Value = "", 0, dtgDatos.Rows(x).Cells(28).Value)
+                                                Dim DDescuentoInfonavit As Integer
+                                                If ValorIncapacidad > 7 Then
+                                                    DDescuentoInfonavit = 7
+                                                End If
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * (DiasCadaPeriodo - DDescuentoInfonavit), 2).ToString("###,##0.00")
                                             Else
                                                 dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit, 2).ToString("###,##0.00")
                                             End If

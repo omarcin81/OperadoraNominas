@@ -91,6 +91,9 @@ Partial Class frmnominasmarinos
         Me.PolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecibosSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,9 +107,9 @@ Partial Class frmnominasmarinos
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbEmpleados, Me.tsbPeriodos, Me.tsbpuestos, Me.tsbdeptos, Me.tsbImportar, Me.tsbIEmpleados, Me.tsbbuscar, Me.tsbLayout})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1438, 59)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1438, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -115,7 +118,7 @@ Partial Class frmnominasmarinos
         Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
         Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEmpleados.Name = "tsbEmpleados"
-        Me.tsbEmpleados.Size = New System.Drawing.Size(149, 56)
+        Me.tsbEmpleados.Size = New System.Drawing.Size(118, 51)
         Me.tsbEmpleados.Text = "Importar Empleados"
         Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -124,7 +127,7 @@ Partial Class frmnominasmarinos
         Me.tsbPeriodos.Image = CType(resources.GetObject("tsbPeriodos.Image"), System.Drawing.Image)
         Me.tsbPeriodos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPeriodos.Name = "tsbPeriodos"
-        Me.tsbPeriodos.Size = New System.Drawing.Size(132, 56)
+        Me.tsbPeriodos.Size = New System.Drawing.Size(106, 51)
         Me.tsbPeriodos.Text = "Importar Períodos"
         Me.tsbPeriodos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -133,7 +136,7 @@ Partial Class frmnominasmarinos
         Me.tsbpuestos.Image = CType(resources.GetObject("tsbpuestos.Image"), System.Drawing.Image)
         Me.tsbpuestos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbpuestos.Name = "tsbpuestos"
-        Me.tsbpuestos.Size = New System.Drawing.Size(125, 56)
+        Me.tsbpuestos.Size = New System.Drawing.Size(101, 51)
         Me.tsbpuestos.Text = "Importar Puestos"
         Me.tsbpuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -142,7 +145,7 @@ Partial Class frmnominasmarinos
         Me.tsbdeptos.Image = CType(resources.GetObject("tsbdeptos.Image"), System.Drawing.Image)
         Me.tsbdeptos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbdeptos.Name = "tsbdeptos"
-        Me.tsbdeptos.Size = New System.Drawing.Size(121, 56)
+        Me.tsbdeptos.Size = New System.Drawing.Size(96, 51)
         Me.tsbdeptos.Text = "Importar deptos"
         Me.tsbdeptos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -151,7 +154,7 @@ Partial Class frmnominasmarinos
         Me.tsbImportar.Image = CType(resources.GetObject("tsbImportar.Image"), System.Drawing.Image)
         Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbImportar.Name = "tsbImportar"
-        Me.tsbImportar.Size = New System.Drawing.Size(86, 56)
+        Me.tsbImportar.Size = New System.Drawing.Size(70, 51)
         Me.tsbImportar.Text = "Incidencias"
         Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbImportar.ToolTipText = "Importar incidencias"
@@ -161,7 +164,7 @@ Partial Class frmnominasmarinos
         Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
         Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbIEmpleados.Name = "tsbIEmpleados"
-        Me.tsbIEmpleados.Size = New System.Drawing.Size(87, 56)
+        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
         Me.tsbIEmpleados.Text = "Empleados"
         Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -170,7 +173,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
         Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbbuscar.Name = "tsbbuscar"
-        Me.tsbbuscar.Size = New System.Drawing.Size(56, 56)
+        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
         Me.tsbbuscar.Text = "Buscar"
         Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -257,7 +260,7 @@ Partial Class frmnominasmarinos
         Me.chkPrimaDominical.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkPrimaDominical.Location = New System.Drawing.Point(127, 36)
         Me.chkPrimaDominical.Name = "chkPrimaDominical"
-        Me.chkPrimaDominical.Size = New System.Drawing.Size(192, 27)
+        Me.chkPrimaDominical.Size = New System.Drawing.Size(153, 22)
         Me.chkPrimaDominical.TabIndex = 35
         Me.chkPrimaDominical.Text = "No Calcular PRIMA D"
         Me.chkPrimaDominical.UseVisualStyleBackColor = False
@@ -269,7 +272,7 @@ Partial Class frmnominasmarinos
         Me.chkDias.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkDias.Location = New System.Drawing.Point(270, 70)
         Me.chkDias.Name = "chkDias"
-        Me.chkDias.Size = New System.Drawing.Size(167, 27)
+        Me.chkDias.Size = New System.Drawing.Size(135, 22)
         Me.chkDias.TabIndex = 37
         Me.chkDias.Text = "No actualizar dias"
         Me.chkDias.UseVisualStyleBackColor = False
@@ -331,7 +334,7 @@ Partial Class frmnominasmarinos
         Me.chkSoloCostoSocial.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkSoloCostoSocial.Location = New System.Drawing.Point(382, 69)
         Me.chkSoloCostoSocial.Name = "chkSoloCostoSocial"
-        Me.chkSoloCostoSocial.Size = New System.Drawing.Size(158, 27)
+        Me.chkSoloCostoSocial.Size = New System.Drawing.Size(128, 22)
         Me.chkSoloCostoSocial.TabIndex = 31
         Me.chkSoloCostoSocial.Text = "Solo costo social"
         Me.chkSoloCostoSocial.UseVisualStyleBackColor = False
@@ -344,7 +347,7 @@ Partial Class frmnominasmarinos
         Me.chkDiasCS.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkDiasCS.Location = New System.Drawing.Point(126, 69)
         Me.chkDiasCS.Name = "chkDiasCS"
-        Me.chkDiasCS.Size = New System.Drawing.Size(171, 27)
+        Me.chkDiasCS.Size = New System.Drawing.Size(135, 22)
         Me.chkDiasCS.TabIndex = 30
         Me.chkDiasCS.Text = "DT COSTO SOCIAL"
         Me.chkDiasCS.UseVisualStyleBackColor = False
@@ -356,7 +359,7 @@ Partial Class frmnominasmarinos
         Me.chkCalSoloMarcados.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkCalSoloMarcados.Location = New System.Drawing.Point(7, 36)
         Me.chkCalSoloMarcados.Name = "chkCalSoloMarcados"
-        Me.chkCalSoloMarcados.Size = New System.Drawing.Size(145, 27)
+        Me.chkCalSoloMarcados.Size = New System.Drawing.Size(116, 22)
         Me.chkCalSoloMarcados.TabIndex = 29
         Me.chkCalSoloMarcados.Text = "Solo marcados"
         Me.chkCalSoloMarcados.UseVisualStyleBackColor = False
@@ -368,7 +371,7 @@ Partial Class frmnominasmarinos
         Me.chkPrimaVacacional.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkPrimaVacacional.Location = New System.Drawing.Point(403, 9)
         Me.chkPrimaVacacional.Name = "chkPrimaVacacional"
-        Me.chkPrimaVacacional.Size = New System.Drawing.Size(184, 27)
+        Me.chkPrimaVacacional.Size = New System.Drawing.Size(149, 22)
         Me.chkPrimaVacacional.TabIndex = 28
         Me.chkPrimaVacacional.Text = "No PrimaVacacional"
         Me.chkPrimaVacacional.UseVisualStyleBackColor = False
@@ -409,7 +412,7 @@ Partial Class frmnominasmarinos
         Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
         Me.cboserie.Location = New System.Drawing.Point(319, 3)
         Me.cboserie.Name = "cboserie"
-        Me.cboserie.Size = New System.Drawing.Size(59, 32)
+        Me.cboserie.Size = New System.Drawing.Size(59, 27)
         Me.cboserie.TabIndex = 21
         '
         'Label3
@@ -417,7 +420,7 @@ Partial Class frmnominasmarinos
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(270, 7)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 24)
+        Me.Label3.Size = New System.Drawing.Size(45, 19)
         Me.Label3.TabIndex = 20
         Me.Label3.Text = "Serie:"
         '
@@ -428,7 +431,7 @@ Partial Class frmnominasmarinos
         Me.chkgrupo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkgrupo.Location = New System.Drawing.Point(871, 36)
         Me.chkgrupo.Name = "chkgrupo"
-        Me.chkgrupo.Size = New System.Drawing.Size(81, 27)
+        Me.chkgrupo.Size = New System.Drawing.Size(65, 22)
         Me.chkgrupo.TabIndex = 19
         Me.chkgrupo.Text = "Grupo"
         Me.chkgrupo.UseVisualStyleBackColor = False
@@ -440,7 +443,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkinter.Location = New System.Drawing.Point(446, 37)
         Me.chkinter.Name = "chkinter"
-        Me.chkinter.Size = New System.Drawing.Size(137, 27)
+        Me.chkinter.Size = New System.Drawing.Size(110, 22)
         Me.chkinter.TabIndex = 18
         Me.chkinter.Text = "Interbancario"
         Me.chkinter.UseVisualStyleBackColor = False
@@ -452,7 +455,7 @@ Partial Class frmnominasmarinos
         Me.cbobancos.Items.AddRange(New Object() {"TMM", "STP"})
         Me.cbobancos.Location = New System.Drawing.Point(573, 33)
         Me.cbobancos.Name = "cbobancos"
-        Me.cbobancos.Size = New System.Drawing.Size(220, 32)
+        Me.cbobancos.Size = New System.Drawing.Size(220, 27)
         Me.cbobancos.TabIndex = 17
         '
         'chkPensionExc
@@ -462,7 +465,7 @@ Partial Class frmnominasmarinos
         Me.chkPensionExc.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkPensionExc.Location = New System.Drawing.Point(284, 37)
         Me.chkPensionExc.Name = "chkPensionExc"
-        Me.chkPensionExc.Size = New System.Drawing.Size(148, 27)
+        Me.chkPensionExc.Size = New System.Drawing.Size(121, 22)
         Me.chkPensionExc.TabIndex = 16
         Me.chkPensionExc.Text = "No Pension Exc"
         Me.chkPensionExc.UseVisualStyleBackColor = False
@@ -474,7 +477,7 @@ Partial Class frmnominasmarinos
         Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkAll.Location = New System.Drawing.Point(6, 67)
         Me.chkAll.Name = "chkAll"
-        Me.chkAll.Size = New System.Drawing.Size(136, 27)
+        Me.chkAll.Size = New System.Drawing.Size(107, 22)
         Me.chkAll.TabIndex = 15
         Me.chkAll.Text = "Marcar todos"
         Me.chkAll.UseVisualStyleBackColor = False
@@ -581,7 +584,7 @@ Partial Class frmnominasmarinos
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(5, 7)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(80, 24)
+        Me.Label1.Size = New System.Drawing.Size(62, 19)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Periodo:"
         '
@@ -590,7 +593,7 @@ Partial Class frmnominasmarinos
         Me.cboperiodo.FormattingEnabled = True
         Me.cboperiodo.Location = New System.Drawing.Point(73, 3)
         Me.cboperiodo.Name = "cboperiodo"
-        Me.cboperiodo.Size = New System.Drawing.Size(191, 32)
+        Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
         Me.cboperiodo.TabIndex = 3
         '
         'cmdguardarfinal
@@ -620,7 +623,7 @@ Partial Class frmnominasmarinos
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(154, 55)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(122, 24)
+        Me.Label2.Size = New System.Drawing.Size(96, 19)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Procesando..."
         '
@@ -635,18 +638,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(223, 52)
+        Me.cMenu.Size = New System.Drawing.Size(186, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(222, 24)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(222, 24)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'layoutTimbrado
@@ -725,9 +728,9 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.AutoSize = True
         Me.chkNoinfonavit.BackColor = System.Drawing.Color.Transparent
         Me.chkNoinfonavit.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNoinfonavit.Location = New System.Drawing.Point(1249, 489)
+        Me.chkNoinfonavit.Location = New System.Drawing.Point(1284, 494)
         Me.chkNoinfonavit.Name = "chkNoinfonavit"
-        Me.chkNoinfonavit.Size = New System.Drawing.Size(189, 27)
+        Me.chkNoinfonavit.Size = New System.Drawing.Size(154, 22)
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
@@ -738,9 +741,9 @@ Partial Class frmnominasmarinos
         Me.chkPeriodosC.AutoSize = True
         Me.chkPeriodosC.BackColor = System.Drawing.Color.Transparent
         Me.chkPeriodosC.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPeriodosC.Location = New System.Drawing.Point(1069, 490)
+        Me.chkPeriodosC.Location = New System.Drawing.Point(1102, 495)
         Me.chkPeriodosC.Name = "chkPeriodosC"
-        Me.chkPeriodosC.Size = New System.Drawing.Size(175, 27)
+        Me.chkPeriodosC.Size = New System.Drawing.Size(142, 22)
         Me.chkPeriodosC.TabIndex = 34
         Me.chkPeriodosC.Text = "Todos los periodos"
         Me.chkPeriodosC.UseVisualStyleBackColor = False
@@ -759,10 +762,10 @@ Partial Class frmnominasmarinos
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1438, 28)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1438, 24)
         Me.MenuStrip1.TabIndex = 42
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -770,38 +773,57 @@ Partial Class frmnominasmarinos
         '
         Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
-        Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(74, 24)
+        Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
         '
         'LayoutTimbradoSAToolStripMenuItem
         '
         Me.LayoutTimbradoSAToolStripMenuItem.Name = "LayoutTimbradoSAToolStripMenuItem"
-        Me.LayoutTimbradoSAToolStripMenuItem.Size = New System.Drawing.Size(217, 24)
+        Me.LayoutTimbradoSAToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.LayoutTimbradoSAToolStripMenuItem.Text = "Layout timbrado SA"
         '
         'AcumuladosNominaToolStripMenuItem
         '
         Me.AcumuladosNominaToolStripMenuItem.Name = "AcumuladosNominaToolStripMenuItem"
-        Me.AcumuladosNominaToolStripMenuItem.Size = New System.Drawing.Size(217, 24)
+        Me.AcumuladosNominaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.AcumuladosNominaToolStripMenuItem.Text = "Acumulados Nomina"
         '
         'PolizasToolStripMenuItem
         '
         Me.PolizasToolStripMenuItem.Name = "PolizasToolStripMenuItem"
-        Me.PolizasToolStripMenuItem.Size = New System.Drawing.Size(217, 24)
+        Me.PolizasToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.PolizasToolStripMenuItem.Text = "Polizas"
         '
         'RecibosSAToolStripMenuItem
         '
         Me.RecibosSAToolStripMenuItem.Name = "RecibosSAToolStripMenuItem"
-        Me.RecibosSAToolStripMenuItem.Size = New System.Drawing.Size(217, 24)
+        Me.RecibosSAToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.RecibosSAToolStripMenuItem.Text = "Recibos SA"
         '
         'ResumenToolStripMenuItem
         '
         Me.ResumenToolStripMenuItem.Name = "ResumenToolStripMenuItem"
-        Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(217, 24)
+        Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.ResumenToolStripMenuItem.Text = "Resumen"
+        '
+        'CalculosToolStripMenuItem
+        '
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
+        Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
+        Me.CalculosToolStripMenuItem.Text = "Calculos"
+        '
+        'CalcularSoloISRToolStripMenuItem
+        '
+        Me.CalcularSoloISRToolStripMenuItem.Name = "CalcularSoloISRToolStripMenuItem"
+        Me.CalcularSoloISRToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CalcularSoloISRToolStripMenuItem.Text = "Calcular solo ISR"
+        '
+        'CalcularInfonavitSoloToolStripMenuItem
+        '
+        Me.CalcularInfonavitSoloToolStripMenuItem.Name = "CalcularInfonavitSoloToolStripMenuItem"
+        Me.CalcularInfonavitSoloToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CalcularInfonavitSoloToolStripMenuItem.Text = "Calcular infonavit Solo"
         '
         'frmnominasmarinos
         '
@@ -917,6 +939,9 @@ Partial Class frmnominasmarinos
     Friend WithEvents PolizasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RecibosSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ResumenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalculosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
