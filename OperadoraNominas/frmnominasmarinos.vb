@@ -141,7 +141,7 @@ Public Class frmnominasmarinos
                 cmdSubirDatos.Enabled = False
                 cmdsoloisr.Enabled = False
                 cmdInfonavitNominaSerie.Enabled = False
-                cmdCalculoSoloInfonavit.Enabled = False
+
                 Button1.Enabled = False
                 cmdincidencias.Enabled = False
 
@@ -2934,6 +2934,8 @@ Public Class frmnominasmarinos
                                                 Dim DDescuentoInfonavit As Integer
                                                 If ValorIncapacidad > 7 Then
                                                     DDescuentoInfonavit = 7
+                                                Else
+                                                    DDescuentoInfonavit = ValorIncapacidad
                                                 End If
                                                 dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * (DiasCadaPeriodo - DDescuentoInfonavit), 2).ToString("###,##0.00")
                                             Else
@@ -4017,7 +4019,15 @@ Public Class frmnominasmarinos
                                         Dim MontoInfonavit As Double = CalcularInfonavitMonto(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(25).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
                                         If MontoInfonavit > 0 Then
                                             If NombrePeriodo = "Semanal" Then
-                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
+                                                ValorIncapacidad = IIf(dtgDatos.Rows(x).Cells(28).Value = "", 0, dtgDatos.Rows(x).Cells(28).Value)
+                                                Dim DDescuentoInfonavit As Integer
+                                                If ValorIncapacidad > 7 Then
+                                                    DDescuentoInfonavit = 7
+                                                Else
+                                                    DDescuentoInfonavit = ValorIncapacidad
+                                                End If
+                                                dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * (DiasCadaPeriodo - DDescuentoInfonavit), 2).ToString("###,##0.00")
+                                                'dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit * DiasCadaPeriodo, 2).ToString("###,##0.00")
                                             Else
                                                 dtgDatos.Rows(x).Cells(60).Value = Math.Round(MontoInfonavit, 2).ToString("###,##0.00")
                                             End If
@@ -12970,7 +12980,7 @@ Public Class frmnominasmarinos
         'End Try
     End Sub
 
-    Private Sub cmdCalculoSoloInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCalculoSoloInfonavit.Click
+    Private Sub cmdCalculoSoloInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Dim Sueldo As Double
         'Dim SueldoBase As Double
         'Dim ValorIncapacidad As Double
