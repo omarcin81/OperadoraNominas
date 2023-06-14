@@ -40,7 +40,6 @@ Partial Class frmnominasmarinos
         Me.chkDias = New System.Windows.Forms.CheckBox()
         Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
         Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
@@ -88,6 +87,9 @@ Partial Class frmnominasmarinos
         Me.PolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecibosSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,7 +196,6 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.chkDias)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
         Me.pnlCatalogo.Controls.Add(Me.Button1)
-        Me.pnlCatalogo.Controls.Add(Me.cmdCalculoSoloInfonavit)
         Me.pnlCatalogo.Controls.Add(Me.cmdAcumuladoOperadora)
         Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
         Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
@@ -290,16 +291,6 @@ Partial Class frmnominasmarinos
         Me.Button1.TabIndex = 35
         Me.Button1.Text = "Infonavit x periodo"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'cmdCalculoSoloInfonavit
-        '
-        Me.cmdCalculoSoloInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(692, 68)
-        Me.cmdCalculoSoloInfonavit.Name = "cmdCalculoSoloInfonavit"
-        Me.cmdCalculoSoloInfonavit.Size = New System.Drawing.Size(146, 27)
-        Me.cmdCalculoSoloInfonavit.TabIndex = 34
-        Me.cmdCalculoSoloInfonavit.Text = "Calcular Infonavit Solo"
-        Me.cmdCalculoSoloInfonavit.UseVisualStyleBackColor = True
         '
         'cmdAcumuladoOperadora
         '
@@ -721,7 +712,7 @@ Partial Class frmnominasmarinos
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1438, 24)
@@ -764,6 +755,25 @@ Partial Class frmnominasmarinos
         Me.ResumenToolStripMenuItem.Name = "ResumenToolStripMenuItem"
         Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.ResumenToolStripMenuItem.Text = "Resumen"
+        '
+        'CalculosToolStripMenuItem
+        '
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
+        Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
+        Me.CalculosToolStripMenuItem.Text = "Calculos"
+        '
+        'CalcularSoloISRToolStripMenuItem
+        '
+        Me.CalcularSoloISRToolStripMenuItem.Name = "CalcularSoloISRToolStripMenuItem"
+        Me.CalcularSoloISRToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CalcularSoloISRToolStripMenuItem.Text = "Calcular solo ISR"
+        '
+        'CalcularInfonavitSoloToolStripMenuItem
+        '
+        Me.CalcularInfonavitSoloToolStripMenuItem.Name = "CalcularInfonavitSoloToolStripMenuItem"
+        Me.CalcularInfonavitSoloToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CalcularInfonavitSoloToolStripMenuItem.Text = "Calcular infonavit Solo"
         '
         'frmnominasmarinos
         '
@@ -855,7 +865,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkSoloCostoSocial As System.Windows.Forms.CheckBox
     Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladoOperadora As System.Windows.Forms.Button
-    Friend WithEvents cmdCalculoSoloInfonavit As System.Windows.Forms.Button
 
     Friend WithEvents Button1 As System.Windows.Forms.Button
 
@@ -873,6 +882,9 @@ Partial Class frmnominasmarinos
     Friend WithEvents PolizasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RecibosSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ResumenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalculosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
