@@ -10,7 +10,8 @@ Public Class frmnominasmarinos
     Public gNombrePeriodo As String
     Public gTipoCalculo As String
     Dim ValorUMAF As Double
-
+    Dim ValorUMA As Double
+    Dim ValorSD As Double
     Dim Ruta As String
     Dim nombre As String
     Dim cargado As Boolean = False
@@ -26,6 +27,8 @@ Public Class frmnominasmarinos
     Dim Agregartrabajadores As Boolean
     Dim NombrePeriodo As String
     Dim tipoperiodos2Calculo As String
+    Dim FechaInicialPeriodoPA As Date
+    Dim FechaFinPeriodoPA As Date
 
 
 
@@ -120,8 +123,22 @@ Public Class frmnominasmarinos
                 diasperiodo = Integer.Parse(rwPeriodo(0)("iDiasPago").ToString)
                 tipoperiodos2Calculo = rwPeriodo(0).Item("fkiIdTipoPeriodo")
                 NombrePeriodo = rwPeriodo(0)("nombre").ToString
-
+                FechaFinPeriodoPA = Date.Parse(rwPeriodo(0)("dFechaFin").ToString)
+                FechaInicialPeriodoPA = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString)
             End If
+            sql = "select * from Salario "
+            sql &= " where Anio=" & aniocostosocial
+            sql &= " and iEstatus=1"
+            Dim rwValorUMA As DataRow() = nConsulta(sql)
+            If rwValorUMA Is Nothing = False Then
+                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                ValorSD = Double.Parse(rwValorUMA(0)("salario").ToString)
+            Else
+                ValorUMA = 0
+                ValorSD = 0
+                MessageBox.Show("No se encontro valor para UMA Y SALARIO en el año: " & aniocostosocial)
+            End If
+
             calcularUma()
             Agregartrabajadores = False
             campoordenamiento = "cCodigoEmpleado"
@@ -2185,7 +2202,8 @@ Public Class frmnominasmarinos
         Dim sql3 As String
         Dim sql4 As String
         Dim sql5 As String
-        Dim ValorUMA As Double
+        'Dim ValorUMA As Double
+        'Dim ValorSD As Double
         Dim primavacacionesgravada As Double
         Dim primavacacionesexenta As Double
         Dim diastrabajados As Double
@@ -2213,16 +2231,18 @@ Public Class frmnominasmarinos
 
 
 
-            sql = "select * from Salario "
-            sql &= " where Anio=" & aniocostosocial
-            sql &= " and iEstatus=1"
-            Dim rwValorUMA As DataRow() = nConsulta(sql)
-            If rwValorUMA Is Nothing = False Then
-                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
-            Else
-                ValorUMA = 0
-                MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
-            End If
+            'sql = "select * from Salario "
+            'sql &= " where Anio=" & aniocostosocial
+            'sql &= " and iEstatus=1"
+            'Dim rwValorUMA As DataRow() = nConsulta(sql)
+            'If rwValorUMA Is Nothing = False Then
+            '    ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+            '    ValorSD = Double.Parse(rwValorUMA(0)("salario").ToString)
+            'Else
+            '    ValorUMA = 0
+            '    ValorSD = 0
+            '    MessageBox.Show("No se encontro valor para UMA Y SALARIO en el año: " & aniocostosocial)
+            'End If
 
 
             pnlProgreso.Visible = True
@@ -3180,6 +3200,57 @@ Public Class frmnominasmarinos
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 dtgDatos.Rows(x).Cells(90).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), 1, 25, CDbl(dtgDatos.Rows(x).Cells(24).Value), cboperiodo.SelectedValue)) / 365) * Double.Parse(dtgDatos.Rows(x).Cells(26).Value)), 2) 'pro prima
                             End If
+                            'calculo prima antiguedad
+                            'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
+                            'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
+                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+
+                            Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
+                            If rwDatosEmpleadoPA Is Nothing = False Then
+                                Dim diasPA As Integer
+                                Dim DiasPROPORCIONALES As Integer
+                                Dim SueldoBASEPA As Double
+                                Dim FechaBuscarPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+                                If tipoperiodos2Calculo = 2 Then
+                                    DiasPROPORCIONALES = 15
+                                ElseIf tipoperiodos2Calculo = 3 Then
+                                    DiasPROPORCIONALES = 7
+                                End If
+
+
+                                Dim FechaAntiguedadPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+
+                                If FechaBuscarPA.CompareTo(FechaInicialPeriodoPA) > 0 And FechaBuscarPA.CompareTo(FechaFinPeriodoPA) <= 0 Then
+                                    'Estamos dentro del rango 
+                                    diasPA = (DateDiff("y", FechaBuscarPA, FechaFinPeriodoPA)) + 1
+                                    DiasPROPORCIONALES = diasPA
+
+                                Else
+                                    diasPA = (DateDiff("y", FechaAntiguedadPA, FechaFinPeriodoPA)) + 1
+
+                                End If
+                                SueldoBASEPA = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) < (ValorSD * 2), CDbl(dtgDatos.Rows(x).Cells(24).Value), ValorSD * 2)
+
+                                dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
+                                
+                            End If
+
+                            'calculoi indemnizacion
+                            'Salario diario * 90 / 365 * dias periodo
+
+                            If tipoperiodos2Calculo = 2 Then
+
+                                'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
+
+                            ElseIf tipoperiodos2Calculo = 3 Then
+
+
+                                'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
+                            End If
+
+
                         End If
 
 
@@ -3270,7 +3341,8 @@ Public Class frmnominasmarinos
         Dim sql3 As String
         Dim sql4 As String
         Dim sql5 As String
-        Dim ValorUMA As Double
+        'Dim ValorUMA As Double
+        'Dim ValorSD As Double
         Dim primavacacionesgravada As Double
         Dim primavacacionesexenta As Double
         Dim diastrabajados As Double
@@ -3298,16 +3370,18 @@ Public Class frmnominasmarinos
 
 
 
-            sql = "select * from Salario "
-            sql &= " where Anio=" & aniocostosocial
-            sql &= " and iEstatus=1"
-            Dim rwValorUMA As DataRow() = nConsulta(sql)
-            If rwValorUMA Is Nothing = False Then
-                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
-            Else
-                ValorUMA = 0
-                MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
-            End If
+            'sql = "select * from Salario "
+            'sql &= " where Anio=" & aniocostosocial
+            'sql &= " and iEstatus=1"
+            'Dim rwValorUMA As DataRow() = nConsulta(sql)
+            'If rwValorUMA Is Nothing = False Then
+            '    ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+            '    ValorSD = Double.Parse(rwValorUMA(0)("salario").ToString)
+            'Else
+            '    ValorUMA = 0
+            '    ValorSD = 0
+            '    MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+            'End If
 
 
             pnlProgreso.Visible = True
@@ -3755,6 +3829,10 @@ Public Class frmnominasmarinos
 
                             'Descanso Laborado
 
+                            'If dtgDatos.Rows(x).Cells(2).Value = "169" Then
+                            '    MsgBox("llego")
+                            'End If
+
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(17).Value = "", 0, dtgDatos.Rows(x).Cells(17).Value)) > 0 Then
                                 dtgDatos.Rows(x).Cells(36).Value = Math.Round(SDEMPLEADOREAL * 2 * Double.Parse(dtgDatos.Rows(x).Cells(17).Value), 2).ToString("###,##0.00")
                             Else
@@ -4119,9 +4197,9 @@ Public Class frmnominasmarinos
                                     Dim excedenteperiodo As Double
                                     sumadescuentosexcedente = 0
                                     excedenteperiodo = 0
-                                    If dtgDatos.Rows(x).Cells(2).Value = "74" Then
-                                        MsgBox("aqui")
-                                    End If
+                                    'If dtgDatos.Rows(x).Cells(2).Value = "74" Then
+                                    '    MsgBox("aqui")
+                                    'End If
                                     If DiasCadaPeriodo > 7 Then
                                         excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
 
@@ -4344,6 +4422,58 @@ Public Class frmnominasmarinos
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 dtgDatos.Rows(x).Cells(90).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), 1, 25, CDbl(dtgDatos.Rows(x).Cells(24).Value), cboperiodo.SelectedValue)) / 365) * Double.Parse(dtgDatos.Rows(x).Cells(26).Value)), 2) 'pro prima
                             End If
+
+                            'calculo prima antiguedad
+                            'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
+                            'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
+                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+
+                            Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
+                            If rwDatosEmpleadoPA Is Nothing = False Then
+                                Dim diasPA As Integer
+                                Dim DiasPROPORCIONALES As Integer
+                                Dim SueldoBASEPA As Double
+                                Dim FechaBuscarPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+                                If tipoperiodos2Calculo = 2 Then
+                                    DiasPROPORCIONALES = 15
+                                ElseIf tipoperiodos2Calculo = 3 Then
+                                    DiasPROPORCIONALES = 7
+                                End If
+
+
+                                Dim FechaAntiguedadPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+
+                                If FechaBuscarPA.CompareTo(FechaInicialPeriodoPA) > 0 And FechaBuscarPA.CompareTo(FechaFinPeriodoPA) <= 0 Then
+                                    'Estamos dentro del rango 
+                                    diasPA = (DateDiff("y", FechaBuscarPA, FechaFinPeriodoPA)) + 1
+                                    DiasPROPORCIONALES = diasPA
+
+                                Else
+                                    diasPA = (DateDiff("y", FechaAntiguedadPA, FechaFinPeriodoPA)) + 1
+
+                                End If
+                                SueldoBASEPA = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) < (ValorSD * 2), CDbl(dtgDatos.Rows(x).Cells(24).Value), ValorSD * 2)
+
+                                dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
+
+                            End If
+
+                            'calculoi indemnizacion
+                            'Salario diario * 90 / 365 * dias periodo
+
+                            If tipoperiodos2Calculo = 2 Then
+
+                                'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
+
+                            ElseIf tipoperiodos2Calculo = 3 Then
+
+
+                                'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
+                            End If
+
+
                         End If
 
 
@@ -17147,6 +17277,67 @@ Public Class frmnominasmarinos
 
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString)
+        End Try
+    End Sub
+
+    Private Sub CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Click
+        Try
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                'calculo prima antiguedad
+                'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
+                'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
+                sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+
+                Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
+                If rwDatosEmpleadoPA Is Nothing = False Then
+                    Dim diasPA As Integer
+                    Dim DiasPROPORCIONALES As Integer
+                    Dim SueldoBASEPA As Double
+                    Dim FechaBuscarPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+                    If tipoperiodos2Calculo = 2 Then
+                        DiasPROPORCIONALES = 15
+                    ElseIf tipoperiodos2Calculo = 3 Then
+                        DiasPROPORCIONALES = 7
+                    End If
+
+
+                    Dim FechaAntiguedadPA As Date = Date.Parse(rwDatosEmpleadoPA(0)("dFechaAntiguedad"))
+
+                    If FechaBuscarPA.CompareTo(FechaInicialPeriodoPA) > 0 And FechaBuscarPA.CompareTo(FechaFinPeriodoPA) <= 0 Then
+                        'Estamos dentro del rango 
+                        diasPA = (DateDiff("y", FechaBuscarPA, FechaFinPeriodoPA)) + 1
+                        DiasPROPORCIONALES = diasPA
+
+                    Else
+                        diasPA = (DateDiff("y", FechaAntiguedadPA, FechaFinPeriodoPA)) + 1
+
+                    End If
+                    SueldoBASEPA = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) < (ValorSD * 2), CDbl(dtgDatos.Rows(x).Cells(24).Value), ValorSD * 2)
+
+                    dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
+
+                End If
+
+                'calculoi indemnizacion
+                'Salario diario * 90 / 365 * dias periodo
+
+                If tipoperiodos2Calculo = 2 Then
+
+                    'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
+
+                ElseIf tipoperiodos2Calculo = 3 Then
+
+
+                    'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
+                End If
+            Next
+
+            
+        Catch ex As Exception
+            MsgBox(ex.ToString)
         End Try
     End Sub
 End Class
