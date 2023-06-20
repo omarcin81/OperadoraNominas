@@ -587,7 +587,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdguardarfinal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarfinal.Location = New System.Drawing.Point(849, 489)
+        Me.cmdguardarfinal.Location = New System.Drawing.Point(454, 492)
         Me.cmdguardarfinal.Name = "cmdguardarfinal"
         Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
         Me.cmdguardarfinal.TabIndex = 9
@@ -643,7 +643,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdSubirNomF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdSubirNomF.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSubirNomF.Location = New System.Drawing.Point(400, 489)
+        Me.cmdSubirNomF.Location = New System.Drawing.Point(5, 492)
         Me.cmdSubirNomF.Name = "cmdSubirNomF"
         Me.cmdSubirNomF.Size = New System.Drawing.Size(127, 27)
         Me.cmdSubirNomF.TabIndex = 30
@@ -654,7 +654,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(535, 489)
+        Me.cmdComision.Location = New System.Drawing.Point(140, 492)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -666,7 +666,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(639, 489)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(244, 492)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
@@ -705,7 +705,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAdiCalculo.Location = New System.Drawing.Point(947, 489)
+        Me.cmdAdiCalculo.Location = New System.Drawing.Point(552, 492)
         Me.cmdAdiCalculo.Name = "cmdAdiCalculo"
         Me.cmdAdiCalculo.Size = New System.Drawing.Size(129, 26)
         Me.cmdAdiCalculo.TabIndex = 40

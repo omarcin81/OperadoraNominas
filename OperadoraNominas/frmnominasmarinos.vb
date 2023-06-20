@@ -9445,12 +9445,13 @@ Public Class frmnominasmarinos
                 book.Worksheet(2).CopyTo(libro, "DETALLE")
                 book.Worksheet(3).CopyTo(libro, "FACT")
                 book.Worksheets(4).CopyTo(libro, "PENSION ALIMENTICIA")
-
+                book.Worksheets(5).CopyTo(libro, "CARATULA")
 
                 Dim hoja As IXLWorksheet = libro.Worksheets(0)
                 Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
+                Dim hoja5 As IXLWorksheet = libro.Worksheets(4)
 
                 Dim fecha, iejercicio, idias, periodom As String
                 Dim DiasCadaPeriodo As Integer
@@ -10014,6 +10015,19 @@ Public Class frmnominasmarinos
                 Next x
                
                 hoja4.Cell(filaExcel + dtgDatos.Rows.Count + 1, 8).FormulaA1 = "=SUM(H2:M" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
+
+
+                ' <<<<<<<<<CARATULA DE NOMINA>>>>>>>>>>>
+
+                Dim totalesnomina As Integer = filaExcel + dtgDatos.Rows.Count - 1
+
+                hoja5.Cell("B4").Value = cboperiodo.SelectedValue
+                hoja5.Cell("B5").Value = ""
+                hoja5.Cell("B6").Value = cboperiodo.Text
+                hoja5.Cell("B7").Value = NombrePeriodo.ToUpper
+
+                hoja5.Cell("F13").FormulaA1 = "=+NOMINA!F" & totalesnomina + 3
+
 
                 '<<<<<CARGAR>>>>>
                 pnlProgreso.Visible = False
