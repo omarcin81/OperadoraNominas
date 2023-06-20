@@ -17354,4 +17354,68 @@ Public Class frmnominasmarinos
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+    Private Sub CalcularProAguinaldoPrimaVacacionalToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CalcularProAguinaldoPrimaVacacionalToolStripMenuItem.Click
+        Try
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                'provisiones
+                'aguinaldo
+                If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                    dtgDatos.Rows(x).Cells(89).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(24).Value) * 15 / 365 * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2)
+                Else
+                    dtgDatos.Rows(x).Cells(89).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(24).Value) * 30 / 365 * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2)
+                End If
+                'prima vacacional
+
+                If tipoperiodos2Calculo = 2 Then
+
+                    'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                    dtgDatos.Rows(x).Cells(90).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), 1, 50, CDbl(dtgDatos.Rows(x).Cells(24).Value), cboperiodo.SelectedValue)) / 365) * Double.Parse(dtgDatos.Rows(x).Cells(26).Value)), 2) 'pro prima
+
+                ElseIf tipoperiodos2Calculo = 3 Then
+
+
+                    'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
+                    dtgDatos.Rows(x).Cells(90).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), 1, 25, CDbl(dtgDatos.Rows(x).Cells(24).Value), cboperiodo.SelectedValue)) / 365) * Double.Parse(dtgDatos.Rows(x).Cells(26).Value)), 2) 'pro prima
+                End If
+            Next
+            
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub CalcularInfonavitSoloToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CalcularInfonavitSoloToolStripMenuItem.Click
+        Try
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                If chkDiasCS.Checked = True Then
+                    dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+
+                    dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
+                    dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+
+                Else
+                    dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+
+                    dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
+                    dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, DiasCadaPeriodo, 3), 2).ToString("###,##0.00")
+
+                End If
+            Next
+
+
+
+            
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
 End Class
