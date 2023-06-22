@@ -90,8 +90,13 @@ Partial Class frmnominasmarinos
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+<<<<<<< HEAD
         Me.FiniquitoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+=======
+        Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+>>>>>>> origin/main
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -760,7 +765,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -768,14 +773,26 @@ Partial Class frmnominasmarinos
         'CalcularSoloISRToolStripMenuItem
         '
         Me.CalcularSoloISRToolStripMenuItem.Name = "CalcularSoloISRToolStripMenuItem"
-        Me.CalcularSoloISRToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CalcularSoloISRToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularSoloISRToolStripMenuItem.Text = "Calcular solo ISR"
         '
         'CalcularInfonavitSoloToolStripMenuItem
         '
         Me.CalcularInfonavitSoloToolStripMenuItem.Name = "CalcularInfonavitSoloToolStripMenuItem"
-        Me.CalcularInfonavitSoloToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.CalcularInfonavitSoloToolStripMenuItem.Text = "Calcular infonavit Solo"
+        Me.CalcularInfonavitSoloToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.CalcularInfonavitSoloToolStripMenuItem.Text = "Calcular Costo Social"
+        '
+        'CalcularProAguinaldoPrimaVacacionalToolStripMenuItem
+        '
+        Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem.Name = "CalcularProAguinaldoPrimaVacacionalToolStripMenuItem"
+        Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem.Text = "Calcular Pro Aguinaldo-Prima vacacional"
+        '
+        'CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem
+        '
+        Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Name = "CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem"
+        Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Text = "Calcular Pro Prima Antiguedad - Indemnizacion"
         '
         'FiniquitoToolStripMenuItem1
         '
@@ -900,8 +917,13 @@ Partial Class frmnominasmarinos
     Friend WithEvents CalculosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+<<<<<<< HEAD
     Friend WithEvents FiniquitoToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+=======
+    Friend WithEvents CalcularProAguinaldoPrimaVacacionalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+>>>>>>> origin/main
 
 
 End Class
