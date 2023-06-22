@@ -90,6 +90,8 @@ Partial Class frmnominasmarinos
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FiniquitoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -712,7 +714,7 @@ Partial Class frmnominasmarinos
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem, Me.FiniquitoToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1438, 24)
@@ -774,6 +776,19 @@ Partial Class frmnominasmarinos
         Me.CalcularInfonavitSoloToolStripMenuItem.Name = "CalcularInfonavitSoloToolStripMenuItem"
         Me.CalcularInfonavitSoloToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
         Me.CalcularInfonavitSoloToolStripMenuItem.Text = "Calcular infonavit Solo"
+        '
+        'FiniquitoToolStripMenuItem1
+        '
+        Me.FiniquitoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem})
+        Me.FiniquitoToolStripMenuItem1.Name = "FiniquitoToolStripMenuItem1"
+        Me.FiniquitoToolStripMenuItem1.Size = New System.Drawing.Size(66, 20)
+        Me.FiniquitoToolStripMenuItem1.Text = "Finiquito"
+        '
+        'SubirFiniquitoToolStripMenuItem
+        '
+        Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
+        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
         '
         'frmnominasmarinos
         '
@@ -885,6 +900,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents CalculosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FiniquitoToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubirFiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class

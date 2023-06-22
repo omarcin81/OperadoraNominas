@@ -16488,6 +16488,10 @@ Public Class frmnominasmarinos
         Try
             Dim Forma As New SeleccionarPeriodo
 
+            Forma.gInicial = cboperiodo.SelectedIndex
+            Forma.gFinal = cboperiodo.SelectedIndex
+            Forma.gSerie = cboserie.SelectedIndex
+
             If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
 
                 Dim filaExcel As Integer = 0
@@ -16609,6 +16613,7 @@ Public Class frmnominasmarinos
 
                 Dim rwFilas As DataRow() = nConsulta(sql)
 
+               
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = rwFilas.Count
@@ -16622,6 +16627,14 @@ Public Class frmnominasmarinos
 
 
                     For x As Integer = 0 To rwFilas.Count - 1
+
+                        Dim sql2 As String
+                        sql2 = "SELECT * FROM nominacomplemento"
+                        sql2 &= " WHERE fkiIdPeriodo between " & Forma.gInicial & " and " & Forma.gFinal
+                        sql2 &= " and iEstatus=1 and iEstatusNomina=0 AND iSerie=" & Forma.gSerie
+                        sql2 &= " and fkiIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC")
+                        Dim rwComplemento As DataRow() = nConsulta(sql2)
+
 
                         'PERIODOS para PROV
                         Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwFilas(x).Item("fkiIdPeriodo"))
@@ -16685,9 +16698,7 @@ Public Class frmnominasmarinos
                         hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-                        If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
-                            'MsgBox("lol")
-                        End If
+                      
                         hoja.Cell(filaExcel + x, 1).Value = mes 'MES
                         hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                         hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
@@ -16780,30 +16791,15 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fInsCS")
                         hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CF" & filaExcel + x & "+CJ" & filaExcel + x & "+Ck" & filaExcel + x & "+CL" & filaExcel + x
                         hoja.Cell(filaExcel + x, 92).Value = rwFilas(x).Item("fTotalCostoSocial")
-                        hoja.Cell(filaExcel + x, 93).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
 
-
-                        If tipoperiodos2 = 2 Then
-
-                            hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
-
-                        ElseIf tipoperiodos2 = 3 Then
-
-
-                            hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
-                            hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
-                            hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
-                            hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
-                            hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
-                            hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
-                        End If
+                        'PROVISIONES
+                        hoja.Cell(filaExcel + x, 93).FormulaA1 = rwComplemento(0)("prAguinaldo")  'Provision Aguinaldo
+                        hoja.Cell(filaExcel + x, 94).Value = rwComplemento(0)("prPrimaV") 'Provision Prima Vacacional
+                        hoja.Cell(filaExcel + x, 95).Value = rwComplemento(0)("prPrimaAnt") 'Provision Prima de antiguedad
+                        hoja.Cell(filaExcel + x, 96).Value = rwComplemento(0)("prIndemnizacion") 'Provision Indeminzacon
+                        hoja.Cell(filaExcel + x, 97).Value = rwComplemento(0)("SAR") 'Provision IMSS 
+                        hoja.Cell(filaExcel + x, 98).Value = rwComplemento(0)("CesantiaVejez")  'Provision Cezantia y Vejez
+                       
 
                         pgbProgreso.Value = x
                     Next x
@@ -17162,5 +17158,26 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString)
         End Try
+    End Sub
+
+    Private Sub SubirFiniquitoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SubirFiniquitoToolStripMenuItem.Click
+        Dim Forma As New frmFiniquito
+        Dim ids As String()
+        Dim sql As String
+        Dim cadenaempleados As String
+
+        Try
+
+            'Dim Forma As New frmFiniquito
+            Forma.gIdPeriodo = cboperiodo.SelectedValue
+            Forma.gUMA = ValorUMAF
+            Forma.ShowDialog()
+
+
+
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
