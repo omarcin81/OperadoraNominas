@@ -6179,7 +6179,19 @@ Public Class frmnominasmarinos
                 aniocostosocial = Date.Parse(rwPeriodo(0)("dFechaInicio").ToString).Year
             End If
 
+            Sql = "select * from periodos inner join tipos_periodos2 on periodos.fkiIdTipoPeriodo = tipos_periodos2.iIdTipoperiodo2     where iIdPeriodo=" & cboperiodo.SelectedValue
+            Dim rwPeriodo2 As DataRow() = nConsulta(Sql)
+            If rwPeriodo2 Is Nothing = False Then
 
+                aniocostosocial = Date.Parse(rwPeriodo2(0)("dFechaInicio").ToString).Year
+                diasperiodo = Integer.Parse(rwPeriodo2(0)("iDiasPago").ToString)
+                tipoperiodos2Calculo = rwPeriodo2(0).Item("fkiIdTipoPeriodo")
+                NombrePeriodo = rwPeriodo2(0)("nombre").ToString
+                FechaFinPeriodoPA = Date.Parse(rwPeriodo2(0)("dFechaFin").ToString)
+                FechaInicialPeriodoPA = Date.Parse(rwPeriodo2(0)("dFechaInicio").ToString)
+                DiasCadaPeriodoCSOPCION = DateDiff(DateInterval.Day, FechaInicialPeriodoPA, FechaFinPeriodoPA) + 1
+
+            End If
         Catch ex As Exception
 
         End Try
@@ -17313,6 +17325,11 @@ Public Class frmnominasmarinos
                 'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
                 sql = "select * from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
+                If Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) = 102 Then
+                    MsgBox("aqui")
+
+                End If
+
                 Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
                 If rwDatosEmpleadoPA Is Nothing = False Then
                     Dim diasPA As Integer
@@ -17461,6 +17478,7 @@ Public Class frmnominasmarinos
             Dim diastrabajados As Double
 
 
+
             
             pnlProgreso.Visible = True
 
@@ -17544,6 +17562,352 @@ Public Class frmnominasmarinos
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
            MessageBox.Show("Calculo terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub CaratulaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaratulaToolStripMenuItem.Click
+        Try
+            Dim SUELDOBRUTON As Double
+            Dim SEPTIMO As Double
+            Dim PRIDOMGRAVADA As Double
+            Dim PRIDOMEXENTA As Double
+            Dim TE2G As Double
+            Dim TE2E As Double
+            Dim TE3 As Double
+            Dim DESCANSOLABORADO As Double
+            Dim FESTIVOTRAB As Double
+            Dim BONOASISTENCIA As Double
+            Dim BONOPRODUCTIVIDAD As Double
+            Dim BONOPOLIVALENCIA As Double
+            Dim BONOESPECIALIDAD As Double
+            Dim BONOCALIDAD As Double
+            Dim COMPENSACION As Double
+            Dim SEMANAFONDO As Double
+            Dim INCREMENTORETENIDO As Double
+            Dim VACACIONESPRO As Double
+            Dim AGUINALDOGRA As Double
+            Dim AGUINALDOEXEN As Double
+            Dim PRIMAVACGRA As Double
+            Dim PRIMAVACEXEN As Double
+            Dim SUMAPERCEPCIONES As Double
+            Dim SUMAPERCEPCIONESPISR As Double
+            Dim FINJUSTIFICADA As Double
+            Dim PERMISOSINGOCEDESUELDO As Double
+            Dim PRIMADOMINICAL As Double
+            Dim SDEMPLEADO As Double
+
+            Dim INCAPACIDADD As Double
+            Dim ISRD As Double
+            Dim IMMSSD As Double
+            Dim INFONAVITD As Double
+            Dim INFOBIMANT As Double
+            Dim AJUSTEINFO As Double
+            Dim PENSIONAD As Double
+            Dim PRESTAMOD As Double
+            Dim FONACOTD As Double
+            Dim TNOLABORADOD As Double
+            Dim CUOTASINDICALD As Double
+            Dim SUBSIDIOG As Double
+            Dim SUBSIDIOA As Double
+            Dim SUMADEDUCCIONES As Double
+            Dim INCAPACIDAD As Double
+            Dim diastrabajados As Double
+            Dim NETO As Double
+
+            SUELDOBRUTON = 0
+            SEPTIMO = 0
+            PRIDOMGRAVADA = 0
+            PRIDOMEXENTA = 0
+            TE2G = 0
+            TE2E = 0
+            TE3 = 0
+            DESCANSOLABORADO = 0
+            FESTIVOTRAB = 0
+            BONOASISTENCIA = 0
+            BONOPRODUCTIVIDAD = 0
+            BONOPOLIVALENCIA = 0
+            BONOESPECIALIDAD = 0
+            BONOCALIDAD = 0
+            COMPENSACION = 0
+            SEMANAFONDO = 0
+            INCREMENTORETENIDO = 0
+            VACACIONESPRO = 0
+            AGUINALDOGRA = 0
+            AGUINALDOEXEN = 0
+            PRIMAVACGRA = 0
+            PRIMAVACEXEN = 0
+            SUMAPERCEPCIONES = 0
+            SUMAPERCEPCIONESPISR = 0
+            FINJUSTIFICADA = 0
+            PERMISOSINGOCEDESUELDO = 0
+            PRIMADOMINICAL = 0
+            SDEMPLEADO = 0
+
+            INCAPACIDADD = 0
+            ISRD = 0
+            IMMSSD = 0
+            INFONAVITD = 0
+            INFOBIMANT = 0
+            AJUSTEINFO = 0
+            PENSIONAD = 0
+            PRESTAMOD = 0
+            FONACOTD = 0
+            TNOLABORADOD = 0
+            CUOTASINDICALD = 0
+            SUBSIDIOG = 0
+            SUBSIDIOA = 0
+            SUMADEDUCCIONES = 0
+            INCAPACIDAD = 0
+            diastrabajados = 0
+            neto = 0
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                diastrabajados += Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value.ToString))
+                INCAPACIDAD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", 0, dtgDatos.Rows(x).Cells(57).Value))
+
+                SUELDOBRUTON += Double.Parse(IIf(dtgDatos.Rows(x).Cells(29).Value = "", 0, dtgDatos.Rows(x).Cells(29).Value))
+                SEPTIMO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(30).Value = "", 0, dtgDatos.Rows(x).Cells(30).Value))
+                PRIDOMGRAVADA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(31).Value = "", 0, dtgDatos.Rows(x).Cells(31).Value))
+                PRIDOMEXENTA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(32).Value = "", 0, dtgDatos.Rows(x).Cells(32).Value))
+                TE2G += Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", 0, dtgDatos.Rows(x).Cells(33).Value))
+                TE2E += Double.Parse(IIf(dtgDatos.Rows(x).Cells(34).Value = "", 0, dtgDatos.Rows(x).Cells(34).Value))
+                TE3 += Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", 0, dtgDatos.Rows(x).Cells(35).Value))
+                DESCANSOLABORADO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", 0, dtgDatos.Rows(x).Cells(36).Value))
+                FESTIVOTRAB += Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", 0, dtgDatos.Rows(x).Cells(37).Value))
+                BONOASISTENCIA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(38).Value = "", 0, dtgDatos.Rows(x).Cells(38).Value))
+                BONOPRODUCTIVIDAD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(39).Value = "", 0, dtgDatos.Rows(x).Cells(39).Value))
+                BONOPOLIVALENCIA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(40).Value = "", 0, dtgDatos.Rows(x).Cells(40).Value))
+                BONOESPECIALIDAD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", 0, dtgDatos.Rows(x).Cells(41).Value))
+                BONOCALIDAD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", 0, dtgDatos.Rows(x).Cells(42).Value))
+                COMPENSACION += Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", 0, dtgDatos.Rows(x).Cells(43).Value))
+                SEMANAFONDO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", 0, dtgDatos.Rows(x).Cells(44).Value))
+                FINJUSTIFICADA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", 0, dtgDatos.Rows(x).Cells(45).Value))
+                PERMISOSINGOCEDESUELDO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(46).Value = "", 0, dtgDatos.Rows(x).Cells(46).Value))
+                INCREMENTORETENIDO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", 0, dtgDatos.Rows(x).Cells(47).Value))
+                VACACIONESPRO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(48).Value = "", 0, dtgDatos.Rows(x).Cells(48).Value))
+                AGUINALDOGRA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", 0, dtgDatos.Rows(x).Cells(49).Value))
+                AGUINALDOEXEN += Double.Parse(IIf(dtgDatos.Rows(x).Cells(50).Value = "", 0, dtgDatos.Rows(x).Cells(50).Value))
+                PRIMAVACGRA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(52).Value = "", 0, dtgDatos.Rows(x).Cells(52).Value))
+                PRIMAVACEXEN += Double.Parse(IIf(dtgDatos.Rows(x).Cells(53).Value = "", 0, dtgDatos.Rows(x).Cells(53).Value))
+
+                
+
+                INCAPACIDADD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", 0, dtgDatos.Rows(x).Cells(57).Value))
+                ISRD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(58).Value = "", 0, dtgDatos.Rows(x).Cells(58).Value))
+                IMMSSD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(59).Value = "", 0, dtgDatos.Rows(x).Cells(59).Value))
+                INFONAVITD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(60).Value = "", 0, dtgDatos.Rows(x).Cells(60).Value))
+                INFOBIMANT += Double.Parse(IIf(dtgDatos.Rows(x).Cells(61).Value = "", 0, dtgDatos.Rows(x).Cells(61).Value))
+                AJUSTEINFO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(62).Value = "", 0, dtgDatos.Rows(x).Cells(62).Value))
+                PENSIONAD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(63).Value = "", 0, dtgDatos.Rows(x).Cells(63).Value))
+                PRESTAMOD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(64).Value = "", 0, dtgDatos.Rows(x).Cells(64).Value))
+                FONACOTD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(65).Value = "", 0, dtgDatos.Rows(x).Cells(65).Value))
+                TNOLABORADOD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(66).Value = "", 0, dtgDatos.Rows(x).Cells(66).Value))
+                CUOTASINDICALD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(67).Value = "", 0, dtgDatos.Rows(x).Cells(67).Value))
+                SUBSIDIOG += Double.Parse(IIf(dtgDatos.Rows(x).Cells(68).Value = "", 0, dtgDatos.Rows(x).Cells(68).Value))
+                SUBSIDIOA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(69).Value = "", 0, dtgDatos.Rows(x).Cells(69).Value))
+                NETO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(70).Value = "", 0, dtgDatos.Rows(x).Cells(70).Value))
+
+                pgbProgreso.Value += 1
+                Application.DoEvents()
+            Next
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+
+
+            If gTipoCalculo = "1" Then
+                SUMAPERCEPCIONES = SUELDOBRUTON + SEPTIMO + PRIDOMGRAVADA + PRIDOMEXENTA + TE2G + TE2E + TE3 + DESCANSOLABORADO + FESTIVOTRAB
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION + SEMANAFONDO
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO + INCREMENTORETENIDO + VACACIONESPRO + AGUINALDOGRA + AGUINALDOEXEN
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + PRIMAVACGRA + PRIMAVACEXEN - INCAPACIDAD
+                SUMAPERCEPCIONESPISR = SUMAPERCEPCIONES - PRIDOMEXENTA - TE2E - AGUINALDOEXEN - PRIMAVACEXEN
+            Else
+                SUMAPERCEPCIONES = SUELDOBRUTON + SEPTIMO
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + SEMANAFONDO
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO + INCREMENTORETENIDO + VACACIONESPRO + AGUINALDOGRA + AGUINALDOEXEN
+                SUMAPERCEPCIONES = SUMAPERCEPCIONES + PRIMAVACGRA + PRIMAVACEXEN - INCAPACIDAD
+                SUMAPERCEPCIONESPISR = SUMAPERCEPCIONES - PRIMAVACEXEN - AGUINALDOEXEN
+            End If
+
+
+
+            'Verificar si tiene excedente y de que tipo
+            If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
+            Else
+                SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
+            End If
+
+            Dim filaExcel As Integer = 5
+            Dim dialogo As New SaveFileDialog()
+            Dim Alter As Boolean = False
+
+
+            Dim sql As String
+
+            'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
+            Dim consecutivo As Integer = 1
+
+            'Dim rwDatosPeriodo As DataRow() = nConsulta(sql)
+
+
+            If dtgDatos.Rows.Count > 0 Then
+
+
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+
+                hoja.Column("A").Width = 30
+                hoja.Column("B").Width = 30
+                hoja.Column("C").Width = 30
+                hoja.Column("D").Width = 25
+                hoja.Column("E").Width = 25
+                hoja.Column("F").Width = 25
+                hoja.Column("G").Width = 25
+                hoja.Column("H").Width = 25
+                hoja.Column("I").Width = 25
+                hoja.Column("J").Width = 25
+
+
+                'hoja.Cell(2, 2).Value = "Fecha:"
+                'hoja.Cell(2, 3).Value = Date.Now.ToShortDateString()
+
+                'hoja.Cell(3, 2).Value = ":"
+                'hoja.Cell(3, 3).Value = ""
+
+                hoja.Range(1, 1, 1, 10).Style.Font.FontSize = 10
+                hoja.Range(1, 1, 1, 10).Style.Font.SetBold(True)
+                hoja.Range(1, 1, 1, 10).Style.Alignment.WrapText = True
+                hoja.Range(1, 1, 1, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(1, 1, 1, 10).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+                hoja.Range(1, 1, 1, 10).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+                hoja.Range(1, 1, 1, 10).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+                hoja.Cell(6, 5).Value = "PERCEPCIONES"
+                hoja.Cell(7, 4).Value = "SUELDO"
+                hoja.Cell(7, 5).Value = SUELDOBRUTON
+                hoja.Cell(8, 4).Value = "SEPTIMO DIA"
+                hoja.Cell(8, 5).Value = SEPTIMO
+                hoja.Cell(9, 4).Value = "PRIMA DOMINICAL GRAVADA"
+                hoja.Cell(9, 5).Value = PRIDOMGRAVADA
+                hoja.Cell(10, 4).Value = "PRIMA DOMINICAL EXENTA"
+                hoja.Cell(10, 5).Value = PRIDOMEXENTA
+                hoja.Cell(11, 4).Value = "HORAS EXTRAS DOBLES GRAVADAS"
+                hoja.Cell(11, 5).Value = TE2G
+                hoja.Cell(12, 4).Value = "HORAS EXTRAS DOBLES EXENTAS"
+                hoja.Cell(12, 5).Value = TE2E
+                hoja.Cell(13, 4).Value = "HORAS EXTRAS TRIPLES"
+                hoja.Cell(13, 5).Value = TE3
+                hoja.Cell(14, 4).Value = "DESCANSO LABORADO"
+                hoja.Cell(14, 5).Value = DESCANSOLABORADO
+                hoja.Cell(15, 4).Value = "FESTIVO TRABAJADO"
+                hoja.Cell(15, 5).Value = FESTIVOTRAB
+                hoja.Cell(16, 4).Value = "BONO ASISTENCIA"
+                hoja.Cell(16, 5).Value = BONOASISTENCIA
+                hoja.Cell(17, 4).Value = "BONO PRODUCTIVIDAD"
+                hoja.Cell(17, 5).Value = BONOPRODUCTIVIDAD
+                hoja.Cell(18, 4).Value = "BONO POLIVALENCIA"
+                hoja.Cell(18, 5).Value = BONOPOLIVALENCIA
+                hoja.Cell(19, 4).Value = "BONO ESPECIALIDAD"
+                hoja.Cell(19, 5).Value = BONOESPECIALIDAD
+                hoja.Cell(20, 4).Value = "BONO CALIDAD"
+                hoja.Cell(20, 5).Value = BONOCALIDAD
+                hoja.Cell(21, 4).Value = "COMPENSACION"
+                hoja.Cell(21, 5).Value = COMPENSACION
+                hoja.Cell(22, 4).Value = "SEMANA DE FONDO"
+                hoja.Cell(22, 5).Value = SEMANAFONDO
+                hoja.Cell(23, 4).Value = "FALTA INJUSTIFICA"
+                hoja.Cell(23, 5).Value = FINJUSTIFICADA
+                hoja.Cell(24, 4).Value = "PERMISO SIN GOCE DE SUELDO"
+                hoja.Cell(24, 5).Value = PERMISOSINGOCEDESUELDO
+                hoja.Cell(25, 4).Value = "INCREMENTO RETENIDO"
+                hoja.Cell(25, 5).Value = INCREMENTORETENIDO
+                hoja.Cell(26, 4).Value = "VACACIONES"
+                hoja.Cell(26, 5).Value = VACACIONESPRO
+                hoja.Cell(27, 4).Value = "AGUINALDO GRAVADO"
+                hoja.Cell(27, 5).Value = AGUINALDOGRA
+                hoja.Cell(28, 4).Value = "AGUINALDO EXENTO"
+                hoja.Cell(28, 5).Value = AGUINALDOEXEN
+                hoja.Cell(29, 4).Value = "PRIMA VACACIONAL GRAVADA"
+                hoja.Cell(29, 5).Value = PRIMAVACGRA
+                hoja.Cell(30, 4).Value = "PRIMA VACACIONAL EXENTA"
+                hoja.Cell(30, 5).Value = PRIMAVACEXEN
+                hoja.Cell(31, 4).Value = "TOTAL PERCEPCIONES"
+                hoja.Cell(31, 5).FormulaA1 = "=SUM(E" & 7 & ":E" & 30 & ")"
+
+                hoja.Cell(32, 5).Value = "DEDUCCIONES"
+                hoja.Cell(33, 4).Value = "INCAPACIDAD"
+                hoja.Cell(33, 5).Value = INCAPACIDADD
+                hoja.Cell(34, 4).Value = "ISR"
+                hoja.Cell(34, 5).Value = ISRD
+                hoja.Cell(35, 4).Value = "IMSS"
+                hoja.Cell(35, 5).Value = IMMSSD
+                hoja.Cell(36, 4).Value = "INFONAVIT"
+                hoja.Cell(36, 5).Value = INFONAVITD
+                hoja.Cell(37, 4).Value = "INFONAVIT BIMESTRE ANTERIOR"
+                hoja.Cell(37, 5).Value = INFOBIMANT
+                hoja.Cell(38, 4).Value = "AJUSTE INFONAVIT"
+                hoja.Cell(38, 5).Value = AJUSTEINFO
+                hoja.Cell(39, 4).Value = "PENSIÓN ALIMENTICIA"
+                hoja.Cell(39, 5).Value = PENSIONAD
+                hoja.Cell(40, 4).Value = "PRESTAMO"
+                hoja.Cell(40, 5).Value = PRESTAMOD
+                hoja.Cell(41, 4).Value = "FONACOT"
+                hoja.Cell(41, 5).Value = FONACOTD
+                hoja.Cell(42, 4).Value = "TIEMPO NO LABORADO"
+                hoja.Cell(42, 5).Value = TNOLABORADOD
+                hoja.Cell(43, 4).Value = "CUOTA SINDICAL"
+                hoja.Cell(43, 5).Value = CUOTASINDICALD
+                hoja.Cell(44, 4).Value = "SUBSIDIO"
+                hoja.Cell(44, 5).Value = SUBSIDIOA * -1
+                hoja.Cell(45, 4).Value = "TOTAL DEDUCCIONES"
+
+                If gTipoCalculo = "1" Then
+                    'hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
+                    hoja.Cell(45, 5).Value = SUMADEDUCCIONES
+                Else
+                    hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
+                End If
+
+
+                'hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
+
+                hoja.Cell(46, 4).Value = "TOTALES"
+                hoja.Cell(47, 4).Value = "NETO"
+                hoja.Cell(47, 5).Value = SUMAPERCEPCIONES - SUMADEDUCCIONES
+                hoja.Cell(47, 6).Value = NETO
+
+
+
+
+                filaExcel = 1
+
+                'Dim dt As DataTable
+                'dt = rwDatosPeriodo.CopyToDataTable()
+
+                
+
+                dialogo.DefaultExt = "*.xlsx"
+                dialogo.FileName = "Caratula de nomina" & cboperiodo.SelectedText
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                dialogo.ShowDialog()
+                libro.SaveAs(dialogo.FileName)
+                'libro.SaveAs("c:\temp\control.xlsx")
+                'libro.SaveAs(dialogo.FileName)
+                'apExcel.Quit()
+                libro = Nothing
+                MessageBox.Show("Proceso terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+
+
+
+
 
 
         Catch ex As Exception

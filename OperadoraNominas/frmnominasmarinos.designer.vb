@@ -92,6 +92,7 @@ Partial Class frmnominasmarinos
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CaratulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -723,7 +724,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -788,6 +789,12 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Name = "CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem"
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Text = "Calcular Pro Prima Antiguedad - Indemnizacion"
+        '
+        'CaratulaToolStripMenuItem
+        '
+        Me.CaratulaToolStripMenuItem.Name = "CaratulaToolStripMenuItem"
+        Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.CaratulaToolStripMenuItem.Text = "Caratula"
         '
         'frmnominasmarinos
         '
@@ -901,6 +908,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularProAguinaldoPrimaVacacionalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CaratulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
