@@ -17323,10 +17323,10 @@ Public Class frmnominasmarinos
                 'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
                 sql = "select * from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
-                If Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) = 102 Then
-                    MsgBox("aqui")
+                'If Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) = 102 Then
+                '    MsgBox("aqui")
 
-                End If
+                'End If
 
                 Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
                 If rwDatosEmpleadoPA Is Nothing = False Then
@@ -17567,7 +17567,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-<<<<<<< HEAD
+
     Private Sub SubirFiniquitoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SubirFiniquitoToolStripMenuItem.Click
 
         'Forma.gIdPeriodo = cboperiodo.SelectedIndex
@@ -17585,7 +17585,12 @@ Public Class frmnominasmarinos
                 cboserie.SelectedIndex = Forma.gIdSerie + 1
 
                 cmdverdatos_Click(sender, e)
-=======
+            End If
+                 Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
+
     Private Sub CaratulaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaratulaToolStripMenuItem.Click
         Try
             Dim SUELDOBRUTON As Double
@@ -17711,7 +17716,7 @@ Public Class frmnominasmarinos
                 PRIMAVACGRA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(52).Value = "", 0, dtgDatos.Rows(x).Cells(52).Value))
                 PRIMAVACEXEN += Double.Parse(IIf(dtgDatos.Rows(x).Cells(53).Value = "", 0, dtgDatos.Rows(x).Cells(53).Value))
 
-                
+
 
                 INCAPACIDADD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", 0, dtgDatos.Rows(x).Cells(57).Value))
                 ISRD += Double.Parse(IIf(dtgDatos.Rows(x).Cells(58).Value = "", 0, dtgDatos.Rows(x).Cells(58).Value))
@@ -17747,17 +17752,12 @@ Public Class frmnominasmarinos
                 SUMAPERCEPCIONES = SUMAPERCEPCIONES + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO + INCREMENTORETENIDO + VACACIONESPRO + AGUINALDOGRA + AGUINALDOEXEN
                 SUMAPERCEPCIONES = SUMAPERCEPCIONES + PRIMAVACGRA + PRIMAVACEXEN - INCAPACIDAD
                 SUMAPERCEPCIONESPISR = SUMAPERCEPCIONES - PRIMAVACEXEN - AGUINALDOEXEN
->>>>>>> origin/main
+
             End If
 
 
 
-<<<<<<< HEAD
-        Catch ex As Exception
 
-        End Try
-
-=======
             'Verificar si tiene excedente y de que tipo
             If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                 SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
@@ -17913,7 +17913,7 @@ Public Class frmnominasmarinos
                 'Dim dt As DataTable
                 'dt = rwDatosPeriodo.CopyToDataTable()
 
-                
+
 
                 dialogo.DefaultExt = "*.xlsx"
                 dialogo.FileName = "Caratula de nomina" & cboperiodo.SelectedText
@@ -17937,6 +17937,5 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
->>>>>>> origin/main
     End Sub
 End Class
