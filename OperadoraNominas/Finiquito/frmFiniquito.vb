@@ -4,8 +4,8 @@ Imports System.Text.RegularExpressions
 Imports System.Net.Mime.MediaTypeNames
 
 Public Class frmFiniquito
-    Public gIdPeriodo As String
-    Public gIdSerie As String
+    Public gIdPeriodo As Integer
+    Public gIdSerie As Integer
     Public gUMA As Double
     Dim sheetIndex As Integer = -1
     Dim SQL As String
@@ -18,13 +18,95 @@ Public Class frmFiniquito
 
     Private Sub frmSubirFiniquito_loand(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
+            
+            cargarperiodos()
+            cargarEmpleados()
+            cargarserie()
+            cboPeriodo.SelectedIndex = gIdPeriodo
 
-            'cargarperiodos()
-            cargarempleados()
+            initTextbox()
+
+
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+    Private Sub initTextbox()
+
+        'STP
+        txtIndeminizacion.TabIndex = 1
+        txtPrimaAntiguedad.TabIndex = 2
+        txtSueldo.TabIndex = 3
+        txtAguinaldo.TabIndex = 4
+        txtVacacionesProp.TabIndex = 5
+        txtPrimaVacacional.TabIndex = 6
+        txtVacacionesPendientes.TabIndex = 7
+        txtHE2.TabIndex = 8
+        txtHE3.TabIndex = 9
+        txtDL.TabIndex = 10
+        txtBonos.TabIndex = 11
+        txtIncidencias.TabIndex = 12
+        txtInfonavit.TabIndex = 13
+        txtFonacot.TabIndex = 14
+        txtVales.TabIndex = 15
+        txtISR.TabIndex = 16
+        txtISRIndemnizacion.TabIndex = 17
+        txtSTP.TabIndex = 18
+
+        txtIndeminizacion.Text = 0.0
+        txtPrimaAntiguedad.Text = 0.0
+        txtSueldo.Text = 0.0
+        txtAguinaldo.Text = 0.0
+        txtVacacionesProp.Text = 0.0
+        txtPrimaVacacional.Text = 0.0
+        txtVacacionesPendientes.Text = 0.0
+        txtHE2.Text = 0.0
+        txtHE3.Text = 0.0
+        txtDL.Text = 0.0
+        txtBonos.Text = 0.0
+        txtIncidencias.Text = 0.0
+        txtInfonavit.Text = 0.0
+        txtFonacot.Text = 0.0
+        txtVales.Text = 0.0
+        txtISR.Text = 0.0
+        txtISRIndemnizacion.Text = 0.0
+        txtSTP.Text = 0.0
+
+        'EXCEDENTE
+        txtindeminizacionExce.TabIndex = 19
+        txtAntiguedadExce.TabIndex = 20
+        txtSueldoExce.TabIndex = 21
+        txtAguinaldoExce.TabIndex = 22
+        txtVacacionesPropExce.TabIndex = 23
+        txtVacacionesPendientesExce.TabIndex = 24
+        txtHE2Exce.TabIndex = 25
+        txtHE3Exce.TabIndex = 26
+        txtDLExce.TabIndex = 27
+        txtBonosExce.TabIndex = 28
+        txtIncidenciasExce.TabIndex = 29
+        txtInfonavitExce.TabIndex = 30
+        txtSindicato.TabIndex = 31
+
+
+        txtindeminizacionExce.Text = 0.0
+        txtAntiguedadExce.Text = 0.0
+        txtSueldoExce.Text = 0.0
+        txtAguinaldoExce.Text = 0.0
+        txtVacacionesPropExce.Text = 0.0
+        txtPrimaVacacionalExce.Text = 0.0
+        txtVacacionesPendientesExce.Text = 0.0
+        txtHE2Exce.Text = 0.0
+        txtHE3Exce.Text = 0.0
+        txtDLExce.Text = 0.0
+        txtBonosExce.Text = 0.0
+        txtIncidenciasExce.Text = 0.0
+        txtInfonavitExce.Text = 0.0
+        txtSindicato.Text = 0.0
+
+
+    End Sub
+
     Private Sub cargarEmpleados()
 
         'Verificar si se tienen permisos
@@ -52,7 +134,12 @@ Public Class frmFiniquito
         'Verificar si se tienen permisos
         Dim sql As String
         Try
-         
+            sql = "SELECT TOP 1 fkiIdPeriodo, iEstatusEmpleado FROM NOMINA where fkiIdPeriodo=" & gIdPeriodo + 1
+            sql &= " order by iEstatusEmpleado desc"
+            Dim rwSerie As DataRow() = nConsulta(sql)
+            If rwSerie Is Nothing = False Then
+                cboSerie.SelectedIndex = rwSerie(0)("iEstatusEmpleado") + 1
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -242,16 +329,16 @@ Public Class frmFiniquito
         Try
 
             SQL = "select  * from empleadosC where " 'fkiIdClienteInter=-1"
-            SQL &= "iIdEmpleadoC=" & cboEmpleado.SelectedIndex
+            SQL &= "iIdEmpleadoC=" & cboEmpleado.SelectedIndex + 1
             'SQL &= " order by cFuncionesPuesto,cNombreLargo"
             Dim rwDatosEmpleado As DataRow() = nConsulta(SQL)
             If rwDatosEmpleado Is Nothing = False Then
 
                 SQL = "EXEC [setNominaInsertarFiniquito ] 0"
                 'periodo
-                SQL &= "," & cboPeriodo.SelectedValue
+                SQL &= "," & cboPeriodo.SelectedIndex + 1
                 'idempleado
-                SQL &= "," & cboEmpleado.SelectedIndex
+                SQL &= "," & cboEmpleado.SelectedIndex + 1
                 'idempresa
                 SQL &= ",1"
                 'Puesto
@@ -311,7 +398,7 @@ Public Class frmFiniquito
                 'numero dias incapacidad
                 SQL &= "'," & 0
                 'sueldobruto
-                SQL &= "," & IIf(CDbl(txtSueldo.Text) = "", 0, CDbl(txtSueldo.Text))
+                SQL &= "," & IIf((txtSueldo.Text) = "", 0, (txtSueldo.Text))
 
                 'fSeptimoDia
                 SQL &= "," & 0.0
@@ -320,15 +407,15 @@ Public Class frmFiniquito
                 'fPrimaDomExenta
                 SQL &= "," & 0.0
                 'fTExtra2Gravado
-                SQL &= "," & IIf(CDbl(txtHE2.Text) = "", 0, CDbl(txtHE2.Text) / 2)
+                SQL &= "," & IIf((txtHE2.Text) = "", 0, CDbl(txtHE2.Text) / 2)
                 'fTExtra2Exento
-                SQL &= "," & IIf(CDbl(txtHE2.Text) = "", 0, CDbl(txtHE2.Text) / 2)
+                SQL &= "," & IIf((txtHE2.Text) = "", 0, CDbl(txtHE2.Text) / 2)
                 'fTExtra3
-                SQL &= "," & IIf(CDbl(txtHE3.Text) = "", 0, CDbl(txtHE3.Text))
+                SQL &= "," & IIf((txtHE3.Text) = "", 0, (txtHE3.Text))
                 'fDescansoL
                 SQL &= "," & 0.0
                 'fDiaFestivoL
-                SQL &= "," & IIf(CDbl(txtDL.Text) = "", 0, CDbl(txtDL.Text))
+                SQL &= "," & IIf((txtDL.Text) = "", 0, (txtDL.Text))
                 'fBonoAsistencia
                 SQL &= "," & 0.0
                 'fBonoProductividad
@@ -340,11 +427,11 @@ Public Class frmFiniquito
                 'fBonoCalidad
                 SQL &= "," & 0.0
                 'fCompensacion
-                SQL &= "," & IIf(CDbl(txtBonos.Text) = "", 0, CDbl(txtBonos.Text))
+                SQL &= "," & IIf((txtBonos.Text) = "", 0, (txtBonos.Text))
                 'fSemanaFondo
                 SQL &= "," & 0.0
                 '@fFaltaInjustificada 
-                SQL &= "," & IIf(CDbl(txtIncidencias.Text) = "", 0, CDbl(txtIncidencias.Text))
+                SQL &= "," & IIf((txtIncidencias.Text) = "", 0, (txtIncidencias.Text))
                 '@fPermisoSinGS 
                 SQL &= "," & 0.0
                 '@fIncrementoRetenido 
@@ -353,10 +440,10 @@ Public Class frmFiniquito
                 'Validacion G Y E
                 Dim topex30 As Double = gUMA * 30
                 Dim topex15 As Double = gUMA * 15
-                Dim aguigravado As Double = IIf(topex30 > CDbl(txtAguinaldo.Text), CDbl(txtAguinaldo.Text) - topex30, 0)
-                Dim primavacgravado As Double = IIf(topex15 > CDbl(txtPrimaVacacional.Text), CDbl(txtPrimaVacacional.Text) - topex15, 0)
+                Dim aguigravado As Double = IIf(CDbl(txtAguinaldo.Text) > topex30, CDbl(txtAguinaldo.Text) - topex30, 0)
+                Dim primavacgravado As Double = IIf(CDbl(txtPrimaVacacional.Text) > topex15, CDbl(txtPrimaVacacional.Text) - topex15, 0)
                 'vacaciones proporcionales
-                SQL &= "," & CDbl(txtVacacionesProp.Text)
+                SQL &= "," & (txtVacacionesProp.Text)
                 'aguinaldo gravado
                 SQL &= "," & aguigravado
                 'aguinaldo exento
@@ -366,13 +453,13 @@ Public Class frmFiniquito
                 'prima vacacional exento
                 SQL &= "," & CDbl(txtPrimaVacacional.Text) - primavacgravado
                 'totalpercepciones
-                SQL &= "," & CDbl(txtSueldo.Text) + CDbl(txtVacacionesProp.Text) + aguigravado + (CDbl(txtAguinaldo.Text) - aguigravado) + primavacgravado + (CDbl(txtPrimaVacacional.Text) - primavacgravado) + CDbl(txtBonos.Text) + CDbl(txtDL.Text)
+                SQL &= "," & IIf(txtSueldo.Text = "", 0, txtSueldo.Text) + CDbl(txtVacacionesProp.Text) + aguigravado + (CDbl(txtAguinaldo.Text) - aguigravado) + primavacgravado + (CDbl(txtPrimaVacacional.Text) - primavacgravado) + IIf(txtBonos.Text = "", 0, CDbl(txtBonos.Text)) + IIf(txtDL.Text = "", 0, CDbl(txtDL.Text))
                 'totalpercepcionesISR
                 SQL &= "," & CDbl(txtSueldo.Text) + CDbl(txtVacacionesProp.Text) + aguigravado + primavacgravado
                 'Incapacidad
                 SQL &= "," & 0.0
                 'isr
-                SQL &= "," & CDbl(txtISR.Text) + IIf(CDbl(txtISRIndemnizacion.Text) = "", 0, CDbl(txtISRIndemnizacion.Text))
+                SQL &= "," & CDbl(txtISR.Text) + IIf((txtISRIndemnizacion.Text) = "", 0, (txtISRIndemnizacion.Text))
                 'imss
                 SQL &= "," & 0.0
                 'infonavit
@@ -386,7 +473,7 @@ Public Class frmFiniquito
                 'Prestamo
                 SQL &= "," & 0.0
                 'Fonacot
-                SQL &= "," & IIf(CDbl(txtFonacot.Text) = "", 0, CDbl(txtFonacot.Text))
+                SQL &= "," & IIf((txtFonacot.Text) = "", 0, (txtFonacot.Text))
                 'fT_No_laborado
                 SQL &= "," & 0.0
                 'cuota sindical
@@ -397,7 +484,7 @@ Public Class frmFiniquito
                 'Subsidio Aplicado
                 SQL &= "," & 0.0
                 'Operadora
-                SQL &= "," & IIf(CDbl(txtSTP.Text) = "", 0, CDbl(txtSTP.Text))
+                SQL &= "," & IIf((txtSTP.Text) = "", 0, (txtSTP.Text))
                 'Prestamo Personal Asimilado
                 SQL &= "," & 0.0
                 'Adeudo_Infonavit_Asimilado
@@ -443,7 +530,7 @@ Public Class frmFiniquito
                 'tipo consecutivo
                 SQL &= "," & 1
                 'fechainicial
-                SQL &= ",'" & Date.Now.ToShortDateString & "'"
+                SQL &= ",'" & Date.Now.ToShortDateString & ""
                 'fechafinal
                 SQL &= "','" & Date.Now.ToShortDateString & "'"
 
@@ -459,13 +546,13 @@ Public Class frmFiniquito
 
                 SQL = "EXEC [setNominaComplementoInsertar] 0"
                 'periodo
-                SQL &= "," & cboPeriodo.SelectedValue
+                SQL &= "," & cboPeriodo.SelectedIndex + 1
                 'idempleado
-                SQL &= "," & rwDatosEmpleado(0)("iIdEmpleado")
+                SQL &= "," & rwDatosEmpleado(0)("iIdEmpleadoC")
                 'serie
                 SQL &= "," & cboSerie.SelectedIndex
                 'vales
-                SQL &= "," & IIf(txtVales.Text = "", 0, CDbl(txtVales.Text))
+                SQL &= "," & IIf(txtVales.Text = "", 0, (txtVales.Text))
                 'aportacion
                 SQL &= "," & 0.0
                 'prAguinaldo
@@ -487,7 +574,9 @@ Public Class frmFiniquito
                 'TE3E
                 SQL &= "," & IIf(txtHE3Exce.Text = "", "0", txtHE3Exce.Text)
                 'Descanso_Laborado_V
-                SQL &= "," & IIf(txtDLExce.Text="","0",txtDLExce.Text)
+                SQL &= "," & IIf(txtDLExce.Text = "", "0", txtDLExce.Text)
+                'DiaFestivoLaborado_v
+                SQL &= "," & 0.0
                 'COSTO
                 SQL &= ",''"
                 'vALOR1
@@ -508,6 +597,9 @@ Public Class frmFiniquito
                     Exit Sub
                 End If
             End If
+            MessageBox.Show("Se guardo Finiquito Correctamente ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Me.DialogResult = Windows.Forms.DialogResult.OK
+            Me.Close()
 
         Catch ex As Exception
             MsgBox(ex.ToString)
@@ -556,14 +648,186 @@ Public Class frmFiniquito
 
     End Function
 
-    
-    Private Sub txtindeminizacionExce_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtindeminizacionExce.TextChanged
-        totalsindicato = CDbl(txtindeminizacionExce.Text) + CDbl(txtAntiguedadExce.Text) + CDbl(txtSueldoExce.Text) + CDbl(txtAguinaldoExce.Text) + CDbl(txtVacacionesPropExce.Text) + CDbl(txtPrimaVacacionalExce.Text) + CDbl(txtVacacionesPendientesExce.Text) + CDbl(txtHE2Exce.Text) + CDbl(txtHE3Exce.Text) + CDbl(txtDLExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtIncidenciasExce.Text) + CDbl(txtInfonavitExce.Text)
+    Sub sumaSindicato()
+        Try
+            totalsindicato += CDbl(txtindeminizacionExce.Text.ToString)
+            totalsindicato += CDbl(txtAntiguedadExce.Text.ToString)
+            totalsindicato += CDbl(txtSueldoExce.Text.ToString)
+            totalsindicato += CDbl(txtAguinaldoExce.Text.ToString)
+            totalsindicato += CDbl(txtVacacionesPropExce.Text.ToString)
+            totalsindicato += CDbl(txtPrimaVacacionalExce.Text.ToString)
+            totalsindicato += CDbl(txtVacacionesPendientesExce.Text.ToString)
+            totalsindicato += CDbl(txtHE2Exce.Text.ToString)
+            totalsindicato += CDbl(txtHE3Exce.Text.ToString)
+            totalsindicato += CDbl(txtDLExce.Text.ToString)
+            totalsindicato += CDbl(txtBonosExce.Text.ToString)
+            totalsindicato -= CDbl(txtIncidenciasExce.Text.ToString)
+            totalsindicato -= CDbl(txtInfonavitExce.Text.ToString)
 
+
+            txtSindicato.Text = totalsindicato
+        Catch ex As Exception
+
+        End Try
+
+
+          
+    End Sub
+    Sub sumarstp()
+        Try
+            Dim totalstp As String
+
+            totalstp += CDbl(txtIndeminizacion.Text.ToString)
+            totalstp += CDbl(txtPrimaAntiguedad.Text.ToString)
+            totalstp += CDbl(txtSueldo.Text.ToString)
+            totalstp += CDbl(txtAguinaldo.Text.ToString)
+            totalstp += CDbl(txtVacacionesProp.Text.ToString)
+            totalstp += CDbl(txtPrimaVacacional.Text.ToString)
+            totalstp += CDbl(txtVacacionesPendientes.Text.ToString)
+            totalstp += CDbl(txtHE2.Text.ToString)
+            totalstp += CDbl(txtHE3.Text.ToString)
+            totalstp += CDbl(txtDL.Text.ToString)
+            totalstp += CDbl(txtBonos.Text.ToString)
+            totalstp -= CDbl(txtIncidencias.Text.ToString)
+            totalstp -= CDbl(txtInfonavit.Text.ToString)
+            totalstp += CDbl(txtFonacot.Text.ToString)
+            'totalstp += CDbl(txtVales.Text.ToString)
+            totalstp -= CDbl(txtISR.Text.ToString)
+            totalstp -= CDbl(txtISRIndemnizacion.Text.ToString)
+
+            txtSTP.Text = totalstp
+
+
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Sub
+   
+    Private Sub txtIndeminizacion_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtIndeminizacion.KeyUp
+        sumarstp()
+    End Sub
+    Private Sub txtPrimaAntiguedad_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPrimaAntiguedad.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtSueldo_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSueldo.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtAguinaldo_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtAguinaldo.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtVacacionesProp_KeyUp(sender As System.Object, e As System.EventArgs) Handles txtVacacionesProp.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtPrimaVacacional_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPrimaVacacional.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtVacacionesPendientes_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtVacacionesPendientes.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtHE2_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtHE2.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtHE3_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtHE3.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtDL_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtDL.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtBonos_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtBonos.KeyUp
+        sumarstp()
+    End Sub
+    Private Sub txtIncidencias_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtIncidencias.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtInfonavit_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtInfonavit.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtFonacot_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtFonacot.KeyUp
+        sumarstp()
+    End Sub
+    Private Sub txtISR_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtISR.KeyUp
+        sumarstp()
+    End Sub
+
+    Private Sub txtISRIndemnizacion_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtISRIndemnizacion.KeyUp
+        sumarstp()
+    End Sub
+    Private Sub txtSTP_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSTP.KeyUp
+        sumarstp()
     End Sub
 
 
-    Private Sub txtSindicato_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSindicato.TextChanged
-        txtSindicato.Text = txtSindicato.Text
+
+
+    Private Sub txtindeminizacionExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtindeminizacionExce.KeyUp
+        sumaSindicato()
     End Sub
+
+    Private Sub txtAntiguedadExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtAntiguedadExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtSueldoExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSueldoExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtAguinaldoExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtAguinaldoExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtVacacionesPropExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtVacacionesPropExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtPrimaVacacionalExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPrimaVacacionalExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtVacacionesPendientesExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtVacacionesPendientesExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtHE2Exce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtHE2Exce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtHE3Exce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtHE3Exce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtDLExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtDLExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtBonosExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtBonosExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtIncidenciasExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtIncidenciasExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtInfonavitExce_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtInfonavitExce.KeyUp
+        sumaSindicato()
+    End Sub
+
+    Private Sub txtVales_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtVales.KeyUp
+        sumaSindicato()
+    End Sub
+
+
 End Class

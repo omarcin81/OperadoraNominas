@@ -16746,7 +16746,6 @@ Public Class frmnominasmarinos
 
                 Dim rwFilas As DataRow() = nConsulta(sql)
 
-               
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = rwFilas.Count
@@ -16767,6 +16766,7 @@ Public Class frmnominasmarinos
                         sql2 &= " and iEstatus=1 and iEstatusNomina=0 AND iSerie=" & Forma.gSerie
                         sql2 &= " and fkiIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC")
                         Dim rwComplemento As DataRow() = nConsulta(sql2)
+
 
 
                         'PERIODOS para PROV
@@ -16831,7 +16831,9 @@ Public Class frmnominasmarinos
                         hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-                      
+                        If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
+                            'MsgBox("lol")
+                        End If
                         hoja.Cell(filaExcel + x, 1).Value = mes 'MES
                         hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                         hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
@@ -16932,9 +16934,9 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 96).Value = rwComplemento(0)("prIndemnizacion") 'Provision Indeminzacon
                         hoja.Cell(filaExcel + x, 97).Value = rwComplemento(0)("SAR") 'Provision IMSS 
                         hoja.Cell(filaExcel + x, 98).Value = rwComplemento(0)("CesantiaVejez")  'Provision Cezantia y Vejez
-                       
 
                         pgbProgreso.Value = x
+
                     Next x
 
 
@@ -17293,27 +17295,6 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-<<<<<<< HEAD
-    Private Sub SubirFiniquitoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SubirFiniquitoToolStripMenuItem.Click
-        Dim Forma As New frmFiniquito
-        Dim ids As String()
-        Dim sql As String
-        Dim cadenaempleados As String
-
-        Try
-
-            'Dim Forma As New frmFiniquito
-            Forma.gIdPeriodo = cboperiodo.SelectedValue
-            Forma.gUMA = ValorUMAF
-            Forma.ShowDialog()
-
-
-
-        Catch ex As Exception
-
-        End Try
-
-=======
     Private Sub CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Click
         Try
             pnlProgreso.Visible = True
@@ -17566,6 +17547,32 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
->>>>>>> origin/main
+    End Sub
+
+    Private Sub SubirFiniquitoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SubirFiniquitoToolStripMenuItem.Click
+
+        'Forma.gIdPeriodo = cboperiodo.SelectedIndex
+        Dim ids As String()
+        Dim sql As String
+        Dim cadenaempleados As String
+
+        Try
+            Dim Forma As New frmFiniquito
+            Forma.gIdPeriodo = cboperiodo.SelectedIndex
+            Forma.gIdSerie = cboserie.SelectedIndex
+            Forma.gUMA = ValorUMAF
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+                cboperiodo.SelectedIndex = Forma.gIdPeriodo
+                cboserie.SelectedIndex = Forma.gIdSerie + 1
+
+                cmdverdatos_Click(sender, e)
+            End If
+
+
+
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class

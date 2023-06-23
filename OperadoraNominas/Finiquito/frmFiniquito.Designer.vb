@@ -104,6 +104,7 @@ Partial Class frmFiniquito
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlCatalogo.AutoScroll = True
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.txtFonacot)
         Me.pnlCatalogo.Controls.Add(Me.Label25)
@@ -167,12 +168,12 @@ Partial Class frmFiniquito
         Me.pnlCatalogo.Controls.Add(Me.lsvLista)
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1370, 647)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(811, 647)
         Me.pnlCatalogo.TabIndex = 24
         '
         'txtFonacot
         '
-        Me.txtFonacot.Location = New System.Drawing.Point(174, 470)
+        Me.txtFonacot.Location = New System.Drawing.Point(174, 464)
         Me.txtFonacot.Name = "txtFonacot"
         Me.txtFonacot.Size = New System.Drawing.Size(160, 20)
         Me.txtFonacot.TabIndex = 86
@@ -180,7 +181,7 @@ Partial Class frmFiniquito
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(22, 473)
+        Me.Label25.Location = New System.Drawing.Point(22, 467)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(61, 13)
         Me.Label25.TabIndex = 85
@@ -211,7 +212,7 @@ Partial Class frmFiniquito
         '
         'txtVales
         '
-        Me.txtVales.Location = New System.Drawing.Point(361, 503)
+        Me.txtVales.Location = New System.Drawing.Point(361, 487)
         Me.txtVales.Name = "txtVales"
         Me.txtVales.Size = New System.Drawing.Size(160, 20)
         Me.txtVales.TabIndex = 78
@@ -219,7 +220,7 @@ Partial Class frmFiniquito
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(22, 503)
+        Me.Label22.Location = New System.Drawing.Point(22, 487)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(36, 13)
         Me.Label22.TabIndex = 77
@@ -394,7 +395,7 @@ Partial Class frmFiniquito
         '
         'txtSindicato
         '
-        Me.txtSindicato.Location = New System.Drawing.Point(361, 605)
+        Me.txtSindicato.Location = New System.Drawing.Point(361, 577)
         Me.txtSindicato.Name = "txtSindicato"
         Me.txtSindicato.Size = New System.Drawing.Size(160, 20)
         Me.txtSindicato.TabIndex = 54
@@ -468,7 +469,7 @@ Partial Class frmFiniquito
         '
         'txtSTP
         '
-        Me.txtSTP.Location = New System.Drawing.Point(174, 605)
+        Me.txtSTP.Location = New System.Drawing.Point(174, 577)
         Me.txtSTP.Name = "txtSTP"
         Me.txtSTP.Size = New System.Drawing.Size(160, 20)
         Me.txtSTP.TabIndex = 44
@@ -476,7 +477,7 @@ Partial Class frmFiniquito
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(39, 612)
+        Me.Label11.Location = New System.Drawing.Point(39, 584)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(79, 13)
         Me.Label11.TabIndex = 43
@@ -484,7 +485,7 @@ Partial Class frmFiniquito
         '
         'txtISRIndemnizacion
         '
-        Me.txtISRIndemnizacion.Location = New System.Drawing.Point(174, 567)
+        Me.txtISRIndemnizacion.Location = New System.Drawing.Point(174, 539)
         Me.txtISRIndemnizacion.Name = "txtISRIndemnizacion"
         Me.txtISRIndemnizacion.Size = New System.Drawing.Size(160, 20)
         Me.txtISRIndemnizacion.TabIndex = 42
@@ -493,7 +494,7 @@ Partial Class frmFiniquito
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.Color.Red
-        Me.Label10.Location = New System.Drawing.Point(23, 570)
+        Me.Label10.Location = New System.Drawing.Point(23, 542)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(101, 13)
         Me.Label10.TabIndex = 41
@@ -501,7 +502,7 @@ Partial Class frmFiniquito
         '
         'txtISR
         '
-        Me.txtISR.Location = New System.Drawing.Point(174, 541)
+        Me.txtISR.Location = New System.Drawing.Point(174, 513)
         Me.txtISR.Name = "txtISR"
         Me.txtISR.Size = New System.Drawing.Size(160, 20)
         Me.txtISR.TabIndex = 40
@@ -510,7 +511,7 @@ Partial Class frmFiniquito
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.Color.Red
-        Me.Label9.Location = New System.Drawing.Point(23, 547)
+        Me.Label9.Location = New System.Drawing.Point(23, 519)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(28, 13)
         Me.Label9.TabIndex = 39
@@ -633,9 +634,9 @@ Partial Class frmFiniquito
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(734, 294)
+        Me.pnlProgreso.Location = New System.Drawing.Point(538, 288)
         Me.pnlProgreso.Name = "pnlProgreso"
-        Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
+        Me.pnlProgreso.Size = New System.Drawing.Size(377, 84)
         Me.pnlProgreso.TabIndex = 24
         Me.pnlProgreso.Visible = False
         '
@@ -668,10 +669,11 @@ Partial Class frmFiniquito
         Me.lsvLista.Location = New System.Drawing.Point(574, 17)
         Me.lsvLista.MultiSelect = False
         Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(751, 623)
+        Me.lsvLista.Size = New System.Drawing.Size(211, 623)
         Me.lsvLista.TabIndex = 2
         Me.lsvLista.UseCompatibleStateImageBehavior = False
         Me.lsvLista.View = System.Windows.Forms.View.Details
+        Me.lsvLista.Visible = False
         '
         'ToolStrip1
         '
@@ -680,7 +682,7 @@ Partial Class frmFiniquito
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbGuardar, Me.tsbNuevo, Me.tsbImportar, Me.tsbProcesar, Me.tsbCancelar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1370, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(823, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -751,7 +753,7 @@ Partial Class frmFiniquito
         '
         Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(1296, 704)
+        Me.cmdCerrar.Location = New System.Drawing.Point(749, 704)
         Me.cmdCerrar.Name = "cmdCerrar"
         Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
@@ -763,7 +765,8 @@ Partial Class frmFiniquito
         'frmFiniquito
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1370, 749)
+        Me.AutoScroll = True
+        Me.ClientSize = New System.Drawing.Size(823, 749)
         Me.Controls.Add(Me.cmdCerrar)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.ToolStrip1)
