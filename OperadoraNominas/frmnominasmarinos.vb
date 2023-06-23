@@ -17711,11 +17711,11 @@ Public Class frmnominasmarinos
                 SUBSIDIOA += Double.Parse(IIf(dtgDatos.Rows(x).Cells(69).Value = "", 0, dtgDatos.Rows(x).Cells(69).Value))
                 NETO += Double.Parse(IIf(dtgDatos.Rows(x).Cells(70).Value = "", 0, dtgDatos.Rows(x).Cells(70).Value))
 
-                pgbProgreso.Value += 1
-                Application.DoEvents()
+                'pgbProgreso.Value += 1
+                'Application.DoEvents()
             Next
-            pnlProgreso.Visible = False
-            pnlCatalogo.Enabled = True
+            'pnlProgreso.Visible = False
+            'pnlCatalogo.Enabled = True
 
 
             If gTipoCalculo = "1" Then
@@ -17789,9 +17789,7 @@ Public Class frmnominasmarinos
 
                 hoja.Cell(6, 5).Value = "PERCEPCIONES"
                 hoja.Cell(7, 4).Value = "SUELDO"
-                hoja.Cell(7, 5).Value = SUELDOBRUTON
-                hoja.Cell(8, 4).Value = "SEPTIMO DIA"
-                hoja.Cell(8, 5).Value = SEPTIMO
+                hoja.Cell(7, 5).Value = SUELDOBRUTON + SEPTIMO + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO - INCAPACIDADD
                 hoja.Cell(9, 4).Value = "PRIMA DOMINICAL GRAVADA"
                 hoja.Cell(9, 5).Value = PRIDOMGRAVADA
                 hoja.Cell(10, 4).Value = "PRIMA DOMINICAL EXENTA"
@@ -17820,10 +17818,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(21, 5).Value = COMPENSACION
                 hoja.Cell(22, 4).Value = "SEMANA DE FONDO"
                 hoja.Cell(22, 5).Value = SEMANAFONDO
-                hoja.Cell(23, 4).Value = "FALTA INJUSTIFICA"
-                hoja.Cell(23, 5).Value = FINJUSTIFICADA
-                hoja.Cell(24, 4).Value = "PERMISO SIN GOCE DE SUELDO"
-                hoja.Cell(24, 5).Value = PERMISOSINGOCEDESUELDO
+                
                 hoja.Cell(25, 4).Value = "INCREMENTO RETENIDO"
                 hoja.Cell(25, 5).Value = INCREMENTORETENIDO
                 hoja.Cell(26, 4).Value = "VACACIONES"
@@ -17840,8 +17835,6 @@ Public Class frmnominasmarinos
                 hoja.Cell(31, 5).FormulaA1 = "=SUM(E" & 7 & ":E" & 30 & ")"
 
                 hoja.Cell(32, 5).Value = "DEDUCCIONES"
-                hoja.Cell(33, 4).Value = "INCAPACIDAD"
-                hoja.Cell(33, 5).Value = INCAPACIDADD
                 hoja.Cell(34, 4).Value = "ISR"
                 hoja.Cell(34, 5).Value = ISRD
                 hoja.Cell(35, 4).Value = "IMSS"
@@ -17865,44 +17858,68 @@ Public Class frmnominasmarinos
                 hoja.Cell(44, 4).Value = "SUBSIDIO"
                 hoja.Cell(44, 5).Value = SUBSIDIOA * -1
                 hoja.Cell(45, 4).Value = "TOTAL DEDUCCIONES"
+                hoja.Cell(45, 5).FormulaA1 = "=SUM(E" & 33 & ":E" & 44 & ")"
+                'If gTipoCalculo = "1" Then
+                '    'hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
+                '    hoja.Cell(45, 5).Value = SUMADEDUCCIONES
+                'Else
 
-                If gTipoCalculo = "1" Then
-                    'hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
-                    hoja.Cell(45, 5).Value = SUMADEDUCCIONES
-                Else
-                    hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
-                End If
+                'End If
 
 
                 'hoja.Cell(45, 5).Value = "=SUM(E" & 33 & ":E" & 43 & ")"
 
                 hoja.Cell(46, 4).Value = "TOTALES"
                 hoja.Cell(47, 4).Value = "NETO"
-                hoja.Cell(47, 5).Value = SUMAPERCEPCIONES - SUMADEDUCCIONES
+                hoja.Cell(47, 5).FormulaA1 = "=E" & 31 & "-E" & 45 & ""
                 hoja.Cell(47, 6).Value = NETO
+                '                If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2)- (Math.Round(SUMAPERCEPCIONES, 2) ) < 0.1 Or (Math.Round(NETO, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUMADEDUCCIONES, 2)) > -0.1 Then
+                If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) > -0.1 Then
+                    If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                        hoja.Cell(44, 5).Value = "0"
+                    Else
+                        hoja.Cell(44, 5).Value = "0"
+                        hoja.Cell(35, 5).Value = "0"
+                    End If
+                    
+
+                Else
+                    If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) > -0.1 Then
+                        hoja.Cell(44, 5).Value = "0"
+                        hoja.Cell(35, 5).Value = "0"
+                    Else
+                        If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) > -0.1 Then
+
+                            hoja.Cell(35, 5).Value = "0"
+
+
+                        End If
+                    End If
+                End If
+
 
 
 
 
                 filaExcel = 1
 
-                'Dim dt As DataTable
-                'dt = rwDatosPeriodo.CopyToDataTable()
+                    'Dim dt As DataTable
+                    'dt = rwDatosPeriodo.CopyToDataTable()
 
-                
 
-                dialogo.DefaultExt = "*.xlsx"
-                dialogo.FileName = "Caratula de nomina" & cboperiodo.SelectedText
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                dialogo.ShowDialog()
-                libro.SaveAs(dialogo.FileName)
-                'libro.SaveAs("c:\temp\control.xlsx")
-                'libro.SaveAs(dialogo.FileName)
-                'apExcel.Quit()
-                libro = Nothing
-                MessageBox.Show("Proceso terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    dialogo.DefaultExt = "*.xlsx"
+                    dialogo.FileName = "Caratula de nomina" & cboperiodo.SelectedText
+                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                    dialogo.ShowDialog()
+                    libro.SaveAs(dialogo.FileName)
+                    'libro.SaveAs("c:\temp\control.xlsx")
+                    'libro.SaveAs(dialogo.FileName)
+                    'apExcel.Quit()
+                    libro = Nothing
+                    MessageBox.Show("Proceso terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
-                MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
 
 
