@@ -3206,7 +3206,7 @@ Public Class frmnominasmarinos
                             'calculo prima antiguedad
                             'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
                             'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
-                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                            sql = "select * from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
                             Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
                             If rwDatosEmpleadoPA Is Nothing = False Then
@@ -4429,7 +4429,7 @@ Public Class frmnominasmarinos
                             'calculo prima antiguedad
                             'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
                             'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
-                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                            sql = "select * from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
                             Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
                             If rwDatosEmpleadoPA Is Nothing = False Then
