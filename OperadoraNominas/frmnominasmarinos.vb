@@ -3024,7 +3024,8 @@ Public Class frmnominasmarinos
                                 SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
 
                                 If Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2) < 0 Then
-                                    dtgDatos.Rows(x).Cells(70).Style.BackColor = Color.DarkGreen
+                                    dtgDatos.Rows(x).Cells(70).Style.BackColor = Color.RosyBrown
+
                                     flagnegativos += 1
                                 End If
 
@@ -3033,7 +3034,8 @@ Public Class frmnominasmarinos
                                 SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
 
                                 If Math.Round(SUMAPERCEPCIONES - SUMADEDUCCIONES, 2) < 0 Then
-                                    dtgDatos.Rows(x).Cells(70).Style.BackColor = Color.DarkGreen
+                                    dtgDatos.Rows(x).Cells(70).Style.BackColor = Color.RosyBrown
+
                                     flagnegativos += 1
                                 End If
 
@@ -3222,11 +3224,8 @@ Public Class frmnominasmarinos
                             'calculo prima antiguedad
                             'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
                             'Datos necesarios: Salario Diario, fecha ingreso, fecha ultimo dia del periodo, salario minimo del año actual
-<<<<<<< HEAD
-                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra, dFechaAntiguedad from EmpleadosC  where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-=======
+
                             sql = "select * from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
->>>>>>> origin/main
 
                             Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
                             If rwDatosEmpleadoPA Is Nothing = False Then
