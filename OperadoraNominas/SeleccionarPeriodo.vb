@@ -6,6 +6,10 @@
     Private Sub SeleccionarPeriodo_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cargarperiodosinicial()
         cargarperiodosfinal()
+
+        cbInicial.SelectedIndex = gInicial
+        cbFinal.SelectedIndex = gFinal
+        cboserie.SelectedIndex = gSerie
     End Sub
 
     Private Sub cargarperiodosinicial()

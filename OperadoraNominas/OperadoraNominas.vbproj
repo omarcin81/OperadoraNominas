@@ -114,6 +114,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Finiquito\frmFiniquito.Designer.vb">
+      <DependentUpon>frmFiniquito.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Finiquito\frmFiniquito.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSubirNominaFinal.Designer.vb">
       <DependentUpon>frmSubirNominaFinal.vb</DependentUpon>
     </Compile>
@@ -371,6 +377,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Finiquito\frmFiniquito.resx">
+      <DependentUpon>frmFiniquito.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSubirNominaFinal.resx">
       <DependentUpon>frmSubirNominaFinal.vb</DependentUpon>
     </EmbeddedResource>

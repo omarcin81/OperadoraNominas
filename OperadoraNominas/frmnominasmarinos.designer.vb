@@ -92,6 +92,9 @@ Partial Class frmnominasmarinos
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+
+        Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaratulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -715,7 +718,7 @@ Partial Class frmnominasmarinos
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem, Me.FiniquitoToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1438, 24)
@@ -790,12 +793,26 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Text = "Calcular Pro Prima Antiguedad - Indemnizacion"
         '
+
+        'FiniquitoToolStripMenuItem
+        '
+        Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem})
+        Me.FiniquitoToolStripMenuItem.Name = "FiniquitoToolStripMenuItem"
+        Me.FiniquitoToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.FiniquitoToolStripMenuItem.Text = "Finiquito"
+        '
+        'SubirFiniquitoToolStripMenuItem
+        '
+        Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
+        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
+
         'CaratulaToolStripMenuItem
         '
         Me.CaratulaToolStripMenuItem.Name = "CaratulaToolStripMenuItem"
         Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.CaratulaToolStripMenuItem.Text = "Caratula"
-        '
+
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -908,6 +925,10 @@ Partial Class frmnominasmarinos
     Friend WithEvents CalcularInfonavitSoloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularProAguinaldoPrimaVacacionalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
+    Friend WithEvents FiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubirFiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
     Friend WithEvents CaratulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 

@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Net.Mime.MediaTypeNames
 
-Public Class frmSubirCECO
+Public Class frmSubirFiniquito
     Public gIdPeriodo As String
     Public gIdSerie As String
     Dim sheetIndex As Integer = -1
