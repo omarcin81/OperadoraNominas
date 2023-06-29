@@ -89,6 +89,8 @@ Public Class frmFiniquito
         txtSindicato.TabIndex = 31
 
 
+
+
         txtindeminizacionExce.Text = 0.0
         txtAntiguedadExce.Text = 0.0
         txtSueldoExce.Text = 0.0
@@ -104,6 +106,7 @@ Public Class frmFiniquito
         txtInfonavitExce.Text = 0.0
         txtSindicato.Text = 0.0
 
+        btnAgregar.TabIndex = 32
 
     End Sub
 
@@ -650,6 +653,8 @@ Public Class frmFiniquito
 
     Sub sumaSindicato()
         Try
+            Dim totalsindicato As String
+
             totalsindicato += CDbl(txtindeminizacionExce.Text.ToString)
             totalsindicato += CDbl(txtAntiguedadExce.Text.ToString)
             totalsindicato += CDbl(txtSueldoExce.Text.ToString)
@@ -830,4 +835,29 @@ Public Class frmFiniquito
     End Sub
 
 
+    Private Sub btnAgregar_Click(sender As System.Object, e As System.EventArgs) Handles btnAgregar.Click
+
+        Try
+            lsvLista.Items.Clear()
+            Dim item As ListViewItem
+
+            item.SubItems.Add(cboEmpleado.SelectedIndex + 1)
+            item.SubItems.Add(cboEmpleado.SelectedText)
+            item.SubItems.Add(cboSerie.SelectedIndex)
+            item.SubItems.Add(txtSTP.Text)
+            item.SubItems.Add(txtSindicato.Text)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cargarFiniqutos()
+        
+    End Sub
+
+   
+    Private Sub cboPeriodo_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboPeriodo.SelectedIndexChanged
+
+    End Sub
 End Class
