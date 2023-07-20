@@ -351,7 +351,6 @@ Public Class frmFiniquito
                 'estatus empleado
                 SQL &= "," & cboSerie.SelectedIndex
                 'edad
-
                 SQL &= "," & CalcularEdad((Date.Parse(rwDatosEmpleado(0)("dFechaNac").ToString)).Day, Month(rwDatosEmpleado(0)("dFechaNac").ToString()), Year(rwDatosEmpleado(0)("dFechaNac").ToString()))
                 'puesto
                 SQL &= ",'" & rwDatosEmpleado(0)("cPuesto") & "'"
@@ -387,7 +386,6 @@ Public Class frmFiniquito
                 SQL &= "," & 0.0
                 'fT_No_laborado_V
                 SQL &= "," & 0.0
-
                 'salario base
                 SQL &= "," & rwDatosEmpleado(0)("fSueldoOrd")
                 'salario diario

@@ -6539,8 +6539,8 @@ Public Class frmnominasmarinos
                     If NombrePeriodo = "Quincenal" Then
                         hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value 'FONDO PFB 3%
                     Else
-                        recorrerFilasColumnas(hoja, 6, filaExcel + x, 94, "clear", 94)
-                        recorrerFilasColumnas(hoja, 1, filaExcel + x, 130, "clear", 103)
+                        recorrerFilasColumnas(hoja, 6, filaExcel + x + 1, 94, "clear", 94)
+                        recorrerFilasColumnas(hoja, 1, filaExcel + x + 3, 130, "clear", 103)
 
                         hoja.Cell(filaExcel + x, 94).Value = "NA"
                     End If
@@ -6880,10 +6880,11 @@ Public Class frmnominasmarinos
 
                 hoja4.Cell(filaExcel + dtgDatos.Rows.Count + 1, 8).FormulaA1 = "=SUM(H2:M" & filaExcel + dtgDatos.Rows.Count - 1 & ")"
 
-
                 ' <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CARATULA DE NOMINA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                Dim totalesnomina As Integer = filaExcel + dtgDatos.Rows.Count - 1
+                filaExcel = 5
+                Dim totalesnomina As Integer = filaExcel + dtgDatos.Rows.Count + 1
+
 
                 hoja5.Cell("B4").Value = cboperiodo.SelectedValue
                 hoja5.Cell("B5").Value = cboperiodo.Text
@@ -7079,71 +7080,117 @@ Public Class frmnominasmarinos
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
                 End If
 
-                hoja5.Range(10, 4, 60, 4).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 3, 60, 4).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 8, 60, 8).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 11, 60, 11).Style.NumberFormat.Format = " #,##0.00"
 
                 'PERCPECPCIONES
                 hoja5.Cell("D10").Value = SUELDOBRUTON + SEPTIMO + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO - INCAPACIDADD
                 hoja5.Cell("D11").Value = PRIDOMGRAVADA
-                hoja5.Cell("D12").Value = PRIDOMEXENTA
-                hoja5.Cell("D13").Value = TE2G
-                hoja5.Cell("D14").Value = TE2E
-                hoja5.Cell("D15").Value = TE3
-                hoja5.Cell("D16").Value = DESCANSOLABORADO
-                hoja5.Cell("D17").Value = FESTIVOTRAB
-                hoja5.Cell("D18").Value = BONOASISTENCIA
-                hoja5.Cell("D19").Value = BONOPRODUCTIVIDAD
-                hoja5.Cell("D20").Value = BONOPOLIVALENCIA
-                hoja5.Cell("D21").Value = BONOESPECIALIDAD
-                hoja5.Cell("D22").Value = BONOCALIDAD
-                hoja5.Cell("D23").Value = COMPENSACION
-                hoja5.Cell("D24").Value = SEMANAFONDO
-                hoja5.Cell("D25").Value = INCREMENTORETENIDO
-                hoja5.Cell("D26").Value = VACACIONESPRO
-                hoja5.Cell("D27").Value = AGUINALDOGRA
-                hoja5.Cell("D28").Value = AGUINALDOEXEN
-                hoja5.Cell("D29").Value = PRIMAVACGRA
-                hoja5.Cell("D30").Value = PRIMAVACEXEN
+                hoja5.Cell("E11").Value = PRIDOMEXENTA
+                hoja5.Cell("D12").Value = TE2G
+                hoja5.Cell("E12").Value = TE2E
+                hoja5.Cell("D13").Value = TE3
+                hoja5.Cell("D14").Value = DESCANSOLABORADO
+                hoja5.Cell("D15").Value = FESTIVOTRAB
+                hoja5.Cell("D16").Value = BONOASISTENCIA
+                hoja5.Cell("D17").Value = BONOPRODUCTIVIDAD
+                hoja5.Cell("D18").Value = BONOPOLIVALENCIA
+                hoja5.Cell("D19").Value = BONOESPECIALIDAD
+                hoja5.Cell("D20").Value = BONOCALIDAD
+                hoja5.Cell("D21").Value = COMPENSACION
+                hoja5.Cell("D22").Value = SEMANAFONDO
+                hoja5.Cell("D23").Value = INCREMENTORETENIDO
+                hoja5.Cell("D24").Value = VACACIONESPRO
+                hoja5.Cell("D25").Value = AGUINALDOGRA
+                hoja5.Cell("E25").Value = AGUINALDOEXEN
+                hoja5.Cell("D26").Value = PRIMAVACGRA
+                hoja5.Cell("E26").Value = PRIMAVACEXEN
+
+                'APLICADO
+                hoja5.Cell("F10").FormulaA1 = "=COUNTIF(NOMINA!AD5:AD" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F11").FormulaA1 = "=COUNTIF(NOMINA!AF5:AF" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F12").FormulaA1 = "=COUNTIF(NOMINA!AH5:AH" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F13").FormulaA1 = "=COUNTIF(NOMINA!AJ5:AJ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F14").FormulaA1 = "=COUNTIF(NOMINA!AK5:AK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F15").FormulaA1 = "=COUNTIF(NOMINA!AL5:AL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F16").FormulaA1 = "=COUNTIF(NOMINA!AM5:AM" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F17").FormulaA1 = "=COUNTIF(NOMINA!AN5:AN" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F18").FormulaA1 = "=COUNTIF(NOMINA!AO5:AO" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F19").FormulaA1 = "=COUNTIF(NOMINA!AP5:AP" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F20").FormulaA1 = "=COUNTIF(NOMINA!AQ5:AQ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F21").FormulaA1 = "=COUNTIF(NOMINA!AR5:AR" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F22").FormulaA1 = "=COUNTIF(NOMINA!AS5:AS" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F23").FormulaA1 = "=COUNTIF(NOMINA!AV5:AV" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F24").FormulaA1 = "=COUNTIF(NOMINA!AW5:AW" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F25").FormulaA1 = "=COUNTIF(NOMINA!AX5:AX" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F26").FormulaA1 = "=COUNTIF(NOMINA!BC5:BC" & totalesnomina - 2 & ","">0"")"
 
                 'DEDUCCIONES
-                hoja5.Cell("D37").Value = ISRD
-                hoja5.Cell("D38").Value = IMMSSD
-                hoja5.Cell("D39").Value = INFONAVITD
-                hoja5.Cell("D40").Value = INFOBIMANT
-                hoja5.Cell("D41").Value = AJUSTEINFO
-                hoja5.Cell("D42").Value = PENSIONAD
-                hoja5.Cell("D43").Value = PRESTAMOD
-                hoja5.Cell("D44").Value = FONACOTD
-                hoja5.Cell("D45").Value = TNOLABORADOD
-                hoja5.Cell("D46").Value = CUOTASINDICALD
-                hoja5.Cell("D47").Value = SUBSIDIOA * -1
+                hoja5.Cell("H10").Value = ISRD
+                hoja5.Cell("H11").Value = IMMSSD
+                hoja5.Cell("H12").Value = INFONAVITD
+                hoja5.Cell("H13").Value = INFOBIMANT
+                hoja5.Cell("H14").Value = AJUSTEINFO
+                hoja5.Cell("H15").Value = PENSIONAD
+                hoja5.Cell("H16").Value = PRESTAMOD
+                hoja5.Cell("H17").Value = FONACOTD
+                hoja5.Cell("H18").Value = TNOLABORADOD
+                hoja5.Cell("H19").Value = CUOTASINDICALD
+                hoja5.Cell("H20").Value = SUBSIDIOA * -1
 
-                hoja5.Cell("D58").FormulaA1 = "=FACT!H4"
-                hoja5.Cell("D59").FormulaA1 = "=+FACT!H5"
+                'APLICADO
+                hoja5.Cell("I10").FormulaA1 = "=COUNTIF(NOMINA!BG5:BG" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I11").FormulaA1 = "=COUNTIF(NOMINA!BH5:BH" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I12").FormulaA1 = "=COUNTIF(NOMINA!BI5:BI" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I13").FormulaA1 = "=COUNTIF(NOMINA!BJ5:BJ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I14").FormulaA1 = "=COUNTIF(NOMINA!BK5:BK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I15").FormulaA1 = "=COUNTIF(NOMINA!BL5:BL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I16").FormulaA1 = "=COUNTIF(NOMINA!BM5:BM" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I17").FormulaA1 = "=COUNTIF(NOMINA!BN5:BN" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I18").FormulaA1 = "=COUNTIF(NOMINA!BO5:BO" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I19").FormulaA1 = "=COUNTIF(NOMINA!BP5:BP" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I20").FormulaA1 = "=COUNTIF(NOMINA!BR5:BR" & totalesnomina - 2 & ","">0"")"
+
+                'PROVISIONES
+                hoja5.Cell("K10").FormulaA1 = "=NOMINA!CQ" & totalesnomina
+                hoja5.Cell("K11").FormulaA1 = "=NOMINA!CR" & totalesnomina
+                hoja5.Cell("K12").FormulaA1 = "=NOMINA!CS" & totalesnomina
+                hoja5.Cell("K13").FormulaA1 = "=NOMINA!CT" & totalesnomina
+                hoja5.Cell("K14").FormulaA1 = "=NOMINA!CU" & totalesnomina
+
+                'APLICADO
+                hoja5.Cell("L10").FormulaA1 = "=COUNTIF(NOMINA!CQ5:CQ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L11").FormulaA1 = "=COUNTIF(NOMINA!CR5:CR" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L12").FormulaA1 = "=COUNTIF(NOMINA!CS5:CS" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L13").FormulaA1 = "=COUNTIF(NOMINA!CT5:CT" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L14").FormulaA1 = "=COUNTIF(NOMINA!CU5:CU" & totalesnomina - 2 & ","">0"")"
+
+                'TOTALES
+                hoja5.Cell("C40").FormulaA1 = "=FACT!H4"
+                hoja5.Cell("C41").FormulaA1 = "=+FACT!H5"
 
                 If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) > -0.1 Then
                     If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
                     Else
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
-                        hoja5.Cell("D38").Value = 0.0 'IMSS
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H11").Value = 0.0 'IMSS
                     End If
 
 
                 Else
                     If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) > -0.1 Then
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
-                        hoja5.Cell("D38").Value = 0.0 'IMSS
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H11").Value = 0.0 'IMSS
                     Else
                         If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) > -0.1 Then
 
-                            hoja5.Cell("D38").Value = 0.0 'IMSS
-
+                            hoja5.Cell("H11").Value = 0.0 'IMSS
 
                         End If
                     End If
                 End If
-
-
 
                 '<<<<<CARGAR>>>>>
                 pnlProgreso.Visible = False
@@ -10006,8 +10053,8 @@ Public Class frmnominasmarinos
                     If NombrePeriodo = "Quincenal" Then
                         hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value ' "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
                     Else
-                        recorrerFilasColumnas(hoja, 5, filaExcel + x, 94, "clear", 94)
-                        recorrerFilasColumnas(hoja, 1, filaExcel + x, 130, "clear", 101)
+                        recorrerFilasColumnas(hoja, 5, filaExcel + x + 1, 94, "clear", 94)
+                        recorrerFilasColumnas(hoja, 1, filaExcel + x + 3, 130, "clear", 101)
 
                         hoja.Cell(filaExcel + x, 94).Value = "NA"
                     End If
@@ -10384,7 +10431,9 @@ Public Class frmnominasmarinos
 
                 ' <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CARATULA DE NOMINA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                Dim totalesnomina As Integer = filaExcel + dtgDatos.Rows.Count - 1
+                filaExcel = 5
+                Dim totalesnomina As Integer = filaExcel + dtgDatos.Rows.Count + 1
+
 
                 hoja5.Cell("B4").Value = cboperiodo.SelectedValue
                 hoja5.Cell("B5").Value = cboperiodo.Text
@@ -10580,65 +10629,113 @@ Public Class frmnominasmarinos
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
                 End If
 
-                hoja5.Range(10, 4, 60, 4).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 3, 60, 4).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 8, 60, 8).Style.NumberFormat.Format = " #,##0.00"
+                hoja5.Range(10, 11, 60, 11).Style.NumberFormat.Format = " #,##0.00"
 
                 'PERCPECPCIONES
                 hoja5.Cell("D10").Value = SUELDOBRUTON + SEPTIMO + FINJUSTIFICADA + PERMISOSINGOCEDESUELDO - INCAPACIDADD
                 hoja5.Cell("D11").Value = PRIDOMGRAVADA
-                hoja5.Cell("D12").Value = PRIDOMEXENTA
-                hoja5.Cell("D13").Value = TE2G
-                hoja5.Cell("D14").Value = TE2E
-                hoja5.Cell("D15").Value = TE3
-                hoja5.Cell("D16").Value = DESCANSOLABORADO
-                hoja5.Cell("D17").Value = FESTIVOTRAB
-                hoja5.Cell("D18").Value = BONOASISTENCIA
-                hoja5.Cell("D19").Value = BONOPRODUCTIVIDAD
-                hoja5.Cell("D20").Value = BONOPOLIVALENCIA
-                hoja5.Cell("D21").Value = BONOESPECIALIDAD
-                hoja5.Cell("D22").Value = BONOCALIDAD
-                hoja5.Cell("D23").Value = COMPENSACION
-                hoja5.Cell("D24").Value = SEMANAFONDO
-                hoja5.Cell("D25").Value = INCREMENTORETENIDO
-                hoja5.Cell("D26").Value = VACACIONESPRO
-                hoja5.Cell("D27").Value = AGUINALDOGRA
-                hoja5.Cell("D28").Value = AGUINALDOEXEN
-                hoja5.Cell("D29").Value = PRIMAVACGRA
-                hoja5.Cell("D30").Value = PRIMAVACEXEN
+                hoja5.Cell("E11").Value = PRIDOMEXENTA
+                hoja5.Cell("D12").Value = TE2G
+                hoja5.Cell("E12").Value = TE2E
+                hoja5.Cell("D13").Value = TE3
+                hoja5.Cell("D14").Value = DESCANSOLABORADO
+                hoja5.Cell("D15").Value = FESTIVOTRAB
+                hoja5.Cell("D16").Value = BONOASISTENCIA
+                hoja5.Cell("D17").Value = BONOPRODUCTIVIDAD
+                hoja5.Cell("D18").Value = BONOPOLIVALENCIA
+                hoja5.Cell("D19").Value = BONOESPECIALIDAD
+                hoja5.Cell("D20").Value = BONOCALIDAD
+                hoja5.Cell("D21").Value = COMPENSACION
+                hoja5.Cell("D22").Value = SEMANAFONDO
+                hoja5.Cell("D23").Value = INCREMENTORETENIDO
+                hoja5.Cell("D24").Value = VACACIONESPRO
+                hoja5.Cell("D25").Value = AGUINALDOGRA
+                hoja5.Cell("E25").Value = AGUINALDOEXEN
+                hoja5.Cell("D26").Value = PRIMAVACGRA
+                hoja5.Cell("E26").Value = PRIMAVACEXEN
+
+                'APLICADO
+                hoja5.Cell("F10").FormulaA1 = "=COUNTIF(NOMINA!AD5:AD" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F11").FormulaA1 = "=COUNTIF(NOMINA!AF5:AF" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F12").FormulaA1 = "=COUNTIF(NOMINA!AH5:AH" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F13").FormulaA1 = "=COUNTIF(NOMINA!AJ5:AJ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F14").FormulaA1 = "=COUNTIF(NOMINA!AK5:AK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F15").FormulaA1 = "=COUNTIF(NOMINA!AL5:AL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F16").FormulaA1 = "=COUNTIF(NOMINA!AM5:AM" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F17").FormulaA1 = "=COUNTIF(NOMINA!AN5:AN" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F18").FormulaA1 = "=COUNTIF(NOMINA!AO5:AO" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F19").FormulaA1 = "=COUNTIF(NOMINA!AP5:AP" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F20").FormulaA1 = "=COUNTIF(NOMINA!AQ5:AQ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F21").FormulaA1 = "=COUNTIF(NOMINA!AR5:AR" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F22").FormulaA1 = "=COUNTIF(NOMINA!AS5:AS" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F23").FormulaA1 = "=COUNTIF(NOMINA!AV5:AV" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F24").FormulaA1 = "=COUNTIF(NOMINA!AW5:AW" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F25").FormulaA1 = "=COUNTIF(NOMINA!AX5:AX" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("F26").FormulaA1 = "=COUNTIF(NOMINA!BC5:BC" & totalesnomina - 2 & ","">0"")"
 
                 'DEDUCCIONES
-                hoja5.Cell("D37").Value = ISRD
-                hoja5.Cell("D38").Value = IMMSSD
-                hoja5.Cell("D39").Value = INFONAVITD
-                hoja5.Cell("D40").Value = INFOBIMANT
-                hoja5.Cell("D41").Value = AJUSTEINFO
-                hoja5.Cell("D42").Value = PENSIONAD
-                hoja5.Cell("D43").Value = PRESTAMOD
-                hoja5.Cell("D44").Value = FONACOTD
-                hoja5.Cell("D45").Value = TNOLABORADOD
-                hoja5.Cell("D46").Value = CUOTASINDICALD
-                hoja5.Cell("D47").Value = SUBSIDIOA * -1
+                hoja5.Cell("H10").Value = ISRD
+                hoja5.Cell("H11").Value = IMMSSD
+                hoja5.Cell("H12").Value = INFONAVITD
+                hoja5.Cell("H13").Value = INFOBIMANT
+                hoja5.Cell("H14").Value = AJUSTEINFO
+                hoja5.Cell("H15").Value = PENSIONAD
+                hoja5.Cell("H16").Value = PRESTAMOD
+                hoja5.Cell("H17").Value = FONACOTD
+                hoja5.Cell("H18").Value = TNOLABORADOD
+                hoja5.Cell("H19").Value = CUOTASINDICALD
+                hoja5.Cell("H20").Value = SUBSIDIOA * -1
 
-                hoja5.Cell("D58").FormulaA1 = "=FACT!H4"
-                hoja5.Cell("D59").FormulaA1 = "=+FACT!H5"
+                'APLICADO
+                hoja5.Cell("I10").FormulaA1 = "=COUNTIF(NOMINA!BG5:BG" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I11").FormulaA1 = "=COUNTIF(NOMINA!BH5:BH" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I12").FormulaA1 = "=COUNTIF(NOMINA!BI5:BI" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I13").FormulaA1 = "=COUNTIF(NOMINA!BJ5:BJ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I14").FormulaA1 = "=COUNTIF(NOMINA!BK5:BK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I15").FormulaA1 = "=COUNTIF(NOMINA!BL5:BL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I16").FormulaA1 = "=COUNTIF(NOMINA!BM5:BM" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I17").FormulaA1 = "=COUNTIF(NOMINA!BN5:BN" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I18").FormulaA1 = "=COUNTIF(NOMINA!BO5:BO" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I19").FormulaA1 = "=COUNTIF(NOMINA!BP5:BP" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("I20").FormulaA1 = "=COUNTIF(NOMINA!BR5:BR" & totalesnomina - 2 & ","">0"")"
+
+                'PROVISIONES
+                hoja5.Cell("K10").FormulaA1 = "=NOMINA!CQ" & totalesnomina
+                hoja5.Cell("K11").FormulaA1 = "=NOMINA!CR" & totalesnomina
+                hoja5.Cell("K12").FormulaA1 = "=NOMINA!CS" & totalesnomina
+                hoja5.Cell("K13").FormulaA1 = "=NOMINA!CT" & totalesnomina
+                hoja5.Cell("K14").FormulaA1 = "=NOMINA!CU" & totalesnomina
+
+                'APLICADO
+                hoja5.Cell("L10").FormulaA1 = "=COUNTIF(NOMINA!CQ5:CQ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L11").FormulaA1 = "=COUNTIF(NOMINA!CR5:CR" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L12").FormulaA1 = "=COUNTIF(NOMINA!CS5:CS" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L13").FormulaA1 = "=COUNTIF(NOMINA!CT5:CT" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L14").FormulaA1 = "=COUNTIF(NOMINA!CU5:CU" & totalesnomina - 2 & ","">0"")"
+
+                'TOTALES
+                hoja5.Cell("C40").FormulaA1 = "=FACT!H4"
+                hoja5.Cell("C41").FormulaA1 = "=+FACT!H5"
 
                 If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) > -0.1 Then
                     If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
                     Else
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
-                        hoja5.Cell("D38").Value = 0.0 'IMSS
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H11").Value = 0.0 'IMSS
                     End If
 
 
                 Else
                     If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(IMMSSD, 2)) > -0.1 Then
-                        hoja5.Cell("D47 ").Value = 0.0 'SUBSIDIO
-                        hoja5.Cell("D38").Value = 0.0 'IMSS
+                        hoja5.Cell("H20").Value = 0.0 'SUBSIDIO
+                        hoja5.Cell("H11").Value = 0.0 'IMSS
                     Else
                         If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2) - Math.Round(SUBSIDIOA, 2)) > -0.1 Then
 
-                            hoja5.Cell("D38").Value = 0.0 'IMSS
-
+                            hoja5.Cell("H11").Value = 0.0 'IMSS
 
                         End If
                     End If
