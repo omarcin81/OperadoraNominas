@@ -87,15 +87,14 @@ Partial Class frmnominasmarinos
         Me.PolizasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecibosSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CaratulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CaratulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -591,7 +590,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdguardarfinal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdguardarfinal.Location = New System.Drawing.Point(454, 492)
+        Me.cmdguardarfinal.Location = New System.Drawing.Point(138, 492)
         Me.cmdguardarfinal.Name = "cmdguardarfinal"
         Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
         Me.cmdguardarfinal.TabIndex = 9
@@ -658,7 +657,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(140, 492)
+        Me.cmdComision.Location = New System.Drawing.Point(373, 492)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -670,7 +669,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(244, 492)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(477, 492)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
@@ -709,7 +708,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdAdiCalculo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdAdiCalculo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAdiCalculo.Location = New System.Drawing.Point(552, 492)
+        Me.cmdAdiCalculo.Location = New System.Drawing.Point(236, 492)
         Me.cmdAdiCalculo.Name = "cmdAdiCalculo"
         Me.cmdAdiCalculo.Size = New System.Drawing.Size(129, 26)
         Me.cmdAdiCalculo.TabIndex = 40
@@ -762,6 +761,12 @@ Partial Class frmnominasmarinos
         Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.ResumenToolStripMenuItem.Text = "Resumen"
         '
+        'CaratulaToolStripMenuItem
+        '
+        Me.CaratulaToolStripMenuItem.Name = "CaratulaToolStripMenuItem"
+        Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.CaratulaToolStripMenuItem.Text = "Caratula"
+        '
         'CalculosToolStripMenuItem
         '
         Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem})
@@ -793,7 +798,6 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Text = "Calcular Pro Prima Antiguedad - Indemnizacion"
         '
-
         'FiniquitoToolStripMenuItem
         '
         Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem})
@@ -804,15 +808,9 @@ Partial Class frmnominasmarinos
         'SubirFiniquitoToolStripMenuItem
         '
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
-        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
-
-        'CaratulaToolStripMenuItem
         '
-        Me.CaratulaToolStripMenuItem.Name = "CaratulaToolStripMenuItem"
-        Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.CaratulaToolStripMenuItem.Text = "Caratula"
-
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
