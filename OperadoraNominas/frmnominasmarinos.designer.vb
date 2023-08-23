@@ -95,6 +95,8 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LayoutTimbradoOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HojaTrabajoPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -726,7 +728,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -810,6 +812,18 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
+        '
+        'LayoutTimbradoOToolStripMenuItem
+        '
+        Me.LayoutTimbradoOToolStripMenuItem.Name = "LayoutTimbradoOToolStripMenuItem"
+        Me.LayoutTimbradoOToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.LayoutTimbradoOToolStripMenuItem.Text = "Layout timbrado O"
+        '
+        'HojaTrabajoPolizaToolStripMenuItem
+        '
+        Me.HojaTrabajoPolizaToolStripMenuItem.Name = "HojaTrabajoPolizaToolStripMenuItem"
+        Me.HojaTrabajoPolizaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.HojaTrabajoPolizaToolStripMenuItem.Text = "Hoja trabajo poliza"
         '
         'frmnominasmarinos
         '
@@ -928,6 +942,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents SubirFiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
     Friend WithEvents CaratulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LayoutTimbradoOToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HojaTrabajoPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
