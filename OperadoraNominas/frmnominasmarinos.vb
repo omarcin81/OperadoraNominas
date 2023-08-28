@@ -2228,6 +2228,10 @@ Public Class frmnominasmarinos
         Dim PensionAntesVariable As Double
 
         Dim flagnegativos As Integer
+
+        Dim resultado As Integer
+        Dim calcularvalessemanal As Boolean
+        calcularvalessemanal = False
         Try
             'verificamos que tenga dias a calcular
             'For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -2262,6 +2266,20 @@ Public Class frmnominasmarinos
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
 
+            If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
+
+                    calcularvalessemanal = False
+                End If
+            Else
+                
+
+            End If
+            
 
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -3168,7 +3186,7 @@ Public Class frmnominasmarinos
                             'VALES DE DESPEMSA 
                             Dim numperiodo As Long = cboperiodo.SelectedValue
                             Dim valesDespensa As String = "0.00"
-                            If validarSiSeCalculanVales(EmpresaN, tipoperiodos2Calculo) Then
+                            If validarSiSeCalculanVales(EmpresaN.ToString.ToUpper, tipoperiodos2Calculo) Then
                                 If tipoperiodos2Calculo = 2 Then
                                     If cboperiodo.SelectedValue Mod 2 = 0 Then
                                         dtgDatos.Rows(x).Cells(87).Value = "0.00"
@@ -3176,6 +3194,40 @@ Public Class frmnominasmarinos
                                         'VALIDAR SI SE LE PAGA NETO
                                         'If dtgDatos.Rows(x).Cells(71).Value > 0 Then
                                         'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                        If EmpresaN <> "IDN" Then
+                                            If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim a() As String
+                                                a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                                If a.Length > 1 Then
+                                                    If CInt(a(1)) > 0 Then
+                                                        dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                                    Else
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    End If
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                End If
+
+
+
+                                            Else
+                                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
+                                            End If
+                                        Else
+                                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                        End If
+
+
+
+                                        'End If
+
+                                    End If
+
+                                ElseIf tipoperiodos2Calculo = 3 Then
+
+                                    If calcularvalessemanal Then
                                         If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
                                             Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                             Dim a() As String
@@ -3189,29 +3241,35 @@ Public Class frmnominasmarinos
                                             Else
                                                 dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                             End If
-                                            
+
 
 
                                         Else
                                             dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                         End If
-
-                                        'End If
-
-                                    End If
-
-                                ElseIf tipoperiodos2Calculo = 3 Then
-                                    If cboperiodo.SelectedValue Mod 4 = 0 Then
-
-                                        'VALIDAR SI SE LE PAGA NETO
-                                        ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                        'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                        'End If
-
                                     Else
                                         dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                     End If
+                                    'If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                    'Else
+                                    '    'preguntar si se calculan o no 
+
+
+                                    'End If
+
+
+                                    'If cboperiodo.SelectedValue Mod 4 = 0 Then
+
+                                    '    'VALIDAR SI SE LE PAGA NETO
+                                    '    ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                    '    'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                    '    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    '    'End If
+
+                                    'Else
+                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                    'End If
                                 Else
                                     dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                 End If
@@ -3424,7 +3482,9 @@ Public Class frmnominasmarinos
         Dim plantaoNO As String
 
         Dim PensionAntesVariable As Double
-
+        Dim resultado As Integer
+        Dim calcularvalessemanal As Boolean
+        calcularvalessemanal = False
         Try
             'verificamos que tenga dias a calcular
             'For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -3458,7 +3518,19 @@ Public Class frmnominasmarinos
             pgbProgreso.Value = 0
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
+            If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
 
+                    calcularvalessemanal = False
+                End If
+            Else
+
+
+            End If
 
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -4437,7 +4509,7 @@ Public Class frmnominasmarinos
                             'VALES DE DESPEMSA 
                             Dim numperiodo As Long = cboperiodo.SelectedValue
                             Dim valesDespensa As String = "0.00"
-                            If validarSiSeCalculanVales(EmpresaN, tipoperiodos2Calculo) Then
+                            If validarSiSeCalculanVales(EmpresaN.ToString.ToUpper, tipoperiodos2Calculo) Then
                                 If tipoperiodos2Calculo = 2 Then
                                     If cboperiodo.SelectedValue Mod 2 = 0 Then
                                         dtgDatos.Rows(x).Cells(87).Value = "0.00"
@@ -4445,23 +4517,82 @@ Public Class frmnominasmarinos
                                         'VALIDAR SI SE LE PAGA NETO
                                         'If dtgDatos.Rows(x).Cells(71).Value > 0 Then
                                         'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                        If EmpresaN <> "IDN" Then
+                                            If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim a() As String
+                                                a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                                If a.Length > 1 Then
+                                                    If CInt(a(1)) > 0 Then
+                                                        dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                                    Else
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    End If
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                End If
+
+
+
+                                            Else
+                                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
+                                            End If
+                                        Else
+                                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                        End If
+
+
+
                                         'End If
 
                                     End If
 
                                 ElseIf tipoperiodos2Calculo = 3 Then
-                                    If cboperiodo.SelectedValue Mod 4 = 0 Then
 
-                                        'VALIDAR SI SE LE PAGA NETO
-                                        ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                        'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                        'End If
+                                    If calcularvalessemanal Then
+                                        If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                            Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                            Dim a() As String
+                                            a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                            If a.Length > 1 Then
+                                                If CInt(a(1)) > 0 Then
+                                                    dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                End If
+                                            Else
+                                                dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                            End If
 
+
+
+                                        Else
+                                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                        End If
                                     Else
                                         dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                     End If
+                                    'If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                    'Else
+                                    '    'preguntar si se calculan o no 
+
+
+                                    'End If
+
+
+                                    'If cboperiodo.SelectedValue Mod 4 = 0 Then
+
+                                    '    'VALIDAR SI SE LE PAGA NETO
+                                    '    ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                    '    'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                    '    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    '    'End If
+
+                                    'Else
+                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                    'End If
                                 Else
                                     dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                 End If
