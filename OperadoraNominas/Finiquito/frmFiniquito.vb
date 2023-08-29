@@ -23,7 +23,7 @@ Public Class frmFiniquito
             cargarEmpleados()
             cargarserie()
             cboPeriodo.SelectedIndex = gIdPeriodo
-
+            cargarEstausFiniquitos()
             initTextbox()
 
 
@@ -109,7 +109,9 @@ Public Class frmFiniquito
         btnAgregar.TabIndex = 32
 
     End Sub
-
+    Private Sub cargarEstausFiniquitos()
+        cboStatus.SelectedIndex = 0
+    End Sub
     Private Sub cargarEmpleados()
 
         'Verificar si se tienen permisos
@@ -137,7 +139,7 @@ Public Class frmFiniquito
         'Verificar si se tienen permisos
         Dim sql As String
         Try
-            sql = "SELECT TOP 1 fkiIdPeriodo, iEstatusEmpleado FROM NOMINA where fkiIdPeriodo=" & gIdPeriodo + 1
+            sql = "SELECT TOP 1 fkiIdPeriodo,iEstatusEmpleado FROM NOMINA where fkiIdPeriodo=" & gIdPeriodo + 1
             sql &= " order by iEstatusEmpleado desc"
             Dim rwSerie As DataRow() = nConsulta(sql)
             If rwSerie Is Nothing = False Then
@@ -836,42 +838,48 @@ Public Class frmFiniquito
     Private Sub btnAgregar_Click(sender As System.Object, e As System.EventArgs) Handles btnAgregar.Click
 
         Try
-            lsvLista.Items.Clear()
+            'lsvLista.Clear()
+            'lsvLista.Items.Clear()
+
             Dim item As New ListViewItem
+
             lsvLista.Columns.Add("Id")
-            lsvLista.Columns.Add("Empleado")
+            lsvLista.Columns.Add("Empleado").Width = 200
             lsvLista.Columns.Add("Periodo")
             lsvLista.Columns.Add("Serie")
-            lsvLista.Columns.Add("Indeminizacion")
-            lsvLista.Columns.Add("PrimaAntiguedad")
-            lsvLista.Columns.Add("Sueldo")
-            lsvLista.Columns.Add("Aguinaldo")
-            lsvLista.Columns.Add("VacacionesProp")
-            lsvLista.Columns.Add("PrimaVacacional")
-            lsvLista.Columns.Add("VacacionesPendientes")
-            lsvLista.Columns.Add("HE2")
-            lsvLista.Columns.Add("HE3")
-            lsvLista.Columns.Add("DL")
-            lsvLista.Columns.Add("Bonos")
-            lsvLista.Columns.Add("Incidencias")
-            lsvLista.Columns.Add("Infonavit")
-            lsvLista.Columns.Add("Fonacot")
-            lsvLista.Columns.Add("Vales")
-            lsvLista.Columns.Add("ISR")
-            lsvLista.Columns.Add("ISRIndemnizacion")
-            lsvLista.Columns.Add("indeminizacionExce")
-            lsvLista.Columns.Add("AntiguedadExce")
-            lsvLista.Columns.Add("SueldoExce")
-            lsvLista.Columns.Add("AguinaldoExce")
-            lsvLista.Columns.Add("VacacionesPropExce")
-            lsvLista.Columns.Add("PrimaVacacionalExce")
-            lsvLista.Columns.Add("VacacionesPendientesExce")
-            lsvLista.Columns.Add("HE2Exce")
-            lsvLista.Columns.Add("HE3Exce")
-            lsvLista.Columns.Add("DLExce")
-            lsvLista.Columns.Add("BonosExce")
-            lsvLista.Columns.Add("IncidenciasExce")
-            lsvLista.Columns.Add("InfonavitExce")
+            lsvLista.Columns.Add("Indeminizacion").Width = 100
+            lsvLista.Columns.Add("PrimaAntiguedad").Width = 100
+            lsvLista.Columns.Add("Sueldo").Width = 100
+            lsvLista.Columns.Add("Aguinaldo").Width = 100
+            lsvLista.Columns.Add("VacacionesProp").Width = 100
+            lsvLista.Columns.Add("PrimaVacacional").Width = 100
+            lsvLista.Columns.Add("VacacionesPendientes").Width = 100
+            lsvLista.Columns.Add("HE2").Width = 100
+            lsvLista.Columns.Add("HE3").Width = 100
+            lsvLista.Columns.Add("DL").Width = 100
+            lsvLista.Columns.Add("Bonos").Width = 100
+            lsvLista.Columns.Add("Incidencias").Width = 100
+            lsvLista.Columns.Add("Infonavit").Width = 100
+            lsvLista.Columns.Add("Fonacot").Width = 100
+            lsvLista.Columns.Add("Vales").Width = 100
+            lsvLista.Columns.Add("ISR").Width = 100
+            lsvLista.Columns.Add("ISRIndemnizacion").Width = 100
+            lsvLista.Columns.Add("indeminizacionExce").Width = 100
+            lsvLista.Columns.Add("AntiguedadExce").Width = 100
+            lsvLista.Columns.Add("SueldoExce").Width = 100
+            lsvLista.Columns.Add("AguinaldoExce").Width = 100
+            lsvLista.Columns.Add("VacacionesPropExce").Width = 100
+            lsvLista.Columns.Add("PrimaVacacionalExce").Width = 100
+            lsvLista.Columns.Add("VacacionesPendientesExce").Width = 100
+            lsvLista.Columns.Add("HE2Exce").Width = 100
+            lsvLista.Columns.Add("HE3Exce").Width = 100
+            lsvLista.Columns.Add("DLExce").Width = 100
+            lsvLista.Columns.Add("BonosExce").Width = 100
+            lsvLista.Columns.Add("IncidenciasExce").Width = 100
+            lsvLista.Columns.Add("InfonavitExce").Width = 100
+
+            lsvLista.Columns.Add("TOTAL STP").Width = 100
+            lsvLista.Columns.Add("TOTAL SINDICATO").Width = 100
 
             SQL = "select  * from empleadosC where "
             SQL &= "iIdEmpleadoC=" & cboEmpleado.SelectedIndex + 1
@@ -880,16 +888,79 @@ Public Class frmFiniquito
             If rwDatosEmpleado Is Nothing = False Then
 
                 item = lsvLista.Items.Add(cboEmpleado.SelectedIndex + 1)
-                item.SubItems.Add(cboEmpleado.SelectedIndex + 1)
+                'item.SubItems.Add(cboEmpleado.SelectedIndex + 1)
                 item.SubItems.Add(rwDatosEmpleado(0)("cNombreLargo"))
-                item.SubItems.Add(cboEmpleado.SelectedText)
-                item.SubItems.Add(cboSerie.SelectedIndex)
+                item.SubItems.Add(cboPeriodo.SelectedValue.ToString)
+                item.SubItems.Add(cboSerie.SelectedItem.ToString)
+                item.SubItems.Add(txtIndeminizacion.Text)
+                item.SubItems.Add(txtPrimaAntiguedad.Text)
+                item.SubItems.Add(txtSueldo.Text)
+                item.SubItems.Add(CDbl(txtAguinaldo.Text))
+                item.SubItems.Add(txtVacacionesProp.Text)
+                item.SubItems.Add(txtPrimaVacacional.Text)
+                item.SubItems.Add(txtVacacionesPendientes.Text)
+                item.SubItems.Add(txtHE2.Text)
+                item.SubItems.Add(txtHE3.Text)
+                item.SubItems.Add(txtDL.Text)
+                item.SubItems.Add(txtBonos.Text)
+                item.SubItems.Add(txtIncidencias.Text)
+                item.SubItems.Add(txtInfonavit.Text)
+                item.SubItems.Add(txtFonacot.Text)
+                item.SubItems.Add(txtVales.Text)
+                item.SubItems.Add(txtISR.Text)
+                item.SubItems.Add(txtISRIndemnizacion.Text)
+
+                item.SubItems.Add(txtindeminizacionExce.Text)
+                item.SubItems.Add(txtAntiguedadExce.Text)
+                item.SubItems.Add(txtSueldoExce.Text)
+                item.SubItems.Add(txtAguinaldoExce.Text)
+                item.SubItems.Add(txtVacacionesPropExce.Text)
+                item.SubItems.Add(txtPrimaVacacionalExce.Text)
+                item.SubItems.Add(txtVacacionesPendientesExce.Text)
+                item.SubItems.Add(txtHE2Exce.Text)
+                item.SubItems.Add(txtHE3Exce.Text)
+                item.SubItems.Add(txtDLExce.Text)
+                item.SubItems.Add(txtBonosExce.Text)
+                item.SubItems.Add(txtIncidenciasExce.Text)
+                item.SubItems.Add(txtInfonavitExce.Text)
+
                 item.SubItems.Add(txtSTP.Text)
                 item.SubItems.Add(txtSindicato.Text)
-
             End If
 
-            
+            txtIndeminizacion.Text = 0.0
+            txtPrimaAntiguedad.Text = 0.0
+            txtSueldo.Text = 0.0
+            txtAguinaldo.Text = 0.0
+            txtVacacionesProp.Text = 0.0
+            txtPrimaVacacional.Text = 0.0
+            txtVacacionesPendientes.Text = 0.0
+            txtHE2.Text = 0.0
+            txtHE3.Text = 0.0
+            txtDL.Text = 0.0
+            txtBonos.Text = 0.0
+            txtIncidencias.Text = 0.0
+            txtInfonavit.Text = 0.0
+            txtFonacot.Text = 0.0
+            txtVales.Text = 0.0
+            txtISR.Text = 0.0
+            txtISRIndemnizacion.Text = 0.0
+            txtSTP.Text = 0.0
+
+            txtindeminizacionExce.Text = 0.0
+            txtAntiguedadExce.Text = 0.0
+            txtSueldoExce.Text = 0.0
+            txtAguinaldoExce.Text = 0.0
+            txtVacacionesPropExce.Text = 0.0
+            txtPrimaVacacionalExce.Text = 0.0
+            txtVacacionesPendientesExce.Text = 0.0
+            txtHE2Exce.Text = 0.0
+            txtHE3Exce.Text = 0.0
+            txtDLExce.Text = 0.0
+            txtBonosExce.Text = 0.0
+            txtIncidenciasExce.Text = 0.0
+            txtInfonavitExce.Text = 0.0
+            txtSindicato.Text = 0.0
 
             If lsvLista.Items.Count > 0 Then
                 lsvLista.Focus()
@@ -898,19 +969,17 @@ Public Class frmFiniquito
                 txtIndeminizacion.Focus()
                 txtIndeminizacion.SelectAll()
             End If
-
+           
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub cargarFiniqutos()
-        
-    End Sub
+    
 
-   
-    Private Sub cboPeriodo_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboPeriodo.SelectedIndexChanged
-
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        lsvLista.Clear()
+        lsvLista.Items.Clear()
     End Sub
 End Class

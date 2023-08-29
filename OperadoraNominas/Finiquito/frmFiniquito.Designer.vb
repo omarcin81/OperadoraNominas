@@ -99,6 +99,7 @@ Partial Class frmFiniquito
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -111,6 +112,7 @@ Partial Class frmFiniquito
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.AutoScroll = True
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.Button1)
         Me.pnlCatalogo.Controls.Add(Me.dtpFechaBaja)
         Me.pnlCatalogo.Controls.Add(Me.Label26)
         Me.pnlCatalogo.Controls.Add(Me.cboStatus)
@@ -217,7 +219,7 @@ Partial Class frmFiniquito
         '
         'btnAgregar
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(504, 15)
+        Me.btnAgregar.Location = New System.Drawing.Point(504, 4)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(75, 23)
         Me.btnAgregar.TabIndex = 87
@@ -814,6 +816,15 @@ Partial Class frmFiniquito
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(504, 35)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 92
+        Me.Button1.Text = "Limpiar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmFiniquito
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -913,4 +924,5 @@ Partial Class frmFiniquito
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents cboStatus As System.Windows.Forms.ComboBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
