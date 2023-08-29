@@ -148,15 +148,14 @@ Partial Class frmEmpleados
         Me.chkInfonavit = New System.Windows.Forms.CheckBox()
         Me.dtFecPlanta = New System.Windows.Forms.DateTimePicker()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtInicio = New System.Windows.Forms.TextBox()
         Me.txtFin = New System.Windows.Forms.TextBox()
-        Me.Label53 = New System.Windows.Forms.Label()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.Label55 = New System.Windows.Forms.Label()
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
         Me.cboExcedente = New System.Windows.Forms.ComboBox()
+        Me.chkvales = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -1304,28 +1303,12 @@ Partial Class frmEmpleados
         Me.Label21.TabIndex = 209
         Me.Label21.Text = "Fecha de Planta"
         '
-        'txtInicio
-        '
-        Me.txtInicio.Location = New System.Drawing.Point(540, 657)
-        Me.txtInicio.Name = "txtInicio"
-        Me.txtInicio.Size = New System.Drawing.Size(148, 26)
-        Me.txtInicio.TabIndex = 210
-        '
         'txtFin
         '
         Me.txtFin.Location = New System.Drawing.Point(707, 657)
         Me.txtFin.Name = "txtFin"
         Me.txtFin.Size = New System.Drawing.Size(153, 26)
         Me.txtFin.TabIndex = 211
-        '
-        'Label53
-        '
-        Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(548, 681)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(109, 18)
-        Me.Label53.TabIndex = 212
-        Me.Label53.Text = "Inicio embarque"
         '
         'Label54
         '
@@ -1378,19 +1361,30 @@ Partial Class frmEmpleados
         Me.cboExcedente.Size = New System.Drawing.Size(101, 26)
         Me.cboExcedente.TabIndex = 218
         '
+        'chkvales
+        '
+        Me.chkvales.AutoSize = True
+        Me.chkvales.Checked = True
+        Me.chkvales.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkvales.Location = New System.Drawing.Point(548, 662)
+        Me.chkvales.Name = "chkvales"
+        Me.chkvales.Size = New System.Drawing.Size(121, 22)
+        Me.chkvales.TabIndex = 219
+        Me.chkvales.Text = "Activar Vales D."
+        Me.chkvales.UseVisualStyleBackColor = True
+        '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1077, 705)
+        Me.Controls.Add(Me.chkvales)
         Me.Controls.Add(Me.cboExcedente)
         Me.Controls.Add(Me.Label56)
         Me.Controls.Add(Me.dtpFinContrato)
         Me.Controls.Add(Me.Label55)
         Me.Controls.Add(Me.txtTelefono)
         Me.Controls.Add(Me.Label54)
-        Me.Controls.Add(Me.Label53)
         Me.Controls.Add(Me.txtFin)
-        Me.Controls.Add(Me.txtInicio)
         Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.dtFecPlanta)
         Me.Controls.Add(Me.chkInfonavit)
@@ -1614,9 +1608,7 @@ Partial Class frmEmpleados
     Friend WithEvents cmdIncapacidad As System.Windows.Forms.Button
     Friend WithEvents dtFecPlanta As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents txtInicio As System.Windows.Forms.TextBox
     Friend WithEvents txtFin As System.Windows.Forms.TextBox
-    Friend WithEvents Label53 As System.Windows.Forms.Label
     Friend WithEvents Label54 As System.Windows.Forms.Label
     Friend WithEvents cmdFamiliar As System.Windows.Forms.Button
     Friend WithEvents Label55 As System.Windows.Forms.Label
@@ -1632,5 +1624,6 @@ Partial Class frmEmpleados
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents cmCECO As System.Windows.Forms.Button
     Friend WithEvents cboExcedente As System.Windows.Forms.ComboBox
+    Friend WithEvents chkvales As System.Windows.Forms.CheckBox
 
 End Class

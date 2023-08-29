@@ -131,7 +131,7 @@ Public Class frmEmpleados
                 SQL &= "," & cbobanco2.SelectedValue
                 SQL &= ",'" & cboExcedente.Text
                 SQL &= "','" & txtclabe2.Text & "'"
-                SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & txtInicio.Text & "','" & txtFin.Text & "'"
+                SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & IIf(chkvales.Checked, "1", "0") & "','" & txtFin.Text & "'"
                 SQL &= ", '" & txtTelefono.Text & "','" & Format(dtpFinContrato.Value.Date, "yyyy/dd/MM") & "'"
             Else
                 'Actualizar
@@ -159,7 +159,7 @@ Public Class frmEmpleados
                 SQL &= "," & cbobanco2.SelectedValue
                 SQL &= ",'" & cboExcedente.Text
                 SQL &= "','" & txtclabe2.Text & "'"
-                SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & txtInicio.Text & "','" & txtFin.Text & "'"
+                SQL &= "," & IIf(txtExtra.Text = "", 0, txtExtra.Text) & ",'" & Format(dtFecPlanta.Value.Date, "yyyy/dd/MM") & "','" & IIf(chkvales.Checked, "1", "0") & "','" & txtFin.Text & "'"
                 SQL &= ", '" & txtTelefono.Text & "','" & Format(dtpFinContrato.Value.Date, "yyyy/dd/MM") & "'"
 
             End If
@@ -364,7 +364,8 @@ Public Class frmEmpleados
                 txtExtra.Text = Convert.ToString(Fila.Item("fsindicatoExtra"))
 
                 dtFecPlanta.Value = IIf(Convert.ToString(Fila.Item("dFechaPlanta")) = "", Date.Now.ToShortDateString, Convert.ToString(Fila.Item("dFechaPlanta")))
-                txtInicio.Text = Fila.Item("cInicioEmbarque")
+                chkvales.Checked = IIf(Fila.Item("cInicioEmbarque") = "1", True, False)
+                'txtInicio.Text = Fila.Item("cInicioEmbarque")
                 txtFin.Text = Fila.Item("cFinalEmbarque")
 
                 blnNuevo = False
@@ -526,7 +527,8 @@ Public Class frmEmpleados
         cboExcedente.TabIndex = 55
         txtclabe2.TabIndex = 56
         cbobanco2.TabIndex = 57
-        txtInicio.TabIndex = 58
+        chkvales.TabIndex = 58
+        'txtInicio.TabIndex = 58
         txtFin.TabIndex = 59
 
 
