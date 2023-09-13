@@ -3194,40 +3194,7 @@ Public Class frmnominasmarinos
                                         'VALIDAR SI SE LE PAGA NETO
                                         'If dtgDatos.Rows(x).Cells(71).Value > 0 Then
                                         'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                        If EmpresaN <> "IDN" Then
-                                            If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                                Dim a() As String
-                                                a = Split(ValesCal.ToString, ".", vbBinaryCompare)
-                                                If a.Length > 1 Then
-                                                    If CInt(a(1)) > 0 Then
-                                                        dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
-                                                    Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                                    End If
-                                                Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                                End If
 
-
-
-                                            Else
-                                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
-
-                                            End If
-                                        Else
-                                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
-                                        End If
-
-
-
-                                        'End If
-
-                                    End If
-
-                                ElseIf tipoperiodos2Calculo = 3 Then
-
-                                    If calcularvalessemanal Then
                                         If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
                                             Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                             Dim a() As String
@@ -3246,33 +3213,64 @@ Public Class frmnominasmarinos
 
                                         Else
                                             dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
                                         End If
+                                        
+
+
+
+                                    'End If
+
+                                End If
+
+                            ElseIf tipoperiodos2Calculo = 3 Then
+
+                                If calcularvalessemanal Then
+                                    If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                        Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                        Dim a() As String
+                                        a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                        If a.Length > 1 Then
+                                            If CInt(a(1)) > 0 Then
+                                                dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                            Else
+                                                dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                            End If
+                                        Else
+                                            dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                        End If
+
+
+
                                     Else
                                         dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                     End If
-                                    'If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
-                                    'Else
-                                    '    'preguntar si se calculan o no 
-
-
-                                    'End If
-
-
-                                    'If cboperiodo.SelectedValue Mod 4 = 0 Then
-
-                                    '    'VALIDAR SI SE LE PAGA NETO
-                                    '    ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
-                                    '    'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
-                                    '    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
-                                    '    'End If
-
-                                    'Else
-                                    '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
-                                    'End If
                                 Else
                                     dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                 End If
+                                'If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                                '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                'Else
+                                '    'preguntar si se calculan o no 
+
+
+                                'End If
+
+
+                                'If cboperiodo.SelectedValue Mod 4 = 0 Then
+
+                                '    'VALIDAR SI SE LE PAGA NETO
+                                '    ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                                '    'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                                '    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                '    'End If
+
+                                'Else
+                                '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                                'End If
+                            Else
+                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                            End If
 
                             Else
                                 dtgDatos.Rows(x).Cells(87).Value = "0.00"
@@ -4475,7 +4473,7 @@ Public Class frmnominasmarinos
                             '######################################
                             'buscar el campo del trabajador y pegar de tipo de excedente
 
-                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                            sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra,cInicioEmbarque from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
 
                             Dim rwExcedentes As DataRow() = nConsulta(sql)
                             If rwExcedentes Is Nothing = False Then
@@ -10971,7 +10969,7 @@ Public Class frmnominasmarinos
                 tienevales = True
             Case "TMMDC"
                 tienevales = True
-            Case "Transportacion"
+            Case "TRANSPORTACION"
                 tienevales = True
             Case "TMMDC Logistic"
                 tienevales = True
@@ -17843,314 +17841,640 @@ Public Class frmnominasmarinos
 
     Private Sub PolizasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PolizasToolStripMenuItem.Click
         Try
-            Dim Forma As New SeleccionarPeriodo
+            Dim dsPoliza As DataSet
+            dsPoliza.Tables.Add("Tabla")
 
-            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+            dsPoliza.Tables("Tabla").Columns.Add("Consecutivo")
+            dsPoliza.Tables("Tabla").Columns.Add("CeCo")
+            dsPoliza.Tables("Tabla").Columns.Add("Id_empleado")
+            dsPoliza.Tables("Tabla").Columns.Add("CodigoEmpleado")
+            dsPoliza.Tables("Tabla").Columns.Add("Nombre")
+            dsPoliza.Tables("Tabla").Columns.Add("Status")
+            dsPoliza.Tables("Tabla").Columns.Add("RFC")
+            dsPoliza.Tables("Tabla").Columns.Add("CURP")
+            dsPoliza.Tables("Tabla").Columns.Add("Num_IMSS")
+            dsPoliza.Tables("Tabla").Columns.Add("Fecha_Nac")
+            dsPoliza.Tables("Tabla").Columns.Add("Edad")
+            dsPoliza.Tables("Tabla").Columns.Add("Puesto")
+            dsPoliza.Tables("Tabla").Columns.Add("Depto")
+            dsPoliza.Tables("Tabla").Columns.Add("Tipo_Infonavit")
+            dsPoliza.Tables("Tabla").Columns.Add("Valor_Infonavit")
 
-                Dim filaExcel As Integer = 0
-                Dim dialogo As New SaveFileDialog()
-                Dim mes, periodo As String
-                Dim fecha, periodom, iejercicio, idias As String
-                Dim pilotin As Boolean
-                Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
-                Dim tiponomina, sueldodescanso As String
-                Dim filaexcelnomtotal As Integer = 0
-                Dim valesDespensa As String
+            dsPoliza.Tables("Tabla").Columns.Add("Horas_extras_dobles_V")
+            dsPoliza.Tables("Tabla").Columns.Add("Horas_extras_triples_V")
+            dsPoliza.Tables("Tabla").Columns.Add("Descanso_Laborado_V")
+            dsPoliza.Tables("Tabla").Columns.Add("Dia_Festivo_laborado_V")
 
-                'dias prov
-                Dim DiasCadaPeriodo As Integer
-                Dim FechaInicioPeriodo As Date
-                Dim FechaFinPeriodo As Date
-                Dim FechaAntiguedad As Date
-                Dim FechaBuscar As Date
-                Dim TipoPeriodoinfoonavit As Integer
-                Dim tipoperiodos2 As String
-                Dim ValorUMA As Double
-                pnlProgreso.Visible = True
-                pnlCatalogo.Enabled = False
-                Application.DoEvents()
+            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_V")
+            dsPoliza.Tables("Tabla").Columns.Add("Falta_Injustificada_V")
+            dsPoliza.Tables("Tabla").Columns.Add("Permiso_Sin_GS_V")
+            dsPoliza.Tables("Tabla").Columns.Add("T_No_laborado_V")
 
 
+            dsPoliza.Tables("Tabla").Columns.Add("Sueldo_Base")
+            dsPoliza.Tables("Tabla").Columns.Add("Salario_Diario")
+            dsPoliza.Tables("Tabla").Columns.Add("Salario_Cotización")
+            dsPoliza.Tables("Tabla").Columns.Add("Dias_Trabajados")
+            dsPoliza.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
+            dsPoliza.Tables("Tabla").Columns.Add("Número_días")
+            dsPoliza.Tables("Tabla").Columns.Add("Sueldo_Bruto")
+            dsPoliza.Tables("Tabla").Columns.Add("Septimo_Dia")
+            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_Gravada")
+            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_Exenta")
+            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Gravado")
+            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Exento")
+            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Triple")
+
+            dsPoliza.Tables("Tabla").Columns.Add("Descanso_Labarado")
+            dsPoliza.Tables("Tabla").Columns.Add("Dia_Festivo_laborado")
+
+            dsPoliza.Tables("Tabla").Columns.Add("Bono_Asistencia")
+            dsPoliza.Tables("Tabla").Columns.Add("Bono_Productividad")
+            dsPoliza.Tables("Tabla").Columns.Add("Bono_Polivalencia")
+            dsPoliza.Tables("Tabla").Columns.Add("Bono_Especialidad")
+            dsPoliza.Tables("Tabla").Columns.Add("Bono_Calidad")
+
+            dsPoliza.Tables("Tabla").Columns.Add("Compensacion")
+            dsPoliza.Tables("Tabla").Columns.Add("Semana_fondo")
+            dsPoliza.Tables("Tabla").Columns.Add("Falta_Injustificada")
+            dsPoliza.Tables("Tabla").Columns.Add("Permiso_Sin_GS")
+
+            dsPoliza.Tables("Tabla").Columns.Add("Incremento_Retenido")
+            dsPoliza.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
+            dsPoliza.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
+            dsPoliza.Tables("Tabla").Columns.Add("Aguinaldo_exento")
+            dsPoliza.Tables("Tabla").Columns.Add("Total_Aguinaldo")
+            dsPoliza.Tables("Tabla").Columns.Add("Prima_vac_gravado")
+            dsPoliza.Tables("Tabla").Columns.Add("Prima_vac_exento")
+
+            dsPoliza.Tables("Tabla").Columns.Add("Total_Prima_vac")
+            dsPoliza.Tables("Tabla").Columns.Add("Total_percepciones")
+            dsPoliza.Tables("Tabla").Columns.Add("Total_percepciones_p/isr")
+            dsPoliza.Tables("Tabla").Columns.Add("Incapacidad")
+            dsPoliza.Tables("Tabla").Columns.Add("ISR")
+            dsPoliza.Tables("Tabla").Columns.Add("IMSS")
+            dsPoliza.Tables("Tabla").Columns.Add("Infonavit")
+            dsPoliza.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
+            dsPoliza.Tables("Tabla").Columns.Add("Ajuste_infonavit")
+            dsPoliza.Tables("Tabla").Columns.Add("Pension_Alimenticia")
+            dsPoliza.Tables("Tabla").Columns.Add("Prestamo")
+            dsPoliza.Tables("Tabla").Columns.Add("Fonacot")
+            dsPoliza.Tables("Tabla").Columns.Add("T_No_laborado")
+            dsPoliza.Tables("Tabla").Columns.Add("Cuota_Sindical")
+            dsPoliza.Tables("Tabla").Columns.Add("Subsidio_Generado")
+            dsPoliza.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
+            dsPoliza.Tables("Tabla").Columns.Add("Neto_SA")
+            dsPoliza.Tables("Tabla").Columns.Add("Prestamo_Personal_A")
+            dsPoliza.Tables("Tabla").Columns.Add("Adeudo_Infonavit_A")
+            'dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_A")
+            dsPoliza.Tables("Tabla").Columns.Add("EXCEDENTE_V")
+            dsPoliza.Tables("Tabla").Columns.Add("SINDICATO/PPP")
+            dsPoliza.Tables("Tabla").Columns.Add("PRIMA_EXCEN")
+            dsPoliza.Tables("Tabla").Columns.Add("PA_E")
+            dsPoliza.Tables("Tabla").Columns.Add("EXCEDENTE_M")
+            dsPoliza.Tables("Tabla").Columns.Add("Comisión_Beneficio")
+
+            dsPoliza.Tables("Tabla").Columns.Add("IMSS_CS")
+            dsPoliza.Tables("Tabla").Columns.Add("RCV_CS")
+            dsPoliza.Tables("Tabla").Columns.Add("Infonavit_CS")
+            dsPoliza.Tables("Tabla").Columns.Add("ISN_CS")
+            dsPoliza.Tables("Tabla").Columns.Add("Total_Costo_Social")
+            dsPoliza.Tables("Tabla").Columns.Add("2%SAR")
+            dsPoliza.Tables("Tabla").Columns.Add("CYV")
+            dsPoliza.Tables("Tabla").Columns.Add("TIPOEXC")
+            dsPoliza.Tables("Tabla").Columns.Add("VALES")
+            dsPoliza.Tables("Tabla").Columns.Add("APORPF")
+            dsPoliza.Tables("Tabla").Columns.Add("PRAGUINALDO")
+            dsPoliza.Tables("Tabla").Columns.Add("PRPRIMAV")
+            dsPoliza.Tables("Tabla").Columns.Add("PRPRIMAANT")
+            dsPoliza.Tables("Tabla").Columns.Add("PRINDEMNIZACION")
+            dsPoliza.Tables("Tabla").Columns.Add("PDE")
+            dsPoliza.Tables("Tabla").Columns.Add("TE2E")
+            dsPoliza.Tables("Tabla").Columns.Add("TE3E")
+            dsPoliza.Tables("Tabla").Columns.Add("DLE")
+            dsPoliza.Tables("Tabla").Columns.Add("DFE")
+            dsPoliza.Tables("Tabla").Columns.Add("M_EXCEDENTE")
 
 
+            Dim totalexcedente As Double
+            Dim fondoPFB As Double
+            Dim ejercicio As String
+            Dim mesperiodo, periodo As String
+            Dim fecha, periodom, iejercicio, idias As String
+            Dim mesid As String
+
+            Dim tipoperiodos2 As String
+            Dim fechapagoletra As String
+
+            Dim filaExcel As Integer = 4
+            Dim dialogo As New SaveFileDialog()
+
+            Dim pilotin As Boolean = False
+            Dim pilotinF As Boolean = False
+
+            Dim PFB_CORTO_PLAZO As Double = 0
+
+
+            '##
+
+
+            Dim mes As String
+
+
+            Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+            Dim tiponomina, sueldodescanso As String
+            Dim filaexcelnomtotal As Integer = 0
+            Dim valesDespensa As String
+
+            'dias prov
+            Dim DiasCadaPeriodo As Integer
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim FechaAntiguedad As Date
+            Dim FechaBuscar As Date
+            Dim TipoPeriodoinfoonavit As Integer
+
+            Dim ValorUMA As Double
+            '##
+
+
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+                'fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                ' iejercicio = rwPeriodo0(0).Item("iEjercicio")
+                idias = rwPeriodo0(0).Item("iDiasPago")
+                tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+            End If
+
+            'Ver datos
+            'borramos los datos
+            dtgDatos.Columns.Clear()
+            'cambiamos el ordenamiento
+            campoordenamiento = "clabe2"
+
+            sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
+            sql &= " where Nomina.fkiIdEmpresa = 1  " & IIf(chkPeriodosC.Checked = True, "And fkiIdPeriodo in (6,8)", "And fkiIdPeriodo =" & cboperiodo.SelectedValue)
+            sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+            sql &= " and iTipoNomina=0"
+            sql &= " order by " & campoordenamiento 'cNombreLargo"
+            'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
+
+
+            Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+
+            'If rwNominaGuardadaFinal Is Nothing = False Then
+            If rwNominaGuardada Is Nothing = False Then
+                cmdverdatos_Click(sender, e)
+                'cmdguardarnomina_Click(sender, e)
+            Else
+                MessageBox.Show("No hay datos guardados, primero genere la nomina que corresponde al periodo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Exit Sub
+            End If
+
+
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+            If dtgDatos.Rows.Count > 0 Then
+
+
+                'Abrimos el machote
                 Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonomina.xlsx"
+
+                If EmpresaN = "TMMDC" Then
+                    ruta = My.Application.Info.DirectoryPath() & "\hojaTP\hojaTP-TMMDC.xlsx"
+
+                ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_logistic_s.xlsx"
+                ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_logistic_q.xlsx"
+                ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_idn_s.xlsx"
+                ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_idn_q.xlsx"
+                ElseIf EmpresaN = "Transportacion" And tipoperiodos2 = 2 Then
+                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_tmm_q.xlsx"
+                End If
+
+
                 Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
-                book.Worksheet(1).CopyTo(libro, "NOMINA")
+
+                book.Worksheet(1).CopyTo(libro, "Generales")
+
+
+
                 Dim hoja As IXLWorksheet = libro.Worksheets(0)
 
 
 
-                sql = "	select EmpleadosC.clabe2 as CeCo,"
-                sql &= " sum(fSueldoBruto) as fSueldoBruto,"
-                sql &= " sum(fSeptimoDia) as fSeptimoDia, sum(fPrimaDomGravada) as fPrimaDomGravada, sum(fPrimaDomExenta) as fPrimaDomExenta, "
-                sql &= " sum(fTExtra2Gravado) as fTExtra2Gravado,sum( fTExtra2Exento) as fTExtra2Exento, sum(fTExtra3) as fTExtra3, sum(fDescansoL) as fDescansoL , sum(fDiaFestivoL) as fDiaFestivoL,"
-                sql &= " sum(fBonoAsistencia) as fBonoAsistencia,sum(fBonoProductividad) as fBonoProductividad,sum( fBonoPolivalencia) as fBonoPolivalencia,"
-                sql &= " sum( fBonoEspecialidad) as fBonoEspecialidad,sum( fBonoCalidad) as fBonoCalidad,sum(fCompensacion) as fCompensacion,sum( fSemanaFondo) as fSemanaFondo,"
-                sql &= " sum(fFaltaInjustificada) as fFaltaInjustificada,sum( fPermisoSinGS) as fPermisoSinGS,sum( fIncrementoRetenido) as fIncrementoRetenido ,"
-                sql &= " sum(fVacacionesProporcionales) as fVacacionesProporcionales ,sum( fAguinaldoGravado) as fAguinaldoGravado,sum( fAguinaldoExento) as fAguinaldoExento,"
-                sql &= " sum(fPrimaVacacionalGravado) as fPrimaVacacionalGravado,sum( fPrimaVacacionalExento) as fPrimaVacacionalExento,sum( fTotalPercepciones) as fTotalPercepciones,"
-                sql &= " sum(fTotalPercepcionesISR) as fTotalPercepcionesISR,sum( fIncapacidad) as fIncapacidad, sum(fIsr) as fIsr, sum(fImss) as fImss,sum( fInfonavit) as  fInfonavit,"
-                sql &= " sum(fInfonavitBanterior) as fInfonavitBanterior,sum( fAjusteInfonavit) as fAjusteInfonavit,sum( fPensionAlimenticia) as fPensionAlimenticia, sum(fPrestamo) as fPrestamo,"
-                sql &= " sum( fFonacot) as fFonacot,sum( fT_No_laborado) as fT_No_laborado,sum( fCuotaSindical) as fCuotaSindical,sum( fSubsidioGenerado) as fSubsidioGenerado,"
-                sql &= " sum(fSubsidioAplicado) as fSubsidioAplicado,(sum( fOperadora)) as neto , sum(fPrestamoPerA) as fPrestamoPerA, sum(fAdeudoInfonavitA) as fAdeudoInfonavitA ,"
-                sql &= " sum( fDiferenciaInfonavitA) as fDiferenciaInfonavitA ,sum( fAsimilados)  as EXCEDENTE,sum( fRetencionOperadora) as   prima, "
-                sql &= " sum(fPorComision) as fPorComision ,sum( fComisionOperadora) as fComisionOperadora ,sum( fComisionAsimilados) as  fComisionAsimilados,sum( fImssCS) as fImssCS ,"
-                sql &= " sum( fRcvCS) as fRcvCS , sum(fInfonavitCS) as fInfonavitCS ,sum( fInsCS) as fInsCS ,sum( fTotalCostoSocial ) as fTotalCostoSocial"
 
-                sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
-                sql &= " where	Nomina.fkiIdEmpresa	=	1	And	fkiIdPeriodo between " & Forma.gInicial
-                sql &= " and " & Forma.gFinal & " and	Nomina.iEstatus=1 and	iTipoNomina=0 AND iEstatusEmpleado=" & Forma.gSerie
-                sql &= " group by EmpleadosC.clabe2"
-                sql &= " ORDER	BY	"
-                sql &= "EmpleadosC.clabe2"
-
-                Dim rwFilas As DataRow() = nConsulta(sql)
-
-                pgbProgreso.Minimum = 0
-                pgbProgreso.Value = 0
-                pgbProgreso.Maximum = rwFilas.Count
-
-                filaExcel = 2
-                Dim pInicial, pFinal As Integer
-                pInicial = Forma.gInicial
-                pFinal = Forma.gFinal
-                If rwFilas Is Nothing = False Then
-
-                    For columna As Integer = 0 To rwFilas.ElementAt(0).Table.Columns.Count - 1
-                        For x As Integer = 0 To rwFilas.Count - 1
-                            MessageBox.Show(rwFilas.ElementAt(0).Table.Columns.Item(0).ColumnName & "," & rwFilas.ElementAt(0).Table.Columns.Item(1).ColumnName & "," & rwFilas.ElementAt(0).Table.Columns.Item(2).ColumnName)
-                            ''PERIODOS para PROV
-                            'Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwFilas(x).Item("fkiIdPeriodo"))
-                            'FechaInicioPeriodo = Date.Parse(rwPeriodo(0)("dFechaInicio"))
-                            'FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
-                            'DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
-
-
-                            ''fechasperioodo
-                            'Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & rwFilas(x).Item("fkiIdPeriodo"))
-                            'If rwPeriodo0 Is Nothing = False Then
-                            '    periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
-                            '    mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
-                            '    iejercicio = rwPeriodo0(0).Item("iEjercicio")
-                            '    idias = rwPeriodo0(0).Item("iDiasPago")
-                            '    periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
-                            '    tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
-                            'End If
-
-                            ''UMAS
-                            'Dim rwValorUMA As DataRow() = nConsulta("select * from Salario where Anio=" & aniocostosocial & " and iEstatus=1")
-                            'If rwValorUMA Is Nothing = False Then
-                            '    If rwFilas(x).Item("fkiIdPeriodo") = 1 Then
-                            '        ValorUMA = 96.22
-                            '    Else
-                            '        ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
-                            '    End If
-                            'Else
-                            '    ValorUMA = 0
-                            '    MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
-                            'End If
-
-                            ''VALES DE DESPEMSA 
-                            'Dim numperiodo As Integer = cboperiodo.SelectedValue
-
-                            'If validarSiSeCalculanVales(EmpresaN, tipoperiodos2) Then
-                            '    If tipoperiodos2 = 2 Then
-                            '        If rwFilas(x).Item("fkiIdPeriodo") Mod 2 = 0 Then
-                            '            valesDespensa = 0
-                            '        Else
-                            '            valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
-
-                            '        End If
-
-                            '    ElseIf tipoperiodos2 = 3 Then
-                            '        If rwFilas(x).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                            '            valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
-                            '        Else
-                            '            valesDespensa = 0
-                            '        End If
-                            '    Else
-                            '        valesDespensa = 0
-                            '    End If
-
-                            'Else
-                            '    valesDespensa = "0.0"
-                            'End If
-
-
-                            'hoja.Range("Q2", "Q" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
-                            'hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
-                            'hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
-                            'Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-                            'If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
-                            '    'MsgBox("lol")
-                            'End If
-                            'hoja.Cell(filaExcel + x, 1).Value = mes 'MES
-                            'hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
-                            'hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
-                            'hoja.Cell(filaExcel + x, 4).Value = rwFilas(x).Item("clabe2") 'ce co
-                            'hoja.Cell(filaExcel + x, 5).Value = rwFilas(x).Item("cNombreLargo")
-                            'hoja.Cell(filaExcel + x, 6).Value = EmpresaN
-                            'hoja.Cell(filaExcel + x, 7).Value = "LIMITADO"
-                            'hoja.Cell(filaExcel + x, 8).Value = rwFilas(x).Item("Puesto")
-                            'hoja.Cell(filaExcel + x, 9).Value = rwFilas(x).Item("Depto")
-                            'hoja.Cell(filaExcel + x, 10).Value = rwFilas(x).Item("fkiIdPeriodo")
-                            'hoja.Cell(filaExcel + x, 11).Value = "OTRO"
-                            'hoja.Cell(filaExcel + x, 12).Value = rwFilas(x).Item("cRFC")
-                            'hoja.Cell(filaExcel + x, 13).Value = rwFilas(x).Item("cIMSS")
-                            'hoja.Cell(filaExcel + x, 14).Value = LTrim(RTrim(rwFilas(x).Item("cCURP")))
-                            'hoja.Cell(filaExcel + x, 15).Value = rwFilas(x).Item("dFechaAntiguedad")
-                            'hoja.Cell(filaExcel + x, 16).FormulaA1 = "=LEFT(Q" & filaExcel + x & ",3)"
-                            'hoja.Cell(filaExcel + x, 17).Value = rwFilas(x).Item("clabe")
-                            'hoja.Cell(filaExcel + x, 18).Value = rwFilas(x).Item("fTExtra2V")
-                            'hoja.Cell(filaExcel + x, 19).Value = rwFilas(x).Item("fTExtra3V")
-                            'hoja.Cell(filaExcel + x, 20).Value = rwFilas(x).Item("fDescansoLV")
-                            'hoja.Cell(filaExcel + x, 21).Value = rwFilas(x).Item("fDiaFestivoLV")
-                            'hoja.Cell(filaExcel + x, 22).Value = rwFilas(x).Item("fHoras_extras_dobles_V")
-                            'hoja.Cell(filaExcel + x, 23).Value = rwFilas(x).Item("fHoras_extras_triples_V")
-                            'hoja.Cell(filaExcel + x, 24).Value = rwFilas(x).Item("fDescanso_Laborado_V")
-                            'hoja.Cell(filaExcel + x, 25).Value = rwFilas(x).Item("fDia_Festivo_laborado_V")
-                            'hoja.Cell(filaExcel + x, 26).Value = rwFilas(x).Item("fPrima_Dominical_V")
-                            'hoja.Cell(filaExcel + x, 27).Value = rwFilas(x).Item("fFalta_Injustificada_V")
-                            'hoja.Cell(filaExcel + x, 28).Value = rwFilas(x).Item("fPermiso_Sin_GS_V")
-                            'hoja.Cell(filaExcel + x, 29).Value = rwFilas(x).Item("fT_No_laborado_V")
-                            'hoja.Cell(filaExcel + x, 30).Value = rwFilas(x).Item("fSalarioBase")
-                            'hoja.Cell(filaExcel + x, 31).Value = rwFilas(x).Item("fSalarioDiario")
-                            'hoja.Cell(filaExcel + x, 32).Value = rwFilas(x).Item("fSalarioBC")
-                            'hoja.Cell(filaExcel + x, 33).Value = rwFilas(x).Item("iDiasTrabajados") 'dias trabajsdos
-                            'hoja.Cell(filaExcel + x, 34).Value = rwFilas(x).Item("fSueldoBruto")
-                            'hoja.Cell(filaExcel + x, 35).Value = rwFilas(x).Item("fSeptimoDia")
-                            'hoja.Cell(filaExcel + x, 36).Value = rwFilas(x).Item("fPrimaDomGravada")
-                            'hoja.Cell(filaExcel + x, 37).Value = rwFilas(x).Item("fPrimaDomExenta")
-                            'hoja.Cell(filaExcel + x, 38).Value = rwFilas(x).Item("fTExtra2Gravado")
-                            'hoja.Cell(filaExcel + x, 39).Value = rwFilas(x).Item("fTExtra2Exento")
-                            'hoja.Cell(filaExcel + x, 40).Value = rwFilas(x).Item("fTExtra3")
-                            'hoja.Cell(filaExcel + x, 41).Value = rwFilas(x).Item("fDescansoL")
-                            'hoja.Cell(filaExcel + x, 42).Value = rwFilas(x).Item("fDiaFestivoL")
-                            'hoja.Cell(filaExcel + x, 43).Value = rwFilas(x).Item("fBonoAsistencia")
-                            'hoja.Cell(filaExcel + x, 44).Value = rwFilas(x).Item("fBonoProductividad")
-                            'hoja.Cell(filaExcel + x, 45).Value = rwFilas(x).Item("fBonoPolivalencia")
-                            'hoja.Cell(filaExcel + x, 46).Value = rwFilas(x).Item("fBonoEspecialidad")
-                            'hoja.Cell(filaExcel + x, 47).Value = rwFilas(x).Item("fBonoCalidad")
-                            'hoja.Cell(filaExcel + x, 48).Value = rwFilas(x).Item("fCompensacion")
-                            'hoja.Cell(filaExcel + x, 49).Value = rwFilas(x).Item("fSemanaFondo")
-                            'hoja.Cell(filaExcel + x, 50).Value = rwFilas(x).Item("fFaltaInjustificada")
-                            'hoja.Cell(filaExcel + x, 51).Value = rwFilas(x).Item("fPermisoSinGS")
-                            'hoja.Cell(filaExcel + x, 52).Value = rwFilas(x).Item("fIncrementoRetenido")
-                            'hoja.Cell(filaExcel + x, 53).Value = rwFilas(x).Item("fVacacionesProporcionales")
-                            'hoja.Cell(filaExcel + x, 54).Value = rwFilas(x).Item("fAguinaldoGravado")
-                            'hoja.Cell(filaExcel + x, 55).Value = rwFilas(x).Item("fAguinaldoExento")
-                            'hoja.Cell(filaExcel + x, 56).Value = rwFilas(x).Item("fPrimaVacacionalGravado")
-                            'hoja.Cell(filaExcel + x, 57).Value = rwFilas(x).Item("fPrimaVacacionalExento")
-                            'hoja.Cell(filaExcel + x, 58).Value = rwFilas(x).Item("fTotalPercepciones")
-                            'hoja.Cell(filaExcel + x, 59).Value = rwFilas(x).Item("fTotalPercepcionesISR")
-                            'hoja.Cell(filaExcel + x, 60).Value = CDbl(rwFilas(x).Item("fTotalPercepciones")) - CDbl(rwFilas(x).Item("fTotalPercepcionesISR")) 'total percep no grava		
-                            'hoja.Cell(filaExcel + x, 61).Value = rwFilas(x).Item("fIncapacidad")
-                            'hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("fIsr")
-                            'hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fImss")
-                            'hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fInfonavit")
-                            'hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fInfonavitBanterior")
-                            'hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fAjusteInfonavit")
-                            'hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fPensionAlimenticia")
-                            'hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fPrestamo")
-                            'hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fFonacot")
-                            'hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fT_No_laborado")
-                            'hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fCuotaSindical")
-                            'hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fSubsidioGenerado")
-                            'hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioAplicado")
-                            'hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
-                            'hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
-                            'hoja.Cell(filaExcel + x, 76).Value = 0 ' rwFilas(x).Item("fPrestamoPerA") 'FONDO PFB 3%
-                            'hoja.Cell(filaExcel + x, 77).FormulaA1 = valesDespensa 'rwFilas(x).Item("fAdeudoInfonavitA")
-                            'hoja.Cell(filaExcel + x, 78).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
-                            'hoja.Cell(filaExcel + x, 79).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, rwFilas(x).Item("EXCEDENTE"), 0)
-                            'hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0") 'rwFilas(x).Item("fRetencion")
-                            'hoja.Cell(filaExcel + x, 81).Value = 0 'rwFilas(x).Item("fPorComision")
-                            'hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
-                            'hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
-                            'hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
-                            'hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x 'cuota imss
-                            'hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
-                            'hoja.Cell(filaExcel + x, 87).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
-                            'hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fRcvCS")
-                            'hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInfonavitCS")
-                            'hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fInsCS")
-                            'hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CF" & filaExcel + x & "+CJ" & filaExcel + x & "+Ck" & filaExcel + x & "+CL" & filaExcel + x
-                            'hoja.Cell(filaExcel + x, 92).Value = rwFilas(x).Item("fTotalCostoSocial")
-                            'hoja.Cell(filaExcel + x, 93).FormulaA1 = IIf(EmpresaN = "IDN", "=((AE" & filaExcel + x & "*15)/365)*AG" & filaExcel + x, "=((AE" & filaExcel + x & "*30)/365)*AG" & filaExcel + x) 'pro agui
-
-
-                            'If tipoperiodos2 = 2 Then
-
-                            '    hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            '    hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
-                            '    hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
-                            '    hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
-                            '    hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
-                            '    hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
-                            '    hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
-
-                            'ElseIf tipoperiodos2 = 3 Then
-
-
-                            '    hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                            '    hoja.Cell(filaExcel + x, 95).Value = 0.0 'imss pro
-                            '    hoja.Cell(filaExcel + x, 96).Value = 0.0 'pro cyv pa
-                            '    hoja.Cell(filaExcel + x, 97).Value = 0.0 ' ret pro
-                            '    hoja.Cell(filaExcel + x, 98).Value = 0.0 'provision ?
-                            '    hoja.Cell(filaExcel + x, 99).Value = 0.0 'PRO ISN
-                            '    hoja.Cell(filaExcel + x, 100).Value = 0.0 'pro PE NOD
-                            'End If
-
-                            'pgbProgreso.Value = x
-                        Next x
-                    Next
+                'Clean cells
+                recorrerFilasColumnas(hoja, 4, dtgDatos.Rows.Count + 50, 100, "clear")
 
 
 
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    Dim fila As DataRow = dsPoliza.Tables("Tabla").NewRow
 
 
-                    ''<<<<<CARGAR>>>>>
-                    'pnlProgreso.Visible = False
-                    'pnlCatalogo.Enabled = True
+                    Dim cuenta, clavebanco, fechainiciorelaboral, cCP, nombrecompleto, correo, ceco, banco As String
 
-                    ''<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
+                    If (dtgDatos.Rows(x).Cells(3).Value Is Nothing = False) Then
+                        Dim rwEmpleado As DataRow() = nConsulta("SELECT * FROM empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
+                        If rwEmpleado Is Nothing = False Then
 
-                    'Dim textoperiodo As String
-                    'If tipoperiodos2 = 2 Then
+                            cuenta = rwEmpleado(0).Item("Clabe")
+                            correo = rwEmpleado(0).Item("cCorreo")
+                            fechainiciorelaboral = rwEmpleado(0).Item("dFechaAntiguedad")
+                            cCP = rwEmpleado(0).Item("cCP")
+                            ceco = rwEmpleado(0).Item("clabe2")
 
-                    '    textoperiodo = Forma.gInicial & "-" & Forma.gFinal & " Q "
+                            nombrecompleto = rwEmpleado(0).Item("cNombre").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoP").ToString.Trim + " " + rwEmpleado(0).Item("cApellidoM").ToString.Trim
+                            Dim rwBanco As DataRow() = nConsulta("SELECT* FROM bancos where iIdBanco=" & rwEmpleado(0).Item("fkiIdBanco"))
 
-                    'ElseIf tipoperiodos2 = 3 Then
+                            clavebanco = rwBanco(0).Item("clave")
+                            banco = rwBanco(0).Item("cBanco")
 
-                    '    textoperiodo = "SEMANA " & Forma.gInicial & "-" & Forma.gFinal
-                    'End If
+                        End If
+
+                    End If
+                    hoja.Range(4, 1, filaExcel, 4).Style.NumberFormat.Format = "@"
+                    'hoja.Range(4, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
+                    'hoja.Range(4, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
+                    'hoja.Range(4, 7, filaExcel, 7).Style.NumberFormat.Format = "@"
+                    'hoja.Range(4, 27, filaExcel, 27).Style.NumberFormat.Format = "@"
+
+                    If dtgDatos.Rows(x).Cells(3).Value <> "" Then
+                        'agregar todos los ceco
+                        ''Generales
+                        'BUSCAMOS EL CECO
+                        fila.Item("Ceco") = ceco
+                        fila.Item("CodigoEmpleado") = dtgDatos.Rows(x).Cells(3).Value
+                        fila.Item("RFC") = dtgDatos.Rows(x).Cells(6).Value
+                        fila.Item("Nombre") = nombrecompleto
 
 
-                    'dialogo.FileName = "CONCENTRADO " & EmpresaN.ToUpper & " " & textoperiodo & periodo
-                    'dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                    ' ''  dialogo.ShowDialog()
+                        
 
-                    'If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    '    ' OK button pressed
-                    '    libro.SaveAs(dialogo.FileName)
-                    '    libro = Nothing
-                    '    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                    'Else
-                    '    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        If EmpresaN = "TMMDC" Then
 
-                    'End If
+                            'hoja.Range(4, 2, dtgDatos.Rows.Count + 4, 10).Style.NumberFormat.Format = "#,##0.00"
+                            'hoja.Range(4, 14, dtgDatos.Rows.Count + 4, 16).Style.NumberFormat.Format = "#,##0.00"
+                            'hoja.Range(4, 20, dtgDatos.Rows.Count + 4, 42).Style.NumberFormat.Format = "#,##0.00"
+                            'hoja.Range(4, 5, dtgDatos.Rows.Count + 4, 5).Style.NumberFormat.Format = "#"
+
+
+                            '<<<<Percepcioness>>>>>
+                            fila.Item("SueldoG") = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado
+                            fila.Item("SueldoE") = ""  ' Sueldo Base excento
+                            fila.Item("AguinaldoG") = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
+                            fila.Item("AguinaldoE") = CDbl(dtgDatos.Rows(x).Cells(50).Value) ' ' Aguinaldo Excento
+                            
+                            'hoja.Cell(filaExcel, 9).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(35).Value)  ' Horas Triples importe gravado
+                            'hoja.Cell(filaExcel, 10).Value = "" ' Horas Triples importe exedente
+                            'hoja.Cell(filaExcel, 11).Value = 0 ''CDbl(dtgDatos.Rows(x).Cells(16).Value) / 3 ' Horas Triples valor dias
+                            'hoja.Cell(filaExcel, 12).Value = 0 ' "2"
+                            'hoja.Cell(filaExcel, 13).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(16).Value) 'Horas Triples valor 
+                            'hoja.Cell(filaExcel, 14).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(35).Value) ' Horas Triples importe
+                            'hoja.Cell(filaExcel, 15).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(33).Value) 'Horas  Doble Gravado
+                            'hoja.Cell(filaExcel, 16).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(34).Value) 'Horas  Doble Excento
+                            'hoja.Cell(filaExcel, 17).FormulaA1 = "=IF(AND(T" & filaExcel & ">0, T" & filaExcel & "<=3),1,IF(AND(T" & filaExcel & ">3,T" & filaExcel & "<=6),2,IF(T" & filaExcel & ">6,3,0)))" 'horas dobles dia
+                            'hoja.Cell(filaExcel, 18).Value = 0 ' "1" 'TIPO
+                            'hoja.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(15).Value) 'Horas
+                            'hoja.Cell(filaExcel, 20).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value) + CDbl(dtgDatos.Rows(x).Cells(34).Value) 'IMPORTE TOTAL HORAS EXTRAS
+                            fila.Item("PrimaDominicalG") = CDbl(dtgDatos.Rows(x).Cells(31).Value) 'PRIMA DOMINICAL GRAVADO
+                            fila.Item("PrimaDominicalE") = CDbl(dtgDatos.Rows(x).Cells(32).Value) 'PRIMA DOMINICAL EXCENTO
+                            fila.Item("PrimaVacacionalG") = CDbl(dtgDatos.Rows(x).Cells(52).Value) 'PRIMA VACACIONAL GRAVADO
+                            fila.Item("PrimaVacacionalE") = CDbl(dtgDatos.Rows(x).Cells(53).Value) 'PRIMA VACACIONAL EXCENTO
+                            fila.Item("ValesG") = "0" 'VALES DE DESPENSA GRAVADO
+                            fila.Item("ValesE") = CDbl(dtgDatos.Rows(x).Cells(87).Value) 'VALES DE DESPENSA EXCENTO
+                            fila.Item("SPendienteG") = "0"
+                            fila.Item("SPendienteE") = "0"
+                            fila.Item("CompensacionG") = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
+                            fila.Item("CompensacionE") = "0" 'COMPENSACION EXENTO
+                            fila.Item("VacaProporG") = CDbl(dtgDatos.Rows(x).Cells(48).Value)  'VACACIONES PROPORCIONALES GRAVADO  
+                            fila.Item("VacaProporE") = "0"  'VACACIONES PROPORCIONALES GRAVADO  
+                            fila.Item("DescLaboradoG") = CDbl(dtgDatos.Rows(x).Cells(36).Value)  'DESC LABORADO GRAVADO     
+                            fila.Item("DescLaboradoE") = 0 'DESC LABORADO EXCENTO
+                            fila.Item("DiaFestLaboradoG") = CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
+                            fila.Item("DiaFestLaboradoE") = 0 'DIAS FESTIVO LAB EXCENTO
+                            fila.Item("PlanFlexG") = 0 'PREVISION_ PFB  gravado
+                            totalexcedente = CDbl(dtgDatos.Rows(x).Cells(74).Value) - (CDbl(dtgDatos.Rows(x).Cells(71).Value) - CDbl(dtgDatos.Rows(x).Cells(72).Value)) + CDbl(dtgDatos.Rows(x).Cells(73).Value) + CDbl(dtgDatos.Rows(x).Cells(75).Value) - CDbl(dtgDatos.Rows(x).Cells(76).Value) + CDbl(dtgDatos.Rows(x).Cells(77).Value) + CDbl(dtgDatos.Rows(x).Cells(93).Value) + CDbl(dtgDatos.Rows(x).Cells(94).Value) + CDbl(dtgDatos.Rows(x).Cells(95).Value) + CDbl(dtgDatos.Rows(x).Cells(96).Value) + CDbl(dtgDatos.Rows(x).Cells(97).Value)
+                            fondoPFB = CDbl(dtgDatos.Rows(x).Cells(88).Value)
+                            fila.Item("PlanFlexE") = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", (totalexcedente + (fondoPFB / 2)), 0) 'PREVISION_ PFB  exento
+                            fila.Item("ApotPFlexG") = 0 'APORT PATRONAL PLAN FLEX LP       gravado
+                            fila.Item("ApotPFlexG") = fondoPFB / 2   'APORT PATRONAL PLAN FLEX LP  exento
+                            fila.Item("ISR") = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
+                            fila.Item("PensionA") = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
+                            fila.Item("Infonavit") = dtgDatos.Rows(x).Cells(60).Value ' 'PRESTAMO INFONAVIT CF
+                            
+                            fila.Item("SeguroVivienda") = 0 'SEGUROS DE VIVIENDA
+                            fila.Item("InfonavitBimAnt") = IIf(dtgDatos.Rows(x).Cells(61).Value < 0, 0, dtgDatos.Rows(x).Cells(61).Value) 'INFONAVIT BIM ANT
+                            fila.Item("Fonacot") = CDbl(dtgDatos.Rows(x).Cells(65).Value) 'FONACOT
+                            fila.Item("ValesD") = CDbl(dtgDatos.Rows(x).Cells(87).Value) 'VALES
+                            fila.Item("AnticipoSueldo") = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO
+                            fila.Item("APORTTRABAJAFLEX") = fondoPFB / 2 'PLAN FLEX LP
+                            fila.Item("APORTPATRONFLEX") = fondoPFB / 2 'APOR PATRON PLAN FLEX LP
+                            
+                            'del concentrado
+                            sql = "select"
+                            sql &= " iIdEmpleadoC, nomina.fkiIdPeriodo,"
+                            sql &= " EmpleadosC.cCodigoEmpleado, EmpleadosC.clabe2, "
+                            sql &= " EmpleadosC.cNombreLargo,"
+                            sql &= " Nomina.Depto, Nomina.Puesto,"
+                            sql &= " EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe, "
+                            sql &= "fTExtra2V, "
+                            sql &= "fTExtra3V, "
+                            sql &= "fDescansoLV , "
+                            sql &= "fDiaFestivoLV , "
+                            sql &= "fHoras_extras_dobles_V , "
+                            sql &= "fHoras_extras_triples_V , "
+                            sql &= "fDescanso_Laborado_V , "
+                            sql &= "fDia_Festivo_laborado_V , "
+                            sql &= "fPrima_Dominical_V , "
+                            sql &= "fFalta_Injustificada_V, "
+                            sql &= "fPermiso_Sin_GS_V , "
+                            sql &= "fT_No_laborado_V , "
+                            sql &= "fSalarioBase , "
+                            sql &= "fSalarioDiario, "
+                            sql &= "fSalarioBC , "
+                            sql &= "iDiasTrabajados , "
+                            sql &= "fSueldoBruto, "
+                            sql &= "fSeptimoDia, "
+                            sql &= "fPrimaDomGravada, "
+                            sql &= "fPrimaDomExenta, "
+                            sql &= "fTExtra2Gravado, "
+                            sql &= "fTExtra2Exento, "
+                            sql &= "fTExtra3, "
+                            sql &= "fDescansoL, "
+                            sql &= "fDiaFestivoL, "
+                            sql &= "fBonoAsistencia, "
+                            sql &= "fBonoProductividad, "
+                            sql &= "fBonoPolivalencia, "
+                            sql &= "fBonoEspecialidad, "
+                            sql &= "fBonoCalidad, "
+                            sql &= "fCompensacion, "
+                            sql &= "fSemanaFondo, "
+                            sql &= "fFaltaInjustificada, "
+                            sql &= "fPermisoSinGS, "
+                            sql &= "fIncrementoRetenido, "
+                            sql &= "fVacacionesProporcionales, "
+                            sql &= "fAguinaldoGravado, "
+                            sql &= "fAguinaldoExento, "
+                            sql &= "fPrimaVacacionalGravado, "
+                            sql &= "fPrimaVacacionalExento, "
+                            sql &= "fTotalPercepciones, "
+                            sql &= "fTotalPercepcionesISR, "
+                            sql &= "fIncapacidad, "
+                            'AQUI
+                            sql &= " fIsr, "
+                            sql &= "fImss, "
+                            sql &= "fInfonavit, "
+                            sql &= "fInfonavitBanterior, "
+                            sql &= "fAjusteInfonavit, "
+                            sql &= "fPensionAlimenticia, "
+                            sql &= "fPrestamo, "
+                            sql &= "fFonacot, "
+                            sql &= "fT_No_laborado, "
+                            sql &= "fCuotaSindical, "
+                            sql &= "fSubsidioGenerado, "
+                            sql &= "fSubsidioAplicado, "
+                            sql &= "fOperadora AS NETO_SA, "
+                            sql &= "fPrestamoPerA, "
+                            sql &= "fAdeudoInfonavitA, "
+                            sql &= "fDiferenciaInfonavitA, "
+                            sql &= "fAsimilados AS EXCEDENTE, "
+                            sql &= "fRetencionOperadora AS fRetencion, "
+                            sql &= "fPorComision, "
+                            sql &= "fComisionOperadora, "
+                            sql &= "fComisionAsimilados, "
+                            sql &= "fImssCS, "
+                            sql &= "fRcvCS, "
+                            sql &= "fInfonavitCS, "
+                            sql &= "fInsCS, "
+                            sql &= "fTotalCostoSocial,"
+                            sql &= "Vales,"
+                            sql &= "AportacionPF,"
+                            sql &= "prAguinaldo,"
+                            sql &= "prPrimaV,"
+                            sql &= "prPrimaAnt,"
+                            sql &= "prIndemnizacion,"
+                            sql &= "SAR,"
+                            sql &= "CesantiaVejez,"
+                            sql &= "PDE,"
+                            sql &= "TE2E,"
+                            sql &= "TE3E,"
+                            sql &= "DLE,"
+                            sql &= "DFE,"
+                            sql &= "Costo,"
+                            sql &= "Valor1,"
+                            sql &= "Valor2,"
+                            sql &= "Valor3,"
+                            sql &= "Valor4"
+
+                            sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
+                            sql &= " inner	join	nominacomplemento	on	Nomina.fkiIdEmpleadoC=nominacomplemento.fkiIdEmpleadoC"
+                            sql &= " where	Nomina.fkiIdEmpresa	=	1	And	nomina.fkiIdPeriodo=" & cboperiodo.SelectedValue
+                            sql &= " and	Nomina.iEstatus=1 and	iTipoNomina=0 AND Nomina.iEstatusEmpleado=" & cboserie.SelectedIndex
+                            sql &= " and iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                            sql &= " and nominacomplemento.fkiIdPeriodo=" & cboperiodo.SelectedValue
+                            sql &= " and nominacomplemento.iSerie=" & cboserie.SelectedIndex
+                            sql &= " and nominacomplemento.fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+
+                            Dim rwComplemento As DataRow() = nConsulta(sql)
+
+
+                            'PERIODOS para PROV
+                            Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwComplemento(0).Item("fkiIdPeriodo"))
+                            FechaInicioPeriodo = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                            FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                            DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
+
+
+                            'fechasperioodo
+                            rwPeriodo0 = nConsulta("Select * from periodos where iIdPeriodo=" & rwComplemento(0).Item("fkiIdPeriodo"))
+                            If rwPeriodo0 Is Nothing = False Then
+                                periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+                                mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                                iejercicio = rwPeriodo0(0).Item("iEjercicio")
+                                idias = rwPeriodo0(0).Item("iDiasPago")
+                                periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
+                                tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+                            End If
+
+                            'UMAS
+                            Dim rwValorUMA As DataRow() = nConsulta("select * from Salario where Anio=" & aniocostosocial & " and iEstatus=1")
+                            If rwValorUMA Is Nothing = False Then
+                                If rwComplemento(0).Item("fkiIdPeriodo") = 1 Then
+                                    ValorUMA = 96.22
+                                Else
+                                    ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                                End If
+                            Else
+                                ValorUMA = 0
+                                MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+                            End If
+
+                            'VALES DE DESPEMSA 
+                            Dim numperiodo As Integer = cboperiodo.SelectedValue
+
+                            If validarSiSeCalculanVales(EmpresaN, tipoperiodos2) Then
+                                If tipoperiodos2 = 2 Then
+                                    If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
+                                        valesDespensa = 0
+                                    Else
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+
+                                    End If
+
+                                ElseIf tipoperiodos2 = 3 Then
+                                    If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                    Else
+                                        valesDespensa = 0
+                                    End If
+                                Else
+                                    valesDespensa = 0
+                                End If
+
+                            Else
+                                valesDespensa = "0.0"
+                            End If
+
+
+                            Dim deduccionestotal As Double = CDbl(rwComplemento(0).Item("fIsr")) + CDbl(rwComplemento(0).Item("fInfonavit")) + CDbl(rwComplemento(0).Item("fInfonavitBanterior")) + CDbl(rwComplemento(0).Item("fPensionAlimenticia")) + CDbl(rwComplemento(0).Item("fPrestamo")) + CDbl(rwComplemento(0).Item("fT_No_laborado")) + CDbl(rwComplemento(0).Item("fCuotaSindical"))
+
+                            hoja.Cell(filaExcel, 53).Value = rwComplemento(0).Item("fIsr")
+                            hoja.Cell(filaExcel, 54).Value = rwComplemento(0).Item("fImss")
+                            hoja.Cell(filaExcel, 55).Value = rwComplemento(0).Item("fInfonavit")
+                            hoja.Cell(filaExcel, 56).Value = rwComplemento(0).Item("fInfonavitBanterior")
+                            hoja.Cell(filaExcel, 57).Value = rwComplemento(0).Item("fAjusteInfonavit")
+                            hoja.Cell(filaExcel, 58).Value = rwComplemento(0).Item("fPensionAlimenticia")
+                            hoja.Cell(filaExcel, 59).Value = rwComplemento(0).Item("fPrestamo")
+                            hoja.Cell(filaExcel, 60).Value = rwComplemento(0).Item("fFonacot")
+                            hoja.Cell(filaExcel, 61).Value = rwComplemento(0).Item("fT_No_laborado")
+                            hoja.Cell(filaExcel, 62).Value = rwComplemento(0).Item("fCuotaSindical")
+                            hoja.Cell(filaExcel, 63).Value = rwComplemento(0).Item("fSubsidioGenerado")
+                            hoja.Cell(filaExcel, 64).Value = rwComplemento(0).Item("fSubsidioAplicado")
+                            hoja.Cell(filaExcel, 65).Value = deduccionestotal
+                            hoja.Cell(filaExcel, 66).Value = rwComplemento(0).Item("NETO_SA")
+
+                            hoja.Cell(filaExcel, 67).Value = rwComplemento(0).Item("Vales")
+                            hoja.Cell(filaExcel, 68).Value = IIf(CDbl(rwComplemento(0).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
+                            'suma de los excedentes
+
+
+
+                            hoja.Cell(filaExcel, 69).Value = totalexcedente
+                            hoja.Cell(filaExcel, 70).Value = fondoPFB
+
+                            hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
+                            hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
+                            hoja.Cell(filaExcel, 75).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                            hoja.Cell(filaExcel, 76).Value = rwComplemento(0).Item("fRcvCS")
+                            hoja.Cell(filaExcel, 77).Value = rwComplemento(0).Item("fInfonavitCS")
+                            hoja.Cell(filaExcel, 78).Value = rwComplemento(0).Item("fInsCS")
+                            hoja.Cell(filaExcel, 79).FormulaA1 = "=+BS" & filaExcel & "+BX" & filaExcel & "+BY" & filaExcel & "+BZ" & filaExcel
+                            hoja.Cell(filaExcel, 80).Value = rwComplemento(0).Item("fTotalCostoSocial")
+
+                            'PROVISIONES
+                            hoja.Cell(filaExcel, 81).FormulaA1 = IIf(rwComplemento(0)("prAguinaldo").ToString = "", 0, rwComplemento(0)("prAguinaldo"))  'Provision Aguinaldo
+                            hoja.Cell(filaExcel, 82).Value = IIf(rwComplemento(0)("prPrimaV").ToString = "", 0, rwComplemento(0)("prPrimaV")) 'Provision Prima Vacacional
+                            hoja.Cell(filaExcel, 83).Value = IIf(rwComplemento(0)("prPrimaAnt").ToString = "", 0, rwComplemento(0)("prPrimaAnt")) 'Provision Prima de antiguedad
+                            hoja.Cell(filaExcel, 84).Value = IIf(rwComplemento(0)("prIndemnizacion").ToString = "", 0, rwComplemento(0)("prIndemnizacion")) 'Provision Indeminzacon
+
+
+
+                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
+                            'quincenal
+
+
+                        ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
+                            '<<<<Percepcioness>>>>>
+
+                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+
+                        ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                            'QUINCENALES
+
+                        ElseIf EmpresaN = "Transportacion" And tipoperiodos2 = 2 Then
+
+
+                        End If
+
+
+                        filaExcel = filaExcel + 1
+                    End If
+
+
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
+                Next
+                'VOLVEMOS A CARGAR LA QUE TENGA
+                dtgDatos.Columns.Clear()
+                'cambiamos el ordenamiento
+                campoordenamiento = "cCodigoEmpleado"
+                cmdverdatos_Click(sender, e)
+                'TERMINAMOS LA CARGA
+
+                'Se guarda
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+
+                Dim textoperiodo As String
+                If NombrePeriodo = "Quincenal" Then
+                    If cboperiodo.SelectedValue Mod 2 = 0 Then
+                        textoperiodo = "2 QNA "
+                    Else
+                        textoperiodo = "1 QNA "
+                    End If
+
+
+                ElseIf NombrePeriodo = "Semanal" Then
+
+                    textoperiodo = "SEMANA " & cboperiodo.SelectedValue & " "
                 End If
 
 
+                dialogo.FileName = "HOJA TRABAJO POLIZA" & EmpresaN.ToUpper & " " & textoperiodo & periodo
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
 
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                End If
+
+            Else
+
+                MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString)
+
+            MessageBox.Show(ex.Message.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            pnlCatalogo.Enabled = True
+            pnlProgreso.Visible = False
         End Try
     End Sub
 
@@ -19065,8 +19389,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 28).Value = "" 'SUELDO PENDIENTE EXCENTO
                             hoja2.Cell(filaExcel, 29).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
                             hoja2.Cell(filaExcel, 30).Value = 0 'COMPENSACION EXENTO
-                            hoja2.Cell(filaExcel, 31).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 32).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 31).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)  'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 32).Value = 0 'VACACIONES PROPORCIONALES EXCENTO
                             hoja2.Cell(filaExcel, 33).Value = CDbl(dtgDatos.Rows(x).Cells(36).Value)  'DESC LABORADO GRAVADO     
                             hoja2.Cell(filaExcel, 34).Value = 0 'DESC LABORADO EXCENTO
                             hoja2.Cell(filaExcel, 35).Value = CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
@@ -19934,8 +20258,8 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 28).Value = "" 'SUELDO PENDIENTE EXCENTO
                             hoja.Cell(filaExcel, 29).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
                             hoja.Cell(filaExcel, 30).Value = 0 'COMPENSACION EXENTO
-                            hoja.Cell(filaExcel, 31).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja.Cell(filaExcel, 32).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja.Cell(filaExcel, 31).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)   'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja.Cell(filaExcel, 32).Value = 0 'VACACIONES PROPORCIONALES EXCENTO
                             hoja.Cell(filaExcel, 33).Value = CDbl(dtgDatos.Rows(x).Cells(36).Value)  'DESC LABORADO GRAVADO     
                             hoja.Cell(filaExcel, 34).Value = 0 'DESC LABORADO EXCENTO
                             hoja.Cell(filaExcel, 35).Value = CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
