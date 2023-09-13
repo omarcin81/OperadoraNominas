@@ -177,7 +177,9 @@ Public Class frmnominasmarinos
 
     Private Sub cargarbancosasociados()
         Dim sql As String
+
         Try
+           
             sql = "select * from bancos inner join ( select distinct(fkiidBanco) from DatosBanco where fkiIdEmpresa=" & gIdEmpresa & ") bancos2 on bancos.iIdBanco=bancos2.fkiidBanco order by cBanco"
             nCargaCBO(cbobancos, sql, "cBanco", "iIdBanco")
         Catch ex As Exception
@@ -188,7 +190,23 @@ Public Class frmnominasmarinos
         'Verificar si se tienen permisos
         Dim sql As String
         Try
-            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 order by iEjercicio,iNumeroPeriodo"
+            Dim periodomensaje As String
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos")
+            Dim tipoperiodos2 As String
+            If rwPeriodo0 Is Nothing = False Then
+
+                tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+
+                If tipoperiodos2 = 2 Then
+                    periodomensaje = "QNA"
+                ElseIf tipoperiodos2 = 3 Then
+                    periodomensaje = "SEM"
+                Else
+                    periodomensaje = ""
+                End If
+            End If
+
+            sql = "Select (' " & periodomensaje & " ' + CONVERT(nvarchar(12),iNumeroPeriodo,103) + ' - '+ CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 order by iEjercicio,iNumeroPeriodo"
             nCargaCBO(cboperiodo, sql, "dFechainicio", "iIdPeriodo")
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -14954,9 +14972,9 @@ Public Class frmnominasmarinos
         If tipo = 2 Then
             Select Case empresa
                 Case "ADEMSA"
-                    datoR = "DIF"
+                    datoR = "CMX"
                 Case "Almacenadora"
-                    datoR = "DIF"
+                    datoR = "CMX"
                 Case "IDN"
                     datoR = "VER"
                 Case "Transportacion"
@@ -14964,9 +14982,9 @@ Public Class frmnominasmarinos
                 Case "TMMDC"
                     datoR = "CAM"
                 Case "Logistic"
-                    datoR = "DIF"
+                    datoR = "CMX"
                 Case "Logistic Q"
-                    datoR = "DIF"
+                    datoR = "CMX"
             End Select
         End If
 
@@ -16708,8 +16726,8 @@ Public Class frmnominasmarinos
                     End If
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
-                    hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
-                    hoja.Range(2, 7, filaExcel, 7).Style.NumberFormat.Format = "@"
+                    hoja.Range(2, 8, filaExcel, 8).Style.NumberFormat.Format = "@"
+                    hoja.Range(2, 13, filaExcel, 13).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 27, filaExcel, 27).Style.NumberFormat.Format = "@"
 
                     If dtgDatos.Rows(x).Cells(3).Value <> "" Then
@@ -16720,6 +16738,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                         hoja.Cell(filaExcel, 3).Value = nombrecompleto 'Nombre
                         hoja.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(7).Value 'CURP
+
                         If dtgDatos.Rows(x).Cells(8).Value.ToString.Length = 11 Then
                             hoja.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value 'SSA
                         Else
@@ -16727,30 +16746,33 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 5).Style.Fill.BackgroundColor = XLColor.Aqua
                         End If
 
-                        hoja.Cell(filaExcel, 6).Value = cuenta 'cuenta bancaria
-                        hoja.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
-                        hoja.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
-                        hoja.Cell(filaExcel, 9).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
-                        hoja.Cell(filaExcel, 10).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
-                        hoja.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
-                        hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
-                        hoja.Cell(filaExcel, 13).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
-                        hoja.Cell(filaExcel, 14).Value = datosEmpresas(EmpresaN, 5)
-                        hoja.Cell(filaExcel, 15).Value = ""
-                        hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
-                        hoja.Cell(filaExcel, 17).Value = "DIURNA"
-                        hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
-                        hoja.Cell(filaExcel, 19).Value = "SUELDOS"
-                        hoja.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
-                        hoja.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
-                        hoja.Cell(filaExcel, 22).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
-                        hoja.Cell(filaExcel, 23).Value = ""
-                        hoja.Cell(filaExcel, 24).Value = IIf(tipoperiodos2 = "3", "'02", "'04")  'periocidad pago
-                        hoja.Cell(filaExcel, 25).Value = "" '
-                        hoja.Cell(filaExcel, 26).FormulaA1 = "=LEFT(F" & filaExcel & ",3)" 'BANCO
-                        hoja.Cell(filaExcel, 27).Value = banco
-                        hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
-                        hoja.Cell(filaExcel, 29).Value = correo  'CORREO
+                        hoja.Cell(filaExcel, 6).Value = "605"
+                        hoja.Cell(filaExcel, 7).Value = "Sueldos y Salarios e Ingresos Asimilados a Salarios"
+                        hoja.Cell(filaExcel, 8).Value = cuenta 'cuenta bancaria
+                        hoja.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(25).Value 'SBC 
+                        hoja.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(24).Value 'SDI
+                        hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
+                        hoja.Cell(filaExcel, 12).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
+                        hoja.Cell(filaExcel, 13).Value = "'" & cCP
+                        hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 15).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                        hoja.Cell(filaExcel, 16).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
+                        hoja.Cell(filaExcel, 17).Value = datosEmpresas(EmpresaN, 5)
+                        hoja.Cell(filaExcel, 18).Value = ""
+                        hoja.Cell(filaExcel, 19).Value = "1"  'Tipo Jornada
+                        hoja.Cell(filaExcel, 20).Value = "DIURNA"
+                        hoja.Cell(filaExcel, 21).Value = "2"  'Tipo Regimen
+                        hoja.Cell(filaExcel, 22).Value = "SUELDOS"
+                        hoja.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'DPTO
+                        hoja.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'PUESTO
+                        hoja.Cell(filaExcel, 25).Value = datosEmpresas(EmpresaN, 3) 'riesgo puesto
+                        hoja.Cell(filaExcel, 26).Value = IIf(datosEmpresas(EmpresaN, 3) = 1, "CLASE I", IIf(datosEmpresas(EmpresaN, 3) = 2, "CLASE II", IIf(datosEmpresas(EmpresaN, 3) = 3, "CLASE III", IIf(datosEmpresas(EmpresaN, 3) = 4, "IV", 0))))
+                        hoja.Cell(filaExcel, 27).Value = IIf(tipoperiodos2 = "3", "'02", "'04")  'periocidad pago
+                        hoja.Cell(filaExcel, 28).Value = IIf(tipoperiodos2 = "3", "SEMANAL", "QUINCENAL")
+                        hoja.Cell(filaExcel, 29).FormulaA1 = "=LEFT(H" & filaExcel & ",3)" 'BANCO
+                        hoja.Cell(filaExcel, 30).Value = banco
+                        hoja.Cell(filaExcel, 31).Value = "" 'SUBCONTRATACION
+                        hoja.Cell(filaExcel, 32).Value = correo  'CORREO
                         filaExcel = filaExcel + 1
                     End If
 
@@ -16782,13 +16804,14 @@ Public Class frmnominasmarinos
                             hoja2.Range(4, 20, dtgDatos.Rows.Count + 4, 42).Style.NumberFormat.Format = "#,##0.00"
                             hoja2.Range(4, 5, dtgDatos.Rows.Count + 4, 5).Style.NumberFormat.Format = "#"
 
+                            '//Sueldo + séptimo día + Falta injustificada + Permiso sin goce de sueldo – Incapacidad
 
                             '<<<<Percepcioness>>>>>
                             hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja2.Cell(filaExcel, 3).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(30).Value)   ' Septimo dia gravado
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia excento
-                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado
+                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value)' Sueldo Base Gravado
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) ' ' Aguinaldo Excento
@@ -16814,8 +16837,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 28).Value = "" 'SUELDO PENDIENTE EXCENTO
                             hoja2.Cell(filaExcel, 29).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
                             hoja2.Cell(filaExcel, 30).Value = 0 'COMPENSACION EXENTO
-                            hoja2.Cell(filaExcel, 31).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 32).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 31).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)  'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 32).Value = 0 'VACACIONES PROPORCIONALES EXCENTO
                             hoja2.Cell(filaExcel, 33).Value = CDbl(dtgDatos.Rows(x).Cells(36).Value)  'DESC LABORADO GRAVADO     
                             hoja2.Cell(filaExcel, 34).Value = 0 'DESC LABORADO EXCENTO
                             hoja2.Cell(filaExcel, 35).Value = CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
@@ -16829,7 +16852,6 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 39).Value = 0 'APORT PATRONAL PLAN FLEX LP       gravado
                             hoja2.Cell(filaExcel, 40).Value = fondoPFB / 2   'APORT PATRONAL PLAN FLEX LP  exento
                             'validacion
-
                             hoja2.Cell(filaExcel, 42).FormulaA1 = "=+AN" & filaExcel & "+AL" & filaExcel & "+AJ" & filaExcel & "+AI" & filaExcel & "+AH" & filaExcel & "+AG" & filaExcel & "+AF" & filaExcel & "+AE" & filaExcel & "+AD" & filaExcel & "+AC" & filaExcel & "+AA" & filaExcel & "+X" & filaExcel & "+W" & filaExcel & "+V" & filaExcel & "+U" & filaExcel & "+P" & filaExcel & "+O" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+E" & filaExcel & "+Z" & filaExcel
 
                         ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
@@ -16842,7 +16864,7 @@ Public Class frmnominasmarinos
                             '<<<<Percepcioness>>>>>
                             hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja2.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado 
+                            hoja2.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) ' Sueldo Base Gravado 
                             hoja2.Cell(filaExcel, 4).Value = 0  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 5).Value = 0 'Septimo dia gravado   
                             hoja2.Cell(filaExcel, 6).Value = 0 'Septimo dia excento
@@ -16864,8 +16886,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 22).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(32).Value) 'PRIMA DOMINICAL EXCENTO
                             hoja2.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(52).Value) 'PRIMA VACACIONAL GRAVADO
                             hoja2.Cell(filaExcel, 24).Value = CDbl(dtgDatos.Rows(x).Cells(53).Value) 'PRIMA VACACIONAL EXCENTO
-                            hoja2.Cell(filaExcel, 25).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 26).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO 
+                            hoja2.Cell(filaExcel, 25).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)  'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 26).Value = 0 'VACACIONES PROPORCIONALES EXCENTO 
                             hoja2.Cell(filaExcel, 27).Value = CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO 
                             hoja2.Cell(filaExcel, 28).Value = 0 'COMPENSACION EXENTO 
                             hoja2.Cell(filaExcel, 29).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
@@ -16902,7 +16924,7 @@ Public Class frmnominasmarinos
                             '<<<<Percepcioness>>>>>
                             hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(6).Value 'RFC
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja2.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado   
+                            hoja2.Cell(filaExcel, 3).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value)' Sueldo Base Gravado   
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 5).Value = 0 ' Septimo dia gravado
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Septimo dia excento
@@ -16946,8 +16968,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 44).Value = 0 'Bono calidad
                             hoja2.Cell(filaExcel, 45).Value = CDbl(dtgDatos.Rows(x).Cells(44).Value) 'SUELO PENDIENTE GRAVADO/SEMANA DE FONDO
                             hoja2.Cell(filaExcel, 46).Value = "" 'SUELDO PENDIENTE EXCENTO
-                            hoja2.Cell(filaExcel, 47).Value = 0   'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 48).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 47).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)   'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 48).Value = 0 'VACACIONES PROPORCIONALES EXCENTO
                             hoja2.Cell(filaExcel, 49).Value = 0  'VALES DE DESPENSA GRAVADO  
                             hoja2.Cell(filaExcel, 50).Value = CDbl(dtgDatos.Rows(x).Cells(88).Value) 'VALES DE DESPENSA EXCENTO
 
@@ -16963,8 +16985,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja2.Cell(filaExcel, 3).Value = 0 ' Septimo dia gravado    
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia excento 
-                            ' hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - (CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value)) - CDbl(dtgDatos.Rows(x).Cells(66).Value) ' Sueldo Base Gravado
-                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado   
+                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) ' Sueldo Base Gravado   
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) '' Aguinaldo Excento
@@ -17019,7 +17040,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja2.Cell(filaExcel, 3).Value = 0 ' Septimo dia gravado    
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia excento 
-                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + dtgDatos.Rows(x).Cells(57).Value - CDbl(dtgDatos.Rows(x).Cells(66).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) ' Sueldo Base Gravado   
+                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) ' Sueldo Base Gravado   
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) '' Aguinaldo Excento
@@ -17081,7 +17102,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
                             hoja2.Cell(filaExcel, 3).Value = 0 ' Septimo dia gravado    
                             hoja2.Cell(filaExcel, 4).Value = ""  ' Septimo dia excento 
-                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(66).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) ' Sueldo Base Gravado   
+                            hoja2.Cell(filaExcel, 5).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value) + CDbl(dtgDatos.Rows(x).Cells(30).Value) - CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(dtgDatos.Rows(x).Cells(46).Value) - CDbl(dtgDatos.Rows(x).Cells(57).Value) ' Sueldo Base Gravado   
                             hoja2.Cell(filaExcel, 6).Value = ""  ' Sueldo Base excento
                             hoja2.Cell(filaExcel, 7).Value = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             hoja2.Cell(filaExcel, 8).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value) '' Aguinaldo Excento
@@ -17143,8 +17164,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 14).Value = "" 'SUELDO PENDIENTE EXCENTO
                             hoja2.Cell(filaExcel, 15).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(43).Value)  'COMPENSACION GRAVADO
                             hoja2.Cell(filaExcel, 16).Value = 0 'COMPENSACION EXENTO
-                            hoja2.Cell(filaExcel, 17).Value = 0  'VACACIONES PROPORCIONALES GRAVADO  
-                            hoja2.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value) 'VACACIONES PROPORCIONALES EXCENTO
+                            hoja2.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(48).Value)  'VACACIONES PROPORCIONALES GRAVADO  
+                            hoja2.Cell(filaExcel, 18).Value = 0 'VACACIONES PROPORCIONALES EXCENTO
                             hoja2.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(36).Value)  'DESC LABORADO GRAVADO    
                             hoja2.Cell(filaExcel, 20).Value = 0 'DESC LABORADO EXCENTO
                             hoja2.Cell(filaExcel, 21).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(37).Value) 'DIAS FESTIVO LAB GRAVADO  
@@ -17206,16 +17227,17 @@ Public Class frmnominasmarinos
                             hoja3.Cell(filaExcel, 17).Value = CDbl(dtgDatos.Rows(x).Cells(64).Value) 'ANTICIPO SUELDO 
                             hoja3.Cell(filaExcel, 18).Value = CDbl(dtgDatos.Rows(x).Cells(67).Value) 'CUOTA SINDICAL  dtgDatos.Rows(x).Cells(86).Value
                             hoja3.Cell(filaExcel, 19).Value = 0 'PERMISO SIN GOCE DE SUELDO
-                            hoja3.Cell(filaExcel, 20).Value = 0 ' FALTA INJUSTIFICADA
+                            hoja3.Cell(filaExcel, 20).Value = CDbl(dtgDatos.Rows(x).Cells(87).Value)
+                            hoja3.Cell(filaExcel, 21).Value = 0 ' FALTA INJUSTIFICADA
 
                             'Validaciones
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=SUM(C" & filaExcel & ":T" & filaExcel & ")"
-                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!U" & filaExcel & "+'Otros Pagos'!E" & filaExcel   'IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
-                            hoja3.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
-                            hoja3.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
-                            hoja3.Cell(filaExcel, 25).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
-                            hoja3.Cell(filaExcel, 26).Value = 0 'vales 
-                            hoja3.Cell(filaExcel, 27).FormulaA1 = "=+V" & filaExcel & "-W" & filaExcel & "-Y" & filaExcel & "-Z" & filaExcel
+                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=SUM(C" & filaExcel & ":U" & filaExcel & ")"
+                            hoja3.Cell(filaExcel, 23).FormulaA1 = "=Percepciones!AW" & filaExcel & "-Deducciones!V" & filaExcel & "+'Otros Pagos'!E" & filaExcel   'IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0)
+                            hoja3.Cell(filaExcel, 24).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value) 'Neto
+                            hoja3.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(86).Value 'Tipo Excedente
+                            hoja3.Cell(filaExcel, 26).Value = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", totalexcedente, 0) ' Total Excedente
+                            hoja3.Cell(filaExcel, 27).Value = CDbl(dtgDatos.Rows(x).Cells(87).Value) 'vales 
+                            hoja3.Cell(filaExcel, 28).FormulaA1 = "=+W" & filaExcel & "-X" & filaExcel & "-Z" & filaExcel & "-AA" & filaExcel
                             hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 27).Style.NumberFormat.Format = " #,##0.00"
 
                         ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
@@ -17239,14 +17261,14 @@ Public Class frmnominasmarinos
                             hoja3.Cell(filaExcel, 17).Value = 0 'Cuota Sindical
                             hoja3.Cell(filaExcel, 18).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(45).Value) * -1 'FALTAS INJUSTIFICADAS
                             hoja3.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(46).Value) * -1 'Permiso sin goce de sueldo
-
+                            hoja3.Cell(filaExcel, 20).Value = CDbl(dtgDatos.Rows(x).Cells(87).Value) 'VALES
                             'Validacion
-                            hoja3.Cell(filaExcel, 20).FormulaA1 = "=S" & filaExcel & "+R" & filaExcel & "+Q" & filaExcel & "+P" & filaExcel & "+O" & filaExcel & "+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+D" & filaExcel & "+C" & filaExcel
-                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=+Percepciones!AY" & filaExcel & "-Deducciones!T" & filaExcel & "+'Otros Pagos'!E" & filaExcel
+                            hoja3.Cell(filaExcel, 21).FormulaA1 = "=S" & filaExcel & "+T" & filaExcel & "+R" & filaExcel & "+Q" & filaExcel & "+P" & filaExcel & "+O" & filaExcel & "+N" & filaExcel & "+M" & filaExcel & "+L" & filaExcel & "+K" & filaExcel & "+J" & filaExcel & "+I" & filaExcel & "+H" & filaExcel & "+G" & filaExcel & "+D" & filaExcel & "+C" & filaExcel
+                            hoja3.Cell(filaExcel, 22).FormulaA1 = "=+Percepciones!AY" & filaExcel & "-Deducciones!T" & filaExcel & "+'Otros Pagos'!E" & filaExcel
 
-                            hoja3.Cell(filaExcel, 22).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value)
-                            hoja3.Cell(filaExcel, 23).FormulaA1 = "=u" & filaExcel & "-v" & filaExcel
-                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 23).Style.NumberFormat.Format = " #,##0.00"
+                            hoja3.Cell(filaExcel, 23).Value = CDbl(dtgDatos.Rows(x).Cells(70).Value)
+                            hoja3.Cell(filaExcel, 24).FormulaA1 = "=v" & filaExcel & "w" & filaExcel
+                            hoja3.Range(4, 3, dtgDatos.Rows.Count + 4, 24).Style.NumberFormat.Format = " #,##0.00"
 
                         ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
 
@@ -17605,6 +17627,8 @@ Public Class frmnominasmarinos
 
                 Dim rwFilas As DataRow() = nConsulta(sql)
 
+               
+
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = rwFilas.Count
@@ -17614,9 +17638,8 @@ Public Class frmnominasmarinos
                 pInicial = Forma.gInicial
                 pFinal = Forma.gFinal
                 If rwFilas Is Nothing = False Then
-
-
-
+                    Dim totalexcedente As Double
+                    
                     For x As Integer = 0 To rwFilas.Count - 1
 
                         Dim sql2 As String
@@ -17626,7 +17649,7 @@ Public Class frmnominasmarinos
                         sql2 &= " and fkiIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC")
                         Dim rwComplemento As DataRow() = nConsulta(sql2)
 
-
+                        totalexcedente = CDbl(rwComplemento(0)("PDE")) + CDbl(rwComplemento(0)("TE2E")) + CDbl(rwComplemento(0)("TE3E")) + CDbl(rwComplemento(0)("DLE")) + CDbl(rwComplemento(0)("DFE")) + CDbl(rwFilas(x).Item("EXCEDENTE")) + CDbl(rwFilas(x).Item("fComisionOperadora")) + CDbl(rwFilas(x).Item("fRetencion"))
 
                         'PERIODOS para PROV
                         Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwFilas(x).Item("fkiIdPeriodo"))
@@ -17684,11 +17707,18 @@ Public Class frmnominasmarinos
                         Else
                             valesDespensa = "0.0"
                         End If
-
+                        'users
+                        Dim tipoexcdente As String
+                        Dim rwUsuarios As DataRow() = nConsulta("select * from EmpleadosC where iIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC"))
+                        If rwUsuarios Is Nothing = False Then
+                            tipoexcdente = rwUsuarios(0)("cuenta2").ToString
+                        End If
 
                         hoja.Range("Q2", "Q" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
+                        'QUERY 
+
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
                         If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
                             'MsgBox("lol")
@@ -17768,10 +17798,10 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioAplicado")
                         hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
                         hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
-                        hoja.Cell(filaExcel + x, 76).Value = 0 ' rwFilas(x).Item("fPrestamoPerA") 'FONDO PFB 3%
-                        hoja.Cell(filaExcel + x, 77).FormulaA1 = valesDespensa 'rwFilas(x).Item("fAdeudoInfonavitA")
-                        hoja.Cell(filaExcel + x, 78).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
-                        hoja.Cell(filaExcel + x, 79).Value = IIf(CDbl(rwFilas(x).Item("fSalarioBase")) > 40000, rwFilas(x).Item("EXCEDENTE"), 0)
+                        hoja.Cell(filaExcel + x, 76).Value = rwComplemento(0)("AportacionPF").ToString 'FONDO PFB 3%
+                        hoja.Cell(filaExcel + x, 77).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
+                        hoja.Cell(filaExcel + x, 78).Value = tipoexcdente  'ppp/sind
+                        hoja.Cell(filaExcel + x, 79).Value = totalexcedente 'excdenete
                         hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0") 'rwFilas(x).Item("fRetencion")
                         hoja.Cell(filaExcel + x, 81).Value = 0 'rwFilas(x).Item("fPorComision")
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
@@ -19725,6 +19755,7 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             pnlCatalogo.Enabled = True
             pnlProgreso.Visible = False
+
         End Try
     End Sub
 
@@ -19748,9 +19779,7 @@ Public Class frmnominasmarinos
 
             Dim PFB_CORTO_PLAZO As Double = 0
 
-
             '##
-
 
             Dim mes As String
 
