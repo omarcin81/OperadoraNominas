@@ -10215,7 +10215,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 90).Value = dtgDatos.Rows(x).Cells(82).Value 'ISN
                     hoja.Cell(filaExcel + x, 91).FormulaA1 = "=+CI" & filaExcel + x & "+CJ" & filaExcel + x & "+CK" & filaExcel + x & "+CL" & filaExcel + x & "-BV" & filaExcel + x   'TOTAL COSTO SOCIAL
 
-                    hoja.Cell(filaExcel + x, 92).Value = valesDespensa 'VALES
+                    hoja.Cell(filaExcel + x, 92).Value = dtgDatos.Rows(x).Cells(87).Value 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = dtgDatos.Rows(x).Cells(98).Value 'fSindicatoExtra 'exedente monto
                    
                     If NombrePeriodo = "Quincenal" Then
