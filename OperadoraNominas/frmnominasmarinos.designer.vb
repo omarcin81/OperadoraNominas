@@ -88,6 +88,8 @@ Partial Class frmnominasmarinos
         Me.RecibosSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaratulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LayoutTimbradoOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HojaTrabajoPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,8 +97,6 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LayoutTimbradoOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HojaTrabajoPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -361,7 +361,7 @@ Partial Class frmnominasmarinos
         Me.chkPrimaVacacional.AutoSize = True
         Me.chkPrimaVacacional.BackColor = System.Drawing.Color.Transparent
         Me.chkPrimaVacacional.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrimaVacacional.Location = New System.Drawing.Point(403, 9)
+        Me.chkPrimaVacacional.Location = New System.Drawing.Point(415, 9)
         Me.chkPrimaVacacional.Name = "chkPrimaVacacional"
         Me.chkPrimaVacacional.Size = New System.Drawing.Size(149, 22)
         Me.chkPrimaVacacional.TabIndex = 28
@@ -402,7 +402,7 @@ Partial Class frmnominasmarinos
         '
         Me.cboserie.FormattingEnabled = True
         Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
-        Me.cboserie.Location = New System.Drawing.Point(319, 3)
+        Me.cboserie.Location = New System.Drawing.Point(347, 3)
         Me.cboserie.Name = "cboserie"
         Me.cboserie.Size = New System.Drawing.Size(59, 27)
         Me.cboserie.TabIndex = 21
@@ -410,7 +410,7 @@ Partial Class frmnominasmarinos
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(270, 7)
+        Me.Label3.Location = New System.Drawing.Point(298, 7)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 19)
         Me.Label3.TabIndex = 20
@@ -574,7 +574,7 @@ Partial Class frmnominasmarinos
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 7)
+        Me.Label1.Location = New System.Drawing.Point(0, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(62, 19)
         Me.Label1.TabIndex = 4
@@ -582,10 +582,11 @@ Partial Class frmnominasmarinos
         '
         'cboperiodo
         '
+        Me.cboperiodo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboperiodo.FormattingEnabled = True
-        Me.cboperiodo.Location = New System.Drawing.Point(73, 3)
+        Me.cboperiodo.Location = New System.Drawing.Point(63, 3)
         Me.cboperiodo.Name = "cboperiodo"
-        Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
+        Me.cboperiodo.Size = New System.Drawing.Size(229, 26)
         Me.cboperiodo.TabIndex = 3
         '
         'cmdguardarfinal
@@ -769,6 +770,18 @@ Partial Class frmnominasmarinos
         Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.CaratulaToolStripMenuItem.Text = "Caratula"
         '
+        'LayoutTimbradoOToolStripMenuItem
+        '
+        Me.LayoutTimbradoOToolStripMenuItem.Name = "LayoutTimbradoOToolStripMenuItem"
+        Me.LayoutTimbradoOToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.LayoutTimbradoOToolStripMenuItem.Text = "Layout timbrado O"
+        '
+        'HojaTrabajoPolizaToolStripMenuItem
+        '
+        Me.HojaTrabajoPolizaToolStripMenuItem.Name = "HojaTrabajoPolizaToolStripMenuItem"
+        Me.HojaTrabajoPolizaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.HojaTrabajoPolizaToolStripMenuItem.Text = "Hoja trabajo poliza"
+        '
         'CalculosToolStripMenuItem
         '
         Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem})
@@ -812,18 +825,6 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
-        '
-        'LayoutTimbradoOToolStripMenuItem
-        '
-        Me.LayoutTimbradoOToolStripMenuItem.Name = "LayoutTimbradoOToolStripMenuItem"
-        Me.LayoutTimbradoOToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.LayoutTimbradoOToolStripMenuItem.Text = "Layout timbrado O"
-        '
-        'HojaTrabajoPolizaToolStripMenuItem
-        '
-        Me.HojaTrabajoPolizaToolStripMenuItem.Name = "HojaTrabajoPolizaToolStripMenuItem"
-        Me.HojaTrabajoPolizaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.HojaTrabajoPolizaToolStripMenuItem.Text = "Hoja trabajo poliza"
         '
         'frmnominasmarinos
         '

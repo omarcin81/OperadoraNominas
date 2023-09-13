@@ -978,7 +978,7 @@ Public Class frmEmpleados
         Dim idtipo As Integer
 
         SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad, "
-        SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2"
+        SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2,cCp"
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
         SQL &= " order by cNombreLargo"
         Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -1081,7 +1081,8 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 22).Value = Fila.Item("cFuncionesPuesto")
                 hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
                 hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
-                hoja.Cell(filaExcel, 24).Value = Fila.Item("cCP")
+                hoja.Cell(filaExcel, 24).Value = Fila.Item("CE CO")
+                hoja.Cell(filaExcel, 24).Value = Fila.Item("ccp")
             Next
 
             dialogo.DefaultExt = "*.xlsx"
