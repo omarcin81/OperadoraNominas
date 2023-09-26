@@ -95,9 +95,10 @@ Partial Class frmnominasmarinos
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -814,6 +815,12 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem.Text = "Calcular Pro Prima Antiguedad - Indemnizacion"
         '
+        'CalcularSoloValesDeDespensaToolStripMenuItem
+        '
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Name = "CalcularSoloValesDeDespensaToolStripMenuItem"
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Text = "Calcular solo vales de despensa"
+        '
         'FiniquitoToolStripMenuItem
         '
         Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem})
@@ -827,16 +834,24 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
         '
-        'CalcularSoloValesDeDespensaToolStripMenuItem
+        'chkVales
         '
-        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Name = "CalcularSoloValesDeDespensaToolStripMenuItem"
-        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Text = "Calcular solo vales de despensa"
+        Me.chkVales.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkVales.AutoSize = True
+        Me.chkVales.BackColor = System.Drawing.Color.Transparent
+        Me.chkVales.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkVales.Location = New System.Drawing.Point(956, 494)
+        Me.chkVales.Name = "chkVales"
+        Me.chkVales.Size = New System.Drawing.Size(130, 22)
+        Me.chkVales.TabIndex = 44
+        Me.chkVales.Text = "No calcular vales"
+        Me.chkVales.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1438, 528)
+        Me.Controls.Add(Me.chkVales)
         Me.Controls.Add(Me.cmdAdiCalculo)
         Me.Controls.Add(Me.chkPeriodosC)
         Me.Controls.Add(Me.chkNoinfonavit)
@@ -953,6 +968,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents LayoutTimbradoOToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HojaTrabajoPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularSoloValesDeDespensaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkVales As System.Windows.Forms.CheckBox
 
 
 End Class
