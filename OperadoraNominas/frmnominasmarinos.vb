@@ -6691,7 +6691,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value 'DIA FESTIVO E
                     hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(76).Value 'PENSION ALIME EXCE
                     hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(77).Value 'EXCEDENTE MANUAL 
-                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=BX" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x
+                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=BX" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x
                     hoja.Cell(filaExcel + x, 86).Value = 0 '% COMISION
                     hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(79).Value 'IMSS
                     hoja.Cell(filaExcel + x, 88).Value = dtgDatos.Rows(x).Cells(80).Value 'RCV
@@ -6699,7 +6699,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 90).Value = dtgDatos.Rows(x).Cells(82).Value 'ISN
                     hoja.Cell(filaExcel + x, 91).FormulaA1 = "=CL" & filaExcel + x & "+CI" & filaExcel + x & "+CJ" & filaExcel + x & "+CK" & filaExcel + x   'TOTAL COSTO SOCIAL
 
-                    hoja.Cell(filaExcel + x, 92).Value = valesDespensa 'VALES
+                    hoja.Cell(filaExcel + x, 92).Value = dtgDatos.Rows(x).Cells(87).Value 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = dtgDatos.Rows(x).Cells(98).Value 'EXCEDENTE MONTO
 
                     If NombrePeriodo = "Quincenal" Then
@@ -10197,14 +10197,14 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 75).Value = dtgDatos.Rows(x).Cells(73).Value 'EXCEDENTE V
                     hoja.Cell(filaExcel + x, 76).Value = dtgDatos.Rows(x).Cells(74).Value 'EXCDENTE SUB
                     hoja.Cell(filaExcel + x, 77).Value = dtgDatos.Rows(x).Cells(75).Value 'PRIMA EXCEDENTE
-                    hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value '"=CO" & filaExcel + x & "/30*T" & filaExcel + x & "*0.25" 'PRIMA DOMINCAL EXEDENTE
-                    hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value '"=CO" & filaExcel + x & "/30/8*P" & filaExcel + x & "*2" 'Tiempo Extra Doble
-                    hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(95).Value '"=CO" & filaExcel + x & "/30/8*Q" & filaExcel + x & "*3" 'Tiempo Extra triple
-                    hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(96).Value '"=CO" & filaExcel + x & "/30*R" & filaExcel + x & "*2" 'desncaso laborado
-                    hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value '"=CO" & filaExcel + x & "/30*S" & filaExcel + x & "*2" 'dia festivo
+                    hoja.Cell(filaExcel + x, 78).Value = dtgDatos.Rows(x).Cells(93).Value ' 'PRIMA DOMINCAL EXEDENTE
+                    hoja.Cell(filaExcel + x, 79).Value = dtgDatos.Rows(x).Cells(94).Value ' 'Tiempo Extra Doble
+                    hoja.Cell(filaExcel + x, 80).Value = dtgDatos.Rows(x).Cells(95).Value ''Tiempo Extra triple
+                    hoja.Cell(filaExcel + x, 81).Value = dtgDatos.Rows(x).Cells(96).Value ' 'desncaso laborado
+                    hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value ' 'dia festivo
                     hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(76).Value 'PA EXCEDENTE
                     hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(77).Value 'EXCDENETE M
-                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BX" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x  'TOTAL EXCEDENTE
+                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+BX" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x  'TOTAL EXCEDENTE
                     hoja.Cell(filaExcel + x, 86).Value = dtgDatos.Rows(x).Cells(78).Value 'COMISION BSS
 
                     hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(79).Value 'IMSS
@@ -17844,7 +17844,7 @@ Public Class frmnominasmarinos
                     End If
 
 
-                    dialogo.FileName = "CONCENTRADO " & EmpresaN.ToUpper & " " & textoperiodo & periodo
+                    dialogo.FileName = "CONCENTRADO " & EmpresaN.ToUpper & " " & textoperiodo & " " & periodo
                     dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                     ''  dialogo.ShowDialog()
 
