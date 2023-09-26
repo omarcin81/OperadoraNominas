@@ -97,6 +97,7 @@ Partial Class frmnominasmarinos
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -784,7 +785,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -825,6 +826,12 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
+        '
+        'CalcularSoloValesDeDespensaToolStripMenuItem
+        '
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Name = "CalcularSoloValesDeDespensaToolStripMenuItem"
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.CalcularSoloValesDeDespensaToolStripMenuItem.Text = "Calcular solo vales de despensa"
         '
         'frmnominasmarinos
         '
@@ -945,6 +952,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents CaratulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LayoutTimbradoOToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HojaTrabajoPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CalcularSoloValesDeDespensaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class

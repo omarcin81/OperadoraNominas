@@ -3286,9 +3286,11 @@ Public Class frmnominasmarinos
                                 'Else
                                 '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                 'End If
-                            Else
-                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
-                            End If
+
+                                Else
+                                    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
+                                End If
 
                             Else
                                 dtgDatos.Rows(x).Cells(87).Value = "0.00"
@@ -17871,119 +17873,160 @@ Public Class frmnominasmarinos
 
     Private Sub PolizasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PolizasToolStripMenuItem.Click
         Try
-            Dim dsPoliza As DataSet
+            Dim dsPoliza As New DataSet
+            Dim dsCentrosCosto As New DataSet
+
+            dsCentrosCosto.Tables.Add("Tabla")
+
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Consecutivo")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("CeCo")
+            
+            dsCentrosCosto.Tables("Tabla").Columns.Add("SueldoG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("SueldoE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("AguinaldoG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("AguinaldoE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PrimaDominicalG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PrimaDominicalE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PrimaVacacionalG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PrimaVacacionalE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ValesG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ValesE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("SPendienteG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("SPendienteE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("CompensacionG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("CompensacionE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("VacaProporG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("VacaProporE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("DescLaboradoG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("DescLaboradoE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("DiaFestLaboradoG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("DiaFestLaboradoE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PlanFlexG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PlanFlexE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ApotPFlexG")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ApotPFlexE")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ISR")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("PensionA")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Infonavit")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("SeguroVivienda")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("InfonavitBimAnt")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Fonacot")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("ValesD")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("AnticipoSueldo")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("APORTTRABAJAFLEX")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("APORTPATRONFLEX")
+
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fisr")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fImss")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fInfonavit")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fInfonavitBanterior")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fAjusteInfonavit")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fPensionAlimenticia")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fPrestamo")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fFonacot")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fT_No_laborado")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fCuotaSindical")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fSubsidioGenerado")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fSubsidioAplicado")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("deduccionestotal")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("NETO_SA")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Vales")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Tipo_Excedente")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Total_Excedente")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("FondoPFB")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fImssCS")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("2%SAR")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("VejezP")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fRcvCS")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fInfonavitCS")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("fISN")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Calculadoimss1")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("Calculadoimss2")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("CostoSocialFormula")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("CostoSocial")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("prAguinaldo")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("prPrimaV")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("prPrimaAnt")
+            dsCentrosCosto.Tables("Tabla").Columns.Add("prIndemnizacion")
+
+
             dsPoliza.Tables.Add("Tabla")
 
             dsPoliza.Tables("Tabla").Columns.Add("Consecutivo")
             dsPoliza.Tables("Tabla").Columns.Add("CeCo")
-            dsPoliza.Tables("Tabla").Columns.Add("Id_empleado")
             dsPoliza.Tables("Tabla").Columns.Add("CodigoEmpleado")
-            dsPoliza.Tables("Tabla").Columns.Add("Nombre")
-            dsPoliza.Tables("Tabla").Columns.Add("Status")
             dsPoliza.Tables("Tabla").Columns.Add("RFC")
+            dsPoliza.Tables("Tabla").Columns.Add("Nombre")
             dsPoliza.Tables("Tabla").Columns.Add("CURP")
-            dsPoliza.Tables("Tabla").Columns.Add("Num_IMSS")
-            dsPoliza.Tables("Tabla").Columns.Add("Fecha_Nac")
-            dsPoliza.Tables("Tabla").Columns.Add("Edad")
-            dsPoliza.Tables("Tabla").Columns.Add("Puesto")
-            dsPoliza.Tables("Tabla").Columns.Add("Depto")
-            dsPoliza.Tables("Tabla").Columns.Add("Tipo_Infonavit")
-            dsPoliza.Tables("Tabla").Columns.Add("Valor_Infonavit")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Horas_extras_dobles_V")
-            dsPoliza.Tables("Tabla").Columns.Add("Horas_extras_triples_V")
-            dsPoliza.Tables("Tabla").Columns.Add("Descanso_Laborado_V")
-            dsPoliza.Tables("Tabla").Columns.Add("Dia_Festivo_laborado_V")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_V")
-            dsPoliza.Tables("Tabla").Columns.Add("Falta_Injustificada_V")
-            dsPoliza.Tables("Tabla").Columns.Add("Permiso_Sin_GS_V")
-            dsPoliza.Tables("Tabla").Columns.Add("T_No_laborado_V")
-
-
-            dsPoliza.Tables("Tabla").Columns.Add("Sueldo_Base")
-            dsPoliza.Tables("Tabla").Columns.Add("Salario_Diario")
-            dsPoliza.Tables("Tabla").Columns.Add("Salario_Cotización")
-            dsPoliza.Tables("Tabla").Columns.Add("Dias_Trabajados")
-            dsPoliza.Tables("Tabla").Columns.Add("Tipo_Incapacidad")
-            dsPoliza.Tables("Tabla").Columns.Add("Número_días")
-            dsPoliza.Tables("Tabla").Columns.Add("Sueldo_Bruto")
-            dsPoliza.Tables("Tabla").Columns.Add("Septimo_Dia")
-            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_Gravada")
-            dsPoliza.Tables("Tabla").Columns.Add("Prima_Dominical_Exenta")
-            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Gravado")
-            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Doble_Exento")
-            dsPoliza.Tables("Tabla").Columns.Add("Tiempo_Extra_Triple")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Descanso_Labarado")
-            dsPoliza.Tables("Tabla").Columns.Add("Dia_Festivo_laborado")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Bono_Asistencia")
-            dsPoliza.Tables("Tabla").Columns.Add("Bono_Productividad")
-            dsPoliza.Tables("Tabla").Columns.Add("Bono_Polivalencia")
-            dsPoliza.Tables("Tabla").Columns.Add("Bono_Especialidad")
-            dsPoliza.Tables("Tabla").Columns.Add("Bono_Calidad")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Compensacion")
-            dsPoliza.Tables("Tabla").Columns.Add("Semana_fondo")
-            dsPoliza.Tables("Tabla").Columns.Add("Falta_Injustificada")
-            dsPoliza.Tables("Tabla").Columns.Add("Permiso_Sin_GS")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Incremento_Retenido")
-            dsPoliza.Tables("Tabla").Columns.Add("Vacaciones_proporcionales")
-            dsPoliza.Tables("Tabla").Columns.Add("Aguinaldo_gravado")
-            dsPoliza.Tables("Tabla").Columns.Add("Aguinaldo_exento")
-            dsPoliza.Tables("Tabla").Columns.Add("Total_Aguinaldo")
-            dsPoliza.Tables("Tabla").Columns.Add("Prima_vac_gravado")
-            dsPoliza.Tables("Tabla").Columns.Add("Prima_vac_exento")
-
-            dsPoliza.Tables("Tabla").Columns.Add("Total_Prima_vac")
-            dsPoliza.Tables("Tabla").Columns.Add("Total_percepciones")
-            dsPoliza.Tables("Tabla").Columns.Add("Total_percepciones_p/isr")
-            dsPoliza.Tables("Tabla").Columns.Add("Incapacidad")
+            dsPoliza.Tables("Tabla").Columns.Add("SueldoG")
+            dsPoliza.Tables("Tabla").Columns.Add("SueldoE")
+            dsPoliza.Tables("Tabla").Columns.Add("AguinaldoG")
+            dsPoliza.Tables("Tabla").Columns.Add("AguinaldoE")
+            dsPoliza.Tables("Tabla").Columns.Add("PrimaDominicalG")
+            dsPoliza.Tables("Tabla").Columns.Add("PrimaDominicalE")
+            dsPoliza.Tables("Tabla").Columns.Add("PrimaVacacionalG")
+            dsPoliza.Tables("Tabla").Columns.Add("PrimaVacacionalE")
+            dsPoliza.Tables("Tabla").Columns.Add("ValesG")
+            dsPoliza.Tables("Tabla").Columns.Add("ValesE")
+            dsPoliza.Tables("Tabla").Columns.Add("SPendienteG")
+            dsPoliza.Tables("Tabla").Columns.Add("SPendienteE")
+            dsPoliza.Tables("Tabla").Columns.Add("CompensacionG")
+            dsPoliza.Tables("Tabla").Columns.Add("CompensacionE")
+            dsPoliza.Tables("Tabla").Columns.Add("VacaProporG")
+            dsPoliza.Tables("Tabla").Columns.Add("VacaProporE")
+            dsPoliza.Tables("Tabla").Columns.Add("DescLaboradoG")
+            dsPoliza.Tables("Tabla").Columns.Add("DescLaboradoE")
+            dsPoliza.Tables("Tabla").Columns.Add("DiaFestLaboradoG")
+            dsPoliza.Tables("Tabla").Columns.Add("DiaFestLaboradoE")
+            dsPoliza.Tables("Tabla").Columns.Add("PlanFlexG")
+            dsPoliza.Tables("Tabla").Columns.Add("PlanFlexE")
+            dsPoliza.Tables("Tabla").Columns.Add("ApotPFlexG")
+            dsPoliza.Tables("Tabla").Columns.Add("ApotPFlexE")
             dsPoliza.Tables("Tabla").Columns.Add("ISR")
-            dsPoliza.Tables("Tabla").Columns.Add("IMSS")
+            dsPoliza.Tables("Tabla").Columns.Add("PensionA")
             dsPoliza.Tables("Tabla").Columns.Add("Infonavit")
-            dsPoliza.Tables("Tabla").Columns.Add("Infonavit_bim_anterior")
-            dsPoliza.Tables("Tabla").Columns.Add("Ajuste_infonavit")
-            dsPoliza.Tables("Tabla").Columns.Add("Pension_Alimenticia")
-            dsPoliza.Tables("Tabla").Columns.Add("Prestamo")
+            dsPoliza.Tables("Tabla").Columns.Add("SeguroVivienda")
+            dsPoliza.Tables("Tabla").Columns.Add("InfonavitBimAnt")
             dsPoliza.Tables("Tabla").Columns.Add("Fonacot")
-            dsPoliza.Tables("Tabla").Columns.Add("T_No_laborado")
-            dsPoliza.Tables("Tabla").Columns.Add("Cuota_Sindical")
-            dsPoliza.Tables("Tabla").Columns.Add("Subsidio_Generado")
-            dsPoliza.Tables("Tabla").Columns.Add("Subsidio_Aplicado")
-            dsPoliza.Tables("Tabla").Columns.Add("Neto_SA")
-            dsPoliza.Tables("Tabla").Columns.Add("Prestamo_Personal_A")
-            dsPoliza.Tables("Tabla").Columns.Add("Adeudo_Infonavit_A")
-            'dsPeriodo.Tables("Tabla").Columns.Add("Diferencia_Infonavit_A")
-            dsPoliza.Tables("Tabla").Columns.Add("EXCEDENTE_V")
-            dsPoliza.Tables("Tabla").Columns.Add("SINDICATO/PPP")
-            dsPoliza.Tables("Tabla").Columns.Add("PRIMA_EXCEN")
-            dsPoliza.Tables("Tabla").Columns.Add("PA_E")
-            dsPoliza.Tables("Tabla").Columns.Add("EXCEDENTE_M")
-            dsPoliza.Tables("Tabla").Columns.Add("Comisión_Beneficio")
+            dsPoliza.Tables("Tabla").Columns.Add("ValesD")
+            dsPoliza.Tables("Tabla").Columns.Add("AnticipoSueldo")
+            dsPoliza.Tables("Tabla").Columns.Add("APORTTRABAJAFLEX")
+            dsPoliza.Tables("Tabla").Columns.Add("APORTPATRONFLEX")
 
-            dsPoliza.Tables("Tabla").Columns.Add("IMSS_CS")
-            dsPoliza.Tables("Tabla").Columns.Add("RCV_CS")
-            dsPoliza.Tables("Tabla").Columns.Add("Infonavit_CS")
-            dsPoliza.Tables("Tabla").Columns.Add("ISN_CS")
-            dsPoliza.Tables("Tabla").Columns.Add("Total_Costo_Social")
+            dsPoliza.Tables("Tabla").Columns.Add("fisr")
+            dsPoliza.Tables("Tabla").Columns.Add("fImss")
+            dsPoliza.Tables("Tabla").Columns.Add("fInfonavit")
+            dsPoliza.Tables("Tabla").Columns.Add("fInfonavitBanterior")
+            dsPoliza.Tables("Tabla").Columns.Add("fAjusteInfonavit")
+            dsPoliza.Tables("Tabla").Columns.Add("fPensionAlimenticia")
+            dsPoliza.Tables("Tabla").Columns.Add("fPrestamo")
+            dsPoliza.Tables("Tabla").Columns.Add("fFonacot")
+            dsPoliza.Tables("Tabla").Columns.Add("fT_No_laborado")
+            dsPoliza.Tables("Tabla").Columns.Add("fCuotaSindical")
+            dsPoliza.Tables("Tabla").Columns.Add("fSubsidioGenerado")
+            dsPoliza.Tables("Tabla").Columns.Add("fSubsidioAplicado")
+            dsPoliza.Tables("Tabla").Columns.Add("deduccionestotal")
+            dsPoliza.Tables("Tabla").Columns.Add("NETO_SA")
+            dsPoliza.Tables("Tabla").Columns.Add("Vales")
+            dsPoliza.Tables("Tabla").Columns.Add("Tipo_Excedente")
+            dsPoliza.Tables("Tabla").Columns.Add("Total_Excedente")
+            dsPoliza.Tables("Tabla").Columns.Add("FondoPFB")
+            dsPoliza.Tables("Tabla").Columns.Add("fImssCS")
             dsPoliza.Tables("Tabla").Columns.Add("2%SAR")
-            dsPoliza.Tables("Tabla").Columns.Add("CYV")
-            dsPoliza.Tables("Tabla").Columns.Add("TIPOEXC")
-            dsPoliza.Tables("Tabla").Columns.Add("VALES")
-            dsPoliza.Tables("Tabla").Columns.Add("APORPF")
-            dsPoliza.Tables("Tabla").Columns.Add("PRAGUINALDO")
-            dsPoliza.Tables("Tabla").Columns.Add("PRPRIMAV")
-            dsPoliza.Tables("Tabla").Columns.Add("PRPRIMAANT")
-            dsPoliza.Tables("Tabla").Columns.Add("PRINDEMNIZACION")
-            dsPoliza.Tables("Tabla").Columns.Add("PDE")
-            dsPoliza.Tables("Tabla").Columns.Add("TE2E")
-            dsPoliza.Tables("Tabla").Columns.Add("TE3E")
-            dsPoliza.Tables("Tabla").Columns.Add("DLE")
-            dsPoliza.Tables("Tabla").Columns.Add("DFE")
-            dsPoliza.Tables("Tabla").Columns.Add("M_EXCEDENTE")
+            dsPoliza.Tables("Tabla").Columns.Add("VejezP")
+            dsPoliza.Tables("Tabla").Columns.Add("fRcvCS")
+            dsPoliza.Tables("Tabla").Columns.Add("fInfonavitCS")
+            dsPoliza.Tables("Tabla").Columns.Add("fISN")
+            dsPoliza.Tables("Tabla").Columns.Add("Calculadoimss1")
+            dsPoliza.Tables("Tabla").Columns.Add("Calculadoimss2")
+            dsPoliza.Tables("Tabla").Columns.Add("CostoSocialFormula")
+            dsPoliza.Tables("Tabla").Columns.Add("CostoSocial")
+            dsPoliza.Tables("Tabla").Columns.Add("prAguinaldo")
+            dsPoliza.Tables("Tabla").Columns.Add("prPrimaV")
+            dsPoliza.Tables("Tabla").Columns.Add("prPrimaAnt")
+            dsPoliza.Tables("Tabla").Columns.Add("prIndemnizacion")
+
+
 
 
             Dim totalexcedente As Double
@@ -17996,7 +18039,7 @@ Public Class frmnominasmarinos
             Dim tipoperiodos2 As String
             Dim fechapagoletra As String
 
-            Dim filaExcel As Integer = 4
+            Dim filaExcel As Integer = 6
             Dim dialogo As New SaveFileDialog()
 
             Dim pilotin As Boolean = False
@@ -18079,7 +18122,7 @@ Public Class frmnominasmarinos
                 Dim ruta As String
 
                 If EmpresaN = "TMMDC" Then
-                    ruta = My.Application.Info.DirectoryPath() & "\hojaTP\hojaTP-TMMDC.xlsx"
+                    ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
 
                 ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
                     ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_logistic_s.xlsx"
@@ -18098,7 +18141,7 @@ Public Class frmnominasmarinos
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
 
-                book.Worksheet(1).CopyTo(libro, "Generales")
+                book.Worksheet(1).CopyTo(libro, "Poliza")
 
 
 
@@ -18108,7 +18151,7 @@ Public Class frmnominasmarinos
 
 
                 'Clean cells
-                recorrerFilasColumnas(hoja, 4, dtgDatos.Rows.Count + 50, 100, "clear")
+                recorrerFilasColumnas(hoja, 6, dtgDatos.Rows.Count + 50, 100, "clear")
 
 
 
@@ -18138,7 +18181,7 @@ Public Class frmnominasmarinos
                         End If
 
                     End If
-                    hoja.Range(4, 1, filaExcel, 4).Style.NumberFormat.Format = "@"
+                    'hoja.Range(4, 1, filaExcel, 4).Style.NumberFormat.Format = "@"
                     'hoja.Range(4, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
                     'hoja.Range(4, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
                     'hoja.Range(4, 7, filaExcel, 7).Style.NumberFormat.Format = "@"
@@ -18148,6 +18191,7 @@ Public Class frmnominasmarinos
                         'agregar todos los ceco
                         ''Generales
                         'BUSCAMOS EL CECO
+                        fila.Item("Consecutivo") = x + 1
                         fila.Item("Ceco") = ceco
                         fila.Item("CodigoEmpleado") = dtgDatos.Rows(x).Cells(3).Value
                         fila.Item("RFC") = dtgDatos.Rows(x).Cells(6).Value
@@ -18159,7 +18203,7 @@ Public Class frmnominasmarinos
 
                         If EmpresaN = "TMMDC" Then
 
-                            'hoja.Range(4, 2, dtgDatos.Rows.Count + 4, 10).Style.NumberFormat.Format = "#,##0.00"
+
                             'hoja.Range(4, 14, dtgDatos.Rows.Count + 4, 16).Style.NumberFormat.Format = "#,##0.00"
                             'hoja.Range(4, 20, dtgDatos.Rows.Count + 4, 42).Style.NumberFormat.Format = "#,##0.00"
                             'hoja.Range(4, 5, dtgDatos.Rows.Count + 4, 5).Style.NumberFormat.Format = "#"
@@ -18171,18 +18215,7 @@ Public Class frmnominasmarinos
                             fila.Item("AguinaldoG") = CDbl(dtgDatos.Rows(x).Cells(49).Value) '' Aguinaldo Gravado
                             fila.Item("AguinaldoE") = CDbl(dtgDatos.Rows(x).Cells(50).Value) ' ' Aguinaldo Excento
                             
-                            'hoja.Cell(filaExcel, 9).Value = 0 ' CDbl(dtgDatos.Rows(x).Cells(35).Value)  ' Horas Triples importe gravado
-                            'hoja.Cell(filaExcel, 10).Value = "" ' Horas Triples importe exedente
-                            'hoja.Cell(filaExcel, 11).Value = 0 ''CDbl(dtgDatos.Rows(x).Cells(16).Value) / 3 ' Horas Triples valor dias
-                            'hoja.Cell(filaExcel, 12).Value = 0 ' "2"
-                            'hoja.Cell(filaExcel, 13).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(16).Value) 'Horas Triples valor 
-                            'hoja.Cell(filaExcel, 14).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(35).Value) ' Horas Triples importe
-                            'hoja.Cell(filaExcel, 15).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(33).Value) 'Horas  Doble Gravado
-                            'hoja.Cell(filaExcel, 16).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(34).Value) 'Horas  Doble Excento
-                            'hoja.Cell(filaExcel, 17).FormulaA1 = "=IF(AND(T" & filaExcel & ">0, T" & filaExcel & "<=3),1,IF(AND(T" & filaExcel & ">3,T" & filaExcel & "<=6),2,IF(T" & filaExcel & ">6,3,0)))" 'horas dobles dia
-                            'hoja.Cell(filaExcel, 18).Value = 0 ' "1" 'TIPO
-                            'hoja.Cell(filaExcel, 19).Value = 0 'CDbl(dtgDatos.Rows(x).Cells(15).Value) 'Horas
-                            'hoja.Cell(filaExcel, 20).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value) + CDbl(dtgDatos.Rows(x).Cells(34).Value) 'IMPORTE TOTAL HORAS EXTRAS
+                            
                             fila.Item("PrimaDominicalG") = CDbl(dtgDatos.Rows(x).Cells(31).Value) 'PRIMA DOMINICAL GRAVADO
                             fila.Item("PrimaDominicalE") = CDbl(dtgDatos.Rows(x).Cells(32).Value) 'PRIMA DOMINICAL EXCENTO
                             fila.Item("PrimaVacacionalG") = CDbl(dtgDatos.Rows(x).Cells(52).Value) 'PRIMA VACACIONAL GRAVADO
@@ -18204,7 +18237,7 @@ Public Class frmnominasmarinos
                             fondoPFB = CDbl(dtgDatos.Rows(x).Cells(88).Value)
                             fila.Item("PlanFlexE") = IIf(dtgDatos.Rows(x).Cells(86).Value = "PPP", (totalexcedente + (fondoPFB / 2)), 0) 'PREVISION_ PFB  exento
                             fila.Item("ApotPFlexG") = 0 'APORT PATRONAL PLAN FLEX LP       gravado
-                            fila.Item("ApotPFlexG") = fondoPFB / 2   'APORT PATRONAL PLAN FLEX LP  exento
+                            fila.Item("ApotPFlexE") = fondoPFB / 2   'APORT PATRONAL PLAN FLEX LP  exento
                             fila.Item("ISR") = CDbl(dtgDatos.Rows(x).Cells(58).Value)  'ISR
                             fila.Item("PensionA") = CDbl(dtgDatos.Rows(x).Cells(63).Value) 'PENSION ALIMENTICIA
                             fila.Item("Infonavit") = dtgDatos.Rows(x).Cells(60).Value ' 'PRESTAMO INFONAVIT CF
@@ -18385,46 +18418,52 @@ Public Class frmnominasmarinos
 
                             Dim deduccionestotal As Double = CDbl(rwComplemento(0).Item("fIsr")) + CDbl(rwComplemento(0).Item("fInfonavit")) + CDbl(rwComplemento(0).Item("fInfonavitBanterior")) + CDbl(rwComplemento(0).Item("fPensionAlimenticia")) + CDbl(rwComplemento(0).Item("fPrestamo")) + CDbl(rwComplemento(0).Item("fT_No_laborado")) + CDbl(rwComplemento(0).Item("fCuotaSindical"))
 
-                            hoja.Cell(filaExcel, 53).Value = rwComplemento(0).Item("fIsr")
-                            hoja.Cell(filaExcel, 54).Value = rwComplemento(0).Item("fImss")
-                            hoja.Cell(filaExcel, 55).Value = rwComplemento(0).Item("fInfonavit")
-                            hoja.Cell(filaExcel, 56).Value = rwComplemento(0).Item("fInfonavitBanterior")
-                            hoja.Cell(filaExcel, 57).Value = rwComplemento(0).Item("fAjusteInfonavit")
-                            hoja.Cell(filaExcel, 58).Value = rwComplemento(0).Item("fPensionAlimenticia")
-                            hoja.Cell(filaExcel, 59).Value = rwComplemento(0).Item("fPrestamo")
-                            hoja.Cell(filaExcel, 60).Value = rwComplemento(0).Item("fFonacot")
-                            hoja.Cell(filaExcel, 61).Value = rwComplemento(0).Item("fT_No_laborado")
-                            hoja.Cell(filaExcel, 62).Value = rwComplemento(0).Item("fCuotaSindical")
-                            hoja.Cell(filaExcel, 63).Value = rwComplemento(0).Item("fSubsidioGenerado")
-                            hoja.Cell(filaExcel, 64).Value = rwComplemento(0).Item("fSubsidioAplicado")
-                            hoja.Cell(filaExcel, 65).Value = deduccionestotal
-                            hoja.Cell(filaExcel, 66).Value = rwComplemento(0).Item("NETO_SA")
+                            fila.Item("fisr") = rwComplemento(0).Item("fIsr")
+                            fila.Item("fImss") = rwComplemento(0).Item("fImss")
+                            fila.Item("fInfonavit") = rwComplemento(0).Item("fInfonavit")
+                            fila.Item("fInfonavitBanterior") = rwComplemento(0).Item("fInfonavitBanterior")
+                            fila.Item("fAjusteInfonavit") = rwComplemento(0).Item("fAjusteInfonavit")
+                            fila.Item("fPensionAlimenticia") = rwComplemento(0).Item("fPensionAlimenticia")
+                            fila.Item("fPrestamo") = rwComplemento(0).Item("fPrestamo")
+                            fila.Item("fFonacot") = rwComplemento(0).Item("fFonacot")
+                            fila.Item("fT_No_laborado") = rwComplemento(0).Item("fT_No_laborado")
+                            fila.Item("fCuotaSindical") = rwComplemento(0).Item("fCuotaSindical")
+                            fila.Item("fSubsidioGenerado") = rwComplemento(0).Item("fSubsidioGenerado")
+                            fila.Item("fSubsidioAplicado") = rwComplemento(0).Item("fSubsidioAplicado")
+                            fila.Item("deduccionestotal") = deduccionestotal
+                            fila.Item("NETO_SA") = rwComplemento(0).Item("NETO_SA")
 
-                            hoja.Cell(filaExcel, 67).Value = rwComplemento(0).Item("Vales")
-                            hoja.Cell(filaExcel, 68).Value = IIf(CDbl(rwComplemento(0).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
+                            fila.Item("Vales") = rwComplemento(0).Item("Vales")
+                            fila.Item("Tipo_Excedente") = IIf(CDbl(rwComplemento(0).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
+
                             'suma de los excedentes
-
-
-
-                            hoja.Cell(filaExcel, 69).Value = totalexcedente
-                            hoja.Cell(filaExcel, 70).Value = fondoPFB
-
-                            hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
-                            hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
-                            hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
-                            hoja.Cell(filaExcel, 75).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
-                            hoja.Cell(filaExcel, 76).Value = rwComplemento(0).Item("fRcvCS")
-                            hoja.Cell(filaExcel, 77).Value = rwComplemento(0).Item("fInfonavitCS")
-                            hoja.Cell(filaExcel, 78).Value = rwComplemento(0).Item("fInsCS")
-                            hoja.Cell(filaExcel, 79).FormulaA1 = "=+BS" & filaExcel & "+BX" & filaExcel & "+BY" & filaExcel & "+BZ" & filaExcel
-                            hoja.Cell(filaExcel, 80).Value = rwComplemento(0).Item("fTotalCostoSocial")
-
+                            If fila.Item("Tipo_Excedente") = "PPP" Then
+                                fila.Item("Total_Excedente") = totalexcedente
+                            Else
+                                fila.Item("Total_Excedente") = 0
+                            End If
+                            'fila.Item("Total_Excedente") = totalexcedente
+                            fila.Item("FondoPFB") = fondoPFB
+                            fila.Item("fImssCS") = rwComplemento(0).Item("fImssCS")
+                            
+                            fila.Item("2%SAR") = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
+                            fila.Item("VejezP") = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                            fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
+                            fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
+                            fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                            fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
+                            fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
                             'PROVISIONES
-                            hoja.Cell(filaExcel, 81).FormulaA1 = IIf(rwComplemento(0)("prAguinaldo").ToString = "", 0, rwComplemento(0)("prAguinaldo"))  'Provision Aguinaldo
-                            hoja.Cell(filaExcel, 82).Value = IIf(rwComplemento(0)("prPrimaV").ToString = "", 0, rwComplemento(0)("prPrimaV")) 'Provision Prima Vacacional
-                            hoja.Cell(filaExcel, 83).Value = IIf(rwComplemento(0)("prPrimaAnt").ToString = "", 0, rwComplemento(0)("prPrimaAnt")) 'Provision Prima de antiguedad
-                            hoja.Cell(filaExcel, 84).Value = IIf(rwComplemento(0)("prIndemnizacion").ToString = "", 0, rwComplemento(0)("prIndemnizacion")) 'Provision Indeminzacon
+                            fila.Item("prAguinaldo") = IIf(rwComplemento(0)("prAguinaldo").ToString = "", 0, rwComplemento(0)("prAguinaldo"))  'Provision Aguinaldo
+                            fila.Item("prPrimaV") = IIf(rwComplemento(0)("prPrimaV").ToString = "", 0, rwComplemento(0)("prPrimaV")) 'Provision Prima Vacacional
+                            fila.Item("prPrimaAnt") = IIf(rwComplemento(0)("prPrimaAnt").ToString = "", 0, rwComplemento(0)("prPrimaAnt")) 'Provision Prima de antiguedad
+                            fila.Item("prIndemnizacion") = IIf(rwComplemento(0)("prIndemnizacion").ToString = "", 0, rwComplemento(0)("prIndemnizacion")) 'Provision Indeminzacon
+                            
+
+
+                            
 
 
 
@@ -18446,13 +18485,609 @@ Public Class frmnominasmarinos
                         End If
 
 
-                        filaExcel = filaExcel + 1
+
                     End If
 
-
+                    dsPoliza.Tables("Tabla").Rows.Add(fila)
                     pgbProgreso.Value += 1
                     Application.DoEvents()
                 Next
+                Dim Primeravez As Boolean
+                'TENEMOS TODO LA INFORMACION EN LA TABLA, GENERAR LA POLIZA
+               
+                
+
+                Dim rwCentrocostos As DataRow() = nConsulta("select distinct clabe2 from empleadosC inner join nomina on empleadosC.iIdEmpleadoC = Nomina.fkiIdEmpleadoC  where fkiIdPeriodo=" & cboperiodo.SelectedValue & " order by clabe2 ")
+                If rwCentrocostos Is Nothing = False Then
+                    For y As Integer = 0 To rwCentrocostos.Count - 1
+                        'dsCentrosCosto.Tables("Tabla").NewRow()
+                        Dim filaCS As DataRow = dsCentrosCosto.Tables("Tabla").NewRow()
+                        Primeravez = True
+                        If Primeravez Then
+                            filaCS.Item("SueldoG") = "0"
+                            filaCS.Item("SueldoE") = "0"  ' Sueldo Base excento
+                            filaCS.Item("AguinaldoG") = "0" '' Aguinaldo Gravado
+                            filaCS.Item("AguinaldoE") = "0" ' ' Aguinaldo Excento
+                            filaCS.Item("PrimaDominicalG") = "0" 'PRIMA DOMINICAL GRAVADO
+                            filaCS.Item("PrimaDominicalE") = "0" 'PRIMA DOMINICAL EXCENTO
+                            filaCS.Item("PrimaVacacionalG") = "0" 'PRIMA VACACIONAL GRAVADO
+                            filaCS.Item("PrimaVacacionalE") = "0" 'PRIMA VACACIONAL EXCENTO
+                            filaCS.Item("ValesG") = "0" 'VALES DE DESPENSA GRAVADO
+                            filaCS.Item("ValesE") = "0" 'VALES DE DESPENSA EXCENTO
+                            filaCS.Item("SPendienteE") = "0"
+                            filaCS.Item("CompensacionG") = "0" 'COMPENSACION GRAVADO
+                            filaCS.Item("CompensacionE") = "0" 'COMPENSACION EXENTO
+                            filaCS.Item("VacaProporG") = "0"  'VACACIONES PROPORCIONALES GRAVADO  
+                            filaCS.Item("VacaProporE") = "0"  'VACACIONES PROPORCIONALES GRAVADO  
+                            filaCS.Item("DescLaboradoG") = "0"  'DESC LABORADO GRAVADO     
+                            filaCS.Item("DescLaboradoE") = "0" 'DESC LABORADO EXCENTO
+                            filaCS.Item("DiaFestLaboradoG") = "0" 'DIAS FESTIVO LAB GRAVADO  
+                            filaCS.Item("DiaFestLaboradoE") = "0" 'DIAS FESTIVO LAB EXCENTO
+                            filaCS.Item("PlanFlexG") = "0" 'PREVISION_ PFB  gravado
+
+                            filaCS.Item("PlanFlexE") = "0" 'PREVISION_ PFB  exento
+                            filaCS.Item("ApotPFlexG") = "0" 'APORT PATRONAL PLAN FLEX LP       gravado
+                            filaCS.Item("ApotPFlexE") = "0"   'APORT PATRONAL PLAN FLEX LP  exento
+                            filaCS.Item("ISR") = "0" 'ISR
+                            filaCS.Item("PensionA") = "0" 'PENSION ALIMENTICIA
+                            filaCS.Item("Infonavit") = "0" ' 'PRESTAMO INFONAVIT CF
+
+                            filaCS.Item("SeguroVivienda") = "0" 'SEGUROS DE VIVIENDA
+                            filaCS.Item("InfonavitBimAnt") = "0" 'INFONAVIT BIM ANT
+                            filaCS.Item("Fonacot") = "0" 'FONACOT
+                            filaCS.Item("ValesD") = "0" 'VALES
+                            filaCS.Item("AnticipoSueldo") = "0" 'ANTICIPO SUELDO
+                            filaCS.Item("APORTTRABAJAFLEX") = "0" 'PLAN FLEX LP
+                            filaCS.Item("APORTPATRONFLEX") = "0" 'APOR PATRON PLAN FLEX LP
+
+                            filaCS.Item("fisr") = "0"
+                            filaCS.Item("fImss") = "0"
+                            filaCS.Item("fInfonavit") = "0"
+                            filaCS.Item("fInfonavitBanterior") = "0"
+                            filaCS.Item("fAjusteInfonavit") = "0"
+                            filaCS.Item("fPensionAlimenticia") = "0"
+                            filaCS.Item("fPrestamo") = "0"
+                            filaCS.Item("fFonacot") = "0"
+                            filaCS.Item("fT_No_laborado") = "0"
+                            filaCS.Item("fCuotaSindical") = "0"
+                            filaCS.Item("fSubsidioGenerado") = "0"
+                            filaCS.Item("fSubsidioAplicado") = "0"
+                            filaCS.Item("deduccionestotal") = "0"
+                            filaCS.Item("NETO_SA") = "0"
+
+                            filaCS.Item("Vales") = "0"
+                            filaCS.Item("Tipo_Excedente") = "PPP"
+                            filaCS.Item("Total_Excedente") = "0"
+                            
+                            filaCS.Item("FondoPFB") = "0"
+                            filaCS.Item("fImssCS") = "0"
+
+                            filaCS.Item("2%SAR") = "0"
+                            filaCS.Item("VejezP") = "0"
+                            filaCS.Item("fRcvCS") = "0"
+                            filaCS.Item("fInfonavitCS") = "0"
+                            filaCS.Item("fISN") = "0"
+                            filaCS.Item("Calculadoimss1") = "0"
+                            filaCS.Item("Calculadoimss2") = "0"
+                            filaCS.Item("CostoSocialFormula") = "0"
+                            filaCS.Item("CostoSocial") = "0"
+                            'PROVISIONES
+                            filaCS.Item("prAguinaldo") = "0"
+                            filaCS.Item("prPrimaV") = "0"
+                            filaCS.Item("prPrimaAnt") = "0"
+                            filaCS.Item("prIndemnizacion") = "0"
+
+
+
+                        Else
+
+                        End If
+                        dsCentrosCosto.Tables("Tabla").Rows.Add(filaCS)
+                        For z As Integer = 0 To dsPoliza.Tables("Tabla").Rows.Count - 1
+                            If rwCentrocostos(y)("clabe2").ToString = dsPoliza.Tables("Tabla").Rows(z)("CeCo").ToString Then
+                                Primeravez = False
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("CeCo") = dsPoliza.Tables("Tabla").Rows(z)("CeCo").ToString
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("SueldoG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("SueldoG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("SueldoG").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("SueldoE") = ""  ' Sueldo Base excento
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("AguinaldoG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("AguinaldoG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("AguinaldoG").ToString) '' Aguinaldo Gravado
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("AguinaldoE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("AguinaldoE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("AguinaldoE").ToString) ' ' Aguinaldo Excento
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaDominicalG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaDominicalG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PrimaDominicalG").ToString) 'PRIMA DOMINICAL GRAVADO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaDominicalE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaDominicalE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PrimaDominicalE").ToString) 'PRIMA DOMINICAL EXCENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaVacacionalG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaVacacionalG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PrimaVacacionalG").ToString) 'PRIMA VACACIONAL GRAVADO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaVacacionalE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PrimaVacacionalE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PrimaVacacionalE").ToString) 'PRIMA VACACIONAL EXCENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ValesG") = "0" 'VALES DE DESPENSA GRAVADO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ValesE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("ValesE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("ValesE").ToString) 'VALES DE DESPENSA EXCENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("SPendienteE") = "0"
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("CompensacionG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("CompensacionG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("CompensacionG").ToString) 'COMPENSACION GRAVADO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("CompensacionE") = "0" 'COMPENSACION EXENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("VacaProporG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("VacaProporG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("VacaProporG").ToString)  'VACACIONES PROPORCIONALES GRAVADO  
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("VacaProporE") = "0"  'VACACIONES PROPORCIONALES GRAVADO  
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("DescLaboradoG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("DescLaboradoG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("DescLaboradoG").ToString)  'DESC LABORADO GRAVADO     
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("DescLaboradoE") = 0 'DESC LABORADO EXCENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("DiaFestLaboradoG") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("DiaFestLaboradoG").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("DiaFestLaboradoG").ToString) 'DIAS FESTIVO LAB GRAVADO  
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("DiaFestLaboradoE") = 0 'DIAS FESTIVO LAB EXCENTO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PlanFlexG") = 0 'PREVISION_ PFB  gravado
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PlanFlexE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PlanFlexE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PlanFlexE").ToString) 'PREVISION_ PFB  exento
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ApotPFlexG") = 0 'APORT PATRONAL PLAN FLEX LP       gravado
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ApotPFlexE") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("ApotPFlexE").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("ApotPFlexE").ToString)  'APORT PATRONAL PLAN FLEX LP  exento
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ISR") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("ISR").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("ISR").ToString)  'ISR
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("PensionA") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("PensionA").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("PensionA").ToString) 'PENSION ALIMENTICIA
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Infonavit") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Infonavit").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Infonavit").ToString) ' 'PRESTAMO INFONAVIT CF
+
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("SeguroVivienda") = 0 'SEGUROS DE VIVIENDA
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("InfonavitBimAnt") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("InfonavitBimAnt").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("InfonavitBimAnt").ToString) 'INFONAVIT BIM ANT
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Fonacot") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Fonacot").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Fonacot").ToString) 'FONACOT
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("ValesD") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("ValesD").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("ValesD").ToString) 'VALES
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("AnticipoSueldo") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("AnticipoSueldo").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("AnticipoSueldo").ToString) 'ANTICIPO SUELDO
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("APORTTRABAJAFLEX") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("APORTTRABAJAFLEX").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("APORTTRABAJAFLEX").ToString) 'PLAN FLEX LP
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("APORTPATRONFLEX") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("APORTPATRONFLEX").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("APORTPATRONFLEX").ToString) 'APOR PATRON PLAN FLEX LP
+
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fisr") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fisr").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fisr").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fImss") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fImss").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fImss").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavit") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavit").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fInfonavit").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavitBanterior") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavitBanterior").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fInfonavitBanterior").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fAjusteInfonavit") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fAjusteInfonavit").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fAjusteInfonavit").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fPensionAlimenticia") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fPensionAlimenticia").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fPensionAlimenticia").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fPrestamo") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fPrestamo").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fPrestamo").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fFonacot") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fFonacot").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fFonacot").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fT_No_laborado") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fT_No_laborado").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fT_No_laborado").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fCuotaSindical") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fCuotaSindical").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fCuotaSindical").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fSubsidioGenerado") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fSubsidioGenerado").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fSubsidioGenerado").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fSubsidioAplicado") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fSubsidioAplicado").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fSubsidioAplicado").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("deduccionestotal") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("deduccionestotal").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("deduccionestotal").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("NETO_SA") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("NETO_SA").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("NETO_SA").ToString)
+
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Vales") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Vales").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Vales").ToString)
+                                'dsCentrosCosto.Tables("Tabla").Rows(y)("Tipo_Excedente") = "PPP"
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Total_Excedente") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Total_Excedente").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Total_Excedente").ToString)
+
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("FondoPFB") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("FondoPFB").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("FondoPFB").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fImssCS") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fImssCS").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fImssCS").ToString)
+
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("2%SAR") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("2%SAR").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("2%SAR").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("VejezP") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("VejezP").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("VejezP").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fRcvCS") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fRcvCS").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fRcvCS").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavitCS") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fInfonavitCS").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fInfonavitCS").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("fISN") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("fISN").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("fISN").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Calculadoimss1") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Calculadoimss1").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Calculadoimss1").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("Calculadoimss2") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("Calculadoimss2").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("Calculadoimss2").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("CostoSocialFormula") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("CostoSocialFormula").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("CostoSocialFormula").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("CostoSocial") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("CostoSocial").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("CostoSocial").ToString)
+                                'PROVISIONES
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("prAguinaldo") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("prAguinaldo").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("prAguinaldo").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("prPrimaV") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("prPrimaV").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("prPrimaV").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("prPrimaAnt") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("prPrimaAnt").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("prPrimaAnt").ToString)
+                                dsCentrosCosto.Tables("Tabla").Rows(y)("prIndemnizacion") = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(y)("prIndemnizacion").ToString) + Double.Parse(dsPoliza.Tables("Tabla").Rows(z)("prIndemnizacion").ToString)
+
+
+
+                            Else
+                                Primeravez = True
+                            End If
+                        Next
+
+                    Next
+                End If
+
+                hoja.Range(6, 6, 7, 1000).Style.NumberFormat.Format = "#,##0.00"
+                hoja.Cell(3, 2).Value = cboperiodo.Text
+                Dim rwCamposPoliza As DataRow() = nConsulta("select * from CuentasContables where iEstatus=1 order by consecutivo ")
+                filaExcel = 6
+                Dim TotalPrimaVacacionalPR, TotalAportacionPatronalFlex, TotalInfonavitT, TotalAnticipoT, TotalFonacotT, TotalISR As Double
+                Dim TotalVales, TotalSueldos, TotalPRAguinaldo, TotalPRIndemnizacion, TotalPRPrimaAntiguedad, TotalISN, TotalIMSS, TotalSAR, TotalInfonavitP As Double
+                Dim TotalPrimaVacacionalT, TotalPlanFlex As Double
+                TotalPrimaVacacionalPR = 0
+                TotalAportacionPatronalFlex = 0
+                TotalInfonavitT = 0
+                TotalAnticipoT = 0
+                TotalFonacotT = 0
+                TotalISR = 0
+                TotalVales = 0
+                TotalSueldos = 0
+                TotalPRAguinaldo = 0
+                TotalPRIndemnizacion = 0
+                TotalPRPrimaAntiguedad = 0
+                TotalISN = 0
+                TotalIMSS = 0
+                TotalSAR = 0
+                TotalInfonavitP = 0
+                TotalPrimaVacacionalT = 0
+                TotalPlanFlex = 0
+                If rwCamposPoliza Is Nothing = False Then
+                    For x As Integer = 0 To rwCamposPoliza.Count - 1
+                        '############################*********ABONO
+                        'SUELDOS CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000101" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RG"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalInfonavitT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavit")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitBanterior")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fAjusteInfonavit")) 'Nombre
+                                    TotalAnticipoT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fPrestamo"))
+                                    TotalFonacotT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
+                                    TotalISR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
+                                    TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                                If Double.Parse(IIf(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE") = "", "0", dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RE"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'PRIMA VACACIONAL TRABAJADOR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RG"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RE"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'PRIMA VACACIONAL PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPrimaVacacionalPR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'VALES CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000107" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RG"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    filaExcel = filaExcel + 1
+                                End If
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RE"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalVales += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'AGUINALDO PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000106" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPRAguinaldo += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'INDEMNIZACION PR CARGP
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000108" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPRIndemnizacion += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'PRIMA DE ANTIGUEDAD PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000110" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPRPrimaAntiguedad += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'IMSS PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000111" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalIMSS += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'INFONAVIT PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000112" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalInfonavitP += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'ISN PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000113" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalISN += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'APORTACION SAR PR CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000114" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalSAR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+                        'PLAN FLEX CARGO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000129" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE")) 'Nombre
+                                    hoja.Cell(filaExcel, 4).Value = ""
+                                    hoja.Cell(filaExcel, 5).Value = "RE"
+                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                    TotalPlanFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE"))
+                                    TotalAportacionPatronalFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE"))
+                                    filaExcel = filaExcel + 1
+                                End If
+                            Next
+                        End If
+
+                        '########################## **ABONO ** ###########################
+
+                        'PRIMA VACACIONAL PR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "87008" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalPrimaVacacionalPR > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalPrimaVacacionalPR
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'CREDITO IKE ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E132470" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalAportacionPatronalFlex > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalAportacionPatronalFlex * 2
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'DESCUENTO INFONAVIT TRABAJADOR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83002" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalInfonavitT > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalInfonavitT
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'DESCUENTO FONACOT TRABAJADOR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83001" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalFonacotT > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalFonacotT
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'VALES DE DESPENSA ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83007" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalVales > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalVales
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'SUELDOS TRBAJADOR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83006" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalSueldos > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalSueldos + TotalPrimaVacacionalT + TotalPlanFlex - TotalAportacionPatronalFlex - TotalAnticipoT - TotalInfonavitT - TotalFonacotT - TotalISR
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'ANTICIPO TRABAJADOR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E18880023" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalAnticipoT > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalAnticipoT
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'AGUINALDO PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21441301" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalPRAguinaldo > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalPRAguinaldo
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'INDEMNIZACIONES PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22511101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalPRIndemnizacion > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalPRIndemnizacion
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'PRIMA ANTIGUEDAD PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22521101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalPRPrimaAntiguedad > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalPRPrimaAntiguedad
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'ISR ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21512108" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalISR > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalISR
+                                hoja.Cell(filaExcel, 5).Value = ""
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'ISN 3% PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21531101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalISN > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalISN
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'CUOTA IMSS PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalIMSS > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalIMSS
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                        'APORTACION SAR PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541102" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalSAR > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalSAR
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                End If
+                        'INFONAVIT PAT PROVISION ABONO
+                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541103" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                            If TotalInfonavitP > 0 Then
+                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                hoja.Cell(filaExcel, 3).Value = ""
+                                hoja.Cell(filaExcel, 4).Value = TotalInfonavitP
+                                hoja.Cell(filaExcel, 5).Value = "PR"
+                                filaExcel = filaExcel + 1
+                            End If
+                        End If
+                    Next
+                End If
+
+                'Sumas
+
+                hoja.Cell(filaExcel + 1, 3).FormulaA1 = "=SUM(C" & 6 & ":C" & filaExcel & ")"
+                hoja.Cell(filaExcel + 1, 4).FormulaA1 = "=SUM(D" & 6 & ":D" & filaExcel & ")"
+                hoja.Cell(filaExcel + 1, 5).FormulaA1 = "=C" & filaExcel + 1 & "-D" & filaExcel + 1
+
                 'VOLVEMOS A CARGAR LA QUE TENGA
                 dtgDatos.Columns.Clear()
                 'cambiamos el ordenamiento
@@ -18480,7 +19115,7 @@ Public Class frmnominasmarinos
                 End If
 
 
-                dialogo.FileName = "HOJA TRABAJO POLIZA" & EmpresaN.ToUpper & " " & textoperiodo & periodo
+                dialogo.FileName = "POLIZA" & EmpresaN.ToUpper & " " & textoperiodo & periodo
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -20504,9 +21139,13 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 68).Value = IIf(CDbl(rwComplemento(0).Item("fSalarioBase")) > 40000, "PPP", "SIND")  ' rwFilas(x).Item("fDiferenciaInfonavitA")'ppp/sind
                             'suma de los excedentes
 
+                            If CDbl(rwComplemento(0).Item("fSalarioBase")) > 40000 Then
+                                hoja.Cell(filaExcel, 69).Value = totalexcedente
+                            Else
+                                hoja.Cell(filaExcel, 69).Value = 0
+                            End If
 
-
-                            hoja.Cell(filaExcel, 69).Value = totalexcedente
+                            'hoja.Cell(filaExcel, 69).Value = totalexcedente
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
                             
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
@@ -20605,6 +21244,131 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             pnlCatalogo.Enabled = True
             pnlProgreso.Visible = False
+        End Try
+    End Sub
+
+    Private Sub CalcularSoloValesDeDespensaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CalcularSoloValesDeDespensaToolStripMenuItem.Click
+        Try
+            Dim numperiodo As Long = cboperiodo.SelectedValue
+            Dim valesDespensa As String = "0.00"
+            Dim calcularvalessemanal As Boolean
+            Dim resultado As Integer
+
+            If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
+
+                    calcularvalessemanal = False
+                End If
+            Else
+
+
+            End If
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                If validarSiSeCalculanVales(EmpresaN.ToString.ToUpper, tipoperiodos2Calculo) Then
+                    sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra,cInicioEmbarque from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+
+                    Dim rwExcedentes As DataRow() = nConsulta(sql)
+                    If tipoperiodos2Calculo = 2 Then
+                        If cboperiodo.SelectedValue Mod 2 = 0 Then
+                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                        Else
+                            'VALIDAR SI SE LE PAGA NETO
+                            'If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                            'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+
+                            If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                Dim a() As String
+                                a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                If a.Length > 1 Then
+                                    If CInt(a(1)) > 0 Then
+                                        dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                    Else
+                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    End If
+                                Else
+                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                End If
+
+
+
+                            Else
+                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
+                            End If
+
+
+
+
+                            'End If
+
+                        End If
+
+                    ElseIf tipoperiodos2Calculo = 3 Then
+
+
+                        If calcularvalessemanal Then
+                            If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
+                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                Dim a() As String
+                                a = Split(ValesCal.ToString, ".", vbBinaryCompare)
+                                If a.Length > 1 Then
+                                    If CInt(a(1)) > 0 Then
+                                        dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
+                                    Else
+                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    End If
+                                Else
+                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                End If
+
+
+
+                            Else
+                                dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                            End If
+                        Else
+                            dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                        End If
+                        'If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                        '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                        'Else
+                        '    'preguntar si se calculan o no 
+
+
+                        'End If
+
+
+                        'If cboperiodo.SelectedValue Mod 4 = 0 Then
+
+                        '    'VALIDAR SI SE LE PAGA NETO
+                        '    ' If dtgDatos.Rows(x).Cells(71).Value > 0 Then
+                        '    'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
+                        '    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3154, 3154.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                        '    'End If
+
+                        'Else
+                        '    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                        'End If
+
+                    Else
+                        dtgDatos.Rows(x).Cells(87).Value = "0.00"
+
+                    End If
+
+                Else
+                    dtgDatos.Rows(x).Cells(87).Value = "0.00"
+                End If
+            Next
+
+            
+        Catch ex As Exception
+
         End Try
     End Sub
 End Class
