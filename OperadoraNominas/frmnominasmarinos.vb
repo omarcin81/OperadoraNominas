@@ -17634,7 +17634,7 @@ Public Class frmnominasmarinos
                 Dim rwFilas As DataRow() = nConsulta(sql)
 
                
-
+                
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = rwFilas.Count
@@ -17645,12 +17645,13 @@ Public Class frmnominasmarinos
                 pFinal = Forma.gFinal
                 If rwFilas Is Nothing = False Then
                     Dim totalexcedente As Double
-                    
+
                     For x As Integer = 0 To rwFilas.Count - 1
+                      
 
                         Dim sql2 As String
                         sql2 = "SELECT * FROM nominacomplemento"
-                        sql2 &= " WHERE fkiIdPeriodo between " & Forma.gInicial & " and " & Forma.gFinal
+                        sql2 &= " WHERE fkiIdPeriodo=" & rwFilas(x).Item("fkiIdPeriodo")
                         sql2 &= " and iEstatus=1 and iEstatusNomina=0 AND iSerie=" & Forma.gSerie
                         sql2 &= " and fkiIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC")
                         Dim rwComplemento As DataRow() = nConsulta(sql2)
@@ -17726,9 +17727,7 @@ Public Class frmnominasmarinos
                         'QUERY 
 
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-                        If rwFilas(x).Item("fkiIdPeriodo") = 2 Then
-                            'MsgBox("lol")
-                        End If
+                       
                         hoja.Cell(filaExcel + x, 1).Value = mes 'MES
                         hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                         hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
@@ -17804,7 +17803,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioAplicado")
                         hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
                         hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
-                        hoja.Cell(filaExcel + x, 76).Value = rwComplemento(0)("AportacionPF").ToString 'FONDO PFB 3%
+                        hoja.Cell(filaExcel + x, 76).Value = " " 'vacia
                         hoja.Cell(filaExcel + x, 77).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
                         hoja.Cell(filaExcel + x, 78).Value = tipoexcdente  'ppp/sind
                         hoja.Cell(filaExcel + x, 79).Value = totalexcedente 'excdenete
