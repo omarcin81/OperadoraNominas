@@ -99,6 +99,7 @@ Partial Class frmnominasmarinos
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.LayoutPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -731,7 +732,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -846,6 +847,12 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
+        '
+        'LayoutPolizaToolStripMenuItem
+        '
+        Me.LayoutPolizaToolStripMenuItem.Name = "LayoutPolizaToolStripMenuItem"
+        Me.LayoutPolizaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.LayoutPolizaToolStripMenuItem.Text = "Layout poliza"
         '
         'frmnominasmarinos
         '
@@ -969,6 +976,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents HojaTrabajoPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CalcularSoloValesDeDespensaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkVales As System.Windows.Forms.CheckBox
+    Friend WithEvents LayoutPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
