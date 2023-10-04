@@ -6699,7 +6699,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 82).Value = dtgDatos.Rows(x).Cells(97).Value 'DIA FESTIVO E
                     hoja.Cell(filaExcel + x, 83).Value = dtgDatos.Rows(x).Cells(76).Value 'PENSION ALIME EXCE
                     hoja.Cell(filaExcel + x, 84).Value = dtgDatos.Rows(x).Cells(77).Value 'EXCEDENTE MANUAL 
-                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=BX" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x
+                    hoja.Cell(filaExcel + x, 85).FormulaA1 = "=BX" & filaExcel + x & "-BU" & filaExcel + x & "-BV" & filaExcel + x & "+BW" & filaExcel + x & "+BY" & filaExcel + x & "+BZ" & filaExcel + x & "+CA" & filaExcel + x & "+CB" & filaExcel + x & "+CC" & filaExcel + x & "+CD" & filaExcel + x & "-CE" & filaExcel + x & "+CF" & filaExcel + x
                     hoja.Cell(filaExcel + x, 86).Value = 0 '% COMISION
                     hoja.Cell(filaExcel + x, 87).Value = dtgDatos.Rows(x).Cells(79).Value 'IMSS
                     hoja.Cell(filaExcel + x, 88).Value = dtgDatos.Rows(x).Cells(80).Value 'RCV
@@ -17616,9 +17616,9 @@ Public Class frmnominasmarinos
                 sql &= "fAdeudoInfonavitA, "
                 sql &= "fDiferenciaInfonavitA, "
                 sql &= "fAsimilados AS EXCEDENTE, "
-                sql &= "fRetencionOperadora AS fRetencion, "
-                sql &= "fPorComision, "
-                sql &= "fComisionOperadora, "
+                sql &= "fRetencionOperadora AS fRetencion, " 'excede
+                sql &= "fPorComision, " 'excede
+                sql &= "fComisionOperadora, " 'excede
                 sql &= "fComisionAsimilados, "
                 sql &= "fImssCS, "
                 sql &= "fRcvCS, "
@@ -17655,8 +17655,9 @@ Public Class frmnominasmarinos
                         sql2 &= " and iEstatus=1 and iEstatusNomina=0 AND iSerie=" & Forma.gSerie
                         sql2 &= " and fkiIdEmpleadoC=" & rwFilas(x).Item("iIdEmpleadoC")
                         Dim rwComplemento As DataRow() = nConsulta(sql2)
-
-                        totalexcedente = CDbl(rwComplemento(0)("PDE")) + CDbl(rwComplemento(0)("TE2E")) + CDbl(rwComplemento(0)("TE3E")) + CDbl(rwComplemento(0)("DLE")) + CDbl(rwComplemento(0)("DFE")) + CDbl(rwFilas(x).Item("EXCEDENTE")) + CDbl(rwFilas(x).Item("fComisionOperadora")) + CDbl(rwFilas(x).Item("fRetencion"))
+                       
+                    
+                        totalexcedente = CDbl(rwFilas(x).Item("EXCEDENTE")) - CDbl(rwFilas(x).Item("fPorComision")) + CDbl(rwFilas(x).Item("fDiferenciaInfonavitA")) + CDbl(rwFilas(x).Item("fRetencion")) + CDbl(rwFilas(x).Item("fComisionOperadora")) + CDbl(rwComplemento(0)("PDE")) + CDbl(rwComplemento(0)("TE2E")) + CDbl(rwComplemento(0)("TE3E")) + CDbl(rwComplemento(0)("DLE")) + CDbl(rwComplemento(0)("DFE"))
 
                         'PERIODOS para PROV
                         Dim rwPeriodo As DataRow() = nConsulta("select * from periodos where iIdPeriodo= " & rwFilas(x).Item("fkiIdPeriodo"))
@@ -17727,7 +17728,7 @@ Public Class frmnominasmarinos
                         'QUERY 
 
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
-                       
+
                         hoja.Cell(filaExcel + x, 1).Value = mes 'MES
                         hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                         hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
