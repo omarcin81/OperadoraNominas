@@ -338,6 +338,8 @@ Public Class frmFiniquito
             'SQL &= " order by cFuncionesPuesto,cNombreLargo"
             Dim rwDatosEmpleado As DataRow() = nConsulta(SQL)
             If rwDatosEmpleado Is Nothing = False Then
+             
+
 
                 SQL = "EXEC [setNominaInsertarFiniquito ] 0"
                 'periodo
@@ -496,7 +498,7 @@ Public Class frmFiniquito
                 SQL &= "," & 0.0
                 'Excedente sindicato/ppp
 
-                totalsindicato = CDbl(txtindeminizacionExce.Text) + CDbl(txtAntiguedadExce.Text) + CDbl(txtSueldoExce.Text) + CDbl(txtAguinaldoExce.Text) + CDbl(txtVacacionesPropExce.Text) + CDbl(txtPrimaVacacionalExce.Text) + CDbl(txtVacacionesPendientesExce.Text) + CDbl(txtHE2Exce.Text) + CDbl(txtHE3Exce.Text) + CDbl(txtDLExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtIncidenciasExce.Text) + CDbl(txtInfonavitExce.text)
+                totalsindicato = CDbl(txtindeminizacionExce.Text) + CDbl(txtAntiguedadExce.Text) + CDbl(txtSueldoExce.Text) + CDbl(txtAguinaldoExce.Text) + CDbl(txtVacacionesPropExce.Text) + CDbl(txtPrimaVacacionalExce.Text) + CDbl(txtVacacionesPendientesExce.Text) + CDbl(txtHE2Exce.Text) + CDbl(txtHE3Exce.Text) + CDbl(txtDLExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtBonosExce.Text) + CDbl(txtIncidenciasExce.Text) + CDbl(txtInfonavitExce.Text)
                 SQL &= "," & CDbl(txtSindicato.Text)
 
                 'Prima excedente
