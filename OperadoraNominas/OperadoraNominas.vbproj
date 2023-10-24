@@ -114,6 +114,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acumulados\frmEligueMes.Designer.vb">
+      <DependentUpon>frmEligueMes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Acumulados\frmEligueMes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Finiquito\frmFiniquito.Designer.vb">
       <DependentUpon>frmFiniquito.vb</DependentUpon>
     </Compile>
@@ -377,6 +383,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Acumulados\frmEligueMes.resx">
+      <DependentUpon>frmEligueMes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Finiquito\frmFiniquito.resx">
       <DependentUpon>frmFiniquito.vb</DependentUpon>
     </EmbeddedResource>
