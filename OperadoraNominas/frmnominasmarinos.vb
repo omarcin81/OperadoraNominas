@@ -10665,6 +10665,7 @@ Public Class frmnominasmarinos
                 Dim INFONAVIT_CS As Double
                 Dim ISN_CS As Double
                 Dim TCS As Double
+                Dim VALES As Double
 
                 SUELDOBRUTON = 0
                 SEPTIMO = 0
@@ -10718,6 +10719,7 @@ Public Class frmnominasmarinos
                 INFONAVIT_CS = 0
                 ISN_CS = 0
                 TCS = 0
+                VALES = 0
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
                     diastrabajados += Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value.ToString))
@@ -10770,14 +10772,9 @@ Public Class frmnominasmarinos
                     INFONAVIT_CS += Double.Parse(IIf(dtgDatos.Rows(x).Cells(81).Value = "", 0, dtgDatos.Rows(x).Cells(81).Value))
                     ISN_CS += Double.Parse(IIf(dtgDatos.Rows(x).Cells(82).Value = "", 0, dtgDatos.Rows(x).Cells(82).Value))
                     TCS += Double.Parse(IIf(dtgDatos.Rows(x).Cells(83).Value = "", 0, dtgDatos.Rows(x).Cells(83).Value))
+                    VALES += Double.Parse(IIf(dtgDatos.Rows(x).Cells(87).Value = "", 0, dtgDatos.Rows(x).Cells(87).Value))
 
-
-                    If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                        IMMSSD = IMMSSD
-                    Else
-                        IMMSSD = 0
-                    End If
-
+                   
 
                     'pgbProgreso.Value += 1
                     'Application.DoEvents()
@@ -10820,6 +10817,13 @@ Public Class frmnominasmarinos
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
                 Else
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
+                End If
+
+                Dim imss_flag As Boolean
+                If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                    imss_flag = True
+                Else
+                    imss_flag = False
                 End If
 
                 hoja5.Range(10, 3, 60, 4).Style.NumberFormat.Format = " #,##0.00"
@@ -10868,9 +10872,11 @@ Public Class frmnominasmarinos
                 hoja5.Cell("F25").FormulaA1 = "=COUNTIF(NOMINA!AX5:AX" & totalesnomina - 2 & ","">0"")"
                 hoja5.Cell("F26").FormulaA1 = "=COUNTIF(NOMINA!BC5:BC" & totalesnomina - 2 & ","">0"")"
 
+               
+
                 'DEDUCCIONES
                 hoja5.Cell("H10").Value = ISRD
-                hoja5.Cell("H11").Value = IMMSSD
+                hoja5.Cell("H11").Value = IIf(imss_flag, IMMSSD, 0)
                 hoja5.Cell("H12").Value = INFONAVITD
                 hoja5.Cell("H13").Value = INFOBIMANT
                 hoja5.Cell("H14").Value = AJUSTEINFO
@@ -10905,6 +10911,8 @@ Public Class frmnominasmarinos
                 hoja5.Cell("K16").Value = RCV_CS
                 hoja5.Cell("K17").Value = INFONAVIT_CS
                 hoja5.Cell("K18").Value = ISN_CS
+                hoja5.Cell("K19").Value = IMMSSD
+                hoja5.Cell("K20").Value = VALES
 
                 'APLICADO
                 hoja5.Cell("L10").FormulaA1 = "=COUNTIF(NOMINA!CQ5:CQ" & totalesnomina - 2 & ","">0"")"
@@ -10913,9 +10921,17 @@ Public Class frmnominasmarinos
                 hoja5.Cell("L13").FormulaA1 = "=COUNTIF(NOMINA!CT5:CT" & totalesnomina - 2 & ","">0"")"
                 hoja5.Cell("L14").FormulaA1 = "=COUNTIF(NOMINA!CU5:CU" & totalesnomina - 2 & ","">0"")"
 
+                hoja5.Cell("L15").FormulaA1 = "=COUNTIF(NOMINA!CI5:CI" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L16").FormulaA1 = "=COUNTIF(NOMINA!CJ5:CJ" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L17").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L18").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L19").FormulaA1 = "=COUNTIF(NOMINA!CL5:CL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L20").FormulaA1 = "=COUNTIF(NOMINA!CN5:CN" & totalesnomina - 2 & ","">0"")"
+
                 'TOTALES
                 hoja5.Cell("C40").FormulaA1 = "=FACT!H4"
-                hoja5.Cell("C41").FormulaA1 = "=+FACT!H5"
+                hoja5.Cell("C41").FormulaA1 = "=NOMINA!F" & totalesnomina + 20
+
 
                 If (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) < 0.1 And (Math.Round(NETO, 2) + Math.Round(SUMADEDUCCIONES, 2) - Math.Round(SUMAPERCEPCIONES, 2)) > -0.1 Then
                     If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
@@ -17565,7 +17581,7 @@ Public Class frmnominasmarinos
 
 
                 Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonomina.xlsx"
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonominames.xlsx"
                 Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
@@ -24981,7 +24997,7 @@ Public Class frmnominasmarinos
             Dim tiponomina, sueldodescanso As String
             Dim filaexcelnomtotal As Integer = 0
             Dim valesDespensa As String
-            Dim mes As String
+            Dim MES As String
 
             'dias prov
             Dim DiasCadaPeriodo As Integer
@@ -25008,80 +25024,75 @@ Public Class frmnominasmarinos
             sql &= " EmpleadosC.cNombreLargo,"
             sql &= " Nomina.Depto, Nomina.Puesto,"
             sql &= " EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe, "
-            sql &= "fTExtra2V, "
-            sql &= "fTExtra3V, "
-            sql &= "fDescansoLV , "
-            sql &= "fDiaFestivoLV , "
-            sql &= "fHoras_extras_dobles_V , "
-            sql &= "fHoras_extras_triples_V , "
-            sql &= "fDescanso_Laborado_V , "
-            sql &= "fDia_Festivo_laborado_V , "
-            sql &= "fPrima_Dominical_V , "
-            sql &= "fFalta_Injustificada_V, "
-            sql &= "fPermiso_Sin_GS_V , "
-            sql &= "fT_No_laborado_V , "
-            sql &= "fSalarioBase , "
-            sql &= "fSalarioDiario, "
-            sql &= "fSalarioBC , "
-            sql &= "iDiasTrabajados , "
-            sql &= "fSueldoBruto, "
-            sql &= "fSeptimoDia, "
-            sql &= "fPrimaDomGravada, "
-            sql &= "fPrimaDomExenta, "
-            sql &= "fTExtra2Gravado, "
-            sql &= "fTExtra2Exento, "
-            sql &= "fTExtra3, "
-            sql &= "fDescansoL, "
-            sql &= "fDiaFestivoL, "
-            sql &= "fBonoAsistencia, "
-            sql &= "fBonoProductividad, "
-            sql &= "fBonoPolivalencia, "
-            sql &= "fBonoEspecialidad, "
-            sql &= "fBonoCalidad, "
-            sql &= "fCompensacion, "
-            sql &= "fSemanaFondo, "
-            sql &= "fFaltaInjustificada, "
-            sql &= "fPermisoSinGS, "
-            sql &= "fIncrementoRetenido, "
-            sql &= "fVacacionesProporcionales, "
-            sql &= "fAguinaldoGravado, "
-            sql &= "fAguinaldoExento, "
-            sql &= "fPrimaVacacionalGravado, "
-            sql &= "fPrimaVacacionalExento, "
-            sql &= "fTotalPercepciones, "
-            sql &= "fTotalPercepcionesISR, "
-            sql &= "fIncapacidad, "
-            sql &= "fIsr, "
-            sql &= "fImss, "
-            sql &= "fInfonavit, "
-            sql &= "fInfonavitBanterior, "
-            sql &= "fAjusteInfonavit, "
-            sql &= "fPensionAlimenticia, "
-            sql &= "fPrestamo, "
-            sql &= "fFonacot, "
-            sql &= "fT_No_laborado, "
-            sql &= "fCuotaSindical, "
-            sql &= "fSubsidioGenerado, "
-            sql &= "fSubsidioAplicado, "
-            sql &= "fOperadora AS NETO_SA, "
-            sql &= "fPrestamoPerA, "
-            sql &= "fAdeudoInfonavitA, "
-            sql &= "fDiferenciaInfonavitA, "
-            sql &= "fAsimilados AS EXCEDENTE, "
-            sql &= "fRetencionOperadora AS fRetencion, " 'excede
-            sql &= "fPorComision, " 'excede
-            sql &= "fComisionOperadora, " 'excede
-            sql &= "fComisionAsimilados, "
-            sql &= "fImssCS, "
-            sql &= "fRcvCS, "
-            sql &= "fInfonavitCS, "
-            sql &= "fInsCS, "
-            sql &= "fTotalCostoSocial"
+            sql &= "SUM (fSalarioBase ) AS fSalarioBase, "
+            sql &= "SUM (fSalarioDiario) AS fSalarioDiario, "
+            sql &= "SUM (fSalarioBC ) AS fSalarioBC, "
+            sql &= "SUM (iDiasTrabajados ) AS iDiasTrabajados, "
+            sql &= "SUM (fSueldoBruto) AS fSueldoBruto, "
+            sql &= "SUM (fSeptimoDia) AS fSeptimoDia, "
+            sql &= "SUM (fPrimaDomGravada) AS fPrimaDomGravada, "
+            sql &= "SUM (fPrimaDomExenta) AS fPrimaDomExenta, "
+            sql &= "SUM (fTExtra2Gravado) AS fTExtra2Gravado, "
+            sql &= "SUM (fTExtra2Exento) AS fTExtra2Exento, "
+            sql &= "SUM (fTExtra3) AS fTExtra3, "
+            sql &= "SUM (fDescansoL) AS fDescansoL, "
+            sql &= "SUM (fDiaFestivoL) AS fDiaFestivoL, "
+            sql &= "SUM (fBonoAsistencia) AS fBonoAsistencia, "
+            sql &= "SUM (fBonoProductividad) AS fBonoProductividad, "
+            sql &= "SUM (fBonoPolivalencia) AS fBonoPolivalencia, "
+            sql &= "SUM (fBonoEspecialidad) AS fBonoEspecialidad, "
+            sql &= "SUM (fBonoCalidad) AS fBonoCalidad, "
+            sql &= "SUM (fCompensacion) AS fCompensacion, "
+            sql &= "SUM (fSemanaFondo) AS fSemanaFondo, "
+            sql &= "SUM (fFaltaInjustificada) AS fFaltaInjustificada, "
+            sql &= "SUM (fPermisoSinGS) AS fPermisoSinGS, "
+            sql &= "SUM (fIncrementoRetenido) AS fIncrementoRetenido, "
+            sql &= "SUM (fVacacionesProporcionales) AS fVacacionesProporcionales, "
+            sql &= "SUM (fAguinaldoGravado) AS fAguinaldoGravado, "
+            sql &= "SUM (fAguinaldoExento) AS fAguinaldoExento, "
+            sql &= "SUM (fPrimaVacacionalGravado) AS fPrimaVacacionalGravado, "
+            sql &= "SUM (fPrimaVacacionalExento) AS fPrimaVacacionalExento, "
+            sql &= "SUM (fTotalPercepciones) AS fTotalPercepciones, "
+            sql &= "SUM (fTotalPercepcionesISR) AS fTotalPercepcionesISR, "
+            sql &= "SUM (fIncapacidad) AS fIncapacidad, "
+            sql &= "SUM (fIsr) AS fIsr, "
+            sql &= "SUM (fImss) AS fImss, "
+            sql &= "SUM (fInfonavit) AS fInfonavit, "
+            sql &= "SUM (fInfonavitBanterior) AS fInfonavitBanterior, "
+            sql &= "SUM (fAjusteInfonavit) AS fAjusteInfonavit, "
+            sql &= "SUM (fPensionAlimenticia) AS fPensionAlimenticia, "
+            sql &= "SUM (fPrestamo) AS fPrestamo, "
+            sql &= "SUM (fFonacot) AS fFonacot, "
+            sql &= "SUM (fT_No_laborado) AS fT_No_laborado, "
+            sql &= "SUM (fCuotaSindical) AS fCuotaSindical, "
+            sql &= "SUM (fSubsidioGenerado) AS fSubsidioGenerado, "
+            sql &= "SUM (fSubsidioAplicado) AS fSubsidioAplicado, "
+            sql &= "SUM (fOperadora ) AS NETO_SA, "
+            sql &= "SUM (fPrestamoPerA) AS fPrestamoPerA, "
+            sql &= "SUM (fAdeudoInfonavitA) AS fAdeudoInfonavitA, "
+            sql &= "SUM (fDiferenciaInfonavitA) AS fDiferenciaInfonavitA, "
+            sql &= "SUM (fAsimilados) AS EXCEDENTE, "
+            sql &= "SUM (fRetencionOperadora) AS fRetencion , "
+            sql &= "SUM (fPorComision) AS fPorComision , "
+            sql &= "SUM (fComisionOperadora) AS fComisionOperadora, "
+            sql &= "SUM (fComisionAsimilados) AS fComisionAsimilados, "
+            sql &= "SUM (fImssCS) AS fImssCS, "
+            sql &= "SUM (fRcvCS) AS fRcvCS, "
+            sql &= "SUM (fInfonavitCS) AS fInfonavitCS, "
+            sql &= "SUM (fInsCS) AS fInsCS, "
+            sql &= "SUM (fTotalCostoSocial) AS fTotalCostoSocial "
             sql &= " FROM	Nomina	inner	join	EmpleadosC	on	fkiIdEmpleadoC=iIdEmpleadoC"
             sql &= " where	Nomina.fkiIdEmpresa	=	1	And	fkiIdPeriodo between " & Forma.gInicial
             sql &= " and " & Forma.gFinal & " and	Nomina.iEstatus=1 and	iTipoNomina=0 AND iEstatusEmpleado=" & Forma.gSerie
-            sql &= " ORDER	BY	fkiIdPeriodo,fkiIdEmpleadoC,	EmpleadosC.cCodigoEmpleado,	EmpleadosC.cNombreLargo, Nomina.Depto, Nomina.Puesto, "
-            sql &= "EmpleadosC.cRFC, EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad, EmpleadosC.clabe"
+            sql &= " GROUP	BY	fkiIdPeriodo,fkiIdEmpleadoC,EmpleadosC.cCodigoEmpleado,	"
+            sql &= " EmpleadosC.cNombreLargo, Nomina.Depto, Nomina.Puesto, EmpleadosC.cRFC, "
+            sql &= " EmpleadosC.cCURP, EmpleadosC.cIMSS, EmpleadosC.dFechaAntiguedad,"
+            sql &= " EmpleadosC.clabe,iIdEmpleadoC, EmpleadosC.clabe2"
+
+            filaExcel = 2
+            Dim pInicial, pFinal As Integer
+            pInicial = Forma.gInicial
+            pFinal = Forma.gFinal
 
             Dim rwFilas As DataRow() = nConsulta(sql)
             If rwFilas Is Nothing = False Then
@@ -25092,11 +25103,12 @@ Public Class frmnominasmarinos
                     Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & rwFilas(x).Item("fkiIdPeriodo"))
                     If rwPeriodo0 Is Nothing = False Then
                         periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
-                        mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                        MES = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
                         iejercicio = rwPeriodo0(0).Item("iEjercicio")
                         idias = rwPeriodo0(0).Item("iDiasPago")
                         periodom = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & (rwPeriodo0(0).Item("iEjercicio"))
                         tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+
                     End If
                     'Dim sql2 As String
                     'sql2 = "SELECT * FROM nominacomplemento"
@@ -25129,7 +25141,7 @@ Public Class frmnominasmarinos
 
                     Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
 
-                    hoja.Cell(filaExcel + x, 1).Value = mes 'MES
+                    hoja.Cell(filaExcel + x, 1).Value = MES 'MES
                     hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("fkiIdPeriodo") 'PERIOD0
                     hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cCodigoEmpleado")
                     hoja.Cell(filaExcel + x, 4).Value = rwFilas(x).Item("clabe2") 'ce co
