@@ -180,7 +180,7 @@ Partial Class frmFiniquito
         Me.pnlCatalogo.Controls.Add(Me.lsvLista)
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1453, 698)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1358, 647)
         Me.pnlCatalogo.TabIndex = 24
         '
         'Button1
@@ -698,7 +698,7 @@ Partial Class frmFiniquito
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(859, 314)
+        Me.pnlProgreso.Location = New System.Drawing.Point(812, 288)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(377, 84)
         Me.pnlProgreso.TabIndex = 24
@@ -733,7 +733,7 @@ Partial Class frmFiniquito
         Me.lsvLista.Location = New System.Drawing.Point(608, 17)
         Me.lsvLista.MultiSelect = False
         Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(819, 674)
+        Me.lsvLista.Size = New System.Drawing.Size(724, 623)
         Me.lsvLista.TabIndex = 2
         Me.lsvLista.UseCompatibleStateImageBehavior = False
         Me.lsvLista.View = System.Windows.Forms.View.Details
@@ -745,7 +745,7 @@ Partial Class frmFiniquito
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbGuardar, Me.tsbNuevo, Me.tsbImportar, Me.tsbProcesar, Me.tsbCancelar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1465, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1370, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -806,7 +806,7 @@ Partial Class frmFiniquito
         '
         Me.lblRuta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblRuta.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRuta.Location = New System.Drawing.Point(0, 752)
+        Me.lblRuta.Location = New System.Drawing.Point(0, 701)
         Me.lblRuta.Name = "lblRuta"
         Me.lblRuta.Size = New System.Drawing.Size(604, 39)
         Me.lblRuta.TabIndex = 34
@@ -815,7 +815,7 @@ Partial Class frmFiniquito
         '
         Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(1391, 755)
+        Me.cmdCerrar.Location = New System.Drawing.Point(1296, 704)
         Me.cmdCerrar.Name = "cmdCerrar"
         Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
@@ -828,7 +828,7 @@ Partial Class frmFiniquito
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1465, 800)
+        Me.ClientSize = New System.Drawing.Size(1370, 749)
         Me.Controls.Add(Me.cmdCerrar)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.ToolStrip1)

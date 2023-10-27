@@ -1200,7 +1200,7 @@ Public Class frmEmpleados
     Private Sub cmCECO_Click_1(sender As System.Object, e As System.EventArgs) Handles cmCECO.Click
         Try
 
-            Dim Forma As New frmSubirFiniquito
+            Dim Forma As New frmSubirCECO
           
             Forma.ShowDialog()
 
