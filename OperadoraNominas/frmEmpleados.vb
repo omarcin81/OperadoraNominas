@@ -68,7 +68,7 @@ Public Class frmEmpleados
                     Dim Fila As DataRow = rwFilas(0)
                     SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Format(dtppatrona.Value.Date, "yyyy/dd/MM")
                     SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & Fila.Item("id")
-                    SQL += ",'01/01/1900',''"
+                    SQL += ",'01/01/1900',''," & txtExtra.Text
 
                 End If
                 'Se le agrego
@@ -85,7 +85,7 @@ Public Class frmEmpleados
 
                         SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Date.Today.ToShortDateString()
                         SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & gIdEmpleado
-                        SQL += ",'01/01/1900',''"
+                        SQL += ",'01/01/1900',''," & txtExtra.Text
 
 
                         ' Enviar_Mail(GenerarCorreo1(gIdEmpresa, gIdCliente, txtcodigo.Text), correo, "Cambio en sueldo")

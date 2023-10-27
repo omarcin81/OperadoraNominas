@@ -22,6 +22,7 @@ Partial Class frmPension
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
@@ -53,6 +54,7 @@ Partial Class frmPension
         Me.ColumnHeader19 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cmdBorrar = New System.Windows.Forms.Button()
         Me.cmdIncapacidad = New System.Windows.Forms.Button()
         Me.lsvincapacidad = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -84,13 +86,17 @@ Partial Class frmPension
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmdBorrar = New System.Windows.Forms.Button()
+        Me.ColumnHeader20 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader21 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.NudDias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.cMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -108,7 +114,7 @@ Partial Class frmPension
         Me.Panel1.Controls.Add(Me.rbAlta)
         Me.Panel1.Location = New System.Drawing.Point(12, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(985, 63)
+        Me.Panel1.Size = New System.Drawing.Size(1251, 63)
         Me.Panel1.TabIndex = 6
         '
         'Label16
@@ -276,19 +282,19 @@ Partial Class frmPension
         Me.Panel3.Controls.Add(Me.Label4)
         Me.Panel3.Location = New System.Drawing.Point(438, 73)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(559, 224)
+        Me.Panel3.Size = New System.Drawing.Size(825, 224)
         Me.Panel3.TabIndex = 8
         '
         'lsvSalario
         '
-        Me.lsvSalario.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader11, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader19})
+        Me.lsvSalario.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader8, Me.ColumnHeader20, Me.ColumnHeader21, Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader11, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader19})
         Me.lsvSalario.FullRowSelect = True
         Me.lsvSalario.GridLines = True
         Me.lsvSalario.HideSelection = False
         Me.lsvSalario.Location = New System.Drawing.Point(7, 29)
         Me.lsvSalario.MultiSelect = False
         Me.lsvSalario.Name = "lsvSalario"
-        Me.lsvSalario.Size = New System.Drawing.Size(541, 184)
+        Me.lsvSalario.Size = New System.Drawing.Size(811, 184)
         Me.lsvSalario.TabIndex = 5
         Me.lsvSalario.UseCompatibleStateImageBehavior = False
         Me.lsvSalario.View = System.Windows.Forms.View.Details
@@ -326,6 +332,7 @@ Partial Class frmPension
         'ColumnHeader19
         '
         Me.ColumnHeader19.Text = "Observaciones"
+        Me.ColumnHeader19.Width = 100
         '
         'Label4
         '
@@ -358,8 +365,17 @@ Partial Class frmPension
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Location = New System.Drawing.Point(12, 303)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(985, 196)
+        Me.Panel4.Size = New System.Drawing.Size(1251, 196)
         Me.Panel4.TabIndex = 9
+        '
+        'cmdBorrar
+        '
+        Me.cmdBorrar.Location = New System.Drawing.Point(894, 54)
+        Me.cmdBorrar.Name = "cmdBorrar"
+        Me.cmdBorrar.Size = New System.Drawing.Size(77, 25)
+        Me.cmdBorrar.TabIndex = 34
+        Me.cmdBorrar.Text = "Borrar"
+        Me.cmdBorrar.UseVisualStyleBackColor = True
         '
         'cmdIncapacidad
         '
@@ -378,7 +394,7 @@ Partial Class frmPension
         Me.lsvincapacidad.Location = New System.Drawing.Point(13, 83)
         Me.lsvincapacidad.MultiSelect = False
         Me.lsvincapacidad.Name = "lsvincapacidad"
-        Me.lsvincapacidad.Size = New System.Drawing.Size(960, 110)
+        Me.lsvincapacidad.Size = New System.Drawing.Size(1231, 110)
         Me.lsvincapacidad.TabIndex = 32
         Me.lsvincapacidad.UseCompatibleStateImageBehavior = False
         Me.lsvincapacidad.View = System.Windows.Forms.View.Details
@@ -416,7 +432,7 @@ Partial Class frmPension
         'ColumnHeader17
         '
         Me.ColumnHeader17.Text = "Observaciones"
-        Me.ColumnHeader17.Width = 360
+        Me.ColumnHeader17.Width = 425
         '
         'txtObservacion
         '
@@ -559,7 +575,7 @@ Partial Class frmPension
         Me.Panel5.Controls.Add(Me.Label6)
         Me.Panel5.Location = New System.Drawing.Point(12, 505)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(985, 194)
+        Me.Panel5.Size = New System.Drawing.Size(1251, 194)
         Me.Panel5.TabIndex = 10
         '
         'ListView1
@@ -569,7 +585,7 @@ Partial Class frmPension
         Me.ListView1.Location = New System.Drawing.Point(12, 69)
         Me.ListView1.MultiSelect = False
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(960, 120)
+        Me.ListView1.Size = New System.Drawing.Size(1232, 120)
         Me.ListView1.TabIndex = 33
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -618,26 +634,39 @@ Partial Class frmPension
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Riesgo de trabajo"
         '
-        'cmdBorrar
+        'ColumnHeader20
         '
-        Me.cmdBorrar.Location = New System.Drawing.Point(894, 54)
-        Me.cmdBorrar.Name = "cmdBorrar"
-        Me.cmdBorrar.Size = New System.Drawing.Size(77, 25)
-        Me.cmdBorrar.TabIndex = 34
-        Me.cmdBorrar.Text = "Borrar"
-        Me.cmdBorrar.UseVisualStyleBackColor = True
+        Me.ColumnHeader20.Text = "SueldoB"
+        Me.ColumnHeader20.Width = 80
         '
-        'frmImss
+        'ColumnHeader21
+        '
+        Me.ColumnHeader21.Text = "Excedente"
+        Me.ColumnHeader21.Width = 80
+        '
+        'cMenu
+        '
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem})
+        Me.cMenu.Name = "cMenu"
+        Me.cMenu.Size = New System.Drawing.Size(173, 48)
+        '
+        'EliminarDeLaListaToolStripMenuItem
+        '
+        Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
+        '
+        'frmPension
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1003, 701)
+        Me.ClientSize = New System.Drawing.Size(1268, 701)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name = "frmImss"
+        Me.Name = "frmPension"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Imss"
         Me.Panel1.ResumeLayout(False)
@@ -651,6 +680,7 @@ Partial Class frmPension
         CType(Me.NudDias, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.cMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -717,4 +747,8 @@ Partial Class frmPension
     Friend WithEvents ColumnHeader18 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader19 As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmdBorrar As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader20 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader21 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents cMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents EliminarDeLaListaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

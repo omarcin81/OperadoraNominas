@@ -11,7 +11,7 @@
         Cargarhistorial()
         CargarSueldos()
         CargarIncapacidades()
-
+        Me.lsvSalario.ContextMenuStrip = Me.cMenu
         cmdAgregar.Enabled = False
         blnNuevo = True
         cbotipo.SelectedIndex = 0
@@ -103,6 +103,8 @@
             If rwFilas Is Nothing = False Then
                 For Each Fila In rwFilas
                     item = lsvSalario.Items.Add(Fila.Item("dFecha"))
+                    item.SubItems.Add("" & Fila.Item("fSueldoOrd"))
+                    item.SubItems.Add("" & Fila.Item("excedentemensual"))
                     item.SubItems.Add("" & Fila.Item("fSD"))
                     item.SubItems.Add("" & Fila.Item("fFactor"))
                     item.SubItems.Add("" & Fila.Item("fSDI"))
@@ -194,9 +196,9 @@
                     clave = "M"
                     rbModificación.Checked = True
 
-                    txtNumacuse.Text = lsvSalario.SelectedItems(0).SubItems(5).Text
-                    txtObservaciones.Text = lsvSalario.SelectedItems(0).SubItems(6).Text
-                    dtpFecha.Value = lsvSalario.SelectedItems(0).SubItems(4).Text
+                    txtNumacuse.Text = lsvSalario.SelectedItems(0).SubItems(7).Text
+                    txtObservaciones.Text = lsvSalario.SelectedItems(0).SubItems(8).Text
+                    dtpFecha.Value = lsvSalario.SelectedItems(0).SubItems(6).Text
                     cmdAgregar.Enabled = True
                     Tipo = "2"
                     MessageBox.Show("Modificacion lista para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -351,5 +353,31 @@
         Else
             MessageBox.Show("No hay una incapacidad seleccionada para borrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
+    End Sub
+
+    Private Sub lsvSalario_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvSalario.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub EliminarDeLaListaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EliminarDeLaListaToolStripMenuItem.Click
+        Try
+
+
+            If lsvSalario.SelectedItems Is Nothing = False Then
+                Dim resultado As Integer = MessageBox.Show("¿Desea eliminar a este registro de la lista?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    idAcuse = lsvSalario.SelectedItems(0).Tag
+                    'Borramos
+
+                    'Insertamos en el la tabla de respaldo
+                    'volvemos a cargar la lista
+
+
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
     End Sub
 End Class
