@@ -9526,15 +9526,15 @@ Public Class frmnominasmarinos
 
                             fila.Item("Tipo_Infonavit") = rwDatosEmpleado(0)("cTipoFactor").ToString
                             fila.Item("Valor_Infonavit") = rwDatosEmpleado(0)("fFactor").ToString
-                            If Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 12 Or Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 39 Then
-                                fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM"))
-                            Else
-                                fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM")) / 2
-                            End If
+                            'If Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 12 Or Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 39 Then
+                            '    fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM"))
+                            'Else
+                            fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("fSalarioBase"))
+                            ' End If
 
                             fila.Item("Salario_Diario") = rwDatosEmpleado(0)("fSueldoBase").ToString
                             fila.Item("Salario_Cotización") = rwDatosEmpleado(0)("fSueldoIntegrado").ToString
-                            fila.Item("Dias_Trabajados") = Forma.dsReporte.Tables(0).Rows(x)("dias")
+                            fila.Item("Dias_Trabajados") = Forma.dsReporte.Tables(0).Rows(x)("iDiasTrabajados")
                             fila.Item("Tipo_Incapacidad") = TipoIncapacidad(rwDatosEmpleado(0)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
                             fila.Item("Número_días") = NumDiasIncapacidad(rwDatosEmpleado(0)("iIdEmpleadoC").ToString, cboperiodo.SelectedValue)
                             fila.Item("Sueldo_Bruto") = ""

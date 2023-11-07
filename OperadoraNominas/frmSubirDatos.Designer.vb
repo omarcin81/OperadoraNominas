@@ -162,6 +162,7 @@ Partial Class frmSubirDatos
         Me.chkGoCanopus.TabIndex = 39
         Me.chkGoCanopus.Text = "Go Canopus"
         Me.chkGoCanopus.UseVisualStyleBackColor = True
+        Me.chkGoCanopus.Visible = False
         '
         'chkBeluga2
         '
@@ -172,6 +173,7 @@ Partial Class frmSubirDatos
         Me.chkBeluga2.TabIndex = 38
         Me.chkBeluga2.Text = "Beluga 2"
         Me.chkBeluga2.UseVisualStyleBackColor = True
+        Me.chkBeluga2.Visible = False
         '
         'chkRedFish
         '
@@ -182,6 +184,7 @@ Partial Class frmSubirDatos
         Me.chkRedFish.TabIndex = 37
         Me.chkRedFish.Text = "Red Fish"
         Me.chkRedFish.UseVisualStyleBackColor = True
+        Me.chkRedFish.Visible = False
         '
         'chkMaersk
         '
@@ -192,6 +195,7 @@ Partial Class frmSubirDatos
         Me.chkMaersk.TabIndex = 36
         Me.chkMaersk.Text = "Maersk"
         Me.chkMaersk.UseVisualStyleBackColor = True
+        Me.chkMaersk.Visible = False
         '
         'pnlProgreso
         '
