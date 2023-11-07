@@ -7,7 +7,6 @@ C:\tmm_semanales\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pd
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFiniquito.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirNominaFinal.resources
-C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirFiniquito.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
@@ -93,3 +92,5 @@ C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNomina
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEligueMes.resources
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirCECO.resources
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEligueMes.resources
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirCECO.resources
