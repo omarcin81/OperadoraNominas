@@ -17581,7 +17581,7 @@ Public Class frmnominasmarinos
 
 
                 Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonominames.xlsx"
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\concentradonomina.xlsx"
                 Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
@@ -24977,6 +24977,7 @@ Public Class frmnominasmarinos
 
     Private Sub SubirLoteFiniquitoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SubirLoteFiniquitoToolStripMenuItem.Click
         Dim Forma As New frmSubirDatos
+
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
 
         End If

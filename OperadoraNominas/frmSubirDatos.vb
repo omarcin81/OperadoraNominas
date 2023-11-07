@@ -95,7 +95,7 @@ Public Class frmSubirDatos
                     lsvLista.Columns(2).Width = 50
                     lsvLista.Columns(3).Width = 90
                     lsvLista.Columns(4).Width = 90
-                    lsvLista.Columns(5).Width = 400
+                    lsvLista.Columns(5).Width = 00
                     lsvLista.Columns(6).Width = 50
                     lsvLista.Columns(7).Width = 150
                     lsvLista.Columns(8).Width = 150
@@ -157,6 +157,7 @@ Public Class frmSubirDatos
                     lsvLista.Columns(64).Width = 60
                     lsvLista.Columns(65).Width = 60
                     lsvLista.Columns(66).Width = 60
+                    lsvLista.Columns(67).Width = 60
 
 
 
@@ -173,32 +174,42 @@ Public Class frmSubirDatos
                                     Valor = sheet.Cell(f, c).ValueCached.ToString()
                                 End If
                                 Valor = Valor.Trim()
-                                item.SubItems.Add(Valor)
+
+                                'If Valor = "" Then
+
+                                '    item.SubItems.Add("0.0")
+
+                                'Else
+
+                                '    item.SubItems.Add(Valor)
+                                'End If
 
 
-                                If f = 6 And c >= 12 Then
 
-                                    'If Valor <> "" AndAlso InStr(Valor, "-") > 0 Then
-                                    '    Dim sValores() As String = Valor.Split("-")
-                                    '    Select Case sValores(0).ToUpper()
-                                    '        Case "P"
-                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "1" 'Percepción
-                                    '        Case "D"
-                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "2" 'Deducción
-                                    '        Case "I"
-                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "3" 'Incapacidad
-                                    '    End Select
-                                    '    Valor = sValores(1).Trim()
-                                    'End If
-                                  
-                                    item.SubItems(item.SubItems.Count - 1).Text = Valor
-                                End If
+                If f = 6 And c >= 12 Then
+
+                    'If Valor <> "" AndAlso InStr(Valor, "-") > 0 Then
+                    '    Dim sValores() As String = Valor.Split("-")
+                    '    Select Case sValores(0).ToUpper()
+                    '        Case "P"
+                    '            item.SubItems(item.SubItems.Count - 1).Tag = "1" 'Percepción
+                    '        Case "D"
+                    '            item.SubItems(item.SubItems.Count - 1).Tag = "2" 'Deducción
+                    '        Case "I"
+                    '            item.SubItems(item.SubItems.Count - 1).Tag = "3" 'Incapacidad
+                    '    End Select
+                    '    Valor = sValores(1).Trim()
+                    'End If
+
+                    item.SubItems(item.SubItems.Count - 1).Text = valor
+
+                End If
 
 
 
                             Catch ex As Exception
 
-                            End Try
+        End Try
 
                         Next
                     Next
