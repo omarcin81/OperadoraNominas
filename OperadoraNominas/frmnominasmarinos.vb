@@ -18171,11 +18171,11 @@ Public Class frmnominasmarinos
                     ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
 
                 ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
-                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_logistic_s.xlsx"
+                    ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
                 ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
                     ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
                 ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
-                    ruta = My.Application.Info.DirectoryPath() & "\Archivos\timbrado_idn_s.xlsx"
+                    ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
                 ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
                     ruta = My.Application.Info.DirectoryPath() & "\Polizas\POLIZATMMDC.xlsx"
                 ElseIf EmpresaN = "Transportacion" And tipoperiodos2 = 2 Then
@@ -19829,11 +19829,25 @@ Public Class frmnominasmarinos
                 End If
 
                 hoja.Range(6, 6, 7, 1000).Style.NumberFormat.Format = "#,##0.00"
+                If EmpresaN = "TMMDC" Then
+                    hoja.Cell(1, 1).Value = "TMM DIRECCIÓN CORPORATIVA"
+                ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
+                    hoja.Cell(1, 1).Value = "TMM LOGISTICS SA DE CV"
+                ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 2 Then
+                    hoja.Cell(1, 1).Value = "TMM LOGISTICS SA DE CV"
+                ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+                    hoja.Cell(1, 1).Value = "INMOBILIARIA DOS NACIONES, S.R.L .DE C.V."
+                ElseIf EmpresaN = "IDN" And tipoperiodos2 = 2 Then
+                    hoja.Cell(1, 1).Value = "INMOBILIARIA DOS NACIONES, S.R.L .DE C.V."
+                ElseIf EmpresaN = "Transportacion" And tipoperiodos2 = 2 Then
+                    hoja.Cell(1, 1).Value = "TMM TRANSPORTACIÓN"
+                End If
+
                 hoja.Cell(3, 2).Value = cboperiodo.Text
                 Dim rwCamposPoliza As DataRow() = nConsulta("select * from CuentasContables where iEstatus=1 order by consecutivo ")
                 filaExcel = 6
                 Dim TotalPrimaVacacionalPR, TotalAportacionPatronalFlex, TotalInfonavitT, TotalAnticipoT, TotalFonacotT, TotalISR As Double
-                Dim TotalVales, TotalSueldos, TotalPRAguinaldo, TotalPRIndemnizacion, TotalPRPrimaAntiguedad, TotalISN, TotalIMSS, TotalSAR, TotalInfonavitP As Double
+                Dim TotalVales, TotalSueldos, TotalPensionA, TotalPRAguinaldo, TotalPRIndemnizacion, TotalPRPrimaAntiguedad, TotalISN, TotalIMSS, TotalSAR, TotalInfonavitP As Double
                 Dim TotalPrimaVacacionalT, TotalPlanFlex As Double
                 TotalPrimaVacacionalPR = 0
                 TotalAportacionPatronalFlex = 0
@@ -19843,6 +19857,7 @@ Public Class frmnominasmarinos
                 TotalISR = 0
                 TotalVales = 0
                 TotalSueldos = 0
+                TotalPensionA = 0
                 TotalPRAguinaldo = 0
                 TotalPRIndemnizacion = 0
                 TotalPRPrimaAntiguedad = 0
@@ -19853,446 +19868,1269 @@ Public Class frmnominasmarinos
                 TotalPrimaVacacionalT = 0
                 TotalPlanFlex = 0
                 If rwCamposPoliza Is Nothing = False Then
-                    For x As Integer = 0 To rwCamposPoliza.Count - 1
-                        '############################*********ABONO
-                        'SUELDOS CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000101" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
 
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RG"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalInfonavitT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavit")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitBanterior")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fAjusteInfonavit")) 'Nombre
-                                    TotalAnticipoT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fPrestamo"))
-                                    TotalFonacotT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
-                                    TotalISR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ISR"))
-                                    TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                                If Double.Parse(IIf(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE") = "", "0", dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RE"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'PRIMA VACACIONAL TRABAJADOR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RG"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RE"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'PRIMA VACACIONAL PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPrimaVacacionalPR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'VALES CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000107" And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RG"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    filaExcel = filaExcel + 1
-                                End If
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RE"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalVales += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'AGUINALDO PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000106" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPRAguinaldo += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'INDEMNIZACION PR CARGP
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000108" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPRIndemnizacion += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'PRIMA DE ANTIGUEDAD PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000110" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPRPrimaAntiguedad += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'IMSS PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000111" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalIMSS += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'INFONAVIT PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000112" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalInfonavitP += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'ISN PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000113" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalISN += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'APORTACION SAR PR CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000114" And rwCamposPoliza(x).Item("Clase") = "PR" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "PR"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalSAR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
-                        'PLAN FLEX CARGO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000129" And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
-                                If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) > 0 Then
-                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                    hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE")) 'Nombre
-                                    hoja.Cell(filaExcel, 4).Value = ""
-                                    hoja.Cell(filaExcel, 5).Value = "RE"
-                                    hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
-                                    TotalPlanFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE"))
-                                    TotalAportacionPatronalFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE"))
-                                    filaExcel = filaExcel + 1
-                                End If
-                            Next
-                        End If
 
-                        '########################## **ABONO ** ###########################
+                    If (EmpresaN = "TMMDC" Or EmpresaN = "Logistic" Or EmpresaN = "Transportacion" Or EmpresaN = "IDN") And tipoperiodos2 = 2 Then
+                        For x As Integer = 0 To rwCamposPoliza.Count - 1
+                            '############################*********ABONO
+                            'SUELDOS CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000101" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
 
-                        'PRIMA VACACIONAL PR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "87008" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalPrimaVacacionalPR > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalPrimaVacacionalPR
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavit")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitBanterior")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fAjusteInfonavit")) 'Nombre
+                                        TotalAnticipoT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fPrestamo"))
+                                        TotalFonacotT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
+                                        TotalISR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ISR"))
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG"))
+                                        TotalPensionA += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PensionA"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(IIf(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE") = "", "0", dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'CREDITO IKE ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E132470" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalAportacionPatronalFlex > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalAportacionPatronalFlex * 2
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'PRIMA VACACIONAL TRABAJADOR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'DESCUENTO INFONAVIT TRABAJADOR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83002" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalInfonavitT > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalInfonavitT
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'PRIMA VACACIONAL PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalPR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'DESCUENTO FONACOT TRABAJADOR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83001" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalFonacotT > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalFonacotT
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'VALES CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000107" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalVales += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'VALES DE DESPENSA ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83007" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalVales > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalVales
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'AGUINALDO PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000106" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRAguinaldo += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'SUELDOS TRBAJADOR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83006" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalSueldos > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalSueldos + TotalPrimaVacacionalT + TotalPlanFlex - TotalAportacionPatronalFlex - TotalAnticipoT - TotalInfonavitT - TotalFonacotT - TotalISR
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'INDEMNIZACION PR CARGP
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000108" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRIndemnizacion += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'ANTICIPO TRABAJADOR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E18880023" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalAnticipoT > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalAnticipoT
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'PRIMA DE ANTIGUEDAD PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000110" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRPrimaAntiguedad += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'AGUINALDO PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21441301" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalPRAguinaldo > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalPRAguinaldo
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                            'IMSS PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000111" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalIMSS += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'INDEMNIZACIONES PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22511101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalPRIndemnizacion > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalPRIndemnizacion
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                            'INFONAVIT PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000112" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitP += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'PRIMA ANTIGUEDAD PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22521101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalPRPrimaAntiguedad > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalPRPrimaAntiguedad
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                            'ISN PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000113" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalISN += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'ISR ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21512108" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalISR > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalISR
-                                hoja.Cell(filaExcel, 5).Value = ""
-                                filaExcel = filaExcel + 1
+                            'APORTACION SAR PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000114" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSAR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'ISN 3% PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21531101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalISN > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalISN
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                            'PLAN FLEX CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000129" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPlanFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE"))
+                                        TotalAportacionPatronalFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
                             End If
-                        End If
-                        'CUOTA IMSS PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalIMSS > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalIMSS
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+
+                            '########################## **ABONO ** ###########################
+
+                            'PRIMA VACACIONAL PR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "87008" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPrimaVacacionalPR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPrimaVacacionalPR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
                             End If
-                        End If
-                        'APORTACION SAR PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541102" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalSAR > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalSAR
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
+                            'CREDITO IKE ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E132470" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAportacionPatronalFlex > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAportacionPatronalFlex * 2
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
                             End If
+                            'DESCUENTO INFONAVIT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83002" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'DESCUENTO FONACOT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83001" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalFonacotT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalFonacotT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'VALES DE DESPENSA ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83007" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalVales > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalVales
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'SUELDOS TRBAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83006" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSueldos > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSueldos + TotalPrimaVacacionalT + TotalPlanFlex - TotalAportacionPatronalFlex - TotalAnticipoT - TotalInfonavitT - TotalFonacotT - TotalISR - TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+
+                            'PENSION ALIMENTICIA
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83010" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPensionA > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ANTICIPO TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E18880023" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAnticipoT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAnticipoT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'AGUINALDO PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21441301" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRAguinaldo > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRAguinaldo
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INDEMNIZACIONES PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22511101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRIndemnizacion > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRIndemnizacion
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'PRIMA ANTIGUEDAD PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22521101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRPrimaAntiguedad > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRPrimaAntiguedad
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21512108" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISR
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISN 3% PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21531101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISN > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISN
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'CUOTA IMSS PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalIMSS > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalIMSS
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'APORTACION SAR PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541102" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSAR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSAR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INFONAVIT PAT PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541103" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitP > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitP
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                        Next
+
+                    ElseIf EmpresaN = "Logistic" And tipoperiodos2 = 3 Then
+                        For x As Integer = 0 To rwCamposPoliza.Count - 1
+                            '############################*********ABONO
+                            'SUELDOS CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000101" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavit")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitBanterior")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fAjusteInfonavit")) 'Nombre
+                                        TotalAnticipoT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fPrestamo"))
+                                        TotalFonacotT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
+                                        TotalISR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ISR"))
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG"))
+                                        TotalPensionA += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PensionA"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(IIf(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE") = "", "0", dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA VACACIONAL TRABAJADOR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000105" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA VACACIONAL PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000105" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalPR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'VALES CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000107" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalVales += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'AGUINALDO PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000106" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRAguinaldo += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'INDEMNIZACION PR CARGP
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000108" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRIndemnizacion += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA DE ANTIGUEDAD PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000110" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRPrimaAntiguedad += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'IMSS PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000111" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalIMSS += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'INFONAVIT PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000112" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitP += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'ISN PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000113" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalISN += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'APORTACION SAR PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000114" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSAR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PLAN FLEX CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "50000129" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPlanFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE"))
+                                        TotalAportacionPatronalFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+
+                            '########################## **ABONO ** ###########################
+
+                            'PRIMA VACACIONAL PR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "87008" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPrimaVacacionalPR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPrimaVacacionalPR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'CREDITO IKE ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E132470" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAportacionPatronalFlex > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAportacionPatronalFlex * 2
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'DESCUENTO INFONAVIT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83002" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'DESCUENTO FONACOT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83001" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalFonacotT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalFonacotT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'VALES DE DESPENSA ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83007" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalVales > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalVales
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'SUELDOS TRBAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83006" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSueldos > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSueldos + TotalPrimaVacacionalT + TotalPlanFlex - TotalAportacionPatronalFlex - TotalAnticipoT - TotalInfonavitT - TotalFonacotT - TotalISR - TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+
+                            'PENSION ALIMENTICIA
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83010" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPensionA > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ANTICIPO TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E18880023" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAnticipoT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAnticipoT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'AGUINALDO PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21441301" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRAguinaldo > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRAguinaldo
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INDEMNIZACIONES PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22511101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRIndemnizacion > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRIndemnizacion
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'PRIMA ANTIGUEDAD PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22521101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRPrimaAntiguedad > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRPrimaAntiguedad
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21512108" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISR
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISN 3% PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21531101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISN > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISN
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'CUOTA IMSS PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalIMSS > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalIMSS
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'APORTACION SAR PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541102" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSAR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSAR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INFONAVIT PAT PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541103" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitP > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitP
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                        Next
+                   
+                    ElseIf EmpresaN = "IDN" And tipoperiodos2 = 3 Then
+                        For x As Integer = 0 To rwCamposPoliza.Count - 1
+                            '############################*********ABONO
+                            'SUELDOS CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000101" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavit")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitBanterior")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fAjusteInfonavit")) 'Nombre
+                                        TotalAnticipoT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fPrestamo"))
+                                        TotalFonacotT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fFonacot"))
+                                        TotalISR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ISR"))
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoG"))
+                                        TotalPensionA += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PensionA"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(IIf(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE") = "", "0", dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSueldos += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("SueldoE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA VACACIONAL TRABAJADOR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalG"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalT += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PrimaVacacionalE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA VACACIONAL PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000105" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPrimaVacacionalPR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaV"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'VALES CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000107" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesG")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RG"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalVales += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ValesE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'AGUINALDO PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000106" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRAguinaldo += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prAguinaldo"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'INDEMNIZACION PR CARGP
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000108" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRIndemnizacion += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prIndemnizacion"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PRIMA DE ANTIGUEDAD PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000110" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPRPrimaAntiguedad += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("prPrimaAnt"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'IMSS PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000111" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalIMSS += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("Calculadoimss1"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'INFONAVIT PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000112" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalInfonavitP += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fInfonavitCS"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'ISN PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000113" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalISN += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("fISN"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'APORTACION SAR PR CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000114" And rwCamposPoliza(x).Item("Clase") = "PR" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "PR"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalSAR += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("2%SAR"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+                            'PLAN FLEX CARGO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "60000129" And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                For z As Integer = 0 To dsCentrosCosto.Tables("Tabla").Rows.Count - 1
+                                    If Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) > 0 Then
+                                        hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                        hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                        hoja.Cell(filaExcel, 3).Value = Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE")) + Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE")) 'Nombre
+                                        hoja.Cell(filaExcel, 4).Value = ""
+                                        hoja.Cell(filaExcel, 5).Value = "RE"
+                                        hoja.Cell(filaExcel, 6).Value = dsCentrosCosto.Tables("Tabla").Rows(z)("CeCo")
+                                        TotalPlanFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("PlanFlexE"))
+                                        TotalAportacionPatronalFlex += Double.Parse(dsCentrosCosto.Tables("Tabla").Rows(z)("ApotPFlexE"))
+                                        filaExcel = filaExcel + 1
+                                    End If
+                                Next
+                            End If
+
+                            '########################## **ABONO ** ###########################
+
+                            'PRIMA VACACIONAL PR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "87008" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPrimaVacacionalPR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPrimaVacacionalPR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'CREDITO IKE ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E132470" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAportacionPatronalFlex > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAportacionPatronalFlex * 2
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'DESCUENTO INFONAVIT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83002" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'DESCUENTO FONACOT TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83001" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalFonacotT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalFonacotT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'VALES DE DESPENSA ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83007" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalVales > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalVales
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'SUELDOS TRBAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83006" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSueldos > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSueldos + TotalPrimaVacacionalT + TotalPlanFlex - TotalAportacionPatronalFlex - TotalAnticipoT - TotalInfonavitT - TotalFonacotT - TotalISR - TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+
+                            'PENSION ALIMENTICIA
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E83010" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPensionA > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPensionA
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ANTICIPO TRABAJADOR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "E18880023" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalAnticipoT > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalAnticipoT
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'AGUINALDO PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21441301" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRAguinaldo > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRAguinaldo
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INDEMNIZACIONES PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22511101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRIndemnizacion > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRIndemnizacion
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'PRIMA ANTIGUEDAD PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "22521101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalPRPrimaAntiguedad > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalPRPrimaAntiguedad
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISR ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21512108" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISR
+                                    hoja.Cell(filaExcel, 5).Value = ""
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'ISN 3% PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21531101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalISN > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalISN
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'CUOTA IMSS PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541101" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalIMSS > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalIMSS
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'APORTACION SAR PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541102" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalSAR > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalSAR
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                            'INFONAVIT PAT PROVISION ABONO
+                            If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541103" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
+                                If TotalInfonavitP > 0 Then
+                                    hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
+                                    hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
+                                    hoja.Cell(filaExcel, 3).Value = ""
+                                    hoja.Cell(filaExcel, 4).Value = TotalInfonavitP
+                                    hoja.Cell(filaExcel, 5).Value = "PR"
+                                    filaExcel = filaExcel + 1
+                                End If
+                            End If
+                        Next
+                    
+                    End If
+
+
+                    
                 End If
-                        'INFONAVIT PAT PROVISION ABONO
-                        If rwCamposPoliza(x).Item("Identificador").ToString.Trim = "21541103" Then 'And rwCamposPoliza(x).Item("Clase") = "GE" Then
-                            If TotalInfonavitP > 0 Then
-                                hoja.Cell(filaExcel, 1).Value = rwCamposPoliza(x).Item("Identificador") 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = rwCamposPoliza(x).Item("NombreCuenta").ToString.Trim
-                                hoja.Cell(filaExcel, 3).Value = ""
-                                hoja.Cell(filaExcel, 4).Value = TotalInfonavitP
-                                hoja.Cell(filaExcel, 5).Value = "PR"
-                                filaExcel = filaExcel + 1
-                            End If
-                        End If
-                    Next
-                End If
 
-                'Sumas
+                    'Sumas
 
                 hoja.Cell(filaExcel + 1, 3).FormulaA1 = "=SUM(C" & 6 & ":C" & filaExcel & ")"
                 hoja.Cell(filaExcel + 1, 4).FormulaA1 = "=SUM(D" & 6 & ":D" & filaExcel & ")"
                 hoja.Cell(filaExcel + 1, 5).FormulaA1 = "=C" & filaExcel + 1 & "-D" & filaExcel + 1
 
-                'VOLVEMOS A CARGAR LA QUE TENGA
-                dtgDatos.Columns.Clear()
-                'cambiamos el ordenamiento
-                campoordenamiento = "cCodigoEmpleado"
-                cmdverdatos_Click(sender, e)
-                'TERMINAMOS LA CARGA
+                    'VOLVEMOS A CARGAR LA QUE TENGA
+                    dtgDatos.Columns.Clear()
+                    'cambiamos el ordenamiento
+                    campoordenamiento = "cCodigoEmpleado"
+                    cmdverdatos_Click(sender, e)
+                    'TERMINAMOS LA CARGA
 
-                'Se guarda
+                    'Se guarda
 
-                pnlProgreso.Visible = False
-                pnlCatalogo.Enabled = True
+                    pnlProgreso.Visible = False
+                    pnlCatalogo.Enabled = True
 
-                Dim textoperiodo As String
-                If NombrePeriodo = "Quincenal" Then
-                    If cboperiodo.SelectedValue Mod 2 = 0 Then
-                        textoperiodo = "2 QNA "
-                    Else
-                        textoperiodo = "1 QNA "
+                    Dim textoperiodo As String
+                    If NombrePeriodo = "Quincenal" Then
+                        If cboperiodo.SelectedValue Mod 2 = 0 Then
+                            textoperiodo = "2 QNA "
+                        Else
+                            textoperiodo = "1 QNA "
+                        End If
+
+
+                    ElseIf NombrePeriodo = "Semanal" Then
+
+                        textoperiodo = "SEMANA " & cboperiodo.SelectedValue & " "
                     End If
 
 
-                ElseIf NombrePeriodo = "Semanal" Then
+                    dialogo.FileName = "POLIZA" & EmpresaN.ToUpper & " " & textoperiodo & periodo
+                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                    ''  dialogo.ShowDialog()
 
-                    textoperiodo = "SEMANA " & cboperiodo.SelectedValue & " "
-                End If
+                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                        ' OK button pressed
+                        libro.SaveAs(dialogo.FileName)
+                        libro = Nothing
+                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                    Else
+                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                dialogo.FileName = "POLIZA" & EmpresaN.ToUpper & " " & textoperiodo & periodo
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                ''  dialogo.ShowDialog()
-
-                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    ' OK button pressed
-                    libro.SaveAs(dialogo.FileName)
-                    libro = Nothing
-                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
 
                 Else
-                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                    MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
-
-            Else
-
-                MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            End If
 
         Catch ex As Exception
 

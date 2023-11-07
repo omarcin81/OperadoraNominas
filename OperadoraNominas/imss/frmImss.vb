@@ -366,13 +366,44 @@
             If lsvSalario.SelectedItems Is Nothing = False Then
                 Dim resultado As Integer = MessageBox.Show("¿Desea eliminar a este registro de la lista?", "Pregunta", MessageBoxButtons.YesNo)
                 If resultado = DialogResult.Yes Then
+                    sql = "select * from usuarios where idUsuario = " & idUsuario
+                    Dim rwUsuarios As DataRow() = nConsulta(sql)
+                    'Dim Forma As New frmTipoEmpresa
+                    'If rwUsuarios Is Nothing = False Then
+                    '    Dim Fila As DataRow = rwUsuarios(0)
+                    'End If
                     idAcuse = lsvSalario.SelectedItems(0).Tag
-                    'Borramos
-
                     'Insertamos en el la tabla de respaldo
+                    sql = "select * from SueldoAlta where iIdCambioSueldo=" & idAcuse
+                    Dim rwFilas As DataRow() = nConsulta(sql)
+                    If rwFilas Is Nothing = False Then
+                        'Insertar nuevo
+                        Dim Fila As DataRow = rwFilas(0)
+                        'cbostatus.SelectedIndex = IIf(Fila.Item("fkiIdClienteInter") = 1, 0, 1)
+                        'txtcodigo.Text = Fila.Item("cCodigoEmpleado")
+                        'txtnombre.Text = Fila.Item("cNombre")
+                        'txtpaterno.Text = Fila.Item("cApellidoP")
+                        'txtmaterno.Text = Fila.Item("cApellidoM")
+                        sql = "EXEC setSueldoAltaRespaldoInsertar 0," & Fila.Item("fSueldoOrd") & ",'" & Format(Fila.Item("dFecha"), "yyyy/dd/MM")
+                        sql &= "'," & Fila.Item("fFactor") & ",'" & Fila.Item("Observaciones")
+                        sql &= "'," & Fila.Item("fSD") & "," & Fila.Item("fSDI")
+                        sql &= "," & Fila.Item("fkiIdEmpleado") & ",'" & Format(Fila.Item("dFechaimss"), "yyyy/dd/MM") & "','" & Fila.Item("acuse")
+                        sql &= "'," & Fila.Item("excedentemensual") & ",'" & rwUsuarios(0).Item("Nombre") & "'"
+
+                        If nExecute(sql) = False Then
+                            MessageBox.Show("Hubo un error al insertar en el respaldo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            Exit Sub
+                        End If
+                    End If
+
+                    'Borramos
+                    sql = "delete  from SueldoAlta where iIdCambioSueldo=" & idAcuse
+
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Hubo un error al eliminar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
                     'volvemos a cargar la lista
-
-
+                    CargarSueldos()
                 End If
             End If
 
