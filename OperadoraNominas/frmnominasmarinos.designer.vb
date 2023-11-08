@@ -376,7 +376,7 @@ Partial Class frmnominasmarinos
         'cmdResumenInfo
         '
         Me.cmdResumenInfo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdResumenInfo.Location = New System.Drawing.Point(1176, 34)
+        Me.cmdResumenInfo.Location = New System.Drawing.Point(1231, 34)
         Me.cmdResumenInfo.Name = "cmdResumenInfo"
         Me.cmdResumenInfo.Size = New System.Drawing.Size(147, 28)
         Me.cmdResumenInfo.TabIndex = 26
@@ -388,7 +388,7 @@ Partial Class frmnominasmarinos
         Me.cmdSubirDatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSubirDatos.Location = New System.Drawing.Point(1058, 34)
         Me.cmdSubirDatos.Name = "cmdSubirDatos"
-        Me.cmdSubirDatos.Size = New System.Drawing.Size(103, 28)
+        Me.cmdSubirDatos.Size = New System.Drawing.Size(139, 28)
         Me.cmdSubirDatos.TabIndex = 25
         Me.cmdSubirDatos.Text = "Subir datos"
         Me.cmdSubirDatos.UseVisualStyleBackColor = True
@@ -406,7 +406,7 @@ Partial Class frmnominasmarinos
         'cboserie
         '
         Me.cboserie.FormattingEnabled = True
-        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
+        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "FNQ"})
         Me.cboserie.Location = New System.Drawing.Point(347, 3)
         Me.cboserie.Name = "cboserie"
         Me.cboserie.Size = New System.Drawing.Size(59, 27)
@@ -848,6 +848,7 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
+        Me.SubirFiniquitoToolStripMenuItem.Visible = False
         '
         'SubirLoteFiniquitoToolStripMenuItem
         '

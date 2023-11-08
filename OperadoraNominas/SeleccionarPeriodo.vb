@@ -4,12 +4,19 @@
     Public gSerie As Integer
    
     Private Sub SeleccionarPeriodo_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Try
+
+       
+
         cargarperiodosinicial()
         cargarperiodosfinal()
 
         cbInicial.SelectedIndex = gInicial
         cbFinal.SelectedIndex = gFinal
-        cboserie.SelectedIndex = gSerie
+            cboserie.SelectedIndex = gSerie
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cargarperiodosinicial()

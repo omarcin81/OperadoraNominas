@@ -87,10 +87,10 @@ Partial Class SeleccionarPeriodo
         'cboserie
         '
         Me.cboserie.FormattingEnabled = True
-        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
+        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "FNQ"})
         Me.cboserie.Location = New System.Drawing.Point(66, 100)
         Me.cboserie.Name = "cboserie"
-        Me.cboserie.Size = New System.Drawing.Size(59, 21)
+        Me.cboserie.Size = New System.Drawing.Size(94, 21)
         Me.cboserie.TabIndex = 22
         '
         'SeleccionarPeriodo

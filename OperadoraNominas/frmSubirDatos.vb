@@ -7,14 +7,21 @@ Public Class frmSubirDatos
     Dim contacolumna As Integer
     Public dsReporte As New DataSet
 
-
     Private Sub tsbNuevo_Click(sender As System.Object, e As System.EventArgs) Handles tsbNuevo.Click
-        tsbNuevo.Enabled = False
-        tsbImportar.Enabled = True
-        tsbImportar_Click(sender, e)
+        Try
+            tsbNuevo.Enabled = False
+            tsbImportar.Enabled = True
+            tsbImportar_Click(sender, e)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+      
     End Sub
 
     Private Sub tsbImportar_Click(sender As System.Object, e As System.EventArgs) Handles tsbImportar.Click
+        Try
+
+       
         Dim dialogo As New OpenFileDialog
         lblRuta.Text = ""
         With dialogo
@@ -28,10 +35,14 @@ Public Class frmSubirDatos
         tsbProcesar.Enabled = lblRuta.Text.Length > 0
         If tsbProcesar.Enabled Then
             tsbProcesar_Click(sender, e)
-        End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub tsbProcesar_Click(sender As System.Object, e As System.EventArgs) Handles tsbProcesar.Click
+      
         lsvLista.Items.Clear()
         lsvLista.Columns.Clear()
         lsvLista.Clear()
@@ -95,7 +106,7 @@ Public Class frmSubirDatos
                     lsvLista.Columns(2).Width = 50
                     lsvLista.Columns(3).Width = 90
                     lsvLista.Columns(4).Width = 90
-                    lsvLista.Columns(5).Width = 00
+                    lsvLista.Columns(5).Width = 300
                     lsvLista.Columns(6).Width = 50
                     lsvLista.Columns(7).Width = 150
                     lsvLista.Columns(8).Width = 150
@@ -158,6 +169,7 @@ Public Class frmSubirDatos
                     lsvLista.Columns(65).Width = 60
                     lsvLista.Columns(66).Width = 60
                     lsvLista.Columns(67).Width = 60
+                    lsvLista.Columns(68).Width = 60
 
 
 
@@ -188,30 +200,30 @@ Public Class frmSubirDatos
 
 
 
-                If f = 6 And c >= 12 Then
+                                If f = 6 And c >= 12 Then
 
-                    'If Valor <> "" AndAlso InStr(Valor, "-") > 0 Then
-                    '    Dim sValores() As String = Valor.Split("-")
-                    '    Select Case sValores(0).ToUpper()
-                    '        Case "P"
-                    '            item.SubItems(item.SubItems.Count - 1).Tag = "1" 'Percepción
-                    '        Case "D"
-                    '            item.SubItems(item.SubItems.Count - 1).Tag = "2" 'Deducción
-                    '        Case "I"
-                    '            item.SubItems(item.SubItems.Count - 1).Tag = "3" 'Incapacidad
-                    '    End Select
-                    '    Valor = sValores(1).Trim()
-                    'End If
+                                    'If Valor <> "" AndAlso InStr(Valor, "-") > 0 Then
+                                    '    Dim sValores() As String = Valor.Split("-")
+                                    '    Select Case sValores(0).ToUpper()
+                                    '        Case "P"
+                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "1" 'Percepción
+                                    '        Case "D"
+                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "2" 'Deducción
+                                    '        Case "I"
+                                    '            item.SubItems(item.SubItems.Count - 1).Tag = "3" 'Incapacidad
+                                    '    End Select
+                                    '    Valor = sValores(1).Trim()
+                                    'End If
 
-                    item.SubItems(item.SubItems.Count - 1).Text = valor
+                                    item.SubItems(item.SubItems.Count - 1).Text = Valor
 
-                End If
+                                End If
 
 
 
                             Catch ex As Exception
 
-        End Try
+                            End Try
 
                         Next
                     Next
@@ -256,7 +268,7 @@ Public Class frmSubirDatos
             End If
 
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -324,11 +336,9 @@ Public Class frmSubirDatos
                
 
                 For Each producto As ListViewItem In lsvLista.CheckedItems
-                    If Len(producto.SubItems(1).Text) < 4 Then
-                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text)
-                    Else
-                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
-                    End If
+
+                    SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(3).Text)
+
 
 
                     Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -381,24 +391,75 @@ Public Class frmSubirDatos
 
                     dsReporte.Tables.Add("Tabla")
                     dsReporte.Tables("Tabla").Columns.Add("Id_empleado")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoEmpleado")
-                    dsReporte.Tables("Tabla").Columns.Add("dias")
-                    dsReporte.Tables("Tabla").Columns.Add("Salario")
-                    dsReporte.Tables("Tabla").Columns.Add("Bono")
-                    dsReporte.Tables("Tabla").Columns.Add("Refrendo")
-                    dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
-                    dsReporte.Tables("Tabla").Columns.Add("Anticipo")
-                    dsReporte.Tables("Tabla").Columns.Add("AnticipoSA")
-                    dsReporte.Tables("Tabla").Columns.Add("InfonavitSA")
-                    dsReporte.Tables("Tabla").Columns.Add("InfonavitBIASA")
-                    dsReporte.Tables("Tabla").Columns.Add("InfonavitASI")
-                    dsReporte.Tables("Tabla").Columns.Add("InfonavitBIAASI")
-                    dsReporte.Tables("Tabla").Columns.Add("Fechainicio")
-                    dsReporte.Tables("Tabla").Columns.Add("Fechafin")
-
-
+                    dsReporte.Tables("Tabla").Columns.Add("MES")
+                    dsReporte.Tables("Tabla").Columns.Add("PERIODO")
+                    dsReporte.Tables("Tabla").Columns.Add("CLAVE")
+                    dsReporte.Tables("Tabla").Columns.Add("CENTRO_COSTO")
+                    dsReporte.Tables("Tabla").Columns.Add("NOMBRE")
+                    dsReporte.Tables("Tabla").Columns.Add("AREA")
+                    dsReporte.Tables("Tabla").Columns.Add("CATEGORIA")
+                    dsReporte.Tables("Tabla").Columns.Add("PUESTO")
+                    dsReporte.Tables("Tabla").Columns.Add("DEPARTAMENTO")
+                    dsReporte.Tables("Tabla").Columns.Add("NOMINA")
+                    dsReporte.Tables("Tabla").Columns.Add("CONTRATO")
+                    dsReporte.Tables("Tabla").Columns.Add("RFC")
+                    dsReporte.Tables("Tabla").Columns.Add("IMSS")
+                    dsReporte.Tables("Tabla").Columns.Add("CURP")
+                    dsReporte.Tables("Tabla").Columns.Add("ALTA")
+                    dsReporte.Tables("Tabla").Columns.Add("BCO_DEPOSITO")
+                    dsReporte.Tables("Tabla").Columns.Add("CTA_DEPOSITO")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra2V")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra3V")
+                    dsReporte.Tables("Tabla").Columns.Add("fDescansoLV")
+                    dsReporte.Tables("Tabla").Columns.Add("fDiaFestivoLV")
+                    dsReporte.Tables("Tabla").Columns.Add("fHoras_extras_dobles_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fHoras_extras_triples_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fDescanso_Laborado_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fDia_Festivo_laborado_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fPrima_Dominical_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fFalta_Injustificada_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fPermiso_Sin_GS_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fT_No_laborado_V")
+                    dsReporte.Tables("Tabla").Columns.Add("fSalarioBase")
+                    dsReporte.Tables("Tabla").Columns.Add("fSalarioDiario")
+                    dsReporte.Tables("Tabla").Columns.Add("fSalarioBC")
+                    dsReporte.Tables("Tabla").Columns.Add("iDiasTrabajados")
+                    dsReporte.Tables("Tabla").Columns.Add("fSueldoBruto")
+                    dsReporte.Tables("Tabla").Columns.Add("fSeptimoDia")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra2Gravado")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra2Exento")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra3Gravado")
+                    dsReporte.Tables("Tabla").Columns.Add("fTExtra3Exento")
+                    dsReporte.Tables("Tabla").Columns.Add("fVacacionesPendientes")
+                    dsReporte.Tables("Tabla").Columns.Add("fBonoProductividad")
+                    dsReporte.Tables("Tabla").Columns.Add("fBonoEspecialidad")
+                    dsReporte.Tables("Tabla").Columns.Add("fCompensacion")
+                    dsReporte.Tables("Tabla").Columns.Add("fFaltaInjustificada")
+                    dsReporte.Tables("Tabla").Columns.Add("fVacacionesProporcionales")
+                    dsReporte.Tables("Tabla").Columns.Add("fAguinaldoGravado")
+                    dsReporte.Tables("Tabla").Columns.Add("fAguinaldoExento")
+                    dsReporte.Tables("Tabla").Columns.Add("fPrimaVacacionalGravado")
+                    dsReporte.Tables("Tabla").Columns.Add("fPrimaVacacionalExento")
+                    dsReporte.Tables("Tabla").Columns.Add("fTotalPercepciones")
+                    dsReporte.Tables("Tabla").Columns.Add("fTotalPercepcionesISR")
+                    dsReporte.Tables("Tabla").Columns.Add("fTotalPercepcionesNoGrava")
+                    dsReporte.Tables("Tabla").Columns.Add("fIsr")
+                    dsReporte.Tables("Tabla").Columns.Add("fT_No_laborado")
+                    dsReporte.Tables("Tabla").Columns.Add("fImss")
+                    dsReporte.Tables("Tabla").Columns.Add("fInfonavit")
+                    dsReporte.Tables("Tabla").Columns.Add("fInfonavitBanterior")
+                    dsReporte.Tables("Tabla").Columns.Add("fAjusteInfonavit")
+                    dsReporte.Tables("Tabla").Columns.Add("fPensionAlimenticia")
+                    dsReporte.Tables("Tabla").Columns.Add("fFonacot")
+                    dsReporte.Tables("Tabla").Columns.Add("fSubsidioGenerado")
+                    dsReporte.Tables("Tabla").Columns.Add("fSubsidioAplicado")
+                    dsReporte.Tables("Tabla").Columns.Add("DED_TOTAL")
+                    dsReporte.Tables("Tabla").Columns.Add("NETO_SA")
+                    dsReporte.Tables("Tabla").Columns.Add("VALES")
+                    dsReporte.Tables("Tabla").Columns.Add("SIND_PPP")
+                    dsReporte.Tables("Tabla").Columns.Add("EXCEDENTE")
+                    dsReporte.Tables("Tabla").Columns.Add("SERIE")
+                   
                     Dim mensaje As String
 
                     pnlProgreso.Visible = True
@@ -418,12 +479,12 @@ Public Class frmSubirDatos
                         SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(3).Text)
                         
 
-                Dim rwFilas As DataRow() = nConsulta(SQL)
+                        Dim rwFilas As DataRow() = nConsulta(SQL)
 
-                If rwFilas Is Nothing = False Then
-                    If rwFilas.Length = 1 Then
-                        producto.BackColor = Color.Green
-                        Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
+                        If rwFilas Is Nothing = False Then
+                            If rwFilas.Length = 1 Then
+                                producto.BackColor = Color.Green
+                                Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
 
 
                                 fila.Item("Id_empleado") = rwFilas(0)("iIdEmpleadoC")
@@ -444,6 +505,7 @@ Public Class frmSubirDatos
                                 fila.Item("ALTA") = Trim(producto.SubItems(15).Text)
                                 fila.Item("BCO_DEPOSITO") = Trim(producto.SubItems(16).Text)
                                 fila.Item("CTA_DEPOSITO") = Trim(producto.SubItems(17).Text)
+
                                 fila.Item("fTExtra2V") = IIf(Trim(producto.SubItems(18).Text) = "", "0", Trim(producto.SubItems(18).Text))
                                 fila.Item("fTExtra3V") = IIf(Trim(producto.SubItems(19).Text) = "", "0", Trim(producto.SubItems(19).Text))
                                 fila.Item("fDescansoLV") = IIf(Trim(producto.SubItems(20).Text) = "", "0", Trim(producto.SubItems(20).Text))
@@ -456,8 +518,10 @@ Public Class frmSubirDatos
                                 fila.Item("fFalta_Injustificada_V") = IIf(Trim(producto.SubItems(27).Text) = "", "0", Trim(producto.SubItems(27).Text))
                                 fila.Item("fPermiso_Sin_GS_V") = IIf(Trim(producto.SubItems(28).Text) = "", "0", Trim(producto.SubItems(28).Text))
                                 fila.Item("fT_No_laborado_V") = IIf(Trim(producto.SubItems(29).Text) = "", "0", Trim(producto.SubItems(29).Text))
+
                                 fila.Item("fSalarioBase") = IIf(Trim(producto.SubItems(30).Text) = "", "0", Trim(producto.SubItems(30).Text))
                                 fila.Item("fSalarioDiario") = IIf(Trim(producto.SubItems(31).Text) = "", "0", Trim(producto.SubItems(31).Text))
+
                                 fila.Item("fSalarioBC") = IIf(Trim(producto.SubItems(32).Text) = "", "0", Trim(producto.SubItems(32).Text))
                                 fila.Item("iDiasTrabajados") = IIf(Trim(producto.SubItems(33).Text) = "", "0", Trim(producto.SubItems(33).Text))
                                 fila.Item("fSueldoBruto") = IIf(Trim(producto.SubItems(34).Text) = "", "0", Trim(producto.SubItems(34).Text))
@@ -467,7 +531,7 @@ Public Class frmSubirDatos
                                 fila.Item("fTExtra3Gravado") = IIf(Trim(producto.SubItems(38).Text) = "", "0", Trim(producto.SubItems(38).Text))
                                 fila.Item("fTExtra3Exento") = IIf(Trim(producto.SubItems(39).Text) = "", "0", Trim(producto.SubItems(39).Text))
                                 fila.Item("fVacacionesPendientes") = IIf(Trim(producto.SubItems(40).Text) = "", "0", Trim(producto.SubItems(40).Text))
-                                fila.Item("bonoproductividad") = IIf(Trim(producto.SubItems(41).Text) = "", "0", Trim(producto.SubItems(41).Text))
+                                fila.Item("fBonoProductividad") = IIf(Trim(producto.SubItems(41).Text) = "", "0", Trim(producto.SubItems(41).Text))
                                 fila.Item("fBonoEspecialidad") = IIf(Trim(producto.SubItems(42).Text) = "", "0", Trim(producto.SubItems(42).Text))
                                 fila.Item("fCompensacion") = IIf(Trim(producto.SubItems(43).Text) = "", "0", Trim(producto.SubItems(43).Text))
                                 fila.Item("fFaltaInjustificada") = IIf(Trim(producto.SubItems(44).Text) = "", "0", Trim(producto.SubItems(44).Text))
@@ -480,24 +544,29 @@ Public Class frmSubirDatos
                                 fila.Item("fTotalPercepcionesISR") = IIf(Trim(producto.SubItems(51).Text) = "", "0", Trim(producto.SubItems(51).Text))
                                 fila.Item("fTotalPercepcionesNoGrava") = IIf(Trim(producto.SubItems(52).Text) = "", "0", Trim(producto.SubItems(52).Text))
                                 fila.Item("fIsr") = IIf(Trim(producto.SubItems(53).Text) = "", "0", Trim(producto.SubItems(53).Text))
-                                fila.Item("periodo_no_laborado") = IIf(Trim(producto.SubItems(54).Text) = "", "0", Trim(producto.SubItems(54).Text))
+                                fila.Item("fT_No_laborado") = IIf(Trim(producto.SubItems(54).Text) = "", "0", Trim(producto.SubItems(54).Text))
+
                                 fila.Item("fImss") = IIf(Trim(producto.SubItems(55).Text) = "", "0", Trim(producto.SubItems(55).Text))
                                 fila.Item("fInfonavit") = IIf(Trim(producto.SubItems(56).Text) = "", "0", Trim(producto.SubItems(56).Text))
                                 fila.Item("fInfonavitBanterior") = IIf(Trim(producto.SubItems(57).Text) = "", "0", Trim(producto.SubItems(57).Text))
                                 fila.Item("fAjusteInfonavit") = IIf(Trim(producto.SubItems(58).Text) = "", "0", Trim(producto.SubItems(58).Text))
                                 fila.Item("fPensionAlimenticia") = IIf(Trim(producto.SubItems(59).Text) = "", "0", Trim(producto.SubItems(59).Text))
-                                fila.Item("fSubsidioGenerado") = IIf(Trim(producto.SubItems(60).Text) = "", "0", Trim(producto.SubItems(60).Text))
-                                fila.Item("fSubsidioAplicado") = IIf(Trim(producto.SubItems(61).Text) = "", "0", Trim(producto.SubItems(61).Text))
-                                fila.Item("DED_TOTAL") = IIf(Trim(producto.SubItems(62).Text) = "", "0", Trim(producto.SubItems(62).Text))
-                                fila.Item("NETO_SA") = IIf(Trim(producto.SubItems(63).Text) = "", "0", Trim(producto.SubItems(63).Text))
-                                fila.Item("VALES") = IIf(Trim(producto.SubItems(64).Text) = "", "0", Trim(producto.SubItems(64).Text))
-                                fila.Item("SIND_PPP") = Trim(producto.SubItems(65).Text)
-                                fila.Item("EXCEDENTE") = IIf(Trim(producto.SubItems(66).Text) = "", "0", Trim(producto.SubItems(66).Text))
-                                fila.Item("SERIE") = Trim(producto.SubItems(67).Text)
+                                fila.Item("fFonacot") = IIf(Trim(producto.SubItems(60).Text) = "", "0", Trim(producto.SubItems(59).Text))
+                                fila.Item("fSubsidioGenerado") = IIf(Trim(producto.SubItems(61).Text) = "", "0", Trim(producto.SubItems(61).Text))
+                                fila.Item("fSubsidioAplicado") = IIf(Trim(producto.SubItems(62).Text) = "", "0", Trim(producto.SubItems(62).Text))
+
+                                fila.Item("DED_TOTAL") = IIf(Trim(producto.SubItems(63).Text) = "", "0", Trim(producto.SubItems(63).Text))
+                                fila.Item("NETO_SA") = IIf(Trim(producto.SubItems(64).Text) = "", "0", Trim(producto.SubItems(64).Text))
+                                fila.Item("VALES") = IIf(Trim(producto.SubItems(65).Text) = "", "0", Trim(producto.SubItems(65).Text))
+                                fila.Item("SIND_PPP") = Trim(producto.SubItems(66).Text)
+                                fila.Item("EXCEDENTE") = IIf(Trim(producto.SubItems(67).Text) = "", "0", Trim(producto.SubItems(67).Text))
+                                fila.Item("SERIE") = Trim(producto.SubItems(68).Text)
+
                                 dsReporte.Tables("Tabla").Rows.Add(fila)
 
                             End If
-
+                        Else
+                            MsgBox("No se encuentra registrado " & Trim(producto.SubItems(5).Text) & ", Porfavor registre al trabajador para agregar su Nomina/Finiquito", , "No se proceso")
                         End If
                         pgbProgreso.Value += 1
 
