@@ -143,7 +143,13 @@ Public Class frmFiniquito
             sql &= " order by iEstatusEmpleado desc"
             Dim rwSerie As DataRow() = nConsulta(sql)
             If rwSerie Is Nothing = False Then
-                cboSerie.SelectedIndex = rwSerie(0)("iEstatusEmpleado") + 1
+                If rwSerie(0)("iEstatusEmpleado") >= 26 Then
+                    cboSerie.SelectedIndex = rwSerie(0)("iEstatusEmpleado")
+                Else
+                    cboSerie.SelectedIndex = rwSerie(0)("iEstatusEmpleado") + 1
+
+                End If
+
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -341,7 +347,7 @@ Public Class frmFiniquito
              
 
 
-                SQL = "EXEC [setNominaInsertarFiniquito ] 0"
+                SQL = "EXEC [setNominaInsertar ] 0"
                 'periodo
                 SQL &= "," & cboPeriodo.SelectedIndex + 1
                 'idempleado
@@ -983,5 +989,53 @@ Public Class frmFiniquito
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
         lsvLista.Clear()
         lsvLista.Items.Clear()
+    End Sub
+
+  
+    Private Sub lsvLista_ItemActivate(sender As System.Object, e As System.EventArgs) Handles lsvLista.ItemActivate
+        Try
+            'Pasar los datos
+            cboEmpleado.SelectedIndex = lsvLista.SelectedItems(0).SubItems(0).Text - 1
+            cboPeriodo.SelectedIndex = lsvLista.SelectedItems(0).SubItems(2).Text - 1
+            cboSerie.SelectedItem = lsvLista.SelectedItems(0).SubItems(3).Text
+
+            txtIndeminizacion.Text = lsvLista.SelectedItems(0).SubItems(4).Text
+            txtPrimaAntiguedad.Text = lsvLista.SelectedItems(0).SubItems(5).Text
+            txtSueldo.Text = lsvLista.SelectedItems(0).SubItems(6).Text
+            txtAguinaldo.Text = lsvLista.SelectedItems(0).SubItems(7).Text
+            txtVacacionesProp.Text = lsvLista.SelectedItems(0).SubItems(8).Text
+            txtPrimaVacacional.Text = lsvLista.SelectedItems(0).SubItems(9).Text
+            txtVacacionesPendientes.Text = lsvLista.SelectedItems(0).SubItems(10).Text
+            txtHE2.Text = lsvLista.SelectedItems(0).SubItems(11).Text
+            txtHE3.Text = lsvLista.SelectedItems(0).SubItems(12).Text
+            txtDL.Text = lsvLista.SelectedItems(0).SubItems(13).Text
+            txtBonos.Text = lsvLista.SelectedItems(0).SubItems(14).Text
+            txtIncidencias.Text = lsvLista.SelectedItems(0).SubItems(15).Text
+            txtInfonavit.Text = lsvLista.SelectedItems(0).SubItems(16).Text
+            txtFonacot.Text = lsvLista.SelectedItems(0).SubItems(17).Text
+            txtVales.Text = lsvLista.SelectedItems(0).SubItems(18).Text
+            txtISR.Text = lsvLista.SelectedItems(0).SubItems(19).Text
+            txtISRIndemnizacion.Text = lsvLista.SelectedItems(0).SubItems(20).Text
+
+
+            txtindeminizacionExce.Text = lsvLista.SelectedItems(0).SubItems(21).Text
+            txtAntiguedadExce.Text = lsvLista.SelectedItems(0).SubItems(22).Text
+            txtSueldoExce.Text = lsvLista.SelectedItems(0).SubItems(23).Text
+            txtAguinaldoExce.Text = lsvLista.SelectedItems(0).SubItems(24).Text
+            txtVacacionesPropExce.Text = lsvLista.SelectedItems(0).SubItems(25).Text
+            txtPrimaVacacionalExce.Text = lsvLista.SelectedItems(0).SubItems(26).Text
+            txtVacacionesPendientesExce.Text = lsvLista.SelectedItems(0).SubItems(27).Text
+            txtHE2Exce.Text = lsvLista.SelectedItems(0).SubItems(28).Text
+            txtHE3Exce.Text = lsvLista.SelectedItems(0).SubItems(29).Text
+            txtDLExce.Text = lsvLista.SelectedItems(0).SubItems(30).Text
+            txtBonosExce.Text = lsvLista.SelectedItems(0).SubItems(31).Text
+            txtIncidenciasExce.Text = lsvLista.SelectedItems(0).SubItems(32).Text
+            txtInfonavitExce.Text = lsvLista.SelectedItems(0).SubItems(33).Text
+
+            txtSTP.Text = lsvLista.SelectedItems(0).SubItems(34).Text
+            txtSindicato.Text = lsvLista.SelectedItems(0).SubItems(35).Text
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

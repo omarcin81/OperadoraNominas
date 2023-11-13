@@ -92,6 +92,7 @@ Partial Class frmnominasmarinos
         Me.HojaTrabajoPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcumuladoContaMensualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AcumuladoProvisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -734,7 +735,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -798,6 +799,13 @@ Partial Class frmnominasmarinos
         Me.AcumuladoContaMensualToolStripMenuItem.Name = "AcumuladoContaMensualToolStripMenuItem"
         Me.AcumuladoContaMensualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.AcumuladoContaMensualToolStripMenuItem.Text = "Acumulado Conta Mensual"
+        Me.AcumuladoContaMensualToolStripMenuItem.Visible = False
+        '
+        'AcumuladoProvisionToolStripMenuItem
+        '
+        Me.AcumuladoProvisionToolStripMenuItem.Name = "AcumuladoProvisionToolStripMenuItem"
+        Me.AcumuladoProvisionToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.AcumuladoProvisionToolStripMenuItem.Text = "Acumulado Provisiones"
         '
         'CalculosToolStripMenuItem
         '
@@ -848,7 +856,6 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
         Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
-        Me.SubirFiniquitoToolStripMenuItem.Visible = False
         '
         'SubirLoteFiniquitoToolStripMenuItem
         '
@@ -994,6 +1001,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents LayoutPolizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirLoteFiniquitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AcumuladoContaMensualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AcumuladoProvisionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class

@@ -26834,4 +26834,136 @@ Public Class frmnominasmarinos
 
         End If
     End Sub
+
+
+    Private Sub AcumuladoProvisionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AcumuladoProvisionToolStripMenuItem.Click
+        Try
+            Dim Forma As New SeleccionarPeriodo
+
+            Forma.gInicial = cboperiodo.SelectedIndex
+            Forma.gFinal = cboperiodo.SelectedIndex
+            Forma.gSerie = cboserie.SelectedIndex
+
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+                Dim filaExcel As Integer = 0
+                Dim dialogo As New SaveFileDialog()
+                Dim mes, periodo As String
+                Dim fecha, periodom, iejercicio, idias As String
+                Dim pilotin As Boolean
+                Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+                Dim tiponomina, sueldodescanso As String
+                Dim filaexcelnomtotal As Integer = 0
+                Dim valesDespensa As String
+
+                'dias prov
+                Dim DiasCadaPeriodo As Integer
+                Dim FechaInicioPeriodo As Date
+                Dim FechaFinPeriodo As Date
+                Dim FechaBuscar As Date
+                Dim TipoPeriodoinfoonavit As Integer
+                Dim tipoperiodos2 As String
+                Dim ValorUMA As Double
+                pnlProgreso.Visible = True
+                pnlCatalogo.Enabled = False
+                Application.DoEvents()
+
+
+
+
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\acumuladosNomComple.xlsx"
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+
+                book.Worksheet(1).CopyTo(libro, "NOMINA")
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+                sql = "SELECT "
+                sql &= "ccodigoempleado, cnombrelargo, iidempleadoc,  "
+                sql &= "SUM(vales) AS vales, "
+                sql &= "SUM(AportacionPF) AS AportacionPF, "
+                sql &= "SUM(prAguinaldo) AS prAguinaldo, "
+                sql &= "SUM(prPrimaV) AS prPrimaV, "
+                sql &= "SUM(prPrimaAnt) AS prPrimaAnt, "
+                sql &= "SUM(prIndemnizacion) AS prIndemnizacion, "
+                sql &= "SUM(SAR) AS SAR, "
+                sql &= "SUM(CesantiaVejez) AS CesantiaVejez "
+                sql &= "FROM	NominaComplemento "
+                sql &= "INNER JOIN	EmpleadosC "
+                sql &= " on fkiIdEmpleadoC=iIdEmpleadoC "
+                sql &= "where fkiIdPeriodo between 1 AND 19 "
+                sql &= "GROUP BY iidempleadoc, ccodigoempleado, cnombrelargo"
+
+                Dim rwFilas As DataRow() = nConsulta(sql)
+
+
+
+                pgbProgreso.Minimum = 0
+                pgbProgreso.Value = 0
+                pgbProgreso.Maximum = rwFilas.Count
+
+                filaExcel = 2
+                Dim pInicial, pFinal As Integer
+                pInicial = Forma.gInicial
+                pFinal = Forma.gFinal
+
+
+                If rwFilas Is Nothing = False Then
+
+                    Dim totalexcedente As Double
+
+                    For x As Integer = 0 To rwFilas.Count - 1
+
+                        hoja.Cell(filaExcel + x, 1).Value = rwFilas(x).Item("ccodigoempleado") 'CODIGO EMPLEADO
+                        hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("cnombrelargo") 'cnombrelargo
+                        hoja.Cell(filaExcel + x, 3).Value = EmpresaN.ToUpper 'empresa
+                        hoja.Cell(filaExcel + x, 4).Value = rwFilas(x).Item("vales") 'vales
+                        hoja.Cell(filaExcel + x, 5).Value = rwFilas(x).Item("AportacionPF") ' Aportacion Plan Flex 
+                        hoja.Cell(filaExcel + x, 6).Value = rwFilas(x).Item("prAguinaldo") 'pr Aguinaldo
+                        hoja.Cell(filaExcel + x, 7).Value = rwFilas(x).Item("prPrimaV") 'pr Prima Vacacional
+                        hoja.Cell(filaExcel + x, 8).Value = rwFilas(x).Item("prPrimaAnt") 'pr Prima Antigüedad
+                        hoja.Cell(filaExcel + x, 9).Value = rwFilas(x).Item("prIndemnizacion") 'pr Indemnizacion
+                        hoja.Cell(filaExcel + x, 10).Value = rwFilas(x).Item("SAR") 'SAR
+                        hoja.Cell(filaExcel + x, 11).Value = rwFilas(x).Item("CesantiaVejez") 'Cesantia y Vejez
+
+                    Next x
+
+                End If
+
+                ' <<<<<CARGAR>>>>>
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+
+                If Forma.cboserie.SelectedIndex = 26 Then
+                    dialogo.FileName = "FINIQUITOS CONCENTRADO " & EmpresaN.ToUpper & periodo
+                Else
+                    If Forma.cbInicial.SelectedIndex = Forma.cbFinal.SelectedIndex Then
+                        dialogo.FileName = Forma.cbFinal.SelectedIndex & "CONCENTRADO PROVISIONES" & EmpresaN.ToUpper & " "
+                    Else
+                        dialogo.FileName = Forma.cbInicial.SelectedIndex & " - " & Forma.cbFinal.SelectedIndex & "CONCENTRADO PROVISIONES" & EmpresaN.ToUpper & " "
+                    End If
+
+                End If
+
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
+
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                End If
+
+
+            End If
+
+        Catch
+        End Try
+
+    End Sub
 End Class
