@@ -1195,7 +1195,53 @@ Public Class frmSubirIncidencias
                                 'Application.DoEvents()
                                 'mandar el reporte
                             Next
+                        Case 19
+                            'MANUAL EXCEDENTE
+                            SQL = " update nomina set fComisionOperadora=0"
+                            SQL &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                            If nExecute(SQL) = False Then
+                                MessageBox.Show("Error al poner en 0 esta incidencia:" & cboIncidencia.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                'pnlProgreso.Visible = False
+                                Exit Sub
+                            End If
 
+                            For Each producto As ListViewItem In lsvLista.CheckedItems
+                                If producto.Index >= (CInt(NudFilaI.Value) - 1) And producto.Index <= (CInt(NudFilaF.Value) - 1) Then
+                                    If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
+                                        SQL = "select * from EmpleadosC where cCodigoEmpleado=" & IIf(producto.SubItems(CInt(NudColumnaN.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaN.Value)).Text)
+
+                                        Dim rwEmpleado As DataRow() = nConsulta(SQL)
+                                        If rwEmpleado Is Nothing = False Then
+                                            SQL = "select * from nomina where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                            SQL &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                                            Dim rwEmpleadoNomina As DataRow() = nConsulta(SQL)
+                                            If rwEmpleadoNomina Is Nothing = False Then
+                                                'verificar si se quiere actualizar a 0
+
+                                                Dim horasextrasdobles As Double = Double.Parse(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text))
+                                                SQL = " update nomina set fComisionOperadora=" & horasextrasdobles '+ Double.Parse(rwEmpleadoNomina(0)("fComisionOperadora").ToString)
+                                                SQL &= " where fkiIdEmpleadoC=" & rwEmpleado(0)("iIdEmpleadoC").ToString & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iEstatusEmpleado= " & cboserie.SelectedIndex
+                                                If nExecute(SQL) = False Then
+                                                    MessageBox.Show("Error al agregar a " & rwEmpleado(0)("cNombreLargo").ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                    'pnlProgreso.Visible = False
+                                                    Exit Sub
+                                                End If
+                                            Else
+                                                MessageBox.Show("El empleado " & rwEmpleado(0)("cNombreLargo").ToString & " no esta en la nomina, verique el alta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            End If
+
+
+
+                                        End If
+
+                                    End If
+
+
+                                End If
+                                pgbProgreso.Value += 1
+                                'Application.DoEvents()
+                                'mandar el reporte
+                            Next
                     End Select
                     tsbCancelar_Click(sender, e)
                     pnlProgreso.Visible = False
