@@ -1117,7 +1117,7 @@ Public Class frmEmpleados
 
     Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
 
-        Dim forma As New frmPension
+        Dim forma As New frmImss
 
         If gIdEmpleado Is Nothing = False Then
 

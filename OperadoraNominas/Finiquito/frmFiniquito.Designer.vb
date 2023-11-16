@@ -198,6 +198,7 @@ Partial Class frmFiniquito
         Me.dtpFechaBaja.Name = "dtpFechaBaja"
         Me.dtpFechaBaja.Size = New System.Drawing.Size(175, 20)
         Me.dtpFechaBaja.TabIndex = 91
+        Me.dtpFechaBaja.Visible = False
         '
         'Label26
         '
@@ -207,6 +208,7 @@ Partial Class frmFiniquito
         Me.Label26.Size = New System.Drawing.Size(64, 13)
         Me.Label26.TabIndex = 90
         Me.Label26.Text = "Fecha Baja:"
+        Me.Label26.Visible = False
         '
         'cboStatus
         '
@@ -216,6 +218,7 @@ Partial Class frmFiniquito
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(148, 21)
         Me.cboStatus.TabIndex = 89
+        Me.cboStatus.Visible = False
         '
         'Label24
         '
@@ -225,6 +228,7 @@ Partial Class frmFiniquito
         Me.Label24.Size = New System.Drawing.Size(87, 13)
         Me.Label24.TabIndex = 88
         Me.Label24.Text = "Estatus Finiquito:"
+        Me.Label24.Visible = False
         '
         'btnAgregar
         '
@@ -408,7 +412,7 @@ Partial Class frmFiniquito
         'cboSerie
         '
         Me.cboSerie.FormattingEnabled = True
-        Me.cboSerie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Y", "Z"})
+        Me.cboSerie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "FNQ"})
         Me.cboSerie.Location = New System.Drawing.Point(365, 17)
         Me.cboSerie.Name = "cboSerie"
         Me.cboSerie.Size = New System.Drawing.Size(115, 21)
@@ -769,6 +773,7 @@ Partial Class frmFiniquito
         Me.tsbNuevo.Text = "Agregar excel"
         Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbNuevo.ToolTipText = "Agregar excel"
+        Me.tsbNuevo.Visible = False
         '
         'tsbImportar
         '

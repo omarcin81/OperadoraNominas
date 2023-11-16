@@ -1,4 +1,4 @@
-﻿Public Class frmPension
+﻿Public Class frmImss
     Public gIdEmpresa As String
     Public gIdCliente As String
     Public gIdEmpleado As String
@@ -355,9 +355,7 @@
         End If
     End Sub
 
-    Private Sub lsvSalario_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvSalario.SelectedIndexChanged
 
-    End Sub
 
     Private Sub EliminarDeLaListaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EliminarDeLaListaToolStripMenuItem.Click
         Try
