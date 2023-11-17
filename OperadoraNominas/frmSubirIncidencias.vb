@@ -117,20 +117,20 @@ Public Class frmSubirIncidencias
 
 
 
-                    'lsvLista.Columns(1).Width = 400 'Empleado
-                    'lsvLista.Columns(2).Width = 100  'ISR
-                    'lsvLista.Columns(3).Width = 50 '#Control
-                    'lsvLista.Columns(4).Width = 100 'ap
-                    'lsvLista.Columns(5).Width = 100 'am
-                    'lsvLista.Columns(6).Width = 100 'nombre
-                    'lsvLista.Columns(7).Width = 100 'isr
-                    'lsvLista.Columns(8).Width = 200 'imss
-                    'lsvLista.Columns(9).Width = 50 'dias
-                    'lsvLista.Columns(10).Width = 100 'banco
-                    'lsvLista.Columns(11).Width = 150 'clabe
-                    'lsvLista.Columns(12).Width = 150 'cuenta
-                    'lsvLista.Columns(13).Width = 150 'curp
-                    'lsvLista.Columns(14).Width = 350 'rfc
+                    lsvLista.Columns(1).Width = 50 '
+                    lsvLista.Columns(2).Width = 100  '
+                    lsvLista.Columns(3).Width = 100 '#
+                    lsvLista.Columns(4).Width = 100 '
+                    lsvLista.Columns(5).Width = 150 '
+                    ' lsvLista.Columns(6).Width = 100 '
+                    'lsvLista.Columns(7).Width = 200 '
+                    ' lsvLista.Columns(8).Width = 100 '
+                    ' lsvLista.Columns(9).Width = 150 '
+                    'lsvLista.Columns(10).Width = 100 '
+                    'lsvLista.Columns(11).Width = 150 '
+                    'lsvLista.Columns(12).Width = 150 '
+                    'lsvLista.Columns(13).Width = 150 '
+                    'lsvLista.Columns(14).Width = 350 '
                     'lsvLista.Columns(15).Width = 350
 
 

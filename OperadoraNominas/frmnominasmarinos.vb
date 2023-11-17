@@ -3042,8 +3042,9 @@ Public Class frmnominasmarinos
 
                             'cuota sindical
                             If dtgDatos.Rows(x).Cells(5).Value = "SINDICALIZADO" Then
-                                dtgDatos.Rows(x).Cells(67).Value = Math.Round((SUELDOBRUTON + SEPTIMO) * 0.015).ToString("###,##0.00")
-
+                                'se corrigio el porcentaje y se agrego que calcule sobre todo
+                                dtgDatos.Rows(x).Cells(67).Value = Math.Round((CDbl(dtgDatos.Rows(x).Cells(23).Value) / 30 * 7) * 0.0105).ToString("###,##0.00")
+                                ' dtgDatos.Rows(x).Cells(67).Value = Math.Round((SUELDOBRUTON + SEPTIMO) *  0.0105).ToString("###,##0.00")
                                 'SUELDOBRUTON = Double.Parse(IIf(dtgDatos.Rows(x).Cells(29).Value = "", 0, dtgDatos.Rows(x).Cells(29).Value))
                             Else
                                 dtgDatos.Rows(x).Cells(67).Value = "0.00"
@@ -6848,7 +6849,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 9, "E").Value = "Total"
 
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
-                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CG5:CG" & totalbuq - 2 & ")"
+                hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CG5:CG" & totalbuq - 2 & ")+SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CE5:CE" & totalbuq - 2 & ")"
                 'hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq
                 hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
