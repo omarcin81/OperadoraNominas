@@ -10057,8 +10057,9 @@ Public Class frmnominasmarinos
 
             pgbProgreso.Minimum = 0
             pgbProgreso.Value = 0
-            pgbProgreso.Maximum = dtgDatos.Rows.Count
 
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+            Dim semanal As Boolean
             If dtgDatos.Rows.Count > 0 Then
 
 
@@ -10104,6 +10105,10 @@ Public Class frmnominasmarinos
 
                 End If
 
+                'semanal
+                If tipoperiodos2 = 3 Then
+                    semanal = True
+                End If
 
 
 
@@ -10521,8 +10526,34 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 6, "I").FormulaA1 = "=+I" & espace + 2 & "+I" & espace + 3 & "+I" & espace + 4 & "+I" & espace + 5
 
 
+                'Costo Finiquito
+
+                hoja.Range(espace, 11, espace, 12).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
+                hoja.Range(espace, 11, espace + 5, 12).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 11, espace + 5, 12).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+                hoja.Range(espace, 11, espace + 5, 12).Style.Font.FontName = " Century Gothic"
+                hoja.Range(espace, 11, espace + 5, 12).Style.Font.Bold = True
+                hoja.Cell(espace, "K").Style.Font.FontColor = XLColor.White
+                hoja.Range(espace, 11, espace + 5, 12).Style.NumberFormat.Format = " #,##0.00"
 
 
+                hoja.Range(espace + 11, 5, espace + 6, 12).Style.Font.Bold = True
+                hoja.Range(espace + 4, 11, espace + 6, 11).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+                hoja.Cell(espace + 5, "K").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                hoja.Cell(espace + 5, "L").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+
+
+                hoja.Cell(espace, "K").Value = "COSTO FINIQUITO"
+                hoja.Range(espace, 9, espace, 8).Merge()
+                hoja.Cell(espace + 2, "K").Value = "FINIQUITOS"
+                hoja.Cell(espace + 3, "K").Value = "COMISION"
+                hoja.Cell(espace + 4, "K").Value = "IVA"
+                hoja.Cell(espace + 5, "K").Value = "TOTAL"
+
+                hoja.Cell(espace + 2, "L").Value = ""
+                hoja.Cell(espace + 3, "L").FormulaA1 = "=(+L" & espace + 2 & ")*0.06"
+                hoja.Cell(espace + 4, "L").FormulaA1 = "=+L" & espace + 3 & "*16%"
+                hoja.Cell(espace + 5, "L").FormulaA1 = "=+L" & espace + 3 & "+L" & espace + 4
 
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
