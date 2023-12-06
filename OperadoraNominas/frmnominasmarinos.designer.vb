@@ -598,13 +598,14 @@ Partial Class frmnominasmarinos
         'cmdguardarfinal
         '
         Me.cmdguardarfinal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdguardarfinal.BackColor = System.Drawing.SystemColors.ButtonShadow
         Me.cmdguardarfinal.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdguardarfinal.Location = New System.Drawing.Point(138, 492)
         Me.cmdguardarfinal.Name = "cmdguardarfinal"
         Me.cmdguardarfinal.Size = New System.Drawing.Size(92, 27)
         Me.cmdguardarfinal.TabIndex = 9
         Me.cmdguardarfinal.Text = "Guardar Final"
-        Me.cmdguardarfinal.UseVisualStyleBackColor = True
+        Me.cmdguardarfinal.UseVisualStyleBackColor = False
         '
         'pnlProgreso
         '

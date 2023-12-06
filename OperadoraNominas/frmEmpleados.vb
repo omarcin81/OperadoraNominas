@@ -1081,8 +1081,7 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 22).Value = Fila.Item("cFuncionesPuesto")
                 hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
                 hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
-                hoja.Cell(filaExcel, 24).Value = Fila.Item("CE CO")
-                hoja.Cell(filaExcel, 24).Value = Fila.Item("ccp")
+                hoja.Cell(filaExcel, 24).Value = Fila.Item("cCp")
             Next
 
             dialogo.DefaultExt = "*.xlsx"
