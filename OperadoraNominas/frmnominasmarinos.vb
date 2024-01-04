@@ -4069,6 +4069,7 @@ Public Class frmnominasmarinos
                             dtgDatos.Rows(x).Cells(56).Value = Math.Round(SUMAPERCEPCIONESPISR, 2).ToString("###,##0.00")
                             Dim ADICIONALES As Double = PRIDOMGRAVADA + TE2G + TE3 + DESCANSOLABORADO + FESTIVOTRAB + BONOASISTENCIA + BONOPRODUCTIVIDAD + BONOPOLIVALENCIA + BONOESPECIALIDAD + BONOCALIDAD + COMPENSACION + SEMANAFONDO
                             ADICIONALES = ADICIONALES + VACACIONESPRO + AGUINALDOGRA + PRIMAVACGRA
+
                             'ISR
                             If DiasCadaPeriodo = 7 Then
                                 TipoPeriodoinfoonavit = 3
@@ -6733,7 +6734,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 99).Value = dtgDatos.Rows(x).Cells(84).Value '2% SAR
                     hoja.Cell(filaExcel + x, 100).Value = dtgDatos.Rows(x).Cells(85).Value 'VEJEZ
 
-                    recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 100)
+                    recorrerFilasColumnas(hoja, 1, dtgDatos.Rows.Count + 1, 124, "clear", 103)
 
                 Next
 
@@ -10049,7 +10050,7 @@ Public Class frmnominasmarinos
             Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
             Dim tiponomina, sueldodescanso As String
             Dim filaexcelnomtotal As Integer = 0
-
+            Dim idnsemanal As Boolean = False
 
             pnlProgreso.Visible = True
             'pnlCatalogo.Enabled = False
@@ -10279,8 +10280,8 @@ Public Class frmnominasmarinos
                     If NombrePeriodo = "Quincenal" Then
                         hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value ' "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
                     Else
-                        recorrerFilasColumnas(hoja, 5, filaExcel + x + 1, 94, "clear", 94)
-                        recorrerFilasColumnas(hoja, 1, filaExcel + x + 3, 130, "clear", 101)
+                        recorrerFilasColumnas(hoja, 5, filaExcel + x + 1, 94, "clear", 102)
+                        recorrerFilasColumnas(hoja, 1, filaExcel + x + 3, 130, "clear", 102)
 
                         hoja.Cell(filaExcel + x, 94).Value = "NA"
                     End If
@@ -10394,6 +10395,7 @@ Public Class frmnominasmarinos
                     valesc = False
                 ElseIf EmpresaN = "IDN" And semanal Then
                     valesc = True
+                    idnsemanal = True
                 Else
                     valesc = False
                 End If
@@ -10915,6 +10917,7 @@ Public Class frmnominasmarinos
                 'Verificar si tiene excedente y de que tipo
                 If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
+                    idnsemanal = True
                 Else
                     SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD
                 End If
@@ -11011,7 +11014,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("K16").Value = RCV_CS
                 hoja5.Cell("K17").Value = INFONAVIT_CS
                 hoja5.Cell("K18").Value = ISN_CS
-                hoja5.Cell("K19").Value = IMMSSD
+                hoja5.Cell("K19").Value = IIf(idnsemanal = True, 0, IMMSSD) 'IMSS T
                 hoja5.Cell("K20").Value = VALES
 
                 'APLICADO
@@ -11025,7 +11028,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("L16").FormulaA1 = "=COUNTIF(NOMINA!CJ5:CJ" & totalesnomina - 2 & ","">0"")"
                 hoja5.Cell("L17").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
                 hoja5.Cell("L18").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
-                hoja5.Cell("L19").FormulaA1 = "=COUNTIF(NOMINA!CL5:CL" & totalesnomina - 2 & ","">0"")"
+                hoja5.Cell("L19").FormulaA1 = IIf(idnsemanal = True, "", "=COUNTIF(NOMINA!CL5:CL" & totalesnomina - 2 & ","">0"")")
                 hoja5.Cell("L20").FormulaA1 = "=COUNTIF(NOMINA!CN5:CN" & totalesnomina - 2 & ","">0"")"
 
                 'TOTALES
@@ -27076,5 +27079,18 @@ Public Class frmnominasmarinos
         Catch
         End Try
 
+    End Sub
+
+ 
+    Private Sub SoloRegistroACalcularToolStripMenuItem_Click_1(sender As System.Object, e As System.EventArgs)
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(4).Tag = "1"
+            iFila.Cells(4).Style.BackColor = Color.Brown
+            chkCalSoloMarcados.Checked = True
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class
