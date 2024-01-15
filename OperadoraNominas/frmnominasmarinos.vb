@@ -6437,6 +6437,19 @@ Public Class frmnominasmarinos
                 FechaInicialPeriodoPA = Date.Parse(rwPeriodo2(0)("dFechaInicio").ToString)
                 DiasCadaPeriodoCSOPCION = DateDiff(DateInterval.Day, FechaInicialPeriodoPA, FechaFinPeriodoPA) + 1
 
+                Sql = "select * from Salario "
+                Sql &= " where Anio=" & aniocostosocial
+                Sql &= " and iEstatus=1"
+                Dim rwValorUMA As DataRow() = nConsulta(Sql)
+                If rwValorUMA Is Nothing = False Then
+                    ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+                    ValorSD = Double.Parse(rwValorUMA(0)("salario").ToString)
+                Else
+                    ValorUMA = 0
+                    ValorSD = 0
+                    MessageBox.Show("No se encontro valor para UMA Y SALARIO en el año: " & aniocostosocial)
+                End If
+
             End If
         Catch ex As Exception
 
