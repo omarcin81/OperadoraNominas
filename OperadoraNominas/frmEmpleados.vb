@@ -1006,6 +1006,8 @@ Public Class frmEmpleados
             hoja.Column("V").Width = 50
             hoja.Column("W").Width = 50
             hoja.Column("X").Width = 30
+            hoja.Column("Y").Width = 20
+            hoja.Column("Z").Width = 30
 
 
             hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
@@ -1049,7 +1051,7 @@ Public Class frmEmpleados
             hoja.Cell(4, 23).Value = "cCorreo"
             hoja.Cell(4, 24).Value = "CE CO"
             hoja.Cell(4, 25).Value = "CODIGO POSTAL"
-
+            hoja.Cell(4, 26).Value = "FECHA NAC"
             filaExcel = 4
             For Each Fila In rwFilas
 
@@ -1081,7 +1083,7 @@ Public Class frmEmpleados
                 hoja.Cell(filaExcel, 22).Value = Fila.Item("cFuncionesPuesto")
                 hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
                 hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
-                hoja.Cell(filaExcel, 24).Value = Fila.Item("cCp")
+                hoja.Cell(filaExcel, 25).Value = Fila.Item("cCp")
             Next
 
             dialogo.DefaultExt = "*.xlsx"
