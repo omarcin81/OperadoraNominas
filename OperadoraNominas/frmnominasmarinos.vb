@@ -6632,7 +6632,7 @@ Public Class frmnominasmarinos
                     hoja.Range(5, 27, dtgDatos.Rows.Count - 1 + filaExcel + x, 100).Style.NumberFormat.Format = " #,##0.00"
                     recorrerFilasColumnas(hoja, filaExcel + x, 200, 100, "text black")
 
-                   
+
                     'Llenar EXCEL
                     hoja.Cell(filaExcel + x, 2).Value = x + 1
                     hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(2).Value 'ID EMPLEADO
@@ -6658,7 +6658,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(22).Value
                     hoja.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(23).Value
                     hoja.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(24).Value 'S DIARIO
-                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(25).Value) 'SBC
+                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMA * 25), (ValorUMA * 25), dtgDatos.Rows(x).Cells(25).Value) 'SBC
                     hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'DIAS TRABAJADOS
                     hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'tipo incapacidad
                     hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'num dias
@@ -7013,23 +7013,29 @@ Public Class frmnominasmarinos
                 'LIMPIAR FILAS
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 1, "clear")
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 60, "clear", 14)
+                recorrerFilasColumnas(hoja2, filaExcel, dtgDatos.Rows.Count + 60, 100, "sin relleno")
+
 
                 hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 & IIf(idias = "15", "Q ", " SEM ") & periodom
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-                   
+
+                    'If (dtgDatos.Rows(x).Cells(3).Value = "6681828") Then
+                    '    MsgBox("ANTEPENULTIMO" & dtgDatos.Rows(x).Cells(3).Value)
+                    'End If
 
                     hoja2.Cell(filaExcel, 9).Style.NumberFormat.Format = "@"
                     hoja2.Cell(filaExcel, 8).Style.NumberFormat.Format = "@"
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Font.SetBold(False)
-                    hoja2.Range(filaExcel, 11, filaExcel, 12).Style.NumberFormat.NumberFormatId = 4
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Font.SetFontColor(XLColor.Black)
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Font.SetFontName("Arial")
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Font.SetFontSize(8)
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Font.SetBold(False)
-                    hoja2.Range(filaExcel, 2, filaExcel, 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Font.SetBold(False)
+                    hoja2.Range(filaExcel, 11, filaExcel, 13).Style.NumberFormat.NumberFormatId = 4
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Font.SetFontColor(XLColor.Black)
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Font.SetFontName("Arial")
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Font.SetFontSize(8)
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Font.SetBold(False)
+                    hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     hoja2.Cell("K5").Value = EmpresaN
 
+                    Dim valcuenta As String
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
                         nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
@@ -7037,8 +7043,20 @@ Public Class frmnominasmarinos
                         clabe = empleado(0).Item("Clabe")
                         Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
                         If bank Is Nothing = False Then
-                            banco = bank(0).Item("cBANCO")
-                            codesanta = bank(0).Item("idSantander")
+                            If clabe.Length >= 3 Then
+                                valcuenta = clabe.Substring(0, 3)
+                            Else
+                                valcuenta = clabe
+                            End If
+
+                            If valcuenta = "012" Then
+                                banco = "BBVA BANCOMER"
+                                codesanta = "BACOM"
+                            Else
+                                banco = bank(0).Item("cBANCO")
+                                codesanta = bank(0).Item("idSantander")
+                            End If
+
                         End If
                     End If
 
@@ -7052,9 +7070,9 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 7).Value = banco
                     hoja2.Cell(filaExcel, 8).Value = codesanta
                     hoja2.Cell(filaExcel, 9).Value = clabe
-                    hoja2.Cell(filaExcel, 10).Value = cuenta
+                    hoja2.Cell(filaExcel, 10).Value = "'" & cuenta
 
-                    hoja2.Cell(filaExcel, 11).FormulaA1 = "=if('NOMINA'!BS" & filatmp & "<0,0.0,'NOMINA'!BS" & filatmp & ")" 'sa
+                    hoja2.Cell(filaExcel, 11).FormulaA1 = "=IF('NOMINA'!BS" & filatmp & "<0,0.0,'NOMINA'!BS" & filatmp & ")" 'sa
                     hoja2.Cell(filaExcel, 12).FormulaA1 = "=+'NOMINA'!CG" & filatmp 'excedente
                     hoja2.Cell(filaExcel, 13).FormulaA1 = "=+NOMINA!CN" & filatmp 'vales
 
@@ -7064,12 +7082,26 @@ Public Class frmnominasmarinos
                 Next x
 
                 'Formulas
-                hoja2.Range(filaExcel + 2, 8, filaExcel + 4, 12).Style.Font.SetBold(True)
-                hoja2.Cell(filaExcel + 2, 11).FormulaA1 = "=SUM(K6:K" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 2, 12).FormulaA1 = "=SUM(L6:L" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")"
+                hoja2.Range(filaExcel + 2, 8, filaExcel + 2, 12).Style.Font.SetBold(True)
+                hoja2.Cell(filaExcel + 2, 11).FormulaA1 = "=SUM(K6:K" & filaExcel & ")" 'Empresa total
+                hoja2.Cell(filaExcel + 2, 12).FormulaA1 = "=SUM(L6:L" & filaExcel & ")" ' Excedente
+                hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")" ' Vales
+                hoja2.Cell("L5").Value = EmpresaN.ToUpper
 
+                'Para fondeo BBVA Exce
 
+                hoja2.Cell(filaExcel + 4, 11).Value = "BBVA BANCOMER"
+                hoja2.Cell(filaExcel + 5, 11).Value = "TERCEROS"
+
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
+
+                'STILO
+                recorrerFilasColumnas(hoja2, 1, 3, 200, "clear")
+                recorrerFilasColumnas(hoja2, 6, 300, 200, "sin relleno", 1)
+                recorrerFilasColumnas(hoja2, 6, filaExcel + 30, 13, "text black")
+                recorrerFilasColumnas(hoja2, 1, 1, 100, "sin relleno")
 
                 ' <<<<<<<<<FACT>>>>>>>>>>>
 
@@ -7454,8 +7486,9 @@ Public Class frmnominasmarinos
 
 
                 ElseIf NombrePeriodo = "Semanal" Then
+                    Dim periodotext As DataRow() = nConsulta("Select ('SEMANA ' + CONVERT(nvarchar(12),iNumeroPeriodo,103) ) as dFechaInicio, iIdPeriodo from periodos where iEstatus=1 and  iIdPeriodo=" & cboperiodo.SelectedValue & " order by iEjercicio,iNumeroPeriodo")
 
-                    textoperiodo = "SEMANA " & cboperiodo.SelectedValue
+                    textoperiodo = periodotext(0).Item("dFechaInicio")
                 End If
 
                 dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & textoperiodo & " " & periodo
@@ -10222,7 +10255,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(22).Value
                     hoja.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(23).Value
                     hoja.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(24).Value 'S DIARIO
-                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMAF * 25), (ValorUMAF * 25), dtgDatos.Rows(x).Cells(25).Value) 'SBC
+                    hoja.Cell(filaExcel + x, 26).Value = IIf(CDbl(dtgDatos.Rows(x).Cells(25).Value) > (ValorUMA * 25), (ValorUMA * 25), dtgDatos.Rows(x).Cells(25).Value) 'SBC
                     hoja.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(26).Value 'DIAS TRABAJADOS
                     hoja.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(27).Value 'TIPO INCACIDAD
                     hoja.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(28).Value 'NUM DIAS
@@ -10598,7 +10631,7 @@ Public Class frmnominasmarinos
                 'LIMPIAR FILAS
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 1, "clear")
                 recorrerFilasColumnas(hoja2, filaExcel - 1, dtgDatos.Rows.Count + 60, 60, "clear", 14)
-
+                recorrerFilasColumnas(hoja2, filaExcel, dtgDatos.Rows.Count + 60, 100, "sin relleno")
 
                 If tipoperiodos2 = 2 Then
 
@@ -10632,6 +10665,7 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 2, filaExcel, 13).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     hoja2.Cell("K5").Value = EmpresaN
 
+
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
                         nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
@@ -10639,8 +10673,15 @@ Public Class frmnominasmarinos
                         clabe = empleado(0).Item("Clabe")
                         Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
                         If bank Is Nothing = False Then
-                            banco = bank(0).Item("cBANCO")
-                            codesanta = bank(0).Item("idSantander")
+                            Dim valcuenta As String = clabe.Substring(0, 3)
+                            If valcuenta = "012" Then
+                                banco = "BBVA BANCOMER"
+                                codesanta = "BACOM"
+                            Else
+                                banco = bank(0).Item("cBANCO")
+                                codesanta = bank(0).Item("idSantander")
+                            End If
+
                         End If
                     End If
 
@@ -10665,10 +10706,19 @@ Public Class frmnominasmarinos
                 Next x
 
                 'Formulas
-                hoja2.Range(filaExcel + 2, 8, filaExcel + 4, 12).Style.Font.SetBold(True)
+                hoja2.Range(filaExcel + 2, 8, filaExcel + 2, 12).Style.Font.SetBold(True)
                 hoja2.Cell(filaExcel + 2, 11).FormulaA1 = "=SUM(K6:K" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 2, 12).FormulaA1 = "=SUM(L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")"
+
+                'Para fondeo BBVA Exce
+
+                hoja2.Cell(filaExcel + 4, 11).Value = "BBVA BANCOMER"
+                hoja2.Cell(filaExcel + 5, 11).Value = "TERCEROS"
+
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
                 recorrerFilasColumnas(hoja2, 1, 3, 200, "clear")
                 recorrerFilasColumnas(hoja2, 6, 300, 200, "sin relleno", 1)
@@ -11101,8 +11151,9 @@ Public Class frmnominasmarinos
 
 
                 ElseIf NombrePeriodo = "Semanal" Then
+                    Dim periodotext As DataRow() = nConsulta("Select ('SEMANA ' + CONVERT(nvarchar(12),iNumeroPeriodo,103) ) as dFechaInicio, iIdPeriodo from periodos where iEstatus=1 and  iIdPeriodo=" & cboperiodo.SelectedValue & " order by iEjercicio,iNumeroPeriodo")
 
-                    textoperiodo = "SEMANA " & cboperiodo.SelectedValue
+                    textoperiodo = periodotext(0).Item("dFechaInicio")
                 End If
 
                 dialogo.FileName = "NOMINA " & EmpresaN.ToUpper & " " & textoperiodo & " " & periodo
