@@ -1052,6 +1052,7 @@ Public Class frmEmpleados
             hoja.Cell(4, 24).Value = "CE CO"
             hoja.Cell(4, 25).Value = "CODIGO POSTAL"
             hoja.Cell(4, 26).Value = "FECHA NAC"
+            'me ve
             filaExcel = 4
             For Each Fila In rwFilas
 
