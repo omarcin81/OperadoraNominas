@@ -982,6 +982,11 @@ Public Class frmEmpleados
             SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad, "
             SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2,cCp"
             SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
+            Dim resultado As Integer = MessageBox.Show("¿Desea solo empleados activos?", "Pregunta", MessageBoxButtons.YesNo)
+            If resultado = DialogResult.Yes Then
+                SQL &= " where fkiIdClienteInter =1"
+            End If
+
             SQL &= " order by cNombreLargo"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             If rwFilas Is Nothing = False Then
