@@ -17834,6 +17834,7 @@ Public Class frmnominasmarinos
                 sql &= "fTotalPercepciones, "
                 sql &= "fTotalPercepcionesISR, "
                 sql &= "fIncapacidad, "
+                sql &= "TipoIncapacidad, "
                 sql &= "fIsr, "
                 sql &= "fImss, "
                 sql &= "fInfonavit, "
@@ -18025,21 +18026,21 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 59).Value = rwFilas(x).Item("fTotalPercepcionesISR")
                         hoja.Cell(filaExcel + x, 60).Value = CDbl(rwFilas(x).Item("fTotalPercepciones")) - CDbl(rwFilas(x).Item("fTotalPercepcionesISR")) 'total percep no grava		
                         hoja.Cell(filaExcel + x, 61).Value = rwFilas(x).Item("fIncapacidad")
-                        hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("fIsr")
-                        hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fImss")
-                        hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fInfonavit")
-                        hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fInfonavitBanterior")
-                        hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fAjusteInfonavit")
-                        hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fPensionAlimenticia")
-                        hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fPrestamo")
-                        hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fFonacot")
-                        hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fT_No_laborado")
-                        hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fCuotaSindical")
-                        hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fSubsidioGenerado")
-                        hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioAplicado")
-                        hoja.Cell(filaExcel + x, 74).Value = deduccionestotal
-                        hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("NETO_SA")
-                        hoja.Cell(filaExcel + x, 76).Value = " " 'vacia
+                        hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("TipoIncapacidad")
+                        hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fIsr")
+                        hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fImss")
+                        hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fInfonavit")
+                        hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fInfonavitBanterior")
+                        hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fAjusteInfonavit")
+                        hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fPensionAlimenticia")
+                        hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fPrestamo")
+                        hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fFonacot")
+                        hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fT_No_laborado")
+                        hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fCuotaSindical")
+                        hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioGenerado")
+                        hoja.Cell(filaExcel + x, 74).Value = rwFilas(x).Item("fSubsidioAplicado")
+                        hoja.Cell(filaExcel + x, 75).Value = deduccionestotal
+                        hoja.Cell(filaExcel + x, 76).Value = rwFilas(x).Item("NETO_SA")
                         hoja.Cell(filaExcel + x, 77).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
                         hoja.Cell(filaExcel + x, 78).Value = tipoexcdente  'ppp/sind
                         hoja.Cell(filaExcel + x, 79).Value = totalexcedente 'excdenete
@@ -18077,13 +18078,18 @@ Public Class frmnominasmarinos
                     '<<<<<<<<<<<<<<<guardar>>>>>>>>>>>>>>>>
 
                     Dim textoperiodo As String
-                    If tipoperiodos2 = 2 Then
+                    If NombrePeriodo = "Quincenal" Then
+                        If cboperiodo.SelectedValue Mod 2 = 0 Then
+                            textoperiodo = "2 QNA "
+                        Else
+                            textoperiodo = "1 QNA "
+                        End If
 
-                        textoperiodo = Forma.gInicial & "-" & Forma.gFinal & " Q "
 
-                    ElseIf tipoperiodos2 = 3 Then
+                    ElseIf NombrePeriodo = "Semanal" Then
+                        Dim periodotext As DataRow() = nConsulta("Select ('SEMANA ' + CONVERT(nvarchar(12),iNumeroPeriodo,103) ) as dFechaInicio, iIdPeriodo from periodos where iEstatus=1 and  iIdPeriodo=" & cboperiodo.SelectedValue & " order by iEjercicio,iNumeroPeriodo")
 
-                        textoperiodo = "SEMANA " & Forma.gInicial & "-" & Forma.gFinal
+                        textoperiodo = periodotext(0).Item("dFechaInicio")
                     End If
 
                     If Forma.cboserie.SelectedIndex = 26 Then
