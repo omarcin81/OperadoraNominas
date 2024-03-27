@@ -2461,15 +2461,15 @@ Public Class frmnominasmarinos
 
                     'si calcular
 
-                ElseIf chkCalSoloMarcados.Checked = True And dtgDatos.Rows(x).Cells(4).Tag = "" Then
+                ElseIf chkCalSoloMarcados.Checked = True And dtgDatos.Rows(x).Cells(0).FormattedValue = False Then
                     'No calcular
                     NOCALCULAR = False
                 ElseIf chkCalSoloMarcados.Checked = False Then
                     'si calcular
                 End If
-                'If dtgDatos.Rows(x).Cells(2).Value = "704" Then
-                '    MsgBox("aqui")
-                'End If
+                If dtgDatos.Rows(x).Cells(2).Value = "76" Then
+                    MsgBox("aqui")
+                End If
                 If NOCALCULAR Then
                     If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
