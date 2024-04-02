@@ -2461,15 +2461,15 @@ Public Class frmnominasmarinos
 
                     'si calcular
 
-                ElseIf chkCalSoloMarcados.Checked = True And dtgDatos.Rows(x).Cells(4).Tag = "" Then
+                ElseIf chkCalSoloMarcados.Checked = True And dtgDatos.Rows(x).Cells(0).FormattedValue = False Then
                     'No calcular
                     NOCALCULAR = False
                 ElseIf chkCalSoloMarcados.Checked = False Then
                     'si calcular
                 End If
-                'If dtgDatos.Rows(x).Cells(2).Value = "704" Then
-                '    MsgBox("aqui")
-                'End If
+                If dtgDatos.Rows(x).Cells(2).Value = "76" Then
+                    MsgBox("aqui")
+                End If
                 If NOCALCULAR Then
                     If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
@@ -3156,6 +3156,10 @@ Public Class frmnominasmarinos
                                     DDescuentoInfonavit = ValorIncapacidad
                                 End If
 
+                                'If dtgDatos.Rows(x).Cells(2).Value = "51" Then
+                                '    MsgBox("patiño")
+                                'End If
+
                                 dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
 
                                 dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
@@ -3299,7 +3303,7 @@ Public Class frmnominasmarinos
                                     dtgDatos.Rows(x).Cells(87).Value = "0.00"
                                 End If
                             End If
-                            
+
 
                             'APORTACION
 
@@ -27179,6 +27183,123 @@ Public Class frmnominasmarinos
 
         Catch ex As Exception
 
+        End Try
+    End Sub
+
+    Private Sub PlantillaActualToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PlantillaActualToolStripMenuItem.Click
+        Try
+            Dim filaExcel As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim mes, periodo As String
+            Dim fecha, periodom, iejercicio, idias As String
+            Dim pilotin As Boolean
+            Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+            Dim tiponomina, sueldodescanso As String
+            Dim filaexcelnomtotal As Integer = 0
+            Dim valesDespensa As String
+
+            'dias prov
+            Dim DiasCadaPeriodo As Integer
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim FechaBuscar As Date
+            Dim TipoPeriodoinfoonavit As Integer
+            Dim tipoperiodos2 As String
+            Dim ValorUMA As Double
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+
+
+
+            Dim ruta As String
+            ruta = My.Application.Info.DirectoryPath() & "\plantilla\plantilla.xlsx"
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+            book.Worksheet(1).CopyTo(libro, "PLANTILLAACTUAL")
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+
+            sql = "select cCodigoEmpleado , UPPER ( cNombreLargo) as nombre,  cPuesto,CASE iSexo WHEN 0 THEN 'HOMBRE' ELSE 'MUJER' END as sexo,"
+            sql &= "fSueldoBase *30 as SueldoIMSS,fsindicatoExtra, (fSueldoBase *30)+fsindicatoExtra as totalmensual,"
+            sql &= "CECO,DESCRIPCION,dFechaAntiguedad,cRFC,cCURP,cIMSS"
+            sql &= " from empleadosC inner join CentroCostos on empleadosC.clabe2 = CentroCostos.CECO "
+            sql &= "inner join nomina on  empleadosC.iIdEmpleadoC = nomina.fkiIdEmpleadoC "
+            sql &= "where nomina.fkiIdPeriodo =" & cboperiodo.SelectedValue & " order by cCodigoEmpleado "
+            
+            Dim rwFilas As DataRow() = nConsulta(sql)
+
+
+
+          
+
+            If rwFilas Is Nothing = False Then
+
+                sql = "select * from nomina where nomina.fkiIdPeriodo =" & cboperiodo.SelectedValue
+
+                Dim rwFilas2 As DataRow() = nConsulta(sql)
+
+                If rwFilas.Count = rwFilas2.Count Then
+                    Dim totalexcedente As Double
+
+                    pgbProgreso.Minimum = 0
+                    pgbProgreso.Value = 0
+                    pgbProgreso.Maximum = rwFilas.Count
+
+                    filaExcel = 2
+
+
+                    For x As Integer = 0 To rwFilas.Count - 1
+
+                        hoja.Cell(filaExcel + x, 1).Value = rwFilas(x).Item("ccodigoempleado") 'CODIGO EMPLEADO
+                        hoja.Cell(filaExcel + x, 2).Value = rwFilas(x).Item("nombre") 'cnombrelargo
+                        hoja.Cell(filaExcel + x, 3).Value = rwFilas(x).Item("cPuesto")
+                        hoja.Cell(filaExcel + x, 4).Value = rwFilas(x).Item("sexo")
+                        hoja.Cell(filaExcel + x, 5).Value = rwFilas(x).Item("SueldoIMSS")
+                        hoja.Cell(filaExcel + x, 6).Value = rwFilas(x).Item("fsindicatoExtra")
+                        hoja.Cell(filaExcel + x, 7).Value = rwFilas(x).Item("totalmensual")
+                        hoja.Cell(filaExcel + x, 8).Value = rwFilas(x).Item("CECO")
+                        hoja.Cell(filaExcel + x, 9).Value = rwFilas(x).Item("DESCRIPCION")
+                        hoja.Cell(filaExcel + x, 10).Value = EmpresaN.ToUpper
+                        hoja.Cell(filaExcel + x, 11).Value = rwFilas(x).Item("dFechaAntiguedad")
+                        hoja.Cell(filaExcel + x, 12).Value = rwFilas(x).Item("cRFC")
+                        hoja.Cell(filaExcel + x, 13).Value = rwFilas(x).Item("cCURP")
+                        hoja.Cell(filaExcel + x, 14).Value = "'" & rwFilas(x).Item("cIMSS")
+                    Next x
+
+                    
+
+
+                    dialogo.FileName = "PLANTILLA ACTUAL " & EmpresaN.ToUpper & periodo
+                    dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                    ''  dialogo.ShowDialog()
+
+                    If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                        ' OK button pressed
+                        libro.SaveAs(dialogo.FileName)
+                        libro = Nothing
+                        MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Else
+                        MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    End If
+
+                Else
+                    MessageBox.Show("Hay trabajadores que no tiene el centro de costos, o el que tiene es incorrecto", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+               
+            Else
+                MessageBox.Show("Periodo sin datos", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
         End Try
     End Sub
 End Class
