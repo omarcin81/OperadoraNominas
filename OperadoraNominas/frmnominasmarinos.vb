@@ -10178,6 +10178,9 @@ Public Class frmnominasmarinos
                 recorrerFilasColumnas(hoja, 1, 400, 1, "clear")
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    If (x = 17) Then
+                        MsgBox("casi ultimo")
+                    End If
                     'CONSULTAS
                     Dim fSindicatoExtra As Double = 0.0
                     Dim valesDespensa As String = "0.00"
@@ -10336,7 +10339,7 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(filaExcel + x, 92).Value = dtgDatos.Rows(x).Cells(87).Value 'VALES
                     hoja.Cell(filaExcel + x, 93).Value = dtgDatos.Rows(x).Cells(98).Value 'fSindicatoExtra 'exedente monto
-                   
+
                     If NombrePeriodo = "Quincenal" Then
                         hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value ' "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
                     Else
@@ -10345,7 +10348,7 @@ Public Class frmnominasmarinos
 
                         hoja.Cell(filaExcel + x, 94).Value = "NA"
                     End If
-                    
+
 
                     hoja.Cell(filaExcel + x, 95).Value = dtgDatos.Rows(x).Cells(89).Value 'prov aguinald
                     hoja.Cell(filaExcel + x, 96).Value = dtgDatos.Rows(x).Cells(90).Value 'prov prima vac
@@ -17835,6 +17838,7 @@ Public Class frmnominasmarinos
                 sql &= "fTotalPercepcionesISR, "
                 sql &= "fIncapacidad, "
                 sql &= "TipoIncapacidad, "
+                sql &= "iNumerodias, "
                 sql &= "fIsr, "
                 sql &= "fImss, "
                 sql &= "fInfonavit, "
@@ -18027,25 +18031,25 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 60).Value = CDbl(rwFilas(x).Item("fTotalPercepciones")) - CDbl(rwFilas(x).Item("fTotalPercepcionesISR")) 'total percep no grava		
                         hoja.Cell(filaExcel + x, 61).Value = rwFilas(x).Item("fIncapacidad")
                         hoja.Cell(filaExcel + x, 62).Value = rwFilas(x).Item("TipoIncapacidad")
-                        hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("fIsr")
-                        hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fImss")
-                        hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fInfonavit")
-                        hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fInfonavitBanterior")
-                        hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fAjusteInfonavit")
-                        hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fPensionAlimenticia")
-                        hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fPrestamo")
-                        hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fFonacot")
-                        hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fT_No_laborado")
-                        hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fCuotaSindical")
-                        hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fSubsidioGenerado")
-                        hoja.Cell(filaExcel + x, 74).Value = rwFilas(x).Item("fSubsidioAplicado")
-                        hoja.Cell(filaExcel + x, 75).Value = deduccionestotal
-                        hoja.Cell(filaExcel + x, 76).Value = rwFilas(x).Item("NETO_SA")
-                        hoja.Cell(filaExcel + x, 77).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
-                        hoja.Cell(filaExcel + x, 78).Value = tipoexcdente  'ppp/sind
-                        hoja.Cell(filaExcel + x, 79).Value = totalexcedente 'excdenete
-                        hoja.Cell(filaExcel + x, 80).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0") 'rwFilas(x).Item("fRetencion")
-                        hoja.Cell(filaExcel + x, 81).Value = 0 'rwFilas(x).Item("fPorComision")
+                        hoja.Cell(filaExcel + x, 63).Value = rwFilas(x).Item("iNumerodias")
+                        hoja.Cell(filaExcel + x, 64).Value = rwFilas(x).Item("fIsr")
+                        hoja.Cell(filaExcel + x, 65).Value = rwFilas(x).Item("fImss")
+                        hoja.Cell(filaExcel + x, 66).Value = rwFilas(x).Item("fInfonavit")
+                        hoja.Cell(filaExcel + x, 67).Value = rwFilas(x).Item("fInfonavitBanterior")
+                        hoja.Cell(filaExcel + x, 68).Value = rwFilas(x).Item("fAjusteInfonavit")
+                        hoja.Cell(filaExcel + x, 69).Value = rwFilas(x).Item("fPensionAlimenticia")
+                        hoja.Cell(filaExcel + x, 70).Value = rwFilas(x).Item("fPrestamo")
+                        hoja.Cell(filaExcel + x, 71).Value = rwFilas(x).Item("fFonacot")
+                        hoja.Cell(filaExcel + x, 72).Value = rwFilas(x).Item("fT_No_laborado")
+                        hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fCuotaSindical")
+                        hoja.Cell(filaExcel + x, 74).Value = rwFilas(x).Item("fSubsidioGenerado")
+                        hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("fSubsidioAplicado")
+                        hoja.Cell(filaExcel + x, 76).Value = deduccionestotal
+                        hoja.Cell(filaExcel + x, 77).Value = rwFilas(x).Item("NETO_SA")
+                        hoja.Cell(filaExcel + x, 78).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
+                        hoja.Cell(filaExcel + x, 79).Value = tipoexcdente  'ppp/sind
+                        hoja.Cell(filaExcel + x, 80).Value = totalexcedente 'excdenete
+                        hoja.Cell(filaExcel + x, 81).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0")
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
