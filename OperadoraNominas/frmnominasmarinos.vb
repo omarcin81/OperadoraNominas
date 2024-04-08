@@ -957,7 +957,7 @@ Public Class frmnominasmarinos
 
             'verificamos que no sea una nomina ya guardada como final
             sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
-            sql &= " where Nomina.fkiIdEmpresa = 1  " & IIf(chkPeriodosC.Checked = True, "And fkiIdPeriodo in (6,8)", "And fkiIdPeriodo =" & cboperiodo.SelectedValue)
+            sql &= " where Nomina.fkiIdEmpresa = 1 " & IIf(chkPeriodosC.Checked = True, "And fkiIdPeriodo in (6,8)", "And fkiIdPeriodo =" & cboperiodo.SelectedValue)
             sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
             sql &= " and iTipoNomina=0"
             sql &= " order by " & campoordenamiento 'cNombreLargo"
@@ -27301,5 +27301,9 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
+    End Sub
+
+    Private Sub CaratulaXPeriodoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaratulaXPeriodoToolStripMenuItem.Click
+
     End Sub
 End Class
