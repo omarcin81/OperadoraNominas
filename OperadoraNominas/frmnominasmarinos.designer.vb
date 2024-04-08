@@ -104,7 +104,12 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+<<<<<<< HEAD
         Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+=======
+        Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+>>>>>>> origin/main
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -818,7 +823,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -885,11 +890,25 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
+<<<<<<< HEAD
         'CaratulaXPeriodoToolStripMenuItem
         '
         Me.CaratulaXPeriodoToolStripMenuItem.Name = "CaratulaXPeriodoToolStripMenuItem"
         Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
+=======
+        'ValidarSoloISRToolStripMenuItem
+        '
+        Me.ValidarSoloISRToolStripMenuItem.Name = "ValidarSoloISRToolStripMenuItem"
+        Me.ValidarSoloISRToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.ValidarSoloISRToolStripMenuItem.Text = "Validar solo ISR"
+        '
+        'VerTablaDeISRActualToolStripMenuItem
+        '
+        Me.VerTablaDeISRActualToolStripMenuItem.Name = "VerTablaDeISRActualToolStripMenuItem"
+        Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
+>>>>>>> origin/main
         '
         'frmnominasmarinos
         '
@@ -1018,7 +1037,12 @@ Partial Class frmnominasmarinos
     Friend WithEvents AcumuladoContaMensualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AcumuladoProvisionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PlantillaActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+<<<<<<< HEAD
     Friend WithEvents CaratulaXPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+=======
+    Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+>>>>>>> origin/main
 
 
 End Class
