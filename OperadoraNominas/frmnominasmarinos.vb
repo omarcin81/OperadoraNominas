@@ -27373,4 +27373,129 @@ Public Class frmnominasmarinos
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+    Private Sub ValidarSoloISRToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ValidarSoloISRToolStripMenuItem.Click
+        Try
+            Dim DiasCadaPeriodo As Integer
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim FechaAntiguedad As Date
+            Dim FechaBuscar As Date
+            Dim TipoPeriodoinfoonavit As Integer
+            Dim ISRD As Double
+            
+            pnlProgreso.Visible = True
+
+            Application.DoEvents()
+            pnlCatalogo.Enabled = False
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+
+
+
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
+                Dim rwPeriodo As DataRow() = nConsulta(sql)
+
+                If rwPeriodo Is Nothing = False Then
+                    FechaInicioPeriodo = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+
+                    FechaFinPeriodo = Date.Parse(rwPeriodo(0)("dFechaFin"))
+                    DiasCadaPeriodo = DateDiff(DateInterval.Day, FechaInicioPeriodo, FechaFinPeriodo) + 1
+
+                    If DiasCadaPeriodo = 7 Then
+                        TipoPeriodoinfoonavit = 3
+                        ISRD = Math.Round(Double.Parse(isrmontodado(Double.Parse(dtgDatos.Rows(x).Cells(56).Value), TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                    ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
+                        TipoPeriodoinfoonavit = 2
+                        If EmpresaN = "NOSEOCUPARA" Then
+                            'Dim diastra As Double = Double.Parse(dtgDatos.Rows(x).Cells(26).Value)
+                            'Dim incapa As Double = Double.Parse(dtgDatos.Rows(x).Cells(28).Value)
+                            'Dim falta As Double = Double.Parse(dtgDatos.Rows(x).Cells(20).Value)
+                            'Dim permiso As Double = Double.Parse(dtgDatos.Rows(x).Cells(21).Value)
+                            'Dim ISRT As Double = Double.Parse(isrmontodadosinsubsidio(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                            'Dim Subsidioaparte As Double = Double.Parse(subsidiocalculomensual(SDEMPLEADO * 30, 1, x) / 30 * (diastra - incapa - falta - permiso))
+                            'If dtgDatos.Rows(x).Cells(2).Value = "58" Then
+                            '    MsgBox("llego")
+
+                            'End If
+                            'If Subsidioaparte > ISRT Then
+
+                            '    dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte)).ToString("###,##0.00")
+                            '    If Subsidioaparte > 0 Then
+                            '        dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte - ISRT)).ToString("###,##0.00")
+                            '    End If
+
+                            'Else
+                            '    dtgDatos.Rows(x).Cells(68).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                            '    If Subsidioaparte > 0 Then
+                            '        dtgDatos.Rows(x).Cells(69).Value = Math.Round(Double.Parse(Subsidioaparte), 2).ToString("###,##0.00")
+                            '    Else
+                            '        dtgDatos.Rows(x).Cells(69).Value = "0.00"
+                            '    End If
+
+                            'End If
+
+
+                            'If ISRT > Subsidioaparte Then
+                            '    ISRT = ISRT - Subsidioaparte
+                            'Else
+                            '    ISRT = 0
+                            'End If
+
+                            'Dim ISRA As Double
+                            'ISRA = 0
+                            'If ADICIONALES > 0 Then
+                            '    ISRA = Double.Parse(isrmontodadosinsubsidio(ADICIONALES, 1, x))
+                            'End If
+
+                            'dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
+                        Else
+                            'todos menos ademsa
+                            ISRD = Math.Round(Double.Parse(isrmontodado(Double.Parse(dtgDatos.Rows(x).Cells(56).Value), TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                        End If
+
+
+                        
+
+
+
+                    Else
+                        TipoPeriodoinfoonavit = 1
+                    End If
+
+                    If ISRD - Double.Parse(dtgDatos.Rows(x).Cells(58).Value) = 0 Then
+                        dtgDatos.Rows(x).Cells(58).Style.BackColor = Color.Green
+                    Else
+                        dtgDatos.Rows(x).Cells(58).Style.BackColor = Color.Red
+                    End If
+
+                End If
+
+
+
+                
+
+
+                pgbProgreso.Value += 1
+                Application.DoEvents()
+            Next
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+            MessageBox.Show("Calculo terminado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+
+        End Try
+    End Sub
+
+    Private Sub VerTablaDeISRActualToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles VerTablaDeISRActualToolStripMenuItem.Click
+        Try
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+
+        End Try
+    End Sub
 End Class

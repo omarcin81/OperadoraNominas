@@ -93,6 +93,7 @@ Partial Class frmnominasmarinos
         Me.LayoutPolizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcumuladoContaMensualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcumuladoProvisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -103,7 +104,8 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-        Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -809,9 +811,15 @@ Partial Class frmnominasmarinos
         Me.AcumuladoProvisionToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.AcumuladoProvisionToolStripMenuItem.Text = "Acumulado Provisiones"
         '
+        'PlantillaActualToolStripMenuItem
+        '
+        Me.PlantillaActualToolStripMenuItem.Name = "PlantillaActualToolStripMenuItem"
+        Me.PlantillaActualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.PlantillaActualToolStripMenuItem.Text = "Plantilla Actual"
+        '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -878,11 +886,17 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-        'PlantillaActualToolStripMenuItem
+        'ValidarSoloISRToolStripMenuItem
         '
-        Me.PlantillaActualToolStripMenuItem.Name = "PlantillaActualToolStripMenuItem"
-        Me.PlantillaActualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.PlantillaActualToolStripMenuItem.Text = "Plantilla Actual"
+        Me.ValidarSoloISRToolStripMenuItem.Name = "ValidarSoloISRToolStripMenuItem"
+        Me.ValidarSoloISRToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.ValidarSoloISRToolStripMenuItem.Text = "Validar solo ISR"
+        '
+        'VerTablaDeISRActualToolStripMenuItem
+        '
+        Me.VerTablaDeISRActualToolStripMenuItem.Name = "VerTablaDeISRActualToolStripMenuItem"
+        Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
         '
         'frmnominasmarinos
         '
@@ -1011,6 +1025,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents AcumuladoContaMensualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AcumuladoProvisionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PlantillaActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
