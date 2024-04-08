@@ -32,9 +32,9 @@ Public Class frmPrincipal
         lblUsuario.Text = Usuario.Nombre & " - " & EmpresaN
         clsConfiguracion.Actualizar()
         lsvPanel.Items.Item(0).Text = "Nomina " '& Servidor.Base.ToString.Substring(0, 3)
-        If EmpresaN = "Logistic" Then
+        'If EmpresaN = "Logistic" Then
 
-        End If
+        'End If
     End Sub
 
     Private Sub CatálogoDeClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
