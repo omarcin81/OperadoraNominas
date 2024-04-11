@@ -94,20 +94,19 @@ Partial Class frmnominasmarinos
         Me.AcumuladoContaMensualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AcumuladoProvisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-        Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-
-        Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -819,6 +818,12 @@ Partial Class frmnominasmarinos
         Me.PlantillaActualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.PlantillaActualToolStripMenuItem.Text = "Plantilla Actual"
         '
+        'CaratulaXPeriodoToolStripMenuItem
+        '
+        Me.CaratulaXPeriodoToolStripMenuItem.Name = "CaratulaXPeriodoToolStripMenuItem"
+        Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
+        '
         'CalculosToolStripMenuItem
         '
         Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
@@ -856,6 +861,18 @@ Partial Class frmnominasmarinos
         Me.CalcularSoloValesDeDespensaToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.CalcularSoloValesDeDespensaToolStripMenuItem.Text = "Calcular solo vales de despensa"
         '
+        'ValidarSoloISRToolStripMenuItem
+        '
+        Me.ValidarSoloISRToolStripMenuItem.Name = "ValidarSoloISRToolStripMenuItem"
+        Me.ValidarSoloISRToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.ValidarSoloISRToolStripMenuItem.Text = "Validar solo ISR"
+        '
+        'VerTablaDeISRActualToolStripMenuItem
+        '
+        Me.VerTablaDeISRActualToolStripMenuItem.Name = "VerTablaDeISRActualToolStripMenuItem"
+        Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
+        '
         'FiniquitoToolStripMenuItem
         '
         Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem})
@@ -887,26 +904,6 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
-        '
-
-        'CaratulaXPeriodoToolStripMenuItem
-        '
-        Me.CaratulaXPeriodoToolStripMenuItem.Name = "CaratulaXPeriodoToolStripMenuItem"
-        Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
-
-        'ValidarSoloISRToolStripMenuItem
-        '
-        Me.ValidarSoloISRToolStripMenuItem.Name = "ValidarSoloISRToolStripMenuItem"
-        Me.ValidarSoloISRToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.ValidarSoloISRToolStripMenuItem.Text = "Validar solo ISR"
-        '
-        'VerTablaDeISRActualToolStripMenuItem
-        '
-        Me.VerTablaDeISRActualToolStripMenuItem.Name = "VerTablaDeISRActualToolStripMenuItem"
-        Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
-
         '
         'frmnominasmarinos
         '

@@ -2294,8 +2294,16 @@ Public Class frmnominasmarinos
 
                     calcularvalessemanal = False
                 End If
+            ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "ATL" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
+
+                    calcularvalessemanal = False
+                End If
             Else
-                
 
             End If
             
@@ -3611,6 +3619,15 @@ Public Class frmnominasmarinos
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
             If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
+
+                    calcularvalessemanal = False
+                End If
+            ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "ATL" Then
                 'preguntar si se calculan o no 
                 resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
                 If resultado = DialogResult.Yes Then
@@ -24720,6 +24737,15 @@ Public Class frmnominasmarinos
 
                     calcularvalessemanal = False
                 End If
+            ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "ATL" Then
+                'preguntar si se calculan o no 
+                resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    calcularvalessemanal = True
+                Else
+
+                    calcularvalessemanal = False
+                End If
             Else
 
 
@@ -27489,7 +27515,59 @@ Public Class frmnominasmarinos
                 Dim TCS As Double
                 Dim VALES As Double
 
+                'variable de conteo
                 Dim SUELDOBRUTONC As Double = 0
+                Dim SEPTIMOC As Double = 0
+                Dim PRIDOMGRAVADAC As Double = 0
+                Dim PRIDOMEXENTAC As Double = 0
+                Dim TE2GC As Double = 0
+                Dim TE2EC As Double = 0
+                Dim TE3C As Double = 0
+                Dim DESCANSOLABORADOC As Double = 0
+                Dim FESTIVOTRABC As Double = 0
+                Dim BONOASISTENCIAC As Double = 0
+                Dim BONOPRODUCTIVIDADC As Double = 0
+                Dim BONOPOLIVALENCIAC As Double = 0
+                Dim BONOESPECIALIDADC As Double = 0
+                Dim BONOCALIDADC As Double = 0
+                Dim COMPENSACIONC As Double = 0
+                Dim SEMANAFONDOC As Double = 0
+                Dim INCREMENTORETENIDOC As Double = 0
+                Dim VACACIONESPROC As Double = 0
+                Dim AGUINALDOGRAC As Double = 0
+                Dim AGUINALDOEXENC As Double = 0
+                Dim PRIMAVACGRAC As Double = 0
+                Dim PRIMAVACEXENC As Double = 0
+                Dim SUMAPERCEPCIONESC As Double = 0
+                Dim SUMAPERCEPCIONESPISRC As Double = 0
+                Dim FINJUSTIFICADAC As Double = 0
+                Dim PERMISOSINGOCEDESUELDOC As Double = 0
+                Dim PRIMADOMINICALC As Double = 0
+
+                Dim INCAPACIDADDC As Double = 0
+                Dim ISRDC As Double = 0
+                Dim IMMSSDC As Double = 0
+                Dim INFONAVITDC As Double = 0
+                Dim INFOBIMANTC As Double = 0
+                Dim AJUSTEINFOC As Double = 0
+                Dim PENSIONADC As Double = 0
+                Dim PRESTAMODC As Double = 0
+                Dim FONACOTDC As Double = 0
+                Dim TNOLABORADODC As Double = 0
+                Dim CUOTASINDICALDC As Double = 0
+                Dim SUBSIDIOGC As Double = 0
+                Dim SUBSIDIOAC As Double = 0
+                Dim SUMADEDUCCIONESC As Double = 0
+                Dim INCAPACIDADC As Double = 0
+                Dim diastrabajadosC As Double = 0
+                Dim NETOC As Double = 0
+
+                Dim IMSS_CSC As Double = 0
+                Dim RCV_CSC As Double = 0
+                Dim INFONAVIT_CSC As Double = 0
+                Dim ISN_CSC As Double = 0
+                Dim TCSC As Double = 0
+                Dim VALESC As Double = 0
 
                 SUELDOBRUTON = 0
                 SEPTIMO = 0
@@ -27616,30 +27694,53 @@ Public Class frmnominasmarinos
                         TCS += Double.Parse(IIf(rwFilas(x).Item("fTotalCostoSocial").ToString = "", 0, rwFilas(x).Item("fTotalCostoSocial").ToString))
                         VALES += Double.Parse(IIf(rwComplemento(0)("Vales").ToString = "", 0, rwComplemento(0)("Vales").ToString))
 
+                        'Conteo aplicado
                         SUELDOBRUTONC += (IIf(rwFilas(x).Item("fSueldoBruto").ToString = "", 0, 1))
-                        SEPTIMO += Double.Parse(IIf(rwFilas(x).Item("fSeptimoDia").ToString = "", 0, rwFilas(x).Item("fSeptimoDia").ToString))
-                        PRIDOMGRAVADA += Double.Parse(IIf(rwFilas(x).Item("fPrimaDomGravada").ToString = "", 0, rwFilas(x).Item("fPrimaDomGravada").ToString))
-                        PRIDOMEXENTA += Double.Parse(IIf(rwFilas(x).Item("fPrimaDomExenta").ToString = "", 0, rwFilas(x).Item("fPrimaDomExenta").ToString))
-                        TE2G += Double.Parse(IIf(rwFilas(x).Item("fTExtra2Gravado").ToString = "", 0, rwFilas(x).Item("fTExtra2Gravado").ToString))
-                        TE2E += Double.Parse(IIf(rwFilas(x).Item("fTExtra2Exento").ToString = "", 0, rwFilas(x).Item("fTExtra2Exento").ToString))
-                        TE3 += Double.Parse(IIf(rwFilas(x).Item("fTExtra3").ToString = "", 0, rwFilas(x).Item("fTExtra3").ToString))
-                        DESCANSOLABORADO += Double.Parse(IIf(rwFilas(x).Item("fDescansoL").ToString = "", 0, rwFilas(x).Item("fDescansoL").ToString))
-                        FESTIVOTRAB += Double.Parse(IIf(rwFilas(x).Item("fDiaFestivoL").ToString = "", 0, rwFilas(x).Item("fDiaFestivoL").ToString))
-                        BONOASISTENCIA += Double.Parse(IIf(rwFilas(x).Item("fBonoAsistencia").ToString = "", 0, rwFilas(x).Item("fBonoAsistencia").ToString))
-                        BONOPRODUCTIVIDAD += Double.Parse(IIf(rwFilas(x).Item("fBonoProductividad").ToString = "", 0, rwFilas(x).Item("fBonoProductividad").ToString))
-                        BONOPOLIVALENCIA += Double.Parse(IIf(rwFilas(x).Item("fBonoPolivalencia").ToString = "", 0, rwFilas(x).Item("fBonoPolivalencia").ToString))
-                        BONOESPECIALIDAD += Double.Parse(IIf(rwFilas(x).Item("fBonoEspecialidad").ToString = "", 0, rwFilas(x).Item("fBonoEspecialidad").ToString))
-                        BONOCALIDAD += Double.Parse(IIf(rwFilas(x).Item("fBonoCalidad").ToString = "", 0, rwFilas(x).Item("fBonoCalidad").ToString))
-                        COMPENSACION += Double.Parse(IIf(rwFilas(x).Item("fCompensacion").ToString = "", 0, rwFilas(x).Item("fCompensacion").ToString))
-                        SEMANAFONDO += Double.Parse(IIf(rwFilas(x).Item("fSemanaFondo").ToString = "", 0, rwFilas(x).Item("fSemanaFondo").ToString))
-                        FINJUSTIFICADA += Double.Parse(IIf(rwFilas(x).Item("fFaltaInjustificada").ToString = "", 0, rwFilas(x).Item("fFaltaInjustificada").ToString))
-                        PERMISOSINGOCEDESUELDO += Double.Parse(IIf(rwFilas(x).Item("fPermisoSinGS").ToString = "", 0, rwFilas(x).Item("fPermisoSinGS").ToString))
-                        INCREMENTORETENIDO += Double.Parse(IIf(rwFilas(x).Item("fIncrementoRetenido").ToString = "", 0, rwFilas(x).Item("fIncrementoRetenido").ToString))
-                        VACACIONESPRO += Double.Parse(IIf(rwFilas(x).Item("fVacacionesProporcionales").ToString = "", 0, rwFilas(x).Item("fVacacionesProporcionales").ToString))
-                        AGUINALDOGRA += Double.Parse(IIf(rwFilas(x).Item("fAguinaldoGravado").ToString = "", 0, rwFilas(x).Item("fAguinaldoGravado").ToString))
-                        AGUINALDOEXEN += Double.Parse(IIf(rwFilas(x).Item("fAguinaldoExento").ToString = "", 0, rwFilas(x).Item("fAguinaldoExento").ToString))
-                        PRIMAVACGRA += Double.Parse(IIf(rwFilas(x).Item("fPrimaVacacionalGravado").ToString = "", 0, rwFilas(x).Item("fPrimaVacacionalGravado").ToString))
-                        PRIMAVACEXEN += Double.Parse(IIf(rwFilas(x).Item("fPrimaVacacionalExento").ToString = "", 0, rwFilas(x).Item("fPrimaVacacionalExento").ToString))
+                        SEPTIMOC += Double.Parse(IIf(rwFilas(x).Item("fSeptimoDia").ToString = "", 0, 1))
+                        PRIDOMGRAVADAC += Double.Parse(IIf(rwFilas(x).Item("fPrimaDomGravada").ToString = "", 0, 1))
+                        PRIDOMEXENTAC += Double.Parse(IIf(rwFilas(x).Item("fPrimaDomExenta").ToString = "", 0, 1))
+                        TE2GC += Double.Parse(IIf(rwFilas(x).Item("fTExtra2Gravado").ToString = "", 0, 1))
+                        TE2EC += Double.Parse(IIf(rwFilas(x).Item("fTExtra2Exento").ToString = "", 0, 1))
+                        TE3C += Double.Parse(IIf(rwFilas(x).Item("fTExtra3").ToString = "", 0, 1))
+                        DESCANSOLABORADOC += Double.Parse(IIf(rwFilas(x).Item("fDescansoL").ToString = "", 0, 1))
+                        FESTIVOTRABC += Double.Parse(IIf(rwFilas(x).Item("fDiaFestivoL").ToString = "", 0, 1))
+                        BONOASISTENCIAC += Double.Parse(IIf(rwFilas(x).Item("fBonoAsistencia").ToString = "", 0, 1))
+                        BONOPRODUCTIVIDADC += Double.Parse(IIf(rwFilas(x).Item("fBonoProductividad").ToString = "", 0, 1))
+                        BONOPOLIVALENCIAC += Double.Parse(IIf(rwFilas(x).Item("fBonoPolivalencia").ToString = "", 0, 1))
+                        BONOESPECIALIDADC += Double.Parse(IIf(rwFilas(x).Item("fBonoEspecialidad").ToString = "", 0, 1))
+                        BONOCALIDADC += Double.Parse(IIf(rwFilas(x).Item("fBonoCalidad").ToString = "", 0, 1))
+                        COMPENSACIONC += Double.Parse(IIf(rwFilas(x).Item("fCompensacion").ToString = "", 0, 1))
+                        SEMANAFONDOC += Double.Parse(IIf(rwFilas(x).Item("fSemanaFondo").ToString = "", 0, 1))
+                        FINJUSTIFICADAC += Double.Parse(IIf(rwFilas(x).Item("fFaltaInjustificada").ToString = "", 0, 1))
+                        PERMISOSINGOCEDESUELDOC += Double.Parse(IIf(rwFilas(x).Item("fPermisoSinGS").ToString = "", 0, 1))
+                        INCREMENTORETENIDOC += Double.Parse(IIf(rwFilas(x).Item("fIncrementoRetenido").ToString = "", 0, 1))
+                        VACACIONESPROC += Double.Parse(IIf(rwFilas(x).Item("fVacacionesProporcionales").ToString = "", 0, 1))
+                        AGUINALDOGRAC += Double.Parse(IIf(rwFilas(x).Item("fAguinaldoGravado").ToString = "", 0, 1))
+                        AGUINALDOEXENC += Double.Parse(IIf(rwFilas(x).Item("fAguinaldoExento").ToString = "", 0, 1))
+                        PRIMAVACGRAC += Double.Parse(IIf(rwFilas(x).Item("fPrimaVacacionalGravado").ToString = "", 0, 1))
+                        PRIMAVACEXENC += Double.Parse(IIf(rwFilas(x).Item("fPrimaVacacionalExento").ToString = "", 0, 1))
+
+                        INCAPACIDADDC += Double.Parse(IIf(rwFilas(x).Item("fIncapacidad").ToString = "", 0, 1))
+                        ISRDC += Double.Parse(IIf(rwFilas(x).Item("fIsr").ToString = "", 0, 1))
+                        IMMSSDC += Double.Parse(IIf(rwFilas(x).Item("fImss").ToString = "", 0, 1))
+                        INFONAVITDC += Double.Parse(IIf(rwFilas(x).Item("fInfonavit").ToString = "", 0, 1))
+                        INFOBIMANTC += Double.Parse(IIf(rwFilas(x).Item("fInfonavitBanterior").ToString = "", 0, 1))
+                        AJUSTEINFOC += Double.Parse(IIf(rwFilas(x).Item("fAjusteInfonavit").ToString = "", 0, 1))
+                        PENSIONADC += Double.Parse(IIf(rwFilas(x).Item("fPensionAlimenticia").ToString = "", 0, 1))
+                        PRESTAMODC += Double.Parse(IIf(rwFilas(x).Item("fPrestamo").ToString = "", 0, 1))
+                        FONACOTDC += Double.Parse(IIf(rwFilas(x).Item("fFonacot").ToString = "", 0, 1))
+                        TNOLABORADODC += Double.Parse(IIf(rwFilas(x).Item("fT_No_laborado").ToString = "", 0, 1))
+                        CUOTASINDICALDC += Double.Parse(IIf(rwFilas(x).Item("fCuotaSindical").ToString = "", 0, 1))
+                        SUBSIDIOGC += Double.Parse(IIf(rwFilas(x).Item("fSubsidioGenerado").ToString = "", 0, 1))
+                        SUBSIDIOAC += Double.Parse(IIf(rwFilas(x).Item("fSubsidioAplicado").ToString = "", 0, 1))
+                        NETOC += Double.Parse(IIf(rwFilas(x).Item("fOperadora").ToString = "", 0, 1))
+
+                        IMSS_CSC += Double.Parse(IIf(rwFilas(x).Item("fImssCS").ToString = "", 0, 1))
+                        RCV_CSC += Double.Parse(IIf(rwFilas(x).Item("fRcvCS").ToString = "", 0, 1))
+                        INFONAVIT_CSC += Double.Parse(IIf(rwFilas(x).Item("fInfonavitCS").ToString = "", 0, 1))
+                        ISN_CSC += Double.Parse(IIf(rwFilas(x).Item("fInsCS").ToString = "", 0, 1))
+                        TCSC += Double.Parse(IIf(rwFilas(x).Item("fTotalCostoSocial").ToString = "", 0, 1))
+                        VALESC += Double.Parse(IIf(rwComplemento(0)("Vales").ToString = "", 0, 1))
 
 
                         pgbProgreso.Value += 1
@@ -27722,22 +27823,22 @@ Public Class frmnominasmarinos
 
                     'APLICADO
                     hoja.Cell("F10").Value = SUELDOBRUTONC
-                    'hoja.Cell("F11").FormulaA1 = "=COUNTIF(NOMINA!AF5:AF" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F12").FormulaA1 = "=COUNTIF(NOMINA!AH5:AH" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F13").FormulaA1 = "=COUNTIF(NOMINA!AJ5:AJ" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F14").FormulaA1 = "=COUNTIF(NOMINA!AK5:AK" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F15").FormulaA1 = "=COUNTIF(NOMINA!AL5:AL" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F16").FormulaA1 = "=COUNTIF(NOMINA!AM5:AM" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F17").FormulaA1 = "=COUNTIF(NOMINA!AN5:AN" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F18").FormulaA1 = "=COUNTIF(NOMINA!AO5:AO" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F19").FormulaA1 = "=COUNTIF(NOMINA!AP5:AP" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F20").FormulaA1 = "=COUNTIF(NOMINA!AQ5:AQ" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F21").FormulaA1 = "=COUNTIF(NOMINA!AR5:AR" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F22").FormulaA1 = "=COUNTIF(NOMINA!AS5:AS" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F23").FormulaA1 = "=COUNTIF(NOMINA!AV5:AV" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F24").FormulaA1 = "=COUNTIF(NOMINA!AW5:AW" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F25").FormulaA1 = "=COUNTIF(NOMINA!AX5:AX" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("F26").FormulaA1 = "=COUNTIF(NOMINA!BC5:BC" & totalesnomina - 2 & ","">0"")"
+                    hoja.Cell("F11").Value = PRIDOMGRAVADAC
+                    hoja.Cell("F12").Value = TE2EC
+                    hoja.Cell("F13").Value = TE3C
+                    hoja.Cell("F14").Value = DESCANSOLABORADOC
+                    hoja.Cell("F15").Value = FESTIVOTRABC
+                    hoja.Cell("F16").Value = BONOASISTENCIAC
+                    hoja.Cell("F17").Value = BONOPRODUCTIVIDADC
+                    hoja.Cell("F18").Value = BONOPOLIVALENCIAC
+                    hoja.Cell("F19").Value = BONOESPECIALIDADC
+                    hoja.Cell("F20").Value = BONOCALIDADC
+                    hoja.Cell("F21").Value = COMPENSACIONC
+                    hoja.Cell("F22").Value = SEMANAFONDOC
+                    hoja.Cell("F23").Value = INCREMENTORETENIDOC
+                    hoja.Cell("F24").Value = VACACIONESPROC
+                    hoja.Cell("F25").Value = AGUINALDOGRAC
+                    hoja.Cell("F26").Value = PRIMAVACGRAC
 
 
 
@@ -27755,17 +27856,17 @@ Public Class frmnominasmarinos
                     hoja.Cell("H20").Value = SUBSIDIOA * -1
 
                     'APLICADO
-                    'hoja.Cell("I10").FormulaA1 = "=COUNTIF(NOMINA!BG5:BG" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I11").FormulaA1 = "=COUNTIF(NOMINA!BH5:BH" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I12").FormulaA1 = "=COUNTIF(NOMINA!BI5:BI" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I13").FormulaA1 = "=COUNTIF(NOMINA!BJ5:BJ" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I14").FormulaA1 = "=COUNTIF(NOMINA!BK5:BK" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I15").FormulaA1 = "=COUNTIF(NOMINA!BL5:BL" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I16").FormulaA1 = "=COUNTIF(NOMINA!BM5:BM" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I17").FormulaA1 = "=COUNTIF(NOMINA!BN5:BN" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I18").FormulaA1 = "=COUNTIF(NOMINA!BO5:BO" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I19").FormulaA1 = "=COUNTIF(NOMINA!BP5:BP" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("I20").FormulaA1 = "=COUNTIF(NOMINA!BR5:BR" & totalesnomina - 2 & ","">0"")"
+                    hoja.Cell("I10").Value = ISRDC
+                    hoja.Cell("I11").Value = IIf(imss_flag, IMMSSDC, 0)
+                    hoja.Cell("I12").Value = INFONAVITDC
+                    hoja.Cell("I13").Value = INFOBIMANTC
+                    hoja.Cell("I14").Value = AJUSTEINFOC
+                    hoja.Cell("I15").Value = PENSIONADC
+                    hoja.Cell("I16").Value = PRESTAMODC
+                    hoja.Cell("I17").Value = FONACOTDC
+                    hoja.Cell("I18").Value = TNOLABORADODC
+                    hoja.Cell("I19").Value = CUOTASINDICALD
+                    hoja.Cell("I20").Value = SUBSIDIOAC
 
                     'PROVISIONES
                     'hoja.Cell("K10").FormulaA1 = "=NOMINA!CQ" & totalesnomina
@@ -27788,12 +27889,12 @@ Public Class frmnominasmarinos
                     'hoja.Cell("L13").FormulaA1 = "=COUNTIF(NOMINA!CT5:CT" & totalesnomina - 2 & ","">0"")"
                     'hoja.Cell("L14").FormulaA1 = "=COUNTIF(NOMINA!CU5:CU" & totalesnomina - 2 & ","">0"")"
 
-                    'hoja.Cell("L15").FormulaA1 = "=COUNTIF(NOMINA!CI5:CI" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("L16").FormulaA1 = "=COUNTIF(NOMINA!CJ5:CJ" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("L17").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("L18").FormulaA1 = "=COUNTIF(NOMINA!CK5:CK" & totalesnomina - 2 & ","">0"")"
-                    'hoja.Cell("L19").FormulaA1 = IIf(idnsemanal = True, "", "=COUNTIF(NOMINA!CL5:CL" & totalesnomina - 2 & ","">0"")")
-                    'hoja.Cell("L20").FormulaA1 = "=COUNTIF(NOMINA!CN5:CN" & totalesnomina - 2 & ","">0"")"
+                    hoja.Cell("L15").Value = IMSS_CSC
+                    hoja.Cell("L16").Value = RCV_CSC
+                    hoja.Cell("L17").Value = INFONAVIT_CSC
+                    hoja.Cell("L18").Value = ISN_CSC
+                    hoja.Cell("L19").Value = IIf(idnsemanal = True, "", IMMSSDC)
+                    hoja.Cell("L20").Value = VALESC
 
                     'TOTALES
                     hoja.Cell("C40").FormulaA1 = "=0"
