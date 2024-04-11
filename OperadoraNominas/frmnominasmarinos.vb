@@ -27426,14 +27426,14 @@ Public Class frmnominasmarinos
                 Dim filaexcelnomtotal As Integer = 0
                 Dim idnsemanal As Boolean = False
 
-                pnlProgreso.Visible = True
+                ' pnlProgreso.Visible = True
                 'pnlCatalogo.Enabled = False
                 Application.DoEvents()
 
-                pgbProgreso.Minimum = 0
-                pgbProgreso.Value = 0
+                'pgbProgreso.Minimum = 0
+                'pgbProgreso.Value = 0
 
-                pgbProgreso.Maximum = dtgDatos.Rows.Count
+                'pgbProgreso.Maximum = dtgDatos.Rows.Count
                 Dim semanal As Boolean
 
 
@@ -27743,8 +27743,8 @@ Public Class frmnominasmarinos
                         VALESC += Double.Parse(IIf(rwComplemento(0)("Vales").ToString = "", 0, 1))
 
 
-                        pgbProgreso.Value += 1
-                        Application.DoEvents()
+                        'pgbProgreso.Value += 1
+                        'Application.DoEvents()
                     Next
                     'pnlProgreso.Visible = False
                     'pnlCatalogo.Enabled = True
@@ -27924,8 +27924,8 @@ Public Class frmnominasmarinos
                     End If
 
                     '<<<<<CARGAR>>>>>
-                    pnlProgreso.Visible = False
-                    pnlCatalogo.Enabled = True
+                    ' pnlProgreso.Visible = False
+                    ' pnlCatalogo.Enabled = True
 
                 End If
 
