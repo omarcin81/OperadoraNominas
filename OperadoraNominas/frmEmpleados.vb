@@ -979,8 +979,8 @@ Public Class frmEmpleados
             Dim dialogo As New SaveFileDialog()
             Dim idtipo As Integer
 
-            SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad, "
-            SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2,cCp"
+            SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe, EmpleadosC.iEstatus, EmpleadosC.fSueldoBase, EmpleadosC.fSueldoIntegrado, EmpleadosC.fSueldoOrd, EmpleadosC.dFechaAntiguedad,  "
+            SQL &= "iSexo, fkiIdPuesto, fkiIdDepartamento,cPuesto, cFuncionesPuesto, cCorreo, clabe2,cCp, EmpleadosC.dFechaNac"
             SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco "
             Dim resultado As Integer = MessageBox.Show("¿Desea solo empleados activos?", "Pregunta", MessageBoxButtons.YesNo)
             If resultado = DialogResult.Yes Then
@@ -1023,14 +1023,14 @@ Public Class frmEmpleados
                 'hoja.Cell(3, 2).Value = ":"
                 'hoja.Cell(3, 3).Value = ""
 
-                hoja.Range(4, 1, 4, 25).Style.Font.FontSize = 10
-                hoja.Range(4, 1, 4, 25).Style.Font.SetBold(True)
-                hoja.Range(4, 1, 4, 25).Style.Alignment.WrapText = True
-                hoja.Range(4, 1, 4, 25).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(4, 1, 4, 25).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                hoja.Range(4, 1, 4, 26).Style.Font.FontSize = 10
+                hoja.Range(4, 1, 4, 26).Style.Font.SetBold(True)
+                hoja.Range(4, 1, 4, 26).Style.Alignment.WrapText = True
+                hoja.Range(4, 1, 4, 26).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(4, 1, 4, 26).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
                 'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-                hoja.Range(4, 1, 4, 25).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-                hoja.Range(4, 1, 4, 25).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+                hoja.Range(4, 1, 4, 26).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+                hoja.Range(4, 1, 4, 26).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
                 'hoja.Cell(4, 1).Value = "Num"
                 hoja.Cell(4, 1).Value = "Id"
@@ -1092,7 +1092,7 @@ Public Class frmEmpleados
                     hoja.Cell(filaExcel, 23).Value = Fila.Item("cCorreo")
                     hoja.Cell(filaExcel, 24).Value = Fila.Item("clabe2")
                     hoja.Cell(filaExcel, 25).Value = Fila.Item("cCp")
-                    hoja.Cell(filaExcel, 26).Value = "0"
+                    hoja.Cell(filaExcel, 26).Value = Fila.Item("dFechaNac")
                 Next
 
                 dialogo.DefaultExt = "*.xlsx"
