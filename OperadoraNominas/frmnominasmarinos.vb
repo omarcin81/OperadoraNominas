@@ -3627,6 +3627,7 @@ Public Class frmnominasmarinos
 
                     calcularvalessemanal = False
                 End If
+                'si estaba omarcin
             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "ATL" Then
                 'preguntar si se calculan o no 
                 resultado = MessageBox.Show("¿ Desea calcular vales de despensa?", "Pregunta", MessageBoxButtons.YesNo)
