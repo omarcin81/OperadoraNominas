@@ -2866,7 +2866,7 @@ Public Class frmnominasmarinos
                             'ISR
                             If DiasCadaPeriodo = 7 Then
                                 TipoPeriodoinfoonavit = 3
-                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, DiasCadaPeriodo)), 2).ToString("###,##0.00")
                             ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                                 TipoPeriodoinfoonavit = 2
                                 If EmpresaN = "NOSEOCUPARA" Then
@@ -2913,7 +2913,7 @@ Public Class frmnominasmarinos
                                     dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
                                 Else
                                     'todos menos ademsa
-                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, 15)), 2).ToString("###,##0.00")
                                 End If
 
 
@@ -4159,7 +4159,7 @@ Public Class frmnominasmarinos
                             'ISR
                             If DiasCadaPeriodo = 7 Then
                                 TipoPeriodoinfoonavit = 3
-                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, DiasCadaPeriodo)), 2).ToString("###,##0.00")
                             ElseIf DiasCadaPeriodo = 15 Or DiasCadaPeriodo = 16 Or DiasCadaPeriodo = 13 Or DiasCadaPeriodo = 14 Then
                                 TipoPeriodoinfoonavit = 2
                                 If EmpresaN = "NOSEOCUPARA" Then
@@ -4206,7 +4206,7 @@ Public Class frmnominasmarinos
                                     dtgDatos.Rows(x).Cells(58).Value = Math.Round(ISRT + ISRA, 2).ToString("###,##0.00")
                                 Else
                                     'todos menos ademsa
-                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodado(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x)), 2).ToString("###,##0.00")
+                                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, 15)), 2).ToString("###,##0.00")
                                 End If
 
 
@@ -5921,6 +5921,105 @@ Public Class frmnominasmarinos
             'Else
 
             'End If
+
+            If subsidio > isr Then
+
+                dtgDatos.Rows(fila).Cells(68).Value = Math.Round(Double.Parse(subsidio)).ToString("###,##0.00")
+                If subsidio > 0 Then
+                    dtgDatos.Rows(fila).Cells(69).Value = Math.Round(Double.Parse(subsidio - isr)).ToString("###,##0.00")
+                End If
+
+            Else
+                dtgDatos.Rows(fila).Cells(68).Value = Math.Round(Double.Parse(subsidio), 2).ToString("###,##0.00")
+                If subsidio > 0 Then
+                    dtgDatos.Rows(fila).Cells(69).Value = Math.Round(Double.Parse(subsidio), 2).ToString("###,##0.00")
+                Else
+                    dtgDatos.Rows(fila).Cells(69).Value = "0.00"
+                End If
+
+            End If
+
+
+            If periodo = 1 Then
+                If isr > subsidio Then
+                    Return isr - subsidio
+                Else
+                    Return 0
+                End If
+            Else
+                If isr > subsidio Then
+                    Return isr - subsidio
+                Else
+                    Return 0
+                End If
+            End If
+
+
+
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Private Function isrmontodadoNsubsidio(monto As Double, periodo As Integer, fila As Integer, DiasP As Integer) As Double
+
+        Dim excendente As Double
+        Dim isr As Double
+        Dim subsidio As Double
+
+
+
+        Dim SQL As String
+
+        Try
+
+
+            'calculos
+
+            'Calculamos isr
+
+            '1.- buscamos datos para el calculo
+            isr = 0
+            SQL = "select * from isr where ((" & monto & ">=isr.limiteinf and " & monto & "<=isr.limitesup)"
+            SQL &= " or (" & monto & ">=isr.limiteinf and isr.limitesup=0)) and fkiIdTipoPeriodo2=" & periodo & "and anio=" & aniocostosocial
+
+
+            Dim rwISRCALCULO As DataRow() = nConsulta(SQL)
+            If rwISRCALCULO Is Nothing = False Then
+                excendente = monto - Double.Parse(rwISRCALCULO(0)("limiteinf").ToString)
+                isr = (excendente * (Double.Parse(rwISRCALCULO(0)("porcentaje").ToString) / 100)) + Double.Parse(rwISRCALCULO(0)("cuotafija").ToString)
+            Else
+                MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
+            End If
+
+            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 9081 Then
+                subsidio = 0
+                SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
+                SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & 5
+                Dim rwSubsidio As DataRow() = nConsulta(SQL)
+                If rwSubsidio Is Nothing = False Then
+                    subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
+                    subsidio = subsidio / 30.4
+                    subsidio = subsidio * DiasP
+
+
+                End If
+
+            Else
+                subsidio = 0
+
+            End If
+
+
+
+            'If periodo = 1 Then
+            '    'dtgDatos.Rows(fila).Cells(68).Value = "0.00"
+            '    'dtgDatos.Rows(fila).Cells(69).Value = "0.00"
+            'Else
+
+            'End If
+
             If subsidio > isr Then
 
                 dtgDatos.Rows(fila).Cells(68).Value = Math.Round(Double.Parse(subsidio)).ToString("###,##0.00")
