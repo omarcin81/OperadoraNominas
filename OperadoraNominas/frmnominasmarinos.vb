@@ -8254,7 +8254,7 @@ Public Class frmnominasmarinos
 
     Private Sub cmdincidencias_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdincidencias.Click
         Try
-            Dim Forma As New frmSubirIncidencias
+            Dim Forma As New frmSubirSD
             Forma.gIdPeriodo = cboperiodo.SelectedValue
             Forma.gIdSerie = cboserie.SelectedIndex
             Forma.gAnioActual = aniocostosocial
@@ -17194,7 +17194,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
                         hoja.Cell(filaExcel, 12).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
                         hoja.Cell(filaExcel, 13).Value = "" & cCP
-                        hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(26).Value - dtgDatos.Rows(x).Cells(28).Value - dtgDatos.Rows(x).Cells(20).Value - dtgDatos.Rows(x).Cells(21).Value 'Días Trabajados
                         hoja.Cell(filaExcel, 15).Value = fechainiciorelaboral 'FechaInicioRelaboral
                         hoja.Cell(filaExcel, 16).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
                         hoja.Cell(filaExcel, 17).Value = datosEmpresas(EmpresaN, 5)
@@ -28931,4 +28931,6 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
+    
 End Class
