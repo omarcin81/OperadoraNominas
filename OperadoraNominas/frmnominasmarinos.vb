@@ -5997,7 +5997,7 @@ Public Class frmnominasmarinos
             If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 9081 Then
                 subsidio = 0
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
-                SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & 5
+                SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & periodo
                 Dim rwSubsidio As DataRow() = nConsulta(SQL)
                 If rwSubsidio Is Nothing = False Then
                     subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
@@ -6008,8 +6008,17 @@ Public Class frmnominasmarinos
                 End If
 
             Else
+                'If dtgDatos.Rows(fila).Cells(2).Value = "193" Then
+                '    MsgBox("aqui")
+                'End If
                 subsidio = 0
-
+                'SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
+                'SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & periodo
+                'Dim rwSubsidio As DataRow() = nConsulta(SQL)
+                'If rwSubsidio Is Nothing = False Then
+                '    subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
+                'End If
+                'subsidio = 0
             End If
 
 
