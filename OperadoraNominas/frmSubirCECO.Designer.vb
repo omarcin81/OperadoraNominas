@@ -45,13 +45,13 @@ Partial Class frmSubirCECO
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.lsvLista = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.lblRuta = New System.Windows.Forms.Label()
-        Me.cmdCerrar = New System.Windows.Forms.Button()
         Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
         Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
+        Me.lblRuta = New System.Windows.Forms.Label()
+        Me.cmdCerrar = New System.Windows.Forms.Button()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
         CType(Me.NudColumnaC, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +75,7 @@ Partial Class frmSubirCECO
         '
         Me.cboTipo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
-        Me.cboTipo.Items.AddRange(New Object() {"CECO"})
+        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI"})
         Me.cboTipo.Location = New System.Drawing.Point(126, 7)
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(191, 27)
@@ -316,28 +316,6 @@ Partial Class frmSubirCECO
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'lblRuta
-        '
-        Me.lblRuta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblRuta.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRuta.Location = New System.Drawing.Point(0, 589)
-        Me.lblRuta.Name = "lblRuta"
-        Me.lblRuta.Size = New System.Drawing.Size(604, 39)
-        Me.lblRuta.TabIndex = 34
-        '
-        'cmdCerrar
-        '
-        Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(1047, 592)
-        Me.cmdCerrar.Name = "cmdCerrar"
-        Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
-        Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
-        Me.cmdCerrar.TabIndex = 35
-        Me.cmdCerrar.Text = "Cerrar"
-        Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdCerrar.UseVisualStyleBackColor = True
-        '
         'tsbNuevo
         '
         Me.tsbNuevo.Image = CType(resources.GetObject("tsbNuevo.Image"), System.Drawing.Image)
@@ -392,6 +370,28 @@ Partial Class frmSubirCECO
         Me.tsbCancelar.Text = "Cancelar"
         Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'lblRuta
+        '
+        Me.lblRuta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblRuta.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRuta.Location = New System.Drawing.Point(0, 589)
+        Me.lblRuta.Name = "lblRuta"
+        Me.lblRuta.Size = New System.Drawing.Size(604, 39)
+        Me.lblRuta.TabIndex = 34
+        '
+        'cmdCerrar
+        '
+        Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdCerrar.Location = New System.Drawing.Point(1047, 592)
+        Me.cmdCerrar.Name = "cmdCerrar"
+        Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
+        Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
+        Me.cmdCerrar.TabIndex = 35
+        Me.cmdCerrar.Text = "Cerrar"
+        Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdCerrar.UseVisualStyleBackColor = True
+        '
         'frmSubirCECO
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -402,7 +402,7 @@ Partial Class frmSubirCECO
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Name = "frmSubirCECO"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Subir incidencias"
+        Me.Text = "Actualizar Usuario"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlCatalogo.ResumeLayout(False)
         Me.pnlCatalogo.PerformLayout()

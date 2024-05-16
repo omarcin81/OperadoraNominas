@@ -3942,14 +3942,19 @@ Public Class frmnominasmarinos
 
                             FINJUSTIFICADA = 0
                             PERMISOSINGOCEDESUELDO = 0
+                            If dtgDatos.Rows(x).Cells(2).Value = "67" Then
+                                MsgBox("llego")
+
+                            End If
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value)) > 0 Then
                                 'diastrabajados = diastrabajados - 1
                                 FINJUSTIFICADA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value))
                                 If NombrePeriodo = "Quincenal" Then
                                     diastrabajados = diastrabajados - FINJUSTIFICADA
                                 Else
-
-                                    diastrabajados = 6
+                                   
+                                    'diastrabajados = 6
+                                    diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR BRISEÑO
                                 End If
 
                                 dtgDatos.Rows(x).Cells(45).Value = "-" + Math.Round(SDEMPLEADO * FINJUSTIFICADA, 2).ToString("###,##0.00")
@@ -3965,7 +3970,8 @@ Public Class frmnominasmarinos
                                     diastrabajados = diastrabajados - PERMISOSINGOCEDESUELDO
                                 Else
 
-                                    diastrabajados = 6
+                                    'diastrabajados = 6
+                                    diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR BRISEÑO
                                 End If
                                 dtgDatos.Rows(x).Cells(46).Value = "-" + Math.Round(SDEMPLEADO * PERMISOSINGOCEDESUELDO, 2).ToString("###,##0.00")
                             Else
@@ -3982,11 +3988,11 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf NombrePeriodo = "Semanal" Then
 
-                                'If dtgDatos.Rows(x).Cells(2).Value = "42" Then
-                                'MsgBox("llego")
-                                ' End If
+                               
                                 If chkDias.Checked = False Then
                                     dtgDatos.Rows(x).Cells(26).Value = "7"
+                                Else
+                                    dtgDatos.Rows(x).Cells(26).Value = dtgDatos.Rows(x).Cells(26).Value 'VALIDAR DIAS
                                 End If
 
 
@@ -4000,6 +4006,8 @@ Public Class frmnominasmarinos
                                 Else
                                     'dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(24).Value) * (diastrabajados - FINJUSTIFICADA - PERMISOSINGOCEDESUELDO), 2).ToString("###,##0.00")
                                     dtgDatos.Rows(x).Cells(29).Value = Math.Round(SDEMPLEADO * (diastrabajados), 2).ToString("###,##0.00")
+
+
                                     If BanPeriodo Then
                                         dtgDatos.Rows(x).Cells(30).Value = Math.Round(SDEMPLEADO, 2).ToString("###,##0.00")
                                     Else
@@ -8263,7 +8271,7 @@ Public Class frmnominasmarinos
 
     Private Sub cmdincidencias_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdincidencias.Click
         Try
-            Dim Forma As New frmSubirIncidencias
+            Dim Forma As New frmSubirSD
             Forma.gIdPeriodo = cboperiodo.SelectedValue
             Forma.gIdSerie = cboserie.SelectedIndex
             Forma.gAnioActual = aniocostosocial
@@ -11426,6 +11434,8 @@ Public Class frmnominasmarinos
             Case "TRANSPORTACION"
                 tienevales = True
             Case "TMMDC Logistic"
+                tienevales = True
+            Case "ATL"
                 tienevales = True
             Case Else
                 tienevales = False
@@ -17203,7 +17213,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 11).Value = datosEmpresas(EmpresaN, 1) 'REGISTRO PATRONAL
                         hoja.Cell(filaExcel, 12).Value = datosEmpresas(EmpresaN, 2) 'ent federativa
                         hoja.Cell(filaExcel, 13).Value = "" & cCP
-                        hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(26).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(26).Value - dtgDatos.Rows(x).Cells(28).Value - dtgDatos.Rows(x).Cells(20).Value - dtgDatos.Rows(x).Cells(21).Value 'Días Trabajados
                         hoja.Cell(filaExcel, 15).Value = fechainiciorelaboral 'FechaInicioRelaboral
                         hoja.Cell(filaExcel, 16).Value = datosEmpresas(EmpresaN, 4) 'Tipo Contrato 
                         hoja.Cell(filaExcel, 17).Value = datosEmpresas(EmpresaN, 5)
@@ -21963,6 +21973,13 @@ Public Class frmnominasmarinos
             pgbProgreso.Minimum = 0
             pgbProgreso.Value = 0
             pgbProgreso.Maximum = dtgDatos.Rows.Count
+            Dim tipoperiodos2 As String
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+              
+                tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+            End If
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
                 'calculo prima antiguedad
@@ -21976,7 +21993,7 @@ Public Class frmnominasmarinos
                 'End If
 
                 'datos vacios primeras semans
-                If cboperiodo.SelectedIndex < 13 Then
+                If cboperiodo.SelectedIndex < 13 And tipoperiodos2 = 3 Then
                     dtgDatos.Rows(x).Cells(86).Value = 0.0
                     dtgDatos.Rows(x).Cells(87).Value = 0.0
                     dtgDatos.Rows(x).Cells(88).Value = 0.0
@@ -22172,6 +22189,11 @@ Public Class frmnominasmarinos
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                'If dtgDatos.Rows(x).Cells(2).Value = "67" Then
+                '    MsgBox("llego")
+
+                'End If
                 diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value.ToString))
                 INCAPACIDAD = Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", 0, dtgDatos.Rows(x).Cells(57).Value))
 
@@ -28940,4 +28962,6 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
+    
 End Class
