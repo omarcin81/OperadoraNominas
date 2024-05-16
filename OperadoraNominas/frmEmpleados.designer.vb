@@ -269,7 +269,7 @@ Partial Class frmEmpleados
         Me.cmCECO.Name = "cmCECO"
         Me.cmCECO.Size = New System.Drawing.Size(95, 72)
         Me.cmCECO.TabIndex = 53
-        Me.cmCECO.Text = "CE CO"
+        Me.cmCECO.Text = "Act Emp Mas"
         Me.cmCECO.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.cmCECO.UseVisualStyleBackColor = True
         '

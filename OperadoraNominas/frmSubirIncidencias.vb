@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Net.Mime.MediaTypeNames
 
-Public Class frmSubirIncidencias
+Public Class frmSubirSD
     Public gIdPeriodo As String
     Public gIdSerie As String
     Dim sheetIndex As Integer = -1
@@ -283,7 +283,7 @@ Public Class frmSubirIncidencias
                                             End If
 
 
-                                            
+
                                         End If
 
                                     End If
@@ -1113,7 +1113,7 @@ Public Class frmSubirIncidencias
 
                             For Each producto As ListViewItem In lsvLista.CheckedItems
                                 If producto.Index >= (CInt(NudFilaI.Value) - 1) And producto.Index <= (CInt(NudFilaF.Value) - 1) Then
-                                   If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
+                                    If CDbl(IIf(producto.SubItems(CInt(NudColumnaC.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaC.Value)).Text)) > 0 Then
                                         SQL = "select * from EmpleadosC where cCodigoEmpleado=" & IIf(producto.SubItems(CInt(NudColumnaN.Value)).Text = "", "0", producto.SubItems(CInt(NudColumnaN.Value)).Text)
 
                                         Dim rwEmpleado As DataRow() = nConsulta(SQL)
@@ -1247,7 +1247,7 @@ Public Class frmSubirIncidencias
                     pnlProgreso.Visible = False
                     MessageBox.Show("Incidencias procesadas", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-                
+
             End If
 
         Catch ex As Exception
