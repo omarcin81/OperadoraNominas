@@ -101,75 +101,17 @@ Public Class frmSubirDatos
                     'lsvLista.Columns.Add("conciliacion")
                     'lsvLista.Columns.Add("color")
 
-                    lsvLista.Columns(1).Width = 90
+                    'Ancho de columnas de acuerdo a N columnas
+                    For cole As Integer = 0 To colFin
+                        If cole = 5 Then
+                            lsvLista.Columns(cole).Width = 250
+                        Else
+                            lsvLista.Columns(cole).Width = 100
+                        End If
 
-                    lsvLista.Columns(2).Width = 50
-                    lsvLista.Columns(3).Width = 90
-                    lsvLista.Columns(4).Width = 90
-                    lsvLista.Columns(5).Width = 300
-                    lsvLista.Columns(6).Width = 50
-                    lsvLista.Columns(7).Width = 150
-                    lsvLista.Columns(8).Width = 150
-                    lsvLista.Columns(9).Width = 190
-                    lsvLista.Columns(10).Width = 90
-                    lsvLista.Columns(11).Width = 90
-                    lsvLista.Columns(12).Width = 90
-                    lsvLista.Columns(13).Width = 90
-                    lsvLista.Columns(14).Width = 200
-                    lsvLista.Columns(15).Width = 150
-                    lsvLista.Columns(16).Width = 100
-                    lsvLista.Columns(17).Width = 160
-                    lsvLista.Columns(18).Width = 60
-                    lsvLista.Columns(19).Width = 60
-                    lsvLista.Columns(20).Width = 60
-                    lsvLista.Columns(21).Width = 60
-                    lsvLista.Columns(22).Width = 60
-                    lsvLista.Columns(23).Width = 60
-                    lsvLista.Columns(24).Width = 60
-                    lsvLista.Columns(25).Width = 60
-                    lsvLista.Columns(26).Width = 60
-                    lsvLista.Columns(27).Width = 60
-                    lsvLista.Columns(28).Width = 60
-                    lsvLista.Columns(29).Width = 60
-                    lsvLista.Columns(30).Width = 60
-                    lsvLista.Columns(31).Width = 60
-                    lsvLista.Columns(32).Width = 60
-                    lsvLista.Columns(33).Width = 60
-                    lsvLista.Columns(34).Width = 60
-                    lsvLista.Columns(35).Width = 60
-                    lsvLista.Columns(36).Width = 60
-                    lsvLista.Columns(37).Width = 60
-                    lsvLista.Columns(38).Width = 60
-                    lsvLista.Columns(39).Width = 60
-                    lsvLista.Columns(40).Width = 60
-                    lsvLista.Columns(41).Width = 60
-                    lsvLista.Columns(42).Width = 60
-                    lsvLista.Columns(43).Width = 60
-                    lsvLista.Columns(44).Width = 60
-                    lsvLista.Columns(45).Width = 60
-                    lsvLista.Columns(46).Width = 60
-                    lsvLista.Columns(47).Width = 60
-                    lsvLista.Columns(48).Width = 60
-                    lsvLista.Columns(49).Width = 60
-                    lsvLista.Columns(50).Width = 60
-                    lsvLista.Columns(51).Width = 60
-                    lsvLista.Columns(52).Width = 60
-                    lsvLista.Columns(53).Width = 60
-                    lsvLista.Columns(54).Width = 60
-                    lsvLista.Columns(55).Width = 60
-                    lsvLista.Columns(56).Width = 60
-                    lsvLista.Columns(57).Width = 60
-                    lsvLista.Columns(58).Width = 60
-                    lsvLista.Columns(59).Width = 60
-                    lsvLista.Columns(60).Width = 60
-                    lsvLista.Columns(61).Width = 60
-                    lsvLista.Columns(62).Width = 60
-                    lsvLista.Columns(63).Width = 60
-                    lsvLista.Columns(64).Width = 60
-                    lsvLista.Columns(65).Width = 60
-                    lsvLista.Columns(66).Width = 60
-                    lsvLista.Columns(67).Width = 60
-                    lsvLista.Columns(68).Width = 60
+                    Next
+
+                    
 
 
 

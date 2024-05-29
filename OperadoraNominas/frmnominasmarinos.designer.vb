@@ -107,6 +107,7 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -875,7 +876,7 @@ Partial Class frmnominasmarinos
         '
         'FiniquitoToolStripMenuItem
         '
-        Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem})
+        Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem, Me.SubirFiniquitosMasivosToolStripMenuItem})
         Me.FiniquitoToolStripMenuItem.Name = "FiniquitoToolStripMenuItem"
         Me.FiniquitoToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.FiniquitoToolStripMenuItem.Text = "Finiquito"
@@ -883,13 +884,13 @@ Partial Class frmnominasmarinos
         'SubirFiniquitoToolStripMenuItem
         '
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
-        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
         '
         'SubirLoteFiniquitoToolStripMenuItem
         '
         Me.SubirLoteFiniquitoToolStripMenuItem.Name = "SubirLoteFiniquitoToolStripMenuItem"
-        Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirLoteFiniquitoToolStripMenuItem.Text = "Subir Lote Finiquito"
         '
         'chkVales
@@ -904,6 +905,12 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
+        '
+        'SubirFiniquitosMasivosToolStripMenuItem
+        '
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
         '
         'frmnominasmarinos
         '
@@ -1035,5 +1042,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents CaratulaXPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
