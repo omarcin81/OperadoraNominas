@@ -95,7 +95,8 @@ Public Class frmnominasmarinos
     Public Sub New()
         InitializeComponent()
     End Sub
-   
+    'esta linea la puedes ver katy?
+
     Private Sub frmcontpaqnominas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim sql As String
@@ -427,7 +428,7 @@ Public Class frmnominasmarinos
         'Sueldo_Bruto
         dtgDatos.Columns(29).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dtgDatos.Columns(29).Width = 150
-        dtgDatos.Columns(29).ReadOnly = True
+
 
         'Septimo_Dia
         dtgDatos.Columns(30).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
