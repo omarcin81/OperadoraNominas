@@ -1,6 +1,7 @@
 ﻿Imports ClosedXML.Excel
 Imports System.IO
 Imports System.Xml
+'verificacion
 
 Public Class frmnominasmarinos
     Private m_currentControl As Control = Nothing
