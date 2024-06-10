@@ -96,7 +96,7 @@ Public Class frmnominasmarinos
         InitializeComponent()
     End Sub
     'esta linea la puedes ver katy?
-
+    'y omar?
     Private Sub frmcontpaqnominas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim sql As String
