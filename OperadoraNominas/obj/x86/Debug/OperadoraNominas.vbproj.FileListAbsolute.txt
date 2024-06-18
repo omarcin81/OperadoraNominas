@@ -1,3 +1,8 @@
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEligueMes.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFiniquito.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirNominaFinal.resources
@@ -19,6 +24,7 @@ C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.fr
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmIncapacidad.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmJuridico.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaExcedente.resources
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
@@ -28,6 +34,7 @@ C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.fr
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmImss.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Resources.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPensionA.resources
+C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.SeleccionarPeriodoAutom.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmEstatusPres.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamoSA.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDeudaInfonavit.resources
@@ -37,13 +44,6 @@ C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Se
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Ruta.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
-C:\PROYECTOS\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.SeleccionarPeriodoAutom.resources
