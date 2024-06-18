@@ -104,9 +104,11 @@ Partial Class frmnominasmarinos
         Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -833,7 +835,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem, Me.GenerarPeriodoToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -880,9 +882,15 @@ Partial Class frmnominasmarinos
         Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
         '
+        'GenerarPeriodoToolStripMenuItem
+        '
+        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
+        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
+        '
         'FiniquitoToolStripMenuItem
         '
-        Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem})
+        Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem, Me.SubirFiniquitosMasivosToolStripMenuItem})
         Me.FiniquitoToolStripMenuItem.Name = "FiniquitoToolStripMenuItem"
         Me.FiniquitoToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.FiniquitoToolStripMenuItem.Text = "Finiquito"
@@ -890,14 +898,20 @@ Partial Class frmnominasmarinos
         'SubirFiniquitoToolStripMenuItem
         '
         Me.SubirFiniquitoToolStripMenuItem.Name = "SubirFiniquitoToolStripMenuItem"
-        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.SubirFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirFiniquitoToolStripMenuItem.Text = "Subir Finiquito"
         '
         'SubirLoteFiniquitoToolStripMenuItem
         '
         Me.SubirLoteFiniquitoToolStripMenuItem.Name = "SubirLoteFiniquitoToolStripMenuItem"
-        Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirLoteFiniquitoToolStripMenuItem.Text = "Subir Lote Finiquito"
+        '
+        'SubirFiniquitosMasivosToolStripMenuItem
+        '
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
         '
         'chkVales
         '
@@ -1042,6 +1056,10 @@ Partial Class frmnominasmarinos
     Friend WithEvents CaratulaXPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
     Friend WithEvents ReporteKatiaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GenerarPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
 
 End Class
