@@ -820,17 +820,6 @@ Public Class frmnominasmarinos
         dsPeriodo2.Tables("Tabla").Columns.Add("Tipo_Infonavit")
         dsPeriodo2.Tables("Tabla").Columns.Add("Valor_Infonavit")
 
-        dsPeriodo2.Tables("Tabla").Columns.Add("Horas_extras_dobles_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("Horas_extras_triples_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("Descanso_Laborado_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("Dia_Festivo_laborado_V")
-
-        dsPeriodo2.Tables("Tabla").Columns.Add("Prima_Dominical_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("Falta_Injustificada_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("Permiso_Sin_GS_V")
-        dsPeriodo2.Tables("Tabla").Columns.Add("T_No_laborado_V")
-
-
         dsPeriodo2.Tables("Tabla").Columns.Add("Sueldo_Base")
         dsPeriodo2.Tables("Tabla").Columns.Add("Salario_Diario")
         dsPeriodo2.Tables("Tabla").Columns.Add("Salario_Cotización")
@@ -28968,6 +28957,7 @@ Public Class frmnominasmarinos
 
                 Dim dsPeriodo As New DataSet
                 dsPeriodo.Tables.Add("Tabla")
+
                 dsPeriodo.Tables("Tabla").Columns.Add("Consecutivo")
                 dsPeriodo.Tables("Tabla").Columns.Add("Id_empleado")
                 dsPeriodo.Tables("Tabla").Columns.Add("CodigoEmpleado")
@@ -29121,14 +29111,14 @@ Public Class frmnominasmarinos
                             fila.Item("Valor_Infonavit") = rwDatosEmpleado(0)("fFactor").ToString
 
                             'Valores
-                            fila.Item("Horas_extras_dobles_V") = Forma.dsReporte.Tables(0).Rows(x)("fTExtra2V")
-                            fila.Item("Horas_extras_triples_V") = Forma.dsReporte.Tables(0).Rows(x)("fTExtra3V")
-                            fila.Item("Descanso_Laborado_V") = Forma.dsReporte.Tables(0).Rows(x)("fDescansoLV")
-                            fila.Item("Dia_Festivo_laborado_V") = Forma.dsReporte.Tables(0).Rows(x)("fDiaFestivoLV")
-                            fila.Item("Prima_Dominical_V") = Forma.dsReporte.Tables(0).Rows(x)("fDiaFestivoLV")
-                            fila.Item("Falta_Injustificada_V") = Forma.dsReporte.Tables(0).Rows(x)("fFalta_Injustificada_V")
-                            fila.Item("Permiso_Sin_GS_V") = Forma.dsReporte.Tables(0).Rows(x)("fPermiso_Sin_GS_V")
-                            fila.Item("T_No_laborado_V") = Forma.dsReporte.Tables(0).Rows(x)("fT_No_laborado_V")
+                            fila.Item("Horas_extras_dobles_V") = 0
+                            fila.Item("Horas_extras_triples_V") = 0
+                            fila.Item("Descanso_Laborado_V") = 0
+                            fila.Item("Dia_Festivo_laborado_V") = 0
+                            fila.Item("Prima_Dominical_V") = 0
+                            fila.Item("Falta_Injustificada_V") = 0
+                            fila.Item("Permiso_Sin_GS_V") = 0
+                            fila.Item("T_No_laborado_V") = 0
 
 
                             'Datos 
@@ -29141,21 +29131,21 @@ Public Class frmnominasmarinos
 
                             fila.Item("Sueldo_Bruto") = Forma.dsReporte.Tables(0).Rows(x)("fSueldoBruto")
                             fila.Item("Septimo_Dia") = Forma.dsReporte.Tables(0).Rows(x)("fSeptimoDia")
-                            fila.Item("Prima_Dominical_Gravada") = ""
-                            fila.Item("Prima_Dominical_Exenta") = ""
+                            fila.Item("Prima_Dominical_Gravada") = Forma.dsReporte.Tables(0).Rows(x)("PrimaDominicalG")
+                            fila.Item("Prima_Dominical_Exenta") = Forma.dsReporte.Tables(0).Rows(x)("PrimaDominicalE")
                             fila.Item("Tiempo_Extra_Doble_Gravado") = Forma.dsReporte.Tables(0).Rows(x)("fTExtra2Gravado")
                             fila.Item("Tiempo_Extra_Doble_Exento") = Forma.dsReporte.Tables(0).Rows(x)("fTExtra2Exento")
                             fila.Item("Tiempo_Extra_Triple") = Math.Round(Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("fTExtra3Gravado")) + Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("fTExtra3Exento")))
-                            fila.Item("Descanso_Labarado") = "0.0"
+                            fila.Item("Descanso_Labarado") = Forma.dsReporte.Tables(0).Rows(x)("DescansoLaboradoG")
                             fila.Item("Dia_Festivo_laborado") = "0.0"
-                            fila.Item("Bono_Asistencia") = "0.0"
+                            fila.Item("Bono_Asistencia") = Forma.dsReporte.Tables(0).Rows(x)("fBonoAsistencia")
                             fila.Item("Bono_Productividad") = Forma.dsReporte.Tables(0).Rows(x)("fBonoProductividad")
-                            fila.Item("Bono_Polivalencia") = ""
+                            fila.Item("Bono_Polivalencia") = Forma.dsReporte.Tables(0).Rows(x)("fBonoPolivalencia")
                             fila.Item("Bono_Especialidad") = Forma.dsReporte.Tables(0).Rows(x)("fBonoEspecialidad")
-                            fila.Item("Bono_Calidad") = "0.0"
-                            fila.Item("Compensacion") = Forma.dsReporte.Tables(0).Rows(x)("fCompensacion")
+                            fila.Item("Bono_Calidad") = Forma.dsReporte.Tables(0).Rows(x)("fBonoEspecialidad")
+                            fila.Item("Compensacion") = Forma.dsReporte.Tables(0).Rows(x)("fCompensacionG")
                             fila.Item("Semana_fondo") = "0.0"
-                            fila.Item("Falta_Injustificada") = Forma.dsReporte.Tables(0).Rows(x)("fFaltaInjustificada")
+                            fila.Item("Falta_Injustificada") = "0.0"
                             fila.Item("Permiso_Sin_GS") = "0.0"
                             fila.Item("Incremento_Retenido") = "0.0"
 
@@ -29189,8 +29179,8 @@ Public Class frmnominasmarinos
 
                             fila.Item("Prestamo_Personal_A") = "0.0"
                             fila.Item("Adeudo_Infonavit_A") = "0.0"
-                            fila.Item("EXCEDENTE_V") = "0.0"
-                            fila.Item("SINDICATO/PPP") = Forma.dsReporte.Tables(0).Rows(x)("EXCEDENTE")
+                            fila.Item("EXCEDENTE_V") = Forma.dsReporte.Tables(0).Rows(x)("EXCEDENTE")
+                            fila.Item("SINDICATO/PPP") = Forma.dsReporte.Tables(0).Rows(x)("SIND_PPP")
                             fila.Item("PRIMA_EXCEN") = "0.0"
                             fila.Item("PA_E") = "0.0"
                             fila.Item("EXCEDENTE_M") = "0.0"
