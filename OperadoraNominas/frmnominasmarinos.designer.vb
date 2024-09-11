@@ -106,8 +106,9 @@ Partial Class frmnominasmarinos
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.cmdSoloISRE = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -208,6 +209,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdSoloISRE)
         Me.pnlCatalogo.Controls.Add(Me.cmdAdiCalculoEXC)
         Me.pnlCatalogo.Controls.Add(Me.cmdSumatoriaE)
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
@@ -295,7 +297,7 @@ Partial Class frmnominasmarinos
         Me.cmdsoloisr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdsoloisr.Location = New System.Drawing.Point(520, 67)
         Me.cmdsoloisr.Name = "cmdsoloisr"
-        Me.cmdsoloisr.Size = New System.Drawing.Size(163, 27)
+        Me.cmdsoloisr.Size = New System.Drawing.Size(111, 27)
         Me.cmdsoloisr.TabIndex = 36
         Me.cmdsoloisr.Text = "Calcular solo ISR"
         Me.cmdsoloisr.UseVisualStyleBackColor = True
@@ -893,6 +895,12 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirLoteFiniquitoToolStripMenuItem.Text = "Subir Lote Finiquito"
         '
+        'SubirFiniquitosMasivosToolStripMenuItem
+        '
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
+        '
         'chkVales
         '
         Me.chkVales.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -906,11 +914,15 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-        'SubirFiniquitosMasivosToolStripMenuItem
+        'cmdSoloISRE
         '
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
+        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSoloISRE.Location = New System.Drawing.Point(637, 66)
+        Me.cmdSoloISRE.Name = "cmdSoloISRE"
+        Me.cmdSoloISRE.Size = New System.Drawing.Size(163, 27)
+        Me.cmdSoloISRE.TabIndex = 40
+        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
+        Me.cmdSoloISRE.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '
@@ -1043,5 +1055,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmdSoloISRE As System.Windows.Forms.Button
 
 End Class

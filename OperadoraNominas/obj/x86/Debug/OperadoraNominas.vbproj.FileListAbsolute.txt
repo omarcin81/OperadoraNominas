@@ -30,7 +30,6 @@ C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNomina
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
-C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirIncidencias.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAcceso.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmUsuarios.resources
 C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmImss.resources
@@ -93,3 +92,5 @@ D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNom
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
 D:\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
+C:\tmm_semanales\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirSD.resources
