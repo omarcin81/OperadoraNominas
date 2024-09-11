@@ -95,6 +95,7 @@ Partial Class frmnominasmarinos
         Me.AcumuladoProvisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReporteKatiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -108,7 +109,9 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+
         Me.cmdSoloISRE = New System.Windows.Forms.Button()
+
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -645,18 +648,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(186, 48)
+        Me.cMenu.Size = New System.Drawing.Size(188, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'cmdSubirNomF
@@ -743,7 +746,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem, Me.ReporteKatiaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -826,6 +829,12 @@ Partial Class frmnominasmarinos
         Me.CaratulaXPeriodoToolStripMenuItem.Name = "CaratulaXPeriodoToolStripMenuItem"
         Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
+        '
+        'ReporteKatiaToolStripMenuItem
+        '
+        Me.ReporteKatiaToolStripMenuItem.Name = "ReporteKatiaToolStripMenuItem"
+        Me.ReporteKatiaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.ReporteKatiaToolStripMenuItem.Text = "Reporte Katia"
         '
         'CalculosToolStripMenuItem
         '
@@ -914,6 +923,7 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
+
         'cmdSoloISRE
         '
         Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -924,6 +934,7 @@ Partial Class frmnominasmarinos
         Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
         Me.cmdSoloISRE.UseVisualStyleBackColor = True
         '
+
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1054,7 +1065,10 @@ Partial Class frmnominasmarinos
     Friend WithEvents CaratulaXPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
+    Friend WithEvents ReporteKatiaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdSoloISRE As System.Windows.Forms.Button
+
 
 End Class
