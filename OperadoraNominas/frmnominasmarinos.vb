@@ -2634,9 +2634,9 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(30).Value = "0.00"
                             ElseIf NombrePeriodo = "Semanal" Then
 
-                                'If dtgDatos.Rows(x).Cells(2).Value = "42" Then
-                                'MsgBox("llego")
-                                ' End If
+                                'If dtgDatos.Rows(x).Cells(2).Value = "59" Then
+                                '    MsgBox("llego")
+                                'End If
                                 If chkDias.Checked = False Then
                                     dtgDatos.Rows(x).Cells(26).Value = "7"
                                 End If
@@ -3932,10 +3932,9 @@ Public Class frmnominasmarinos
 
                             FINJUSTIFICADA = 0
                             PERMISOSINGOCEDESUELDO = 0
-                            'If dtgDatos.Rows(x).Cells(2).Value = "193" Then
-                            '    MsgBox("llego")
-
-                            'End If
+                            If dtgDatos.Rows(x).Cells(2).Value = "212" Then
+                                MsgBox("llego")
+                            End If
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value)) > 0 Then
                                 'diastrabajados = diastrabajados - 1
                                 FINJUSTIFICADA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value))
@@ -3944,7 +3943,7 @@ Public Class frmnominasmarinos
                                 Else
                                    
                                     diastrabajados = 6
-                                    'diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR BRISEÑO
+                                    '  diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR septimo dia
                                 End If
 
                                 dtgDatos.Rows(x).Cells(45).Value = "-" + Math.Round(SDEMPLEADO * FINJUSTIFICADA, 2).ToString("###,##0.00")
@@ -3961,7 +3960,7 @@ Public Class frmnominasmarinos
                                 Else
 
                                     diastrabajados = 6
-                                    'diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR BRISEÑO
+                                    'diastrabajados = dtgDatos.Rows(x).Cells(26).Value 'LO PUSE  POR SEPTIMO DIA
                                 End If
                                 dtgDatos.Rows(x).Cells(46).Value = "-" + Math.Round(SDEMPLEADO * PERMISOSINGOCEDESUELDO, 2).ToString("###,##0.00")
                             Else
@@ -7280,7 +7279,7 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 2, 11).FormulaA1 = "=SUM(K6:K" & filaExcel & ")" 'Empresa total
                 hoja2.Cell(filaExcel + 2, 12).FormulaA1 = "=SUM(L6:L" & filaExcel & ")" ' Excedente
                 hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")" ' Vales
-                hoja2.Cell("L5").Value = EmpresaN.ToUpper
+                hoja2.Cell("K5").Value = EmpresaN.ToUpper
 
                 'Para fondeo BBVA Exce
 
@@ -10865,6 +10864,9 @@ Public Class frmnominasmarinos
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
                         nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
+                        'If nombrecompleto = "JUAN REY GOMEZ CORDOVA" Then
+                        '    MsgBox("AQUI,ERO")
+                        'End If
                         cuenta = empleado(0).Item("NumCuenta")
                         clabe = empleado(0).Item("Clabe")
                         Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
