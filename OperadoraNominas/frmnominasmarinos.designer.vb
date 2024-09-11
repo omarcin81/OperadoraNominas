@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdSoloISRE = New System.Windows.Forms.Button()
         Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
         Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
@@ -109,9 +110,7 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-
-        Me.cmdSoloISRE = New System.Windows.Forms.Button()
-
+        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -250,6 +249,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1507, 396)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdSoloISRE
+        '
+        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSoloISRE.Location = New System.Drawing.Point(637, 66)
+        Me.cmdSoloISRE.Name = "cmdSoloISRE"
+        Me.cmdSoloISRE.Size = New System.Drawing.Size(163, 27)
+        Me.cmdSoloISRE.TabIndex = 40
+        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
+        Me.cmdSoloISRE.UseVisualStyleBackColor = True
         '
         'cmdAdiCalculoEXC
         '
@@ -838,7 +847,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem, Me.GenerarPeriodoToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -923,18 +932,12 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-
-        'cmdSoloISRE
+        'GenerarPeriodoToolStripMenuItem
         '
-        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSoloISRE.Location = New System.Drawing.Point(637, 66)
-        Me.cmdSoloISRE.Name = "cmdSoloISRE"
-        Me.cmdSoloISRE.Size = New System.Drawing.Size(163, 27)
-        Me.cmdSoloISRE.TabIndex = 40
-        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
-        Me.cmdSoloISRE.UseVisualStyleBackColor = True
+        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
+        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
         '
-
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1069,6 +1072,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents ReporteKatiaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdSoloISRE As System.Windows.Forms.Button
+    Friend WithEvents GenerarPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class

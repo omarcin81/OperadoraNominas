@@ -30528,5 +30528,225 @@ Public Class frmnominasmarinos
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+
+
+    Private Sub GenerarPeriodoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GenerarPeriodoToolStripMenuItem.Click
+        Try
+            Dim Forma As New SeleccionarPeriodoAutom
+
+            Forma.gInicial = cboperiodo.SelectedIndex
+            Forma.gSerie = cboserie.SelectedIndex
+
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                'Añadir ciclo for segun sea quince o siete días
+
+                Dim sql As String
+                Dim Msg As String
+                Dim FechaBase As String
+                Dim FechaInicio As String
+                Dim FechaFin As Date
+                Dim PeriodoSelec As String
+                Dim i As Integer
+                Dim rwDate As DataRow
+                Dim FechaFinQ As String
+                Dim FechaInicioQ As String
+                Dim FechaFinQ2 As String
+                Dim FechaInicioQ2 As String
+                Dim Lastday
+
+                'Datos de la BD
+                Dim TipoPeriodo As String
+                Dim NumeroPeriodo As String
+                Dim Ejercicio As String
+                Dim DiasPago As String
+                Dim Septimos As String
+                Dim FinEjercicio As String
+                Dim MesAnt As String
+                Dim DiaAnt As String
+                Dim Empresa As String
+                Dim Estatus As String
+                Dim FinMes As String
+                Dim TipoPeriodo2 As String
+
+                'Parseo a Integer
+
+                'Dim iTipoPeriodo = Integer.Parse(TipoPeriodo)
+                'Dim iNumeroPeriodo = Integer.Parse(NumeroPeriodo)
+                'Dim iEjercicio = Integer.Parse(Ejercicio)
+                'Dim iDiasPago = Integer.Parse(DiasPago)
+                'Dim iSeptimos = Integer.Parse(Septimos)
+                'Dim iEmpresa = Integer.Parse(Empresa)
+                'Dim iEstatus = Integer.Parse(Estatus)
+
+                'Variables
+
+                Dim Mes As String
+                Dim Year As String
+                Dim Day As String
+
+
+                'Dim semanas As Integer = DatePart(DateInterval.WeekOfYear, CDate(FechaInicio).Year, FirstDayOfWeek.Monday, FirstWeekOfYear.FirstFullWeek)
+                sql = "SELECT * FROM periodos where iIdPeriodo = " & Forma.gInicial
+
+                Dim rwPeriodos As DataRow() = nConsulta(sql)
+
+                FechaBase = rwPeriodos(0)("dFechaFin").ToString
+
+                TipoPeriodo2 = rwPeriodos(0)("iSeptimos").ToString
+
+                'Format(FechaBase, "dd-MM-yyTHH:mm:ss")
+
+                FechaInicio = FechaBase
+
+                FechaInicioQ = FechaBase
+
+                If TipoPeriodo2 = 1 Then
+
+                    MesAnt = CDate(FechaInicio).Month
+                    DiaAnt = CDate(FechaInicio).Day
+
+                    'Validar semanas
+
+                    For i = 1 To 60  'variable numero de semanas
+
+                        FechaInicio = DateAdd("d", 1, FechaInicio)
+                        FechaFin = DateAdd("d", 6, FechaInicio)
+                        Year = CDate(FechaFin).Year
+                        TipoPeriodo = 3
+                        Mes = CDate(FechaInicio).Month
+                        'MonthNumber = CDbl(Mes)
+                        Ejercicio = CDate(FechaInicio).Year
+                        FinEjercicio = CDate(FechaFin).Year
+                        DiasPago = 6
+                        Septimos = 1
+                        Empresa = 1
+                        Estatus = 1
+                        NumeroPeriodo = i
+                        Day = CDate(FechaFin).Day
+
+                        If NumeroPeriodo >= 51 Then
+
+                            Mes = 12
+
+                        End If
+
+                        Msg = "Datos ingresados correctamente"
+
+                        'Msg += " Fecha inicio: " & FechaInicio + " Fecha fin: " & FechaFin + " TipoPeriodo: " & TipoPeriodo + " Numperiodo" & NumeroPeriodo + " Ejercicio" & Ejercicio + " Dias Pago: " & DiasPago + " Septimos: " & Septimos + " Empresa: " & Empresa + " Estatus: " & Estatus + " Mes: " & Mes + vbCr
+
+                        sql = "EXEC setperiodosInsertarK 0,'" & TipoPeriodo & "','" & NumeroPeriodo & "','" & Ejercicio & "','" & Mes & "','" & DiasPago & "','" & Septimos & "','" & FechaInicio & "','" & FechaFin & "','" & Empresa & "','" & Estatus & "'"
+
+                        If nExecute(sql) = False Then
+                            MessageBox.Show("Error en el registro de los datos:  ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+                            Exit Sub
+                        End If
+
+                        If Mes = 12 And Day = 31 Then
+
+                            Exit For
+
+                        ElseIf Ejercicio < Year Then
+
+                            Exit For
+
+                        End If
+
+                        FechaInicio = FechaFin
+
+                    Next
+
+                    MsgBox(Msg)
+                    cargarperiodos()
+
+
+                ElseIf TipoPeriodo2 = 0 Then
+
+                    For i = 1 To 24
+
+                        FechaInicioQ = DateAdd("d", 1, FechaInicioQ)
+                        Year = CDate(FechaInicioQ).Year
+                        TipoPeriodo = 2
+                        Mes = CDate(FechaInicioQ).Month
+                        'MonthNumber = CDbl(Mes)
+                        DiasPago = 15
+                        Septimos = 0
+                        Empresa = 1
+                        Estatus = 1
+                        NumeroPeriodo = i
+                        Day = CDate(FechaInicioQ).Day
+
+                        If Day = 1 Then
+
+                            FechaInicioQ = FechaInicioQ
+
+                            FechaFinQ = DateAdd("d", 14, FechaInicioQ)
+
+                            Lastday = CDate(FechaFinQ).Day
+
+                        ElseIf Day = 16 Then
+
+                            FechaFinQ = DateAdd("d", 15, FechaInicioQ)
+
+                            Lastday = CDate(FechaFinQ).Day
+
+                            If Lastday = 3 Then ' Si es 28
+
+                                FechaFinQ = DateAdd("d", -3, FechaFinQ)
+
+                            ElseIf Lastday = 2 Then ' Si es 29
+
+                                FechaFinQ = DateAdd("d", -2, FechaFinQ)
+
+                            ElseIf Lastday = 1 Then 'Si es 30
+
+                                FechaFinQ = DateAdd("d", -1, FechaFinQ)
+
+                            ElseIf Lastday = 31 Then
+
+                                FechaFinQ = FechaFinQ
+
+                            End If
+
+                        End If
+
+                        sql = "EXEC setperiodosInsertarK 0,'" & TipoPeriodo & "','" & NumeroPeriodo & "','" & Year & "','" & Mes & "','" & DiasPago & "','" & Septimos & "','" & FechaInicioQ & "','" & FechaFinQ & "','" & Empresa & "','" & Estatus & "'"
+
+                        If nExecute(sql) = False Then
+                            MessageBox.Show("Error en el registro de los datos:  ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+                            Exit Sub
+                        End If
+
+                        Msg = " Datos insertados correctamente " '& FechaInicioQ + "Fecha Fin: " & FechaFinQ + " TipoPeriodo: " & +" Numperiodo" & +" Ejercicio" & +" Dias Pago: " & DiasPago + " Septimos: " & Septimos + " Empresa: " & Empresa + " Estatus: " & Estatus + vbCr
+
+                        FechaInicioQ = FechaFinQ
+
+                    Next
+
+                    MsgBox(Msg)
+
+                    cargarperiodos()
+
+                End If
+
+                'IntervalType = "d"
+                'FirstDate = Forma.gInicial
+                'Msg = "Fecha inicio: 03-jun-2024" + vbCr + "Fecha Fin: " & FechaFin + vbCr + "Fecha inicio:" & FechaInicio2 + vbCr + "Fecha Fin: " & FechaFin2
+
+                'MsgBox(Msg)
+
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString)
+        End Try
+    End Sub
+
+    Private Function Day(FechaFinQ As String) As Object
+        Throw New NotImplementedException
+    End Function
 End Class
 
