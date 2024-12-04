@@ -2957,12 +2957,24 @@ Public Class frmnominasmarinos
                             Dim rwPensionAntes As DataRow() = nConsulta(sql)
 
                             If rwPensionAntes Is Nothing = False Then
+                                Dim SubtotalAntesPensioVariable As Double
+                                'Transportacion Pension sin IMSS
+                                If EmpresaN = "Transportacion" Then
 
-                                TotalPercepciones = SUMAPERCEPCIONES
-                                Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", "0", dtgDatos.Rows(x).Cells(57).Value))
-                                isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(58).Value = "", "0", dtgDatos.Rows(x).Cells(58).Value))
-                                imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(59).Value = "", "0", dtgDatos.Rows(x).Cells(59).Value))
-                                Dim SubtotalAntesPensioVariable As Double = TotalPercepciones - Incapacidad - isr - imss
+                                    TotalPercepciones = SUMAPERCEPCIONES
+                                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", "0", dtgDatos.Rows(x).Cells(57).Value))
+                                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(58).Value = "", "0", dtgDatos.Rows(x).Cells(58).Value))
+                                    imss = 0
+                                    SubtotalAntesPensioVariable = TotalPercepciones - Incapacidad - isr
+                                Else
+
+                                    TotalPercepciones = SUMAPERCEPCIONES
+                                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", "0", dtgDatos.Rows(x).Cells(57).Value))
+                                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(58).Value = "", "0", dtgDatos.Rows(x).Cells(58).Value))
+                                    imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(59).Value = "", "0", dtgDatos.Rows(x).Cells(59).Value))
+                                    SubtotalAntesPensioVariable = TotalPercepciones - Incapacidad - isr - imss
+                                End If
+
 
                                 pension = 0
                                 For y As Integer = 0 To rwPensionAntes.Length - 1
