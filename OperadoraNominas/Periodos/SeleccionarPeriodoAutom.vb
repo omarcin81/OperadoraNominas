@@ -52,4 +52,7 @@
         End Try
     End Sub
 
+    Private Sub cbInicial_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbInicial.SelectedIndexChanged
+
+    End Sub
 End Class

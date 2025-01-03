@@ -110,6 +110,10 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+<<<<<<< HEAD
+=======
+        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+>>>>>>> origin/main
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -846,7 +850,7 @@ Partial Class frmnominasmarinos
         '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem, Me.GenerarPeriodoToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -931,6 +935,15 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
+<<<<<<< HEAD
+=======
+        'GenerarPeriodoToolStripMenuItem
+        '
+        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
+        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
+        '
+>>>>>>> origin/main
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1065,6 +1078,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents ReporteKatiaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdSoloISRE As System.Windows.Forms.Button
+    Friend WithEvents GenerarPeriodoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
