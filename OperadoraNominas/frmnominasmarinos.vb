@@ -104,6 +104,7 @@ Public Class frmnominasmarinos
             Dim frm As Form = Me
             frm.Text = "Nominas " '& Servidor.Base.ToString.Substring(0, 9)
             cargarperiodos()
+            verificarAniovsBD()
             Me.dtgDatos.ContextMenuStrip = Me.cMenu
             cboserie.SelectedIndex = 0
 
@@ -30540,5 +30541,25 @@ Public Class frmnominasmarinos
             MsgBox(ex.ToString)
         End Try
     End Sub
+
+    Private Sub verificarAniovsBD()
+        Dim anioBD As String
+        Dim anioactual As Integer
+        anioBD = "select top 1 * from salario order by anio desc"
+        Dim rwAnioBD As DataRow() = nConsulta(anioBD)
+
+        If rwAnioBD Is Nothing = False Then
+            anioactual = Date.Now.Year
+
+            If anioactual = CInt(rwAnioBD(0).Item("anio").ToString) Then
+
+            Else
+                MsgBox("Verfique las actualizacionesde inicio de año en su base ")
+            End If
+        Else
+            MsgBox("Verfique las actualizacionesde inicio de año en su base o contacte al administrador")
+        End If
+    End Sub
+
 End Class
 

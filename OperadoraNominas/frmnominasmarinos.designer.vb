@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdSoloISRE = New System.Windows.Forms.Button()
         Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
         Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
@@ -109,9 +110,6 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-
-        Me.cmdSoloISRE = New System.Windows.Forms.Button()
-
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -250,6 +248,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1507, 396)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdSoloISRE
+        '
+        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSoloISRE.Location = New System.Drawing.Point(637, 66)
+        Me.cmdSoloISRE.Name = "cmdSoloISRE"
+        Me.cmdSoloISRE.Size = New System.Drawing.Size(163, 27)
+        Me.cmdSoloISRE.TabIndex = 40
+        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
+        Me.cmdSoloISRE.UseVisualStyleBackColor = True
         '
         'cmdAdiCalculoEXC
         '
@@ -648,18 +656,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(188, 48)
+        Me.cMenu.Size = New System.Drawing.Size(186, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'cmdSubirNomF
@@ -923,18 +931,6 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-
-        'cmdSoloISRE
-        '
-        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSoloISRE.Location = New System.Drawing.Point(637, 66)
-        Me.cmdSoloISRE.Name = "cmdSoloISRE"
-        Me.cmdSoloISRE.Size = New System.Drawing.Size(163, 27)
-        Me.cmdSoloISRE.TabIndex = 40
-        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
-        Me.cmdSoloISRE.UseVisualStyleBackColor = True
-        '
-
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
