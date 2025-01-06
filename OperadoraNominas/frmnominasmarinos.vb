@@ -6032,7 +6032,7 @@ Public Class frmnominasmarinos
                 MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
             End If
 
-            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 9081 Then
+            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 10171 Then
                 subsidio = 0
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
                 SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=5" '& periodo
@@ -30542,7 +30542,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-<<<<<<< HEAD
+
     Private Sub verificarAniovsBD()
         Dim anioBD As String
         Dim anioactual As Integer
@@ -30562,7 +30562,6 @@ Public Class frmnominasmarinos
         End If
     End Sub
 
-=======
 
 
     Private Sub GenerarPeriodoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GenerarPeriodoToolStripMenuItem.Click
@@ -30782,6 +30781,6 @@ Public Class frmnominasmarinos
     Private Function Day(FechaFinQ As String) As Object
         Throw New NotImplementedException
     End Function
->>>>>>> origin/main
+
 End Class
 

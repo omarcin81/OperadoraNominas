@@ -110,10 +110,7 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-<<<<<<< HEAD
-=======
         Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
->>>>>>> origin/main
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -935,15 +932,11 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-<<<<<<< HEAD
-=======
         'GenerarPeriodoToolStripMenuItem
         '
         Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
         Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
-        '
->>>>>>> origin/main
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
