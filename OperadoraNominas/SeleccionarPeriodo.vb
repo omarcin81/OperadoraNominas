@@ -44,8 +44,8 @@
 
     Private Sub btnAceptar_Click(sender As System.Object, e As System.EventArgs) Handles btnAceptar.Click
         Try
-            gInicial = cbInicial.SelectedIndex + 1
-            gFinal = cbFinal.SelectedIndex + 1
+            gInicial = cbInicial.SelectedValue
+            gFinal = cbFinal.SelectedValue
             gSerie = cboserie.SelectedIndex
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()

@@ -33,7 +33,7 @@
 
     Private Sub pnlDatos_EnabledChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlDatos.EnabledChanged
         Limpiar(pnlDatos)
-
+        dtpFechaInicio.Value = Date.Now
         tsbNuevo.Enabled = Not pnlDatos.Enabled
         tsbGuardar.Enabled = pnlDatos.Enabled
         tsbCancelar.Enabled = pnlDatos.Enabled
@@ -42,6 +42,8 @@
     End Sub
 
     Private Sub tsbNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbNuevo.Click
+        dtpFechaInicio.Value = Date.Now
+
         blnNuevo = True
         pnlDatos.Enabled = True
     End Sub
@@ -74,7 +76,7 @@
                 SQL &= ",1"
             Else
                 'Actualizar
-
+                'validar si tiene
                 SQL = "EXEC setIncapacidadActualizar " & IdIncapacidad & "," & gIdEmpleado & ",'" & txtFolio.Text
                 SQL &= "'," & cboTipo.SelectedIndex
                 SQL &= "," & nudDias.Value
@@ -89,6 +91,30 @@
             If nExecute(Sql) = False Then
                 Exit Sub
             End If
+            'Guardar el detalle de la incapacidad
+
+            'generar dia a dia, sacar los dias en el un for
+            'buscar el periodo para asignarlo
+
+
+
+            For x As Integer = 0 To nudDias.Value - 1
+                'Insertar nuevo
+                SQL = "EXEC IncapacidadDetalle 0," & gIdEmpleado & ",'" & txtFolio.Text
+                SQL &= "'," & cboTipo.SelectedIndex
+                SQL &= "," & nudDias.Value
+                SQL &= ",'" & dtpFechaInicio.Value.ToShortDateString
+                SQL &= "','" & calculofechafinal(dtpFechaInicio.Value, nudDias.Value)
+                SQL &= "'," & cboRamoSeguro.SelectedIndex
+                SQL &= "," & cboriesgo.SelectedIndex
+                SQL &= "," & nudPorcentaje.Value
+                SQL &= ",1"
+                If nExecute(SQL) = False Then
+                    Exit Sub
+                End If
+            Next
+
+
 
             MessageBox.Show("Los datos de la incapacidad se han dado de alta correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             ListarIncapacidad()
