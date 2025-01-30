@@ -2859,6 +2859,9 @@ Public Class frmnominasmarinos
                             ADICIONALES = ADICIONALES + VACACIONESPRO + AGUINALDOGRA + PRIMAVACGRA
 
                             'ISR
+                            If dtgDatos.Rows(x).Cells(2).Value = "51" Then
+                                MsgBox("Si esta")
+                            End If
                             If DiasCadaPeriodo = 7 Then
                                 'TipoPeriodoinfoonavit = 3
                                 'dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, DiasCadaPeriodo)), 2).ToString("###,##0.00")
@@ -3137,7 +3140,7 @@ Public Class frmnominasmarinos
                                 'SUELDOBRUTON = Double.Parse(IIf(dtgDatos.Rows(x).Cells(29).Value = "", 0, dtgDatos.Rows(x).Cells(29).Value))
                             Else
                                 dtgDatos.Rows(x).Cells(67).Value = "0.00"
-                                End If
+                            End If
 
 
 
@@ -6021,7 +6024,7 @@ Public Class frmnominasmarinos
             '1.- buscamos datos para el calculo
             isr = 0
             SQL = "select * from isr where ((" & monto & ">=isr.limiteinf and " & monto & "<=isr.limitesup)"
-            SQL &= " or (" & monto & ">=isr.limiteinf and isr.limitesup=0)) and fkiIdTipoPeriodo2=" & periodo & "and anio=" & aniocostosocial
+            SQL &= " or (" & monto & ">=isr.limiteinf and isr.limitesup=0)) and fkiIdTipoPeriodo2=" & periodo & " and anio=" & aniocostosocial
 
 
             Dim rwISRCALCULO As DataRow() = nConsulta(SQL)
