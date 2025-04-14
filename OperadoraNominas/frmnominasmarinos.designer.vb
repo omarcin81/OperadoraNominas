@@ -95,6 +95,7 @@ Partial Class frmnominasmarinos
         Me.AcumuladoProvisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReporteKatiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,6 +111,8 @@ Partial Class frmnominasmarinos
         Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.cmdSoloISRE = New System.Windows.Forms.Button()
+        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -210,6 +213,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdSoloISRE)
         Me.pnlCatalogo.Controls.Add(Me.cmdAdiCalculoEXC)
         Me.pnlCatalogo.Controls.Add(Me.cmdSumatoriaE)
         Me.pnlCatalogo.Controls.Add(Me.chkPrimaDominical)
@@ -743,7 +747,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem, Me.ReporteKatiaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -827,9 +831,15 @@ Partial Class frmnominasmarinos
         Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
         '
+        'ReporteKatiaToolStripMenuItem
+        '
+        Me.ReporteKatiaToolStripMenuItem.Name = "ReporteKatiaToolStripMenuItem"
+        Me.ReporteKatiaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.ReporteKatiaToolStripMenuItem.Text = "Reporte Katia"
+        '
         'CalculosToolStripMenuItem
         '
-        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem})
+        Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem, Me.GenerarPeriodoToolStripMenuItem})
         Me.CalculosToolStripMenuItem.Name = "CalculosToolStripMenuItem"
         Me.CalculosToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.CalculosToolStripMenuItem.Text = "Calculos"
@@ -911,7 +921,7 @@ Partial Class frmnominasmarinos
         'CalcularToolStripMenuItem
         '
         Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
-        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.CalcularToolStripMenuItem.Text = "Calcular"
         '
         'chkVales
@@ -926,6 +936,22 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
+        '
+        'cmdSoloISRE
+        '
+        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSoloISRE.Location = New System.Drawing.Point(686, 67)
+        Me.cmdSoloISRE.Name = "cmdSoloISRE"
+        Me.cmdSoloISRE.Size = New System.Drawing.Size(157, 27)
+        Me.cmdSoloISRE.TabIndex = 40
+        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
+        Me.cmdSoloISRE.UseVisualStyleBackColor = True
+        '
+        'GenerarPeriodoToolStripMenuItem
+        '
+        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
+        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
         '
         'frmnominasmarinos
         '
@@ -1060,4 +1086,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TMmEspecialToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CalcularToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReporteKatiaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdSoloISRE As Button
+    Friend WithEvents GenerarPeriodoToolStripMenuItem As ToolStripMenuItem
 End Class

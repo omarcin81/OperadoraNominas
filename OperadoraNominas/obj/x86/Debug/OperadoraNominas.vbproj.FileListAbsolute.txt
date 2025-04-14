@@ -40,3 +40,15 @@ E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug
 E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.cache
 E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.CoreCompileInputs.cache
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\DocumentFormat.OpenXml.dll
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\stdole.dll
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\bin\Debug\DocumentFormat.OpenXml.xml
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.CopyComplete
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+E:\Programacion\Desarrollo\TMMSQ\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.AssemblyReference.cache
