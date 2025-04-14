@@ -2,17 +2,16 @@
     Public gInicial As Integer
     Public gFinal As Integer
     Public gSerie As Integer
-   
+
     Private Sub SeleccionarPeriodo_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
 
-       
 
-        cargarperiodosinicial()
-        cargarperiodosfinal()
+            cargarperiodosinicial()
+            cargarperiodosfinal()
 
-        cbInicial.SelectedIndex = gInicial
-        cbFinal.SelectedIndex = gFinal
+            cbInicial.SelectedIndex = gInicial
+            cbFinal.SelectedIndex = gFinal
             cboserie.SelectedIndex = gSerie
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -45,8 +44,8 @@
 
     Private Sub btnAceptar_Click(sender As System.Object, e As System.EventArgs) Handles btnAceptar.Click
         Try
-            gInicial = cbInicial.SelectedIndex + 1
-            gFinal = cbFinal.SelectedIndex + 1
+            gInicial = cbInicial.SelectedValue
+            gFinal = cbFinal.SelectedValue
             gSerie = cboserie.SelectedIndex
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
@@ -56,5 +55,5 @@
         End Try
     End Sub
 
-   
+
 End Class

@@ -321,6 +321,12 @@
     <Compile Include="pension\frmPensionA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Periodos\SeleccionarPeriodoAutom.Designer.vb">
+      <DependentUpon>SeleccionarPeriodoAutom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Periodos\SeleccionarPeriodoAutom.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="prestamo\frmEstatusPres.Designer.vb">
       <DependentUpon>frmEstatusPres.vb</DependentUpon>
     </Compile>
@@ -480,6 +486,9 @@
     <EmbeddedResource Include="pension\frmPensionA.resx">
       <DependentUpon>frmPensionA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Periodos\SeleccionarPeriodoAutom.resx">
+      <DependentUpon>SeleccionarPeriodoAutom.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="prestamo\frmEstatusPres.resx">
       <DependentUpon>frmEstatusPres.vb</DependentUpon>
     </EmbeddedResource>
@@ -512,6 +521,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="bin\Debug\Archivos\TMM.xlsx" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

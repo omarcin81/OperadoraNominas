@@ -37,6 +37,7 @@ Public Class frmSubirDatos
             tsbProcesar_Click(sender, e)
             End If
         Catch ex As Exception
+            Me.Enabled = False
             MsgBox(ex.Message)
         End Try
     End Sub

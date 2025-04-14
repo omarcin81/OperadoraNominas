@@ -77,7 +77,7 @@ Partial Class frmSubirSD
         '
         Me.cboIncidencia.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboIncidencia.FormattingEnabled = True
-        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL V", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "BONO CALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO SIN GOCE DE SUELDO", "SUELDO PENDIENTE", "COMPENSACION", "FONACOT", "PRIMA DOMINICAL IMPORTE", "PRESTAMO IMPORTE", "INFONAVITBIMANTERIOR", "EXCEDENTE MANUAL"})
+        Me.cboIncidencia.Items.AddRange(New Object() {"TIEMPO EXTRA DOBLE", "TIEMPO EXTRA TRIPLE", "DESCANSO LABORADO", "FESTIVO LABORADO", "PRIMA DOMINICAL V", "BONO ASISTENCIA", "BONO PRODUCTIVIDAD", "BONO POLIVALENCIA", "BONO ESPECIALIDAD", "BONO CALIDAD", "TIEMPO NO LABORADO", "FALTAS INJUTIFICADAS", "PERMISO SIN GOCE DE SUELDO", "SUELDO PENDIENTE", "COMPENSACION", "FONACOT", "PRIMA DOMINICAL IMPORTE", "PRESTAMO IMPORTE", "INFONAVITBIMANTERIOR", "EXCEDENTE MANUAL", "INFONAVIT PERIODO"})
         Me.cboIncidencia.Location = New System.Drawing.Point(126, 7)
         Me.cboIncidencia.Name = "cboIncidencia"
         Me.cboIncidencia.Size = New System.Drawing.Size(191, 27)
@@ -416,7 +416,7 @@ Partial Class frmSubirSD
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
         '
-        'frmSubirIncidencias
+        'frmSubirSD
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1121, 637)
@@ -424,7 +424,7 @@ Partial Class frmSubirSD
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.pnlCatalogo)
-        Me.Name = "frmSubirIncidencias"
+        Me.Name = "frmSubirSD"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Subir incidencias"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

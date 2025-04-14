@@ -107,9 +107,9 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -901,19 +901,6 @@ Partial Class frmnominasmarinos
         Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
         '
-        'chkVales
-        '
-        Me.chkVales.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkVales.AutoSize = True
-        Me.chkVales.BackColor = System.Drawing.Color.Transparent
-        Me.chkVales.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkVales.Location = New System.Drawing.Point(985, 493)
-        Me.chkVales.Name = "chkVales"
-        Me.chkVales.Size = New System.Drawing.Size(130, 22)
-        Me.chkVales.TabIndex = 44
-        Me.chkVales.Text = "No calcular vales"
-        Me.chkVales.UseVisualStyleBackColor = False
-        '
         'TMmEspecialToolStripMenuItem
         '
         Me.TMmEspecialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularToolStripMenuItem})
@@ -926,6 +913,19 @@ Partial Class frmnominasmarinos
         Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
         Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CalcularToolStripMenuItem.Text = "Calcular"
+        '
+        'chkVales
+        '
+        Me.chkVales.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkVales.AutoSize = True
+        Me.chkVales.BackColor = System.Drawing.Color.Transparent
+        Me.chkVales.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkVales.Location = New System.Drawing.Point(985, 493)
+        Me.chkVales.Name = "chkVales"
+        Me.chkVales.Size = New System.Drawing.Size(130, 22)
+        Me.chkVales.TabIndex = 44
+        Me.chkVales.Text = "No calcular vales"
+        Me.chkVales.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
