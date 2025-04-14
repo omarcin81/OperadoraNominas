@@ -106,8 +106,10 @@ Partial Class frmnominasmarinos
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkVales = New System.Windows.Forms.CheckBox()
         Me.SubirFiniquitosMasivosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -643,18 +645,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(186, 48)
+        Me.cMenu.Size = New System.Drawing.Size(187, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'cmdSubirNomF
@@ -732,7 +734,7 @@ Partial Class frmnominasmarinos
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem, Me.FiniquitoToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReporteToolStripMenuItem, Me.CalculosToolStripMenuItem, Me.FiniquitoToolStripMenuItem, Me.TMmEspecialToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1439, 24)
@@ -893,6 +895,12 @@ Partial Class frmnominasmarinos
         Me.SubirLoteFiniquitoToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SubirLoteFiniquitoToolStripMenuItem.Text = "Subir Lote Finiquito"
         '
+        'SubirFiniquitosMasivosToolStripMenuItem
+        '
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
+        '
         'chkVales
         '
         Me.chkVales.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -906,11 +914,18 @@ Partial Class frmnominasmarinos
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
         '
-        'SubirFiniquitosMasivosToolStripMenuItem
+        'TMmEspecialToolStripMenuItem
         '
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Name = "SubirFiniquitosMasivosToolStripMenuItem"
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.SubirFiniquitosMasivosToolStripMenuItem.Text = "Subir Finiquitos Masivos"
+        Me.TMmEspecialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularToolStripMenuItem})
+        Me.TMmEspecialToolStripMenuItem.Name = "TMmEspecialToolStripMenuItem"
+        Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
+        Me.TMmEspecialToolStripMenuItem.Text = "TMm Especial"
+        '
+        'CalcularToolStripMenuItem
+        '
+        Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
+        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CalcularToolStripMenuItem.Text = "Calcular"
         '
         'frmnominasmarinos
         '
@@ -1043,5 +1058,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents ValidarSoloISRToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerTablaDeISRActualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubirFiniquitosMasivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
+    Friend WithEvents TMmEspecialToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CalcularToolStripMenuItem As ToolStripMenuItem
 End Class
