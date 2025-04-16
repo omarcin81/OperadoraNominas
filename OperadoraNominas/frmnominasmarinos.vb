@@ -7243,7 +7243,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 23, 6, espace + 25, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta GROESSINGER"
+                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
                     hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 23, "F").FormulaA1 = "=F" & espace + 2
                     hoja.Cell(espace + 24, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
@@ -7256,7 +7256,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 14, 6, espace + 16, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 14, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta GROESSINGER"
+                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
                     hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
@@ -7392,11 +7392,11 @@ Public Class frmnominasmarinos
 
                 'Para fondeo BBVA Exce
 
-                hoja2.Cell(filaExcel + 4, 11).Value = "BBVA BANCOMER"
-                hoja2.Cell(filaExcel + 5, 11).Value = "TERCEROS"
+                hoja2.Cell(filaExcel + 4, 11).Value = "SINDICATO"
+                hoja2.Cell(filaExcel + 5, 11).Value = "PPP"
 
-                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""BBVA BANCOMER"",L6:L" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""SINDICATO"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""<>SINDICATO"",L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
                 'STILO
@@ -10847,7 +10847,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 23, 6, espace + 25, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta GROESSINGER"
+                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
                     hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 23, "F").FormulaA1 = "=F" & espace + 2
                     hoja.Cell(espace + 24, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
@@ -10860,7 +10860,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 14, 6, espace + 16, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 14, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta GROESSINGER"
+                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
                     hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
@@ -11020,11 +11020,11 @@ Public Class frmnominasmarinos
 
                 'Para fondeo BBVA Exce
 
-                hoja2.Cell(filaExcel + 4, 11).Value = "BBVA BANCOMER"
-                hoja2.Cell(filaExcel + 5, 11).Value = "TERCEROS"
+                hoja2.Cell(filaExcel + 4, 11).Value = "SINDICATO"
+                hoja2.Cell(filaExcel + 5, 11).Value = "PPP"
 
-                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""BBVA BANCOMER"",L6:L" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>BBVA BANCOMER"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""SINDICATO"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""<>SINDICATO"",L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
                 recorrerFilasColumnas(hoja2, 1, 3, 200, "clear")
@@ -31783,6 +31783,9 @@ Public Class frmnominasmarinos
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                                 totalPrimaAntig = 4133.45
                                 totalIndeminizacion = 16885.28
+                            ElseIf EmpresaN = "TMMS" Then
+                                totalPrimaAntig = 4133.45
+                                totalIndeminizacion = 16885.28
                             End If
 
                             'calculo prima antiguedad
@@ -31821,7 +31824,10 @@ Public Class frmnominasmarinos
 
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                                     dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                ElseIf EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(91).Value = totalPrimaAntig
                                 Else
+
                                     dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count - 1), 2)
                                 End If
 
@@ -31836,7 +31842,12 @@ Public Class frmnominasmarinos
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
-                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                If EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
+                                Else
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                End If
+
                             ElseIf tipoperiodos2Calculo = 3 Then
 
                                 If EmpresaN = "Logistic" Then

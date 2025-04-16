@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdSoloISRE = New System.Windows.Forms.Button()
         Me.cmdAdiCalculoEXC = New System.Windows.Forms.Button()
         Me.cmdSumatoriaE = New System.Windows.Forms.Button()
         Me.chkPrimaDominical = New System.Windows.Forms.CheckBox()
@@ -104,6 +105,7 @@ Partial Class frmnominasmarinos
         Me.CalcularSoloValesDeDespensaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ValidarSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerTablaDeISRActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubirLoteFiniquitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -111,8 +113,6 @@ Partial Class frmnominasmarinos
         Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-        Me.cmdSoloISRE = New System.Windows.Forms.Button()
-        Me.GenerarPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -251,6 +251,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1507, 396)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdSoloISRE
+        '
+        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSoloISRE.Location = New System.Drawing.Point(686, 67)
+        Me.cmdSoloISRE.Name = "cmdSoloISRE"
+        Me.cmdSoloISRE.Size = New System.Drawing.Size(157, 27)
+        Me.cmdSoloISRE.TabIndex = 40
+        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
+        Me.cmdSoloISRE.UseVisualStyleBackColor = True
         '
         'cmdAdiCalculoEXC
         '
@@ -886,6 +896,12 @@ Partial Class frmnominasmarinos
         Me.VerTablaDeISRActualToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
         Me.VerTablaDeISRActualToolStripMenuItem.Text = "Ver tabla de ISR actual"
         '
+        'GenerarPeriodoToolStripMenuItem
+        '
+        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
+        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
+        '
         'FiniquitoToolStripMenuItem
         '
         Me.FiniquitoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubirFiniquitoToolStripMenuItem, Me.SubirLoteFiniquitoToolStripMenuItem, Me.SubirFiniquitosMasivosToolStripMenuItem})
@@ -916,12 +932,12 @@ Partial Class frmnominasmarinos
         Me.TMmEspecialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularToolStripMenuItem})
         Me.TMmEspecialToolStripMenuItem.Name = "TMmEspecialToolStripMenuItem"
         Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
-        Me.TMmEspecialToolStripMenuItem.Text = "TMm Especial"
+        Me.TMmEspecialToolStripMenuItem.Text = "TMM Especial"
         '
         'CalcularToolStripMenuItem
         '
         Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
-        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CalcularToolStripMenuItem.Text = "Calcular"
         '
         'chkVales
@@ -936,22 +952,6 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
-        '
-        'cmdSoloISRE
-        '
-        Me.cmdSoloISRE.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSoloISRE.Location = New System.Drawing.Point(686, 67)
-        Me.cmdSoloISRE.Name = "cmdSoloISRE"
-        Me.cmdSoloISRE.Size = New System.Drawing.Size(157, 27)
-        Me.cmdSoloISRE.TabIndex = 40
-        Me.cmdSoloISRE.Text = "Calcular solo ISR EXCE"
-        Me.cmdSoloISRE.UseVisualStyleBackColor = True
-        '
-        'GenerarPeriodoToolStripMenuItem
-        '
-        Me.GenerarPeriodoToolStripMenuItem.Name = "GenerarPeriodoToolStripMenuItem"
-        Me.GenerarPeriodoToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.GenerarPeriodoToolStripMenuItem.Text = "Generar periodo"
         '
         'frmnominasmarinos
         '
