@@ -3334,10 +3334,10 @@ Public Class frmnominasmarinos
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
 
 
