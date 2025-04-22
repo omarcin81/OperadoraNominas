@@ -3358,18 +3358,19 @@ Public Class frmnominasmarinos
 
                                         If calcularvalessemanal Then
                                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 Dim a() As String
                                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                 If a.Length > 1 Then
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
+
 
 
 
@@ -3475,11 +3476,11 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = (5481.75 / 30)
                                 totalIndeminizacion = (12069.53 / 30)
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 2238.95
-                                totalIndeminizacion = 9146.19
+                                totalPrimaAntig = 1797.62
+                                totalIndeminizacion = 9314.29
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 4133.45
-                                totalIndeminizacion = 16885.28
+                                totalPrimaAntig = 4059.11
+                                totalIndeminizacion = 15877.93
                             End If
 
                             'calculo prima antiguedad
@@ -4735,17 +4736,17 @@ Public Class frmnominasmarinos
                                             'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
                                             If EmpresaN <> "IDN" Then
                                                 If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                    Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     Dim a() As String
                                                     a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                     If a.Length > 1 Then
                                                         If CInt(a(1)) > 0 Then
                                                             dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                         Else
-                                                            dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                            dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                         End If
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
 
 
@@ -4768,17 +4769,17 @@ Public Class frmnominasmarinos
 
                                         If calcularvalessemanal Then
                                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 Dim a() As String
                                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                 If a.Length > 1 Then
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3459, 3459, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
 
 
@@ -4843,6 +4844,34 @@ Public Class frmnominasmarinos
 
 
                             'provisiones
+                            'Tablas Provisiones
+                            Dim totalPrimaAntig As Double
+                            Dim totalIndeminizacion As Double
+
+                            If EmpresaN = "ATL" Then
+                                totalPrimaAntig = 1142.04
+                                totalIndeminizacion = 7457.42
+                            ElseIf EmpresaN = "TMMDC" Then
+                                totalPrimaAntig = 9864.75
+                                totalIndeminizacion = 87670.46
+                            ElseIf EmpresaN = "Transportacion" Then
+                                totalPrimaAntig = 7162.58
+                                totalIndeminizacion = 54904.67
+                            ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "Logistic" Then
+                                totalPrimaAntig = 12790.75
+                                totalIndeminizacion = 28162.23
+                            ElseIf NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                ' Es diferente por que es de acuerdo a la cantidad de semanas por mes
+                                totalPrimaAntig = (5481.75 / 30)
+                                totalIndeminizacion = (12069.53 / 30)
+                            ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
+                                totalPrimaAntig = 1797.61
+                                totalIndeminizacion = 9314.29
+                            ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
+                                totalPrimaAntig = 4059.11
+                                totalIndeminizacion = 15877.93
+                            End If
+
                             'aguinaldo
                             If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                                 dtgDatos.Rows(x).Cells(89).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(24).Value) * 15 / 365 * Double.Parse(dtgDatos.Rows(x).Cells(26).Value), 2)
@@ -4894,7 +4923,13 @@ Public Class frmnominasmarinos
                                 End If
                                 SueldoBASEPA = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) < (ValorSD * 2), CDbl(dtgDatos.Rows(x).Cells(24).Value), ValorSD * 2)
 
-                                dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
+                                ' dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
+
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                Else
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round(totalPrimaAntig / (dtgDatos.Rows.Count - 1), 2)
+                                End If
 
                             End If
 
@@ -4904,13 +4939,24 @@ Public Class frmnominasmarinos
                             If tipoperiodos2Calculo = 2 Then
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
+                                'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
+
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                Else
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                End If
 
                             ElseIf tipoperiodos2Calculo = 3 Then
 
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
-                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
+                                'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                Else
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                End If
                             End If
 
 
@@ -22122,11 +22168,11 @@ Public Class frmnominasmarinos
                     totalPrimaAntig = (5481.75 / 30)
                     totalIndeminizacion = (12069.53 / 30)
                 ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                    totalPrimaAntig = 2238.95
-                    totalIndeminizacion = 9146.19
+                    totalPrimaAntig = 1797.61
+                    totalIndeminizacion = 9314.29
                 ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                    totalPrimaAntig = 4133.45
-                    totalIndeminizacion = 16885.28
+                    totalPrimaAntig = 4059.11
+                    totalIndeminizacion = 15877.93
                 End If
 
                 Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
@@ -24076,13 +24122,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439.70,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -24665,13 +24711,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -24959,13 +25005,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -25254,13 +25300,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -25546,13 +25592,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -26611,13 +26657,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3153.70,3153.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439.70,3439.70,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -31630,18 +31676,19 @@ Public Class frmnominasmarinos
                                             'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
 
                                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 Dim a() As String
                                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                 If a.Length > 1 Then
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
+
 
 
 
@@ -31668,10 +31715,10 @@ Public Class frmnominasmarinos
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3301, 3301.0, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
 
 
@@ -31778,15 +31825,16 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = (5481.75 / 30)
                                 totalIndeminizacion = (12069.53 / 30)
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 2238.95
-                                totalIndeminizacion = 9146.19
+                                totalPrimaAntig = 1797.62
+                                totalIndeminizacion = 9314.29
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 4133.45
-                                totalIndeminizacion = 16885.28
+                                totalPrimaAntig = 4059.11
+                                totalIndeminizacion = 15877.93
                             ElseIf EmpresaN = "TMMS" Then
                                 totalPrimaAntig = 4133.45
                                 totalIndeminizacion = 16885.28
                             End If
+
 
                             'calculo prima antiguedad
                             'Se tiene que calcular a la fecha final del periodo que se calcula, se genera y de ahi se toman los valores de los ultumos dias correspondientes al periodo del periodo
@@ -31842,7 +31890,9 @@ Public Class frmnominasmarinos
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
-                                If EmpresaN = "TMMS" Then
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                ElseIf EmpresaN = "TMMS" Then
                                     dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
                                 Else
                                     dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
