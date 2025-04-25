@@ -3516,13 +3516,14 @@ Public Class frmnominasmarinos
                                 SueldoBASEPA = IIf(CDbl(dtgDatos.Rows(x).Cells(24).Value) < (ValorSD * 2), CDbl(dtgDatos.Rows(x).Cells(24).Value), ValorSD * 2)
 
                                 'dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
-
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count), 2)
+                                ElseIf EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(91).Value = totalPrimaAntig
                                 Else
-                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count - 1), 2)
-                                End If
 
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count), 2)
+                                End If
 
 
                             End If
@@ -3534,13 +3535,22 @@ Public Class frmnominasmarinos
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
-                                dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
+                                ElseIf EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
+                                Else
+
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion) / (dtgDatos.Rows.Count), 2)
+                                End If
+
+
                             ElseIf tipoperiodos2Calculo = 3 Then
 
-                                If EmpresaN = "Logistic" Then
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
                                 Else
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count), 2)
                                 End If
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
@@ -4870,6 +4880,9 @@ Public Class frmnominasmarinos
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                                 totalPrimaAntig = 4059.11
                                 totalIndeminizacion = 15877.93
+                            ElseIf EmpresaN = "TMMS" Then
+                                totalPrimaAntig = 4059.11
+                                totalIndeminizacion = 15877.93
                             End If
 
                             'aguinaldo
@@ -4926,9 +4939,12 @@ Public Class frmnominasmarinos
                                 ' dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
 
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count), 2)
+                                ElseIf EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(91).Value = totalPrimaAntig
                                 Else
-                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round(totalPrimaAntig / (dtgDatos.Rows.Count - 1), 2)
+
+                                    dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count), 2)
                                 End If
 
                             End If
@@ -4940,11 +4956,13 @@ Public Class frmnominasmarinos
 
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
-
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
+                                ElseIf EmpresaN = "TMMS" Then
+                                    dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
                                 Else
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion) / (dtgDatos.Rows.Count), 2)
                                 End If
 
                             ElseIf tipoperiodos2Calculo = 3 Then
@@ -4953,9 +4971,9 @@ Public Class frmnominasmarinos
                                 'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
                                 'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 7, 2) 'pro indemnizacion
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
                                 Else
-                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                                    dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count), 2)
                                 End If
                             End If
 
@@ -18512,16 +18530,16 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 73).Value = rwFilas(x).Item("fCuotaSindical")
                         hoja.Cell(filaExcel + x, 74).Value = rwFilas(x).Item("fSubsidioGenerado")
                         hoja.Cell(filaExcel + x, 75).Value = rwFilas(x).Item("fSubsidioAplicado")
-                        hoja.Cell(filaExcel + x, 76).Value = deduccionestotal
+                        hoja.Cell(filaExcel + x, 76).Value = deduccionestotal 'Deduccion Totales
                         hoja.Cell(filaExcel + x, 77).Value = rwFilas(x).Item("NETO_SA")
-                        hoja.Cell(filaExcel + x, 78).FormulaA1 = rwComplemento(0)("Vales").ToString 'rwFilas(x).Item("fAdeudoInfonavitA")
+                        hoja.Cell(filaExcel + x, 78).FormulaA1 = rwComplemento(0)("Vales").ToString 'VALES DE DESPENSA BZ rwFilas(x).Item("fAdeudoInfonavitA")
                         hoja.Cell(filaExcel + x, 79).Value = tipoexcdente  'ppp/sind
                         hoja.Cell(filaExcel + x, 80).Value = totalexcedente 'excdenete
                         hoja.Cell(filaExcel + x, 81).FormulaA1 = IIf(tipoperiodos2 = 2, "=IF(BZ" & filaExcel + x & "=""PPP"",((AF" & filaExcel + x & "/1.0493)*15.2)*0.03,0)", "0")
                         hoja.Cell(filaExcel + x, 82).Value = 0 'rwFilas(x).Item("fComisionOperadora")
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
-                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x 'cuota imss
+                        hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x & "BM" & filaExcel + x 'cuota imss
                         hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                         hoja.Cell(filaExcel + x, 87).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                         hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fRcvCS")
@@ -19124,13 +19142,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -19196,7 +19214,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)   ' Double.Parse(rwComplemento(0).Item("fRcvCS"))
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -19407,13 +19425,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -19477,7 +19495,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -19685,13 +19703,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -19755,7 +19773,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  ' Double.Parse(rwComplemento(0).Item("fRcvCS"))
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -19961,13 +19979,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -20031,7 +20049,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'Double.Parse(rwComplemento(0).Item("fRcvCS"))
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -20241,13 +20259,13 @@ Public Class frmnominasmarinos
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 2 = 0 Then
                                         valesDespensa = 0
                                     Else
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
 
                                     End If
 
                                 ElseIf tipoperiodos2 = 3 Then
                                     If rwComplemento(0).Item("fkiIdPeriodo") Mod 4 = 0 Then
-                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3301,3301,(AD" & filaExcel + x & "*9%)),0)" 'VALES
+                                        valesDespensa = "=ROUNDUP(IF((AD" & filaExcel + x & "*9%)>=3439,3439,(AD" & filaExcel + x & "*9%)),0)" 'VALES
                                     Else
                                         valesDespensa = 0
                                     End If
@@ -20311,7 +20329,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'Double.Parse(rwComplemento(0).Item("fRcvCS"))
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -20587,7 +20605,7 @@ Public Class frmnominasmarinos
                             fila.Item("fRcvCS") = rwComplemento(0).Item("fRcvCS")
                             fila.Item("fInfonavitCS") = rwComplemento(0).Item("fInfonavitCS")
                             fila.Item("fISN") = rwComplemento(0).Item("fInsCS")
-                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS"))
+                            fila.Item("Calculadoimss1") = Double.Parse(rwComplemento(0).Item("fImss")) + Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'Double.Parse(rwComplemento(0).Item("fRcvCS"))
                             fila.Item("Calculadoimss2") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                             fila.Item("CostoSocialFormula") = Double.Parse(rwComplemento(0).Item("fImssCS")) + Double.Parse(rwComplemento(0).Item("fRcvCS")) + Double.Parse(rwComplemento(0).Item("fInfonavitCS")) + Double.Parse(rwComplemento(0).Item("fInsCS"))
                             fila.Item("CostoSocial") = rwComplemento(0).Item("fTotalCostoSocial")
@@ -22202,11 +22220,13 @@ Public Class frmnominasmarinos
 
                     'dtgDatos.Rows(x).Cells(91).Value = Math.Round(diasPA / 365 * 12 * SueldoBASEPA / diasPA * DiasPROPORCIONALES, 2)
                     If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                        dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
+                        dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count), 2)
+                    ElseIf EmpresaN = "TMMS" Then
+                        dtgDatos.Rows(x).Cells(91).Value = totalPrimaAntig
                     Else
-                        dtgDatos.Rows(x).Cells(91).Value = Math.Round(totalPrimaAntig / (dtgDatos.Rows.Count - 1), 2)
-                    End If
 
+                        dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count), 2)
+                    End If
                 End If
 
                 'calculoi indemnizacion
@@ -22217,20 +22237,21 @@ Public Class frmnominasmarinos
                     'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 50, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
 
                     'dtgDatos.Rows(x).Cells(92).Value = Math.Round(CDbl(dtgDatos.Rows(x).Cells(24).Value) * 90 / 365 * 15, 2) ''pro indemnizacion
-
                     If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                        dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                        dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
+                    ElseIf EmpresaN = "TMMS" Then
+                        dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
                     Else
-                        dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
-                    End If
 
+                        dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion) / (dtgDatos.Rows.Count), 2)
+                    End If
 
                 ElseIf tipoperiodos2Calculo = 3 Then
 
                     If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
-                        dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
+                        dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count), 2)
                     Else
-                        dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
+                        dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count), 2)
                     End If
 
                     'hoja.Cell(filaExcel + x, 94).Value = Math.Round(Double.Parse(((CalculoPrimaPROV(rwFilas(x).Item("iIdEmpleadoC"), 1, 25, CDbl(rwFilas(x).Item("fSalarioDiario")), rwFilas(x).Item("fkiIdPeriodo"))) / 365) * CDbl(rwFilas(x).Item("iDiasTrabajados"))), 2) 'pro prima
@@ -24186,7 +24207,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -24481,7 +24502,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -24774,7 +24795,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -25068,7 +25089,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -25363,7 +25384,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -25655,7 +25676,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 70).Value = fondoPFB
 
                             hoja.Cell(filaExcel, 71).Value = rwComplemento(0).Item("fImssCS")
-                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BX" & filaExcel
+                            hoja.Cell(filaExcel, 72).FormulaA1 = "=+BB" & filaExcel & "+BS" & filaExcel & "+BW" & filaExcel
                             hoja.Cell(filaExcel, 73).FormulaA1 = "=+BS" & filaExcel & "+BW" & filaExcel 'cuota imss
                             'hoja.Cell(filaExcel, 74).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwComplemento(0).Item("fSalarioBC"), mes), rwComplemento(0).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
                             hoja.Cell(filaExcel, 74).Value = rwComplemento(0).Item("SAR")
@@ -31873,7 +31894,7 @@ Public Class frmnominasmarinos
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                                     dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig * 7) / (dtgDatos.Rows.Count - 1), 2)
                                 ElseIf EmpresaN = "TMMS" Then
-                                    dtgDatos.Rows(x).Cells(91).Value = totalPrimaAntig
+                                    dtgDatos.Rows(x).Cells(91).Value = 170.54 ' totalPrimaAntig
                                 Else
 
                                     dtgDatos.Rows(x).Cells(91).Value = Math.Round((totalPrimaAntig) / (dtgDatos.Rows.Count - 1), 2)
@@ -31893,7 +31914,7 @@ Public Class frmnominasmarinos
                                 If NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                                     dtgDatos.Rows(x).Cells(92).Value = Math.Round((totalIndeminizacion * 7) / (dtgDatos.Rows.Count - 1), 2)
                                 ElseIf EmpresaN = "TMMS" Then
-                                    dtgDatos.Rows(x).Cells(92).Value = totalIndeminizacion
+                                    dtgDatos.Rows(x).Cells(92).Value = 1307.25 ' totalIndeminizacion
                                 Else
                                     dtgDatos.Rows(x).Cells(92).Value = Math.Round(totalIndeminizacion / (dtgDatos.Rows.Count - 1), 2)
                                 End If
