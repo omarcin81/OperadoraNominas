@@ -30460,6 +30460,8 @@ Public Class frmnominasmarinos
 
     End Sub
 
+    'lo ultimito que se programo
+
     Private Sub CalcularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalcularToolStripMenuItem.Click
         Dim sql2 As String
         Dim sql3 As String
