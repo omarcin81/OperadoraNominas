@@ -3469,8 +3469,8 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = 7162.58
                                 totalIndeminizacion = 54904.67
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "Logistic" Then
-                                totalPrimaAntig = 12790.75
-                                totalIndeminizacion = 28162.23
+                                totalPrimaAntig = 6395.38
+                                totalIndeminizacion = 14081.11
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                                 ' Es diferente por que es de acuerdo a la cantidad de semanas por mes
                                 totalPrimaAntig = (5481.75 / 30)
@@ -4027,7 +4027,7 @@ Public Class frmnominasmarinos
                             FINJUSTIFICADA = 0
                             PERMISOSINGOCEDESUELDO = 0
                             If dtgDatos.Rows(x).Cells(2).Value = "212" Then
-                                MsgBox("llego")
+                                '  MsgBox("llego")
                             End If
                             If Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", 0, dtgDatos.Rows(x).Cells(20).Value)) > 0 Then
                                 'diastrabajados = diastrabajados - 1
@@ -4868,8 +4868,8 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = 7162.58
                                 totalIndeminizacion = 54904.67
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "Logistic" Then
-                                totalPrimaAntig = 12790.75
-                                totalIndeminizacion = 28162.23
+                                totalPrimaAntig = 6395.38
+                                totalIndeminizacion = 14081.11
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                                 ' Es diferente por que es de acuerdo a la cantidad de semanas por mes
                                 totalPrimaAntig = (5481.75 / 30)
@@ -22179,8 +22179,8 @@ Public Class frmnominasmarinos
                     totalPrimaAntig = 7162.58
                     totalIndeminizacion = 54904.67
                 ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "Logistic" Then
-                    totalPrimaAntig = 12790.75
-                    totalIndeminizacion = 28162.23
+                    totalPrimaAntig = 6395.38
+                    totalIndeminizacion = 14081.11
                 ElseIf NombrePeriodo = "Semanal" And EmpresaN = "Logistic" Then
                     ' Es diferente por que es de acuerdo a la cantidad de semanas por mes
                     totalPrimaAntig = (5481.75 / 30)
