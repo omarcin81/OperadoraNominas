@@ -937,7 +937,7 @@ Partial Class frmnominasmarinos
         'CalcularToolStripMenuItem
         '
         Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
-        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.CalcularToolStripMenuItem.Text = "Calcular"
         '
         'chkVales

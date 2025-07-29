@@ -2860,9 +2860,7 @@ Public Class frmnominasmarinos
                             ADICIONALES = ADICIONALES + VACACIONESPRO + AGUINALDOGRA + PRIMAVACGRA
 
                             'ISR
-                            If dtgDatos.Rows(x).Cells(2).Value = "51" Then
-                                MsgBox("Si esta")
-                            End If
+
                             If DiasCadaPeriodo = 7 Then
                                 'TipoPeriodoinfoonavit = 3
                                 'dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(SUMAPERCEPCIONESPISR, TipoPeriodoinfoonavit, x, DiasCadaPeriodo)), 2).ToString("###,##0.00")
@@ -3232,8 +3230,8 @@ Public Class frmnominasmarinos
 
                             'aqui la pension alimenticia excedente
 
-
-                            'Costo Social----
+                            '####################################################################################################################
+                            'Costo Social########################################################################################################
                             Dim valorISN As Double
                             If EmpresaN = "IDN" Then
                                 valorISN = 3
@@ -4657,17 +4655,26 @@ Public Class frmnominasmarinos
                             '    End If
                             'End If
 
+                            '##################################
+                            'Costo Social
+
+                            Dim valorISN As Double
+                            If EmpresaN = "IDN" Then
+                                valorISN = 3
+                            Else
+                                valorISN = 4
+                            End If
 
 
                             If chkDiasCS.Checked = True Then
-                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
 
-                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
                                 dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
-                                dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, diastrabajados, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
 
                             Else
                                 ValorIncapacidad = IIf(dtgDatos.Rows(x).Cells(28).Value = "", 0, dtgDatos.Rows(x).Cells(28).Value)
@@ -4681,14 +4688,14 @@ Public Class frmnominasmarinos
                                     DDescuentoInfonavit = ValorIncapacidad
                                 End If
 
-                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
 
-                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, 3), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
                                 dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
-                                dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, DiasCadaPeriodo, 3) - DDescuentoInfonavit, 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, DiasCadaPeriodo, 3) - DDescuentoInfonavit, 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, DiasCadaPeriodo, valorISN) - DDescuentoInfonavit, 2).ToString("###,##0.00")
+                                dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, DiasCadaPeriodo, valorISN) - DDescuentoInfonavit, 2).ToString("###,##0.00")
 
 
 
