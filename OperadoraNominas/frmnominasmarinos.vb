@@ -7261,12 +7261,18 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 2, "F").FormulaA1 = "=BS" & totalbuq & "+I" & espace + 4
                 hoja.Cell(espace + 3, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CG5:CG" & totalbuq - 2 & ")+SUMIF(BT5:BT" & totalbuq - 2 & ",""SINDICATO"",CE5:CE" & totalbuq - 2 & ")"
                 'hoja.Cell(espace + 4, "F").FormulaA1 = "=SUMIF(BX5:BX" & totalbuq - 2 & ",""PPP"",CE5:CE" & totalbuq - 2 & ")"
-                hoja.Cell(espace + 5, "F").FormulaA1 = IIf(valesc, "=+CN" & totalbuq, "=0")
+                hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq 'IIf(valesc, "=+CN" & totalbuq, "=0")
                 ' hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
+                If valesc Then
+                    hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & ")*0.06"
+                    hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 7 & ")*0.16"
+                    hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
+                Else
+                    hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & ")*0.06"
+                    hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
+                    hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
+                End If
 
-                hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & ")*0.06"
-                hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
-                hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
 
                 'IKE FACT
                 If diasperiodo > 14 Then
