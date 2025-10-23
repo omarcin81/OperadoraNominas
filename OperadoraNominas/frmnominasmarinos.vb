@@ -3232,6 +3232,11 @@ Public Class frmnominasmarinos
 
                             '####################################################################################################################
                             'Costo Social########################################################################################################
+
+
+                            If dtgDatos.Rows(x).Cells(28).Value > 0 Then
+                                MsgBox("incapacidad")
+                            End If
                             Dim valorISN As Double
                             If EmpresaN = "IDN" Then
                                 valorISN = 3
@@ -3263,14 +3268,19 @@ Public Class frmnominasmarinos
                                 'If dtgDatos.Rows(x).Cells(2).Value = "51" Then
                                 '    MsgBox("patiño")
                                 'End If
-
+                                'cuotaimss
                                 dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
-
+                                'total rcvp
                                 dtgDatos.Rows(x).Cells(80).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 3, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
+                                'infonavitp
                                 dtgDatos.Rows(x).Cells(81).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 4, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
+                                'impuesto sobre la nomina
                                 dtgDatos.Rows(x).Cells(82).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 5, ValorUMA, DiasCadaPeriodo - DDescuentoInfonavit, valorISN), 2).ToString("###,##0.00")
+                                'costosocialtotal
                                 dtgDatos.Rows(x).Cells(83).Value = Math.Round(IMMSSD + Double.Parse(dtgDatos.Rows(x).Cells(79).Value) + Double.Parse(dtgDatos.Rows(x).Cells(80).Value) + Double.Parse(dtgDatos.Rows(x).Cells(81).Value) + Double.Parse(dtgDatos.Rows(x).Cells(82).Value), 2)
+                                ' retiro
                                 dtgDatos.Rows(x).Cells(84).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 6, ValorUMA, DiasCadaPeriodo, valorISN) - DDescuentoInfonavit, 2).ToString("###,##0.00")
+                                'vejezp
                                 dtgDatos.Rows(x).Cells(85).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 7, ValorUMA, DiasCadaPeriodo, valorISN) - DDescuentoInfonavit, 2).ToString("###,##0.00")
 
                             End If
@@ -4666,6 +4676,9 @@ Public Class frmnominasmarinos
                             End If
 
 
+                            If dtgDatos.Rows(x).Cells(28).Value > 0 Then
+                                MsgBox("incapacidad")
+                            End If
                             If chkDiasCS.Checked = True Then
                                 dtgDatos.Rows(x).Cells(79).Value = Math.Round(calculoimss(dtgDatos.Rows(x).Cells(25).Value, SUMAPERCEPCIONES, 2, ValorUMA, diastrabajados, valorISN), 2).ToString("###,##0.00")
 
@@ -4681,6 +4694,7 @@ Public Class frmnominasmarinos
 
                                 If ValorIncapacidad > 7 And NombrePeriodo = "Semanal" Then
                                     DDescuentoInfonavit = 7
+
                                 ElseIf ValorIncapacidad > 15 And NombrePeriodo = "Quincenal" Then
                                     DDescuentoInfonavit = 15
                                 Else
@@ -7264,12 +7278,14 @@ Public Class frmnominasmarinos
                 hoja.Cell(espace + 5, "F").FormulaA1 = "=+CN" & totalbuq 'IIf(valesc, "=+CN" & totalbuq, "=0")
                 ' hoja.Cell(espace + 6, "F").FormulaA1 = "=+CM" & totalbuq
                 If valesc Then
-                    hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & ")*0.06"
-                    hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 7 & ")*0.16"
-                    hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
-                Else
                     hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & ")*0.06"
                     hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & ")*0.16"
+                    hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
+
+                Else
+
+                    hoja.Cell(espace + 7, "F").FormulaA1 = "=(F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & ")*0.06"
+                    hoja.Cell(espace + 8, "F").FormulaA1 = "=(F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 7 & ")*0.16"
                     hoja.Cell(espace + 9, "F").FormulaA1 = "=F" & espace + 2 & "+F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 6 & "+F" & espace + 7 & "+F" & espace + 8
                 End If
 
@@ -18465,6 +18481,9 @@ Public Class frmnominasmarinos
                         hoja.Range("D2", "D" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         hoja.Range("M2", "M" & rwFilas.Count + 5).Style.NumberFormat.Format = "@"
                         'QUERY 
+                        '    If rwFilas(x).Item("iNumerodias") > 0 Then
+                        ' MsgBox("mincapacidad")
+                        ' End If
 
                         Dim deduccionestotal As Double = CDbl(rwFilas(x).Item("fIsr")) + CDbl(rwFilas(x).Item("fInfonavit")) + CDbl(rwFilas(x).Item("fInfonavitBanterior")) + CDbl(rwFilas(x).Item("fPensionAlimenticia")) + CDbl(rwFilas(x).Item("fPrestamo")) + CDbl(rwFilas(x).Item("fT_No_laborado")) + CDbl(rwFilas(x).Item("fCuotaSindical"))
 
@@ -18553,8 +18572,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 83).Value = 0 'rwFilas(x).Item("fComisionAsimilados")
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
                         hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x & "BM" & filaExcel + x 'cuota imss
-                        hoja.Cell(filaExcel + x, 86).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
-                        hoja.Cell(filaExcel + x, 87).Value = Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                        hoja.Cell(filaExcel + x, 86).Value = IIf(rwComplemento(0)("SAR").ToString = "", 0, rwComplemento(0)("SAR")) 'Provision IMSS  Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
+                        hoja.Cell(filaExcel + x, 87).Value = If(rwComplemento(0)("CesantiaVejez").ToString = "", 0, rwComplemento(0)("CesantiaVejez")) 'Provision Cezantia y Vejez Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                         hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fRcvCS")
                         hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInfonavitCS")
                         hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fInsCS")
@@ -22404,11 +22423,9 @@ Public Class frmnominasmarinos
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
-
-                'If dtgDatos.Rows(x).Cells(2).Value = "67" Then
-                '    MsgBox("llego")
-
-                'End If
+                If dtgDatos.Rows(x).Cells(28).Value > 0 Then
+                    MsgBox("incapacidad")
+                End If
                 diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(26).Value = "", "0", dtgDatos.Rows(x).Cells(26).Value.ToString))
                 INCAPACIDAD = Double.Parse(IIf(dtgDatos.Rows(x).Cells(57).Value = "", 0, dtgDatos.Rows(x).Cells(57).Value))
 
