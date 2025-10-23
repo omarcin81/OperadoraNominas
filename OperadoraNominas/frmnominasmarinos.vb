@@ -18573,7 +18573,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 84).Value = rwFilas(x).Item("fImssCS")
                         hoja.Cell(filaExcel + x, 85).FormulaA1 = "=+CF" & filaExcel + x & "+CI" & filaExcel + x & "BM" & filaExcel + x 'cuota imss
                         hoja.Cell(filaExcel + x, 86).Value = IIf(rwComplemento(0)("SAR").ToString = "", 0, rwComplemento(0)("SAR")) 'Provision IMSS  Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 6, ValorUMA, DiasCadaPeriodo, 3), 2) '"2%  SAR RETIRO 
-                        hoja.Cell(filaExcel + x, 87).Value = If(rwComplemento(0)("CesantiaVejez").ToString = "", 0, rwComplemento(0)("CesantiaVejez")) 'Provision Cezantia y Vejez Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
+                        hoja.Cell(filaExcel + x, 87).Value = IIf(rwComplemento(0)("CesantiaVejez").ToString = "", 0, rwComplemento(0)("CesantiaVejez")) 'Provision Cezantia y Vejez Math.Round(calculoimss(validarTopeSalarioBC(rwFilas(x).Item("fSalarioBC"), mes), rwFilas(x).Item("fTotalPercepciones"), 7, ValorUMA, DiasCadaPeriodo, 3), 2)  'VEJEZ PROP
                         hoja.Cell(filaExcel + x, 88).Value = rwFilas(x).Item("fRcvCS")
                         hoja.Cell(filaExcel + x, 89).Value = rwFilas(x).Item("fInfonavitCS")
                         hoja.Cell(filaExcel + x, 90).Value = rwFilas(x).Item("fInsCS")
