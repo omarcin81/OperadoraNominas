@@ -75,7 +75,7 @@ Partial Class frmSubirCECO
         '
         Me.cboTipo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
-        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI"})
+        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI", "SALARIO REAL", "SALARIO EXCEDENTE"})
         Me.cboTipo.Location = New System.Drawing.Point(126, 7)
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(191, 27)
@@ -321,7 +321,7 @@ Partial Class frmSubirCECO
         Me.tsbNuevo.Image = CType(resources.GetObject("tsbNuevo.Image"), System.Drawing.Image)
         Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(83, 51)
+        Me.tsbNuevo.Size = New System.Drawing.Size(82, 51)
         Me.tsbNuevo.Text = "Agregar excel"
         Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbNuevo.ToolTipText = "Agregar excel"

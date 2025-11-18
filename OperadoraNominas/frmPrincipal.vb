@@ -32,9 +32,9 @@ Public Class frmPrincipal
         lblUsuario.Text = Usuario.Nombre & " - " & EmpresaN
         clsConfiguracion.Actualizar()
         lsvPanel.Items.Item(0).Text = "Nomina " '& Servidor.Base.ToString.Substring(0, 3)
-        'If EmpresaN = "Logistic" Then
+        If EmpresaN = "Transportacion" Then
 
-        'End If
+        End If
     End Sub
 
     Private Sub CatálogoDeClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -209,9 +209,24 @@ Public Class frmPrincipal
                         End If
 
 
+
                     Catch ex As Exception
                         ShowError(ex, Me.Text)
                     End Try
+                Case "Nomina TMM"
+                    Try
+                        If Usuario.Perfil = "1" Or Usuario.Perfil = "2" Then
+                            Dim Forma As New frmnominasmarinos
+                            Forma.gTipoCalculo = "2"
+                            Forma.EmpresaN = EmpresaN
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    Catch ex As Exception
+                        ShowError(ex, Me.Text)
+                    End Try
+
             End Select
 
         Catch ex As Exception
@@ -715,7 +730,6 @@ Public Class frmPrincipal
         End Try
     End Sub
 
- 
-   
+
 End Class
 

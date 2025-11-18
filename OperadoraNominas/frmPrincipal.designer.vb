@@ -60,9 +60,9 @@ Partial Class frmPrincipal
         Me.pnlBar.Controls.Add(Me.Label1)
         Me.pnlBar.Controls.Add(Me.lblUsuario)
         Me.pnlBar.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlBar.Location = New System.Drawing.Point(0, 436)
+        Me.pnlBar.Location = New System.Drawing.Point(0, 479)
         Me.pnlBar.Name = "pnlBar"
-        Me.pnlBar.Size = New System.Drawing.Size(727, 41)
+        Me.pnlBar.Size = New System.Drawing.Size(779, 41)
         Me.pnlBar.TabIndex = 5
         '
         'CheckBox1
@@ -157,7 +157,7 @@ Partial Class frmPrincipal
         Me.lsvPanel.Location = New System.Drawing.Point(0, 0)
         Me.lsvPanel.Name = "lsvPanel"
         Me.lsvPanel.ShowItemToolTips = True
-        Me.lsvPanel.Size = New System.Drawing.Size(727, 477)
+        Me.lsvPanel.Size = New System.Drawing.Size(779, 520)
         Me.lsvPanel.TabIndex = 3
         Me.lsvPanel.UseCompatibleStateImageBehavior = False
         '
@@ -223,7 +223,7 @@ Partial Class frmPrincipal
         'PictureBox1
         '
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.PictureBox1.Location = New System.Drawing.Point(334, 208)
+        Me.PictureBox1.Location = New System.Drawing.Point(418, 221)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(309, 213)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -234,7 +234,7 @@ Partial Class frmPrincipal
         'frmPrincipal
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(727, 477)
+        Me.ClientSize = New System.Drawing.Size(779, 520)
         Me.Controls.Add(Me.pnlBar)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lsvPanel)

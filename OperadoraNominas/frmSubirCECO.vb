@@ -248,6 +248,7 @@ Public Class frmSubirCECO
                                 'actualizar cenctro de costo
                                 Select Case cboTipo.SelectedIndex
                                     Case 0
+                                        'actualizar ceco
                                         Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
                                         SQL = "update empleadosC set clabe2 ='" & ceco & "'"
                                         SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
@@ -259,6 +260,7 @@ Public Class frmSubirCECO
                                         pgbProgreso.Value += 1
 
                                     Case 1
+                                        'actualizar sueldo basde
                                         Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
                                         SQL = "update empleadosC set fSueldoBase ='" & ceco & "'"
                                         SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
@@ -270,8 +272,33 @@ Public Class frmSubirCECO
 
                                         pgbProgreso.Value += 1
                                     Case 2
+                                        'actualizar sueldo integrado
                                         Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
                                         SQL = "update empleadosC set fSueldoIntegrado ='" & ceco & "'"
+                                        SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                        If nExecute(SQL) = False Then
+                                            MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+                                        pgbProgreso.Value += 1
+
+                                    Case 3
+                                        'actualizar salario real /ordinario
+                                        Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
+                                        SQL = "update empleadosC set fSueldoOrd ='" & ceco & "'"
+                                        SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                        If nExecute(SQL) = False Then
+                                            MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+                                        pgbProgreso.Value += 1
+
+                                    Case 4
+                                        'actualizar salario excedente/sindicato
+                                        Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
+                                        SQL = "update empleadosC set fSindicatoExtra ='" & ceco & "'"
                                         SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
                                         If nExecute(SQL) = False Then
                                             MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
