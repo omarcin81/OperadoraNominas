@@ -113,6 +113,7 @@ Partial Class frmnominasmarinos
         Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -659,18 +660,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(187, 48)
+        Me.cMenu.Size = New System.Drawing.Size(186, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'cmdSubirNomF
@@ -757,7 +758,7 @@ Partial Class frmnominasmarinos
         '
         'ReporteToolStripMenuItem
         '
-        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem, Me.ReporteKatiaToolStripMenuItem})
+        Me.ReporteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LayoutTimbradoSAToolStripMenuItem, Me.AcumuladosNominaToolStripMenuItem, Me.PolizasToolStripMenuItem, Me.RecibosSAToolStripMenuItem, Me.ResumenToolStripMenuItem, Me.CaratulaToolStripMenuItem, Me.LayoutTimbradoOToolStripMenuItem, Me.HojaTrabajoPolizaToolStripMenuItem, Me.LayoutPolizaToolStripMenuItem, Me.AcumuladoContaMensualToolStripMenuItem, Me.AcumuladoProvisionToolStripMenuItem, Me.PlantillaActualToolStripMenuItem, Me.CaratulaXPeriodoToolStripMenuItem, Me.ReporteKatiaToolStripMenuItem, Me.HojaTrabajoPolizaBusquedaToolStripMenuItem})
         Me.ReporteToolStripMenuItem.Name = "ReporteToolStripMenuItem"
         Me.ReporteToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.ReporteToolStripMenuItem.Text = "Reporte"
@@ -765,86 +766,86 @@ Partial Class frmnominasmarinos
         'LayoutTimbradoSAToolStripMenuItem
         '
         Me.LayoutTimbradoSAToolStripMenuItem.Name = "LayoutTimbradoSAToolStripMenuItem"
-        Me.LayoutTimbradoSAToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.LayoutTimbradoSAToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LayoutTimbradoSAToolStripMenuItem.Text = "Layout timbrado SA"
         '
         'AcumuladosNominaToolStripMenuItem
         '
         Me.AcumuladosNominaToolStripMenuItem.Name = "AcumuladosNominaToolStripMenuItem"
-        Me.AcumuladosNominaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.AcumuladosNominaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.AcumuladosNominaToolStripMenuItem.Text = "Acumulados Nomina"
         '
         'PolizasToolStripMenuItem
         '
         Me.PolizasToolStripMenuItem.Name = "PolizasToolStripMenuItem"
-        Me.PolizasToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.PolizasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.PolizasToolStripMenuItem.Text = "Polizas"
         '
         'RecibosSAToolStripMenuItem
         '
         Me.RecibosSAToolStripMenuItem.Name = "RecibosSAToolStripMenuItem"
-        Me.RecibosSAToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.RecibosSAToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.RecibosSAToolStripMenuItem.Text = "Recibos SA"
         '
         'ResumenToolStripMenuItem
         '
         Me.ResumenToolStripMenuItem.Name = "ResumenToolStripMenuItem"
-        Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.ResumenToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.ResumenToolStripMenuItem.Text = "Resumen"
         '
         'CaratulaToolStripMenuItem
         '
         Me.CaratulaToolStripMenuItem.Name = "CaratulaToolStripMenuItem"
-        Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.CaratulaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.CaratulaToolStripMenuItem.Text = "Caratula"
         '
         'LayoutTimbradoOToolStripMenuItem
         '
         Me.LayoutTimbradoOToolStripMenuItem.Name = "LayoutTimbradoOToolStripMenuItem"
-        Me.LayoutTimbradoOToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.LayoutTimbradoOToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LayoutTimbradoOToolStripMenuItem.Text = "Layout timbrado O"
         '
         'HojaTrabajoPolizaToolStripMenuItem
         '
         Me.HojaTrabajoPolizaToolStripMenuItem.Name = "HojaTrabajoPolizaToolStripMenuItem"
-        Me.HojaTrabajoPolizaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.HojaTrabajoPolizaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.HojaTrabajoPolizaToolStripMenuItem.Text = "Hoja trabajo poliza"
         '
         'LayoutPolizaToolStripMenuItem
         '
         Me.LayoutPolizaToolStripMenuItem.Name = "LayoutPolizaToolStripMenuItem"
-        Me.LayoutPolizaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.LayoutPolizaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LayoutPolizaToolStripMenuItem.Text = "Layout poliza"
         '
         'AcumuladoContaMensualToolStripMenuItem
         '
         Me.AcumuladoContaMensualToolStripMenuItem.Name = "AcumuladoContaMensualToolStripMenuItem"
-        Me.AcumuladoContaMensualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.AcumuladoContaMensualToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.AcumuladoContaMensualToolStripMenuItem.Text = "Acumulado Conta Mensual"
         Me.AcumuladoContaMensualToolStripMenuItem.Visible = False
         '
         'AcumuladoProvisionToolStripMenuItem
         '
         Me.AcumuladoProvisionToolStripMenuItem.Name = "AcumuladoProvisionToolStripMenuItem"
-        Me.AcumuladoProvisionToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.AcumuladoProvisionToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.AcumuladoProvisionToolStripMenuItem.Text = "Acumulado Provisiones"
         '
         'PlantillaActualToolStripMenuItem
         '
         Me.PlantillaActualToolStripMenuItem.Name = "PlantillaActualToolStripMenuItem"
-        Me.PlantillaActualToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.PlantillaActualToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.PlantillaActualToolStripMenuItem.Text = "Plantilla Actual"
         '
         'CaratulaXPeriodoToolStripMenuItem
         '
         Me.CaratulaXPeriodoToolStripMenuItem.Name = "CaratulaXPeriodoToolStripMenuItem"
-        Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.CaratulaXPeriodoToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.CaratulaXPeriodoToolStripMenuItem.Text = "Caratula x Periodo"
         '
         'ReporteKatiaToolStripMenuItem
         '
         Me.ReporteKatiaToolStripMenuItem.Name = "ReporteKatiaToolStripMenuItem"
-        Me.ReporteKatiaToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.ReporteKatiaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.ReporteKatiaToolStripMenuItem.Text = "Reporte Katia"
         '
         'CalculosToolStripMenuItem
@@ -931,7 +932,7 @@ Partial Class frmnominasmarinos
         '
         Me.TMmEspecialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularToolStripMenuItem})
         Me.TMmEspecialToolStripMenuItem.Name = "TMmEspecialToolStripMenuItem"
-        Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
+        Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
         Me.TMmEspecialToolStripMenuItem.Text = "TMM Especial"
         '
         'CalcularToolStripMenuItem
@@ -952,6 +953,12 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
+        '
+        'HojaTrabajoPolizaBusquedaToolStripMenuItem
+        '
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Name = "HojaTrabajoPolizaBusquedaToolStripMenuItem"
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Text = "Hoja trabajo poliza busqueda"
         '
         'frmnominasmarinos
         '
@@ -1089,4 +1096,5 @@ Partial Class frmnominasmarinos
     Friend WithEvents ReporteKatiaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents cmdSoloISRE As Button
     Friend WithEvents GenerarPeriodoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HojaTrabajoPolizaBusquedaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

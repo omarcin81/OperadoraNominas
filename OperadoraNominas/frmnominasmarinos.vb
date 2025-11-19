@@ -1089,26 +1089,28 @@ Public Class frmnominasmarinos
                     sql = "select * from NominaComplemento inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
                     sql &= " where " & IIf(chkPeriodosC.Checked = True, " fkiIdPeriodo in (6,8)", " fkiIdPeriodo =" & cboperiodo.SelectedValue)
                     sql &= " and NominaComplemento.iEstatus=1 and NominaComplemento.iSerie=" & cboserie.SelectedIndex
+                    sql &= " and NominaComplemento.fkiIdEmpleadoC=" & rwNominaGuardada(x)("iIdEmpleadoC").ToString
+
                     sql &= " order by " & campoordenamiento 'cNombreLargo"
                     'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
 
                     Dim rwNominaComplemento As DataRow() = nConsulta(sql)
                     If rwNominaComplemento Is Nothing = False Then
-                        fila.Item("2%SAR") = rwNominaComplemento(x)("SAR").ToString
-                        fila.Item("CYV") = rwNominaComplemento(x)("CesantiaVejez").ToString
+                        fila.Item("2%SAR") = rwNominaComplemento(0)("SAR").ToString
+                        fila.Item("CYV") = rwNominaComplemento(0)("CesantiaVejez").ToString
 
 
-                        fila.Item("VALES") = rwNominaComplemento(x)("Vales").ToString
-                        fila.Item("APORPF") = rwNominaComplemento(x)("AportacionPF").ToString
-                        fila.Item("PRAGUINALDO") = rwNominaComplemento(x)("prAguinaldo").ToString
-                        fila.Item("PRPRIMAV") = rwNominaComplemento(x)("prPrimaV").ToString
-                        fila.Item("PRPRIMAANT") = rwNominaComplemento(x)("prPrimaAnt").ToString
-                        fila.Item("PRINDEMNIZACION") = rwNominaComplemento(x)("prIndemnizacion").ToString
-                        fila.Item("PDE") = rwNominaComplemento(x)("PDE").ToString
-                        fila.Item("TE2E") = rwNominaComplemento(x)("TE2E").ToString
-                        fila.Item("TE3E") = rwNominaComplemento(x)("TE3E").ToString
-                        fila.Item("DLE") = rwNominaComplemento(x)("DLE").ToString
-                        fila.Item("DFE") = rwNominaComplemento(x)("DFE").ToString
+                        fila.Item("VALES") = rwNominaComplemento(0)("Vales").ToString
+                        fila.Item("APORPF") = rwNominaComplemento(0)("AportacionPF").ToString
+                        fila.Item("PRAGUINALDO") = rwNominaComplemento(0)("prAguinaldo").ToString
+                        fila.Item("PRPRIMAV") = rwNominaComplemento(0)("prPrimaV").ToString
+                        fila.Item("PRPRIMAANT") = rwNominaComplemento(0)("prPrimaAnt").ToString
+                        fila.Item("PRINDEMNIZACION") = rwNominaComplemento(0)("prIndemnizacion").ToString
+                        fila.Item("PDE") = rwNominaComplemento(0)("PDE").ToString
+                        fila.Item("TE2E") = rwNominaComplemento(0)("TE2E").ToString
+                        fila.Item("TE3E") = rwNominaComplemento(0)("TE3E").ToString
+                        fila.Item("DLE") = rwNominaComplemento(0)("DLE").ToString
+                        fila.Item("DFE") = rwNominaComplemento(0)("DFE").ToString
                         'calcular
 
                         sql = "select cuenta2 as TipoExcedente,isnull( fsindicatoExtra,0) as  fsindicatoExtra from EmpleadosC where iIdEmpleadoC= " & Integer.Parse(rwNominaGuardada(x)("iIdEmpleadoC").ToString)
@@ -32509,5 +32511,91 @@ Public Class frmnominasmarinos
     End Sub
 
 
+    Private Sub HojaTrabajoPolizaBusquedaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HojaTrabajoPolizaBusquedaToolStripMenuItem.Click
+        Try
+            Dim totalexcedente As Double
+            Dim fondoPFB As Double
+            Dim ejercicio As String
+            Dim mesperiodo, periodo As String
+            Dim fecha, periodom, iejercicio, idias As String
+            Dim mesid As String
+
+            Dim tipoperiodos2 As String
+            Dim fechapagoletra As String
+
+            Dim filaExcel As Integer = 4
+            Dim dialogo As New SaveFileDialog()
+
+            Dim pilotin As Boolean = False
+            Dim pilotinF As Boolean = False
+
+            Dim PFB_CORTO_PLAZO As Double = 0
+
+            '##
+
+            Dim mes As String
+
+
+            Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+            Dim tiponomina, sueldodescanso As String
+            Dim filaexcelnomtotal As Integer = 0
+            Dim valesDespensa As String
+
+            'dias prov
+            Dim DiasCadaPeriodo As Integer
+            Dim FechaInicioPeriodo As Date
+            Dim FechaFinPeriodo As Date
+            Dim FechaAntiguedad As Date
+            Dim FechaBuscar As Date
+            Dim TipoPeriodoinfoonavit As Integer
+
+            Dim ValorUMA As Double
+            '##
+
+
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+                'fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                ' iejercicio = rwPeriodo0(0).Item("iEjercicio")
+                idias = rwPeriodo0(0).Item("iDiasPago")
+                tipoperiodos2 = rwPeriodo0(0).Item("fkiIdTipoPeriodo")
+            End If
+
+            'Ver datos
+            'borramos los datos
+            dtgDatos.Columns.Clear()
+            'cambiamos el ordenamiento
+            campoordenamiento = "clabe2" ' calbe2 es igual centro de costo
+
+            sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
+            sql &= " where Nomina.fkiIdEmpresa = 1  " & IIf(chkPeriodosC.Checked = True, "And fkiIdPeriodo in (6,8)", "And fkiIdPeriodo =" & cboperiodo.SelectedValue)
+            sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+            sql &= " and iTipoNomina=0"
+            sql &= " order by " & campoordenamiento 'cNombreLargo"
+            'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
+
+
+            Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+
+            'If rwNominaGuardadaFinal Is Nothing = False Then
+            If rwNominaGuardada Is Nothing = False Then
+                cmdverdatos_Click(sender, e)
+                'cmdguardarnomina_Click(sender, e)
+            Else
+                MessageBox.Show("No hay datos guardados, primero genere la nomina que corresponde al periodo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Exit Sub
+            End If
+
+
+        Catch ex As Exception
+
+            MessageBox.Show(ex.Message.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            pnlCatalogo.Enabled = True
+            pnlProgreso.Visible = False
+        End Try
+
+    End Sub
 End Class
 
