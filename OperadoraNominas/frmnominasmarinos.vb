@@ -2558,7 +2558,7 @@ Public Class frmnominasmarinos
                         Else
 
                             If dtgDatos.Rows(x).Cells(2).Value = 78 Then
-                                MsgBox("lol")
+                                ' MsgBox("lol")
                             End If
                             dias = 0
                             BanPeriodo = False
@@ -6173,7 +6173,7 @@ Public Class frmnominasmarinos
                 MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
             End If
 
-            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 10171 Then
+            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 11492.66 Then
                 subsidio = 0
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
                 SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=5" '& periodo
