@@ -2556,6 +2556,10 @@ Public Class frmnominasmarinos
 
 
                         Else
+
+                            If dtgDatos.Rows(x).Cells(2).Value = 78 Then
+                                ' MsgBox("lol")
+                            End If
                             dias = 0
                             BanPeriodo = False
                             sql = "select * from periodos where iIdPeriodo= " & cboperiodo.SelectedValue
@@ -2632,7 +2636,7 @@ Public Class frmnominasmarinos
                                 dtgDatos.Rows(x).Cells(46).Value = 0.0
                             End If
                             If BanPeriodo Then
-                                diastrabajados = dias - 1
+                                diastrabajados = dias ' - 1'se quito por el sindicato quita un dia 13112025
                             End If
                             'solo falta injustificada juega para el septimo dia
                             If NombrePeriodo = "Quincenal" Then
@@ -3160,7 +3164,7 @@ Public Class frmnominasmarinos
                             SUBSIDIOA = Double.Parse(IIf(dtgDatos.Rows(x).Cells(69).Value = "", 0, dtgDatos.Rows(x).Cells(69).Value))
 
 
-
+                            'NETOOOOO##########################
                             'Verificar si tiene excedente y de que tipo
                             If NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
                                 SUMADEDUCCIONES = ISRD + INFONAVITD + INFOBIMANT + AJUSTEINFO + PENSIONAD + PRESTAMOD + FONACOTD + TNOLABORADOD + CUOTASINDICALD + IMMSSD
@@ -3192,51 +3196,51 @@ Public Class frmnominasmarinos
 
                             Dim rwDatos As DataRow() = nConsulta(sql)
                             If rwDatos Is Nothing = False Then
-                                'If dtgDatos.Rows(x).Cells(2).Value = "229" Then
-                                '    MsgBox("lemus")
-                                'End If
+                                If dtgDatos.Rows(x).Cells(2).Value = "78" Then
+                                    MsgBox("lemus")
+                                End If
                                 If Double.Parse(rwDatos(0)("fsindicatoExtra").ToString) > 0 Then
-                                    Dim sumadescuentosexcedente As Double
-                                    Dim excedenteperiodo As Double
-                                    sumadescuentosexcedente = 0
-                                    excedenteperiodo = 0
-                                    If DiasCadaPeriodo > 7 Then
-                                        excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
+                                        Dim sumadescuentosexcedente As Double
+                                        Dim excedenteperiodo As Double
+                                        sumadescuentosexcedente = 0
+                                        excedenteperiodo = 0
+                                        If DiasCadaPeriodo > 7 Then
+                                            excedenteperiodo = Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * diastrabajados
 
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (diastrabajados), 2)
-                                        'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(71).Value = "", 0, dtgDatos.Rows(x).Cells(71).Value))
-                                        'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(72).Value = "", 0, dtgDatos.Rows(x).Cells(72).Value))
-                                        ''sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
+                                            dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (diastrabajados), 2)
+                                            'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(71).Value = "", 0, dtgDatos.Rows(x).Cells(71).Value))
+                                            'sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(72).Value = "", 0, dtgDatos.Rows(x).Cells(72).Value))
+                                            ''sumadescuentosexcedente += Double.Parse(IIf(dtgDatos.Rows(x).Cells(73).Value = "", 0, dtgDatos.Rows(x).Cells(73).Value))
 
-                                        'If sumadescuentosexcedente > excedenteperiodo Then
-                                        '    MessageBox.Show("Los descuentos por excendente son mas que el mismo excedente, verifica ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                        'Else
-                                        '    excedenteperiodo = excedenteperiodo - sumadescuentosexcedente
-                                        '    dtgDatos.Rows(x).Cells(74).Value = Math.Round(excedenteperiodo, 2)
-                                        'End If
-                                    Else
-                                        'cambiar monto
-                                        Dim DiasDescontar As Integer
-                                        DiasDescontar = Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", "0", dtgDatos.Rows(x).Cells(20).Value))
-                                        DiasDescontar += Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", "0", dtgDatos.Rows(x).Cells(21).Value))
-                                        If DiasDescontar = 6 Then
-                                            DiasDescontar = 7
+                                            'If sumadescuentosexcedente > excedenteperiodo Then
+                                            '    MessageBox.Show("Los descuentos por excendente son mas que el mismo excedente, verifica ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            'Else
+                                            '    excedenteperiodo = excedenteperiodo - sumadescuentosexcedente
+                                            '    dtgDatos.Rows(x).Cells(74).Value = Math.Round(excedenteperiodo, 2)
+                                            'End If
+                                        Else
+                                            'cambiar monto
+                                            Dim DiasDescontar As Integer
+                                            DiasDescontar = Double.Parse(IIf(dtgDatos.Rows(x).Cells(20).Value = "", "0", dtgDatos.Rows(x).Cells(20).Value))
+                                            DiasDescontar += Double.Parse(IIf(dtgDatos.Rows(x).Cells(21).Value = "", "0", dtgDatos.Rows(x).Cells(21).Value))
+                                            If DiasDescontar = 6 Then
+                                                DiasDescontar = 7
+                                            End If
+                                            dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - DiasDescontar), 2)
+
                                         End If
-                                        dtgDatos.Rows(x).Cells(74).Value = Math.Round(Double.Parse(rwDatos(0)("fsindicatoExtra")) / 30 * (DiasCadaPeriodo - DiasDescontar), 2)
 
                                     End If
 
                                 End If
 
-                            End If
+                                'aqui la pension alimenticia excedente
 
-                            'aqui la pension alimenticia excedente
-
-                            '####################################################################################################################
-                            'Costo Social########################################################################################################
+                                '####################################################################################################################
+                                'Costo Social########################################################################################################
 
 
-                            If dtgDatos.Rows(x).Cells(28).Value > 0 Then
+                                If dtgDatos.Rows(x).Cells(28).Value > 0 Then
                                 MsgBox("incapacidad")
                             End If
                             Dim valorISN As Double
@@ -6169,7 +6173,7 @@ Public Class frmnominasmarinos
                 MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
             End If
 
-            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 10171 Then
+            If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 11492.66 Then
                 subsidio = 0
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
                 SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=5" '& periodo
