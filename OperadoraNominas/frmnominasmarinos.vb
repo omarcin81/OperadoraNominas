@@ -6174,6 +6174,8 @@ Public Class frmnominasmarinos
             End If
 
             If Double.Parse(dtgDatos.Rows(fila).Cells(24).Value) * 30 < 11492.66 Then
+                'tres o que ?
+                '2 caguamitas.
                 subsidio = 0
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
                 SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=5" '& periodo
