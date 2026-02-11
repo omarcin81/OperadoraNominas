@@ -4773,17 +4773,17 @@ Public Class frmnominasmarinos
                                             'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
                                             If EmpresaN <> "IDN" Then
                                                 If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                    Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     Dim a() As String
                                                     a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                     If a.Length > 1 Then
                                                         If CInt(a(1)) > 0 Then
                                                             dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                         Else
-                                                            dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                            dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                         End If
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
 
 
@@ -4806,17 +4806,17 @@ Public Class frmnominasmarinos
 
                                         If calcularvalessemanal Then
                                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 Dim a() As String
                                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                                 If a.Length > 1 Then
                                                     If CInt(a(1)) > 0 Then
                                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                                     Else
-                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                     End If
                                                 Else
-                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                                 End If
 
 
@@ -25840,17 +25840,17 @@ Public Class frmnominasmarinos
                             'valesDespensa = "=ROUNDUP(IF((X" & filaExcel + x & "*9%)>=3153.70,3153.70,(X" & filaExcel + x & "*9%)),0)" 'VALES
 
                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                 Dim a() As String
                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                 If a.Length > 1 Then
                                     If CInt(a(1)) > 0 Then
                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                     Else
-                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                     End If
                                 Else
-                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                 End If
 
 
@@ -25872,17 +25872,17 @@ Public Class frmnominasmarinos
 
                         If calcularvalessemanal Then
                             If rwExcedentes(0)("cInicioEmbarque").ToString = "1" Then
-                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                Dim ValesCal As Double = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                 Dim a() As String
                                 a = Split(ValesCal.ToString, ".", vbBinaryCompare)
                                 If a.Length > 1 Then
                                     If CInt(a(1)) > 0 Then
                                         dtgDatos.Rows(x).Cells(87).Value = (CInt(a(0)) + 1).ToString
                                     Else
-                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                        dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                     End If
                                 Else
-                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3439, 3439, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
+                                    dtgDatos.Rows(x).Cells(87).Value = Math.Round(IIf(Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09 >= 3567, 3567, Double.Parse(dtgDatos.Rows(x).Cells(23).Value) * 0.09), 2)
                                 End If
 
 
