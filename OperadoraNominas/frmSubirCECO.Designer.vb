@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmSubirCECO
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,14 @@ Partial Class frmSubirCECO
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSubirCECO))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboTipo = New System.Windows.Forms.ComboBox()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.NudColumna2 = New System.Windows.Forms.NumericUpDown()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cboserie = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.chkIncidencia0 = New System.Windows.Forms.CheckBox()
@@ -52,13 +54,17 @@ Partial Class frmSubirCECO
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
+        Me.NudColumna3 = New System.Windows.Forms.NumericUpDown()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.pnlCatalogo.SuspendLayout()
+        CType(Me.NudColumna2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
         CType(Me.NudColumnaC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudColumnaN, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudFilaF, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudFilaI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
+        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -75,7 +81,7 @@ Partial Class frmSubirCECO
         '
         Me.cboTipo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
-        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI", "SALARIO REAL", "SALARIO EXCEDENTE"})
+        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI", "SALARIO REAL", "SALARIO EXCEDENTE", "CLABE INTERBANCARIA"})
         Me.cboTipo.Location = New System.Drawing.Point(126, 7)
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(191, 27)
@@ -87,6 +93,10 @@ Partial Class frmSubirCECO
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.NudColumna3)
+        Me.pnlCatalogo.Controls.Add(Me.Label9)
+        Me.pnlCatalogo.Controls.Add(Me.NudColumna2)
+        Me.pnlCatalogo.Controls.Add(Me.Label3)
         Me.pnlCatalogo.Controls.Add(Me.cboserie)
         Me.pnlCatalogo.Controls.Add(Me.Label8)
         Me.pnlCatalogo.Controls.Add(Me.chkIncidencia0)
@@ -108,8 +118,29 @@ Partial Class frmSubirCECO
         Me.pnlCatalogo.Enabled = False
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1121, 535)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1244, 535)
         Me.pnlCatalogo.TabIndex = 24
+        '
+        'NudColumna2
+        '
+        Me.NudColumna2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NudColumna2.Location = New System.Drawing.Point(1012, 48)
+        Me.NudColumna2.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.NudColumna2.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudColumna2.Name = "NudColumna2"
+        Me.NudColumna2.Size = New System.Drawing.Size(45, 27)
+        Me.NudColumna2.TabIndex = 31
+        Me.NudColumna2.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(923, 51)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(78, 19)
+        Me.Label3.TabIndex = 30
+        Me.Label3.Text = "Col Banco:"
         '
         'cboserie
         '
@@ -117,7 +148,7 @@ Partial Class frmSubirCECO
         Me.cboserie.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboserie.FormattingEnabled = True
         Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
-        Me.cboserie.Location = New System.Drawing.Point(924, 7)
+        Me.cboserie.Location = New System.Drawing.Point(853, 7)
         Me.cboserie.Name = "cboserie"
         Me.cboserie.Size = New System.Drawing.Size(59, 27)
         Me.cboserie.TabIndex = 29
@@ -126,7 +157,7 @@ Partial Class frmSubirCECO
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(873, 11)
+        Me.Label8.Location = New System.Drawing.Point(802, 11)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(45, 19)
         Me.Label8.TabIndex = 28
@@ -137,7 +168,7 @@ Partial Class frmSubirCECO
         Me.chkIncidencia0.AutoSize = True
         Me.chkIncidencia0.BackColor = System.Drawing.Color.Transparent
         Me.chkIncidencia0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkIncidencia0.Location = New System.Drawing.Point(144, 47)
+        Me.chkIncidencia0.Location = New System.Drawing.Point(108, 48)
         Me.chkIncidencia0.Name = "chkIncidencia0"
         Me.chkIncidencia0.Size = New System.Drawing.Size(110, 22)
         Me.chkIncidencia0.TabIndex = 27
@@ -148,7 +179,7 @@ Partial Class frmSubirCECO
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(594, 11)
+        Me.Label10.Location = New System.Drawing.Point(523, 11)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(62, 19)
         Me.Label10.TabIndex = 26
@@ -159,7 +190,7 @@ Partial Class frmSubirCECO
         Me.cboperiodo.Enabled = False
         Me.cboperiodo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboperiodo.FormattingEnabled = True
-        Me.cboperiodo.Location = New System.Drawing.Point(662, 7)
+        Me.cboperiodo.Location = New System.Drawing.Point(591, 7)
         Me.cboperiodo.Name = "cboperiodo"
         Me.cboperiodo.Size = New System.Drawing.Size(191, 27)
         Me.cboperiodo.TabIndex = 25
@@ -169,7 +200,7 @@ Partial Class frmSubirCECO
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(319, 268)
+        Me.pnlProgreso.Location = New System.Drawing.Point(381, 268)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 24
@@ -194,7 +225,7 @@ Partial Class frmSubirCECO
         'NudColumnaC
         '
         Me.NudColumnaC.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaC.Location = New System.Drawing.Point(909, 47)
+        Me.NudColumnaC.Location = New System.Drawing.Point(845, 47)
         Me.NudColumnaC.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaC.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaC.Name = "NudColumnaC"
@@ -205,7 +236,7 @@ Partial Class frmSubirCECO
         'NudColumnaN
         '
         Me.NudColumnaN.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumnaN.Location = New System.Drawing.Point(731, 47)
+        Me.NudColumnaN.Location = New System.Drawing.Point(688, 47)
         Me.NudColumnaN.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NudColumnaN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudColumnaN.Name = "NudColumnaN"
@@ -217,7 +248,7 @@ Partial Class frmSubirCECO
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(778, 48)
+        Me.Label7.Location = New System.Drawing.Point(740, 50)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(106, 19)
         Me.Label7.TabIndex = 14
@@ -227,7 +258,7 @@ Partial Class frmSubirCECO
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(582, 48)
+        Me.Label6.Location = New System.Drawing.Point(539, 48)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(146, 19)
         Me.Label6.TabIndex = 13
@@ -236,7 +267,7 @@ Partial Class frmSubirCECO
         'NudFilaF
         '
         Me.NudFilaF.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaF.Location = New System.Drawing.Point(509, 47)
+        Me.NudFilaF.Location = New System.Drawing.Point(466, 47)
         Me.NudFilaF.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaF.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaF.Name = "NudFilaF"
@@ -248,7 +279,7 @@ Partial Class frmSubirCECO
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(441, 48)
+        Me.Label5.Location = New System.Drawing.Point(398, 48)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(71, 19)
         Me.Label5.TabIndex = 11
@@ -258,7 +289,7 @@ Partial Class frmSubirCECO
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(286, 48)
+        Me.Label4.Location = New System.Drawing.Point(243, 48)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 19)
         Me.Label4.TabIndex = 10
@@ -267,7 +298,7 @@ Partial Class frmSubirCECO
         'NudFilaI
         '
         Me.NudFilaI.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudFilaI.Location = New System.Drawing.Point(364, 47)
+        Me.NudFilaI.Location = New System.Drawing.Point(321, 47)
         Me.NudFilaI.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudFilaI.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudFilaI.Name = "NudFilaI"
@@ -300,7 +331,7 @@ Partial Class frmSubirCECO
         Me.lsvLista.Location = New System.Drawing.Point(1, 92)
         Me.lsvLista.MultiSelect = False
         Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(1113, 441)
+        Me.lsvLista.Size = New System.Drawing.Size(1236, 441)
         Me.lsvLista.TabIndex = 2
         Me.lsvLista.UseCompatibleStateImageBehavior = False
         Me.lsvLista.View = System.Windows.Forms.View.Details
@@ -312,7 +343,7 @@ Partial Class frmSubirCECO
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbProcesar, Me.tsbCancelar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1121, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1244, 54)
         Me.ToolStrip1.TabIndex = 25
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -383,7 +414,7 @@ Partial Class frmSubirCECO
         '
         Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(1047, 592)
+        Me.cmdCerrar.Location = New System.Drawing.Point(1170, 592)
         Me.cmdCerrar.Name = "cmdCerrar"
         Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.cmdCerrar.Size = New System.Drawing.Size(62, 43)
@@ -392,10 +423,31 @@ Partial Class frmSubirCECO
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
         '
+        'NudColumna3
+        '
+        Me.NudColumna3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NudColumna3.Location = New System.Drawing.Point(1168, 49)
+        Me.NudColumna3.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.NudColumna3.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudColumna3.Name = "NudColumna3"
+        Me.NudColumna3.Size = New System.Drawing.Size(45, 27)
+        Me.NudColumna3.TabIndex = 33
+        Me.NudColumna3.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(1079, 52)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(84, 19)
+        Me.Label9.TabIndex = 32
+        Me.Label9.Text = "Col Cuenta:"
+        '
         'frmSubirCECO
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1121, 637)
+        Me.ClientSize = New System.Drawing.Size(1244, 637)
         Me.Controls.Add(Me.cmdCerrar)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.ToolStrip1)
@@ -406,6 +458,7 @@ Partial Class frmSubirCECO
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlCatalogo.ResumeLayout(False)
         Me.pnlCatalogo.PerformLayout()
+        CType(Me.NudColumna2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlProgreso.ResumeLayout(False)
         Me.pnlProgreso.PerformLayout()
         CType(Me.NudColumnaC, System.ComponentModel.ISupportInitialize).EndInit()
@@ -414,6 +467,7 @@ Partial Class frmSubirCECO
         CType(Me.NudFilaI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -447,4 +501,8 @@ Partial Class frmSubirCECO
     Friend WithEvents chkIncidencia0 As System.Windows.Forms.CheckBox
     Friend WithEvents cboserie As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents NudColumna2 As NumericUpDown
+    Friend WithEvents Label3 As Label
+    Friend WithEvents NudColumna3 As NumericUpDown
+    Friend WithEvents Label9 As Label
 End Class

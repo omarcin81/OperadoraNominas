@@ -7298,73 +7298,73 @@ Public Class frmnominasmarinos
                 End If
 
 
-                'IKE FACT
+                'EXCEDE FACT
                 If diasperiodo > 14 Then
-                    'Quincenal
-                    hoja.Cell(espace + 14, "E").Value = "IKE "
+                    hoja.Cell(espace + 14, "E").Value = "SINDICATO 2 "
                     hoja.Cell(espace + 14, "E").Style.Font.Bold = True
                     hoja.Range(espace + 14, 5, espace + 14, 6).Merge()
                     hoja.Range(espace + 14, 5, espace + 14, 6).Style.Font.FontColor = XLColor.White
                     hoja.Range(espace + 14, 5, espace + 14, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Font.FontName = "Century Gothic"
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Font.FontName = "Century Gothic"
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
 
                     hoja.Range(espace + 17, 5, espace + 17, 6).Style.Font.Bold = True
-                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Font.Bold = True
+                    hoja.Range(espace + 18, 5, espace + 18, 6).Style.Font.Bold = True
                     hoja.Cell(espace + 17, "E").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
-                    hoja.Range(espace + 20, 5, espace + 21, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+                    hoja.Range(espace + 18, 5, espace + 18, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
 
-                    hoja.Cell(espace + 17, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
-                    hoja.Cell(espace + 17, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
-                    hoja.Cell(espace + 21, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
-                    hoja.Cell(espace + 21, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+                    hoja.Cell(espace + 18, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    hoja.Cell(espace + 18, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
 
-                    hoja.Cell(espace + 15, "E").Value = "PPP"
-                    hoja.Cell(espace + 16, "E").Value = "3% Largo Plazo (ahorro)"
-                    hoja.Cell(espace + 17, "E").Value = "IKE Deposito 1"
-                    hoja.Cell(espace + 18, "E").Value = "-"
-                    hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
-                    hoja.Cell(espace + 20, "E").Value = "IVA"
-                    hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
+                    'hoja.Cell(espace + 21, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    'hoja.Cell(espace + 21, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+
+                    hoja.Cell(espace + 15, "E").Value = "BENEFICIOSOCIAL"
+                    hoja.Cell(espace + 16, "E").Value = "Comisión 5.5%"
+                    hoja.Cell(espace + 17, "E").Value = "IVA"
+                    hoja.Cell(espace + 18, "E").Value = "SINDICATO 2"
+                    ' hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
+                    ' hoja.Cell(espace + 20, "E").Value = "IVA"
+                    'hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
 
                     hoja.Range(espace + 15, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=CP" & totalbuq
-                    hoja.Cell(espace + 17, "F").FormulaA1 = "=F" & espace + 15 & "+F" & espace + 16
-                    ' hoja.Cell(espace + 18, "F").Value = "-"
-                    hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
-                    hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
-                    hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 19 & "+F" & espace + 20
+                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5%"
+                    hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & "*16%"
+                    hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
 
-                    'Tabla de depositos
-                    hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
-                    hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
-                    hoja.Range(espace + 23, 6, espace + 25, 6).Style.NumberFormat.Format = " #,##0.00"
+                    'hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
+                    'hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
+                    'hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 19 & "+F" & espace + 20
 
-                    hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
-                    hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
-                    hoja.Cell(espace + 23, "F").FormulaA1 = "=F" & espace + 2
-                    hoja.Cell(espace + 24, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
-                    hoja.Cell(espace + 25, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+                    'DEPOSITOS
+                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
+                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
+                    hoja.Range(espace + 20, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
+
+                    hoja.Cell(espace + 20, "E").Value = "Deposito Cuenta SA"
+                    hoja.Cell(espace + 21, "E").Value = "Deposito cuenta ADMINISTRACION AYIPEY TECNOLOGY"
+                    'hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
+                    hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 2 'SA
+                    hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8 & "+F" & espace + 18
+                    ' hoja.Cell(espace + 25, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+
                 Else
-                    'SEMANAL
                     'DEPOSITOS
                     hoja.Range(espace + 14, 5, espace + 16, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
                     hoja.Range(espace + 14, 5, espace + 16, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
                     hoja.Range(espace + 14, 6, espace + 16, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 14, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
-                    hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
-                    hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2
+                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ADMINISTRACION AYIPEY TECNOLOGY"
+                    '  hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
+                    hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2 'sa
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+                    '  hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 End If
-
 
 
                 'RETENCIONES
@@ -7491,13 +7491,18 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")" ' Vales
                 hoja2.Cell("K5").Value = EmpresaN.ToUpper
 
-                'Para fondeo BBVA Exce
+                'Para fondeo INBURSA Exce
 
-                hoja2.Cell(filaExcel + 4, 11).Value = "SINDICATO"
-                hoja2.Cell(filaExcel + 5, 11).Value = "PPP"
+                hoja2.Cell(filaExcel + 4, 10).Value = "INBURSA"
+                hoja2.Cell(filaExcel + 5, 10).Value = "INTERBANCARIOS"
+                'sa
+                hoja2.Cell(filaExcel + 4, 11).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""INBURSA"",K6:K" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 11).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>INBURSA"",K6:K" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 6, 11).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
-                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""SINDICATO"",L6:L" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""<>SINDICATO"",L6:L" & filaExcel & ")"
+                'exce
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""INBURSA"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>INBURSA"",L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
                 'STILO
@@ -10744,12 +10749,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 93).Value = dtgDatos.Rows(x).Cells(98).Value 'fSindicatoExtra 'exedente monto
 
                     If NombrePeriodo = "Quincenal" Then
-                        hoja.Cell(filaExcel + x, 94).Value = dtgDatos.Rows(x).Cells(88).Value ' "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
+                        hoja.Cell(filaExcel + x, 94).Value = 0 ' dtgDatos.Rows(x).Cells(88).Value ' "=if(BX" & filaExcel + x & "=""PPP"",((Z" & filaExcel + x & "/1.0493)*15.2)*0.03,0)"
                     Else
                         recorrerFilasColumnas(hoja, 5, filaExcel + x + 1, 94, "clear", 102)
                         recorrerFilasColumnas(hoja, 1, filaExcel + x + 3, 130, "clear", 102)
 
-                        hoja.Cell(filaExcel + x, 94).Value = "NA"
+                        hoja.Cell(filaExcel + x, 94).Value = "0"
                     End If
 
 
@@ -10905,54 +10910,56 @@ Public Class frmnominasmarinos
                 'IKE FACT
                 If diasperiodo > 14 Then
 
-                    hoja.Cell(espace + 14, "E").Value = "IKE "
+                    hoja.Cell(espace + 14, "E").Value = "SINDICATO 2 "
                     hoja.Cell(espace + 14, "E").Style.Font.Bold = True
                     hoja.Range(espace + 14, 5, espace + 14, 6).Merge()
                     hoja.Range(espace + 14, 5, espace + 14, 6).Style.Font.FontColor = XLColor.White
                     hoja.Range(espace + 14, 5, espace + 14, 6).Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 240)
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Font.FontName = "Century Gothic"
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
-                    hoja.Range(espace + 14, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Font.FontName = "Century Gothic"
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thick
+                    hoja.Range(espace + 14, 5, espace + 18, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thick
 
                     hoja.Range(espace + 17, 5, espace + 17, 6).Style.Font.Bold = True
-                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Font.Bold = True
+                    hoja.Range(espace + 18, 5, espace + 18, 6).Style.Font.Bold = True
                     hoja.Cell(espace + 17, "E").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
-                    hoja.Range(espace + 20, 5, espace + 21, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
+                    hoja.Range(espace + 18, 5, espace + 18, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right
 
-                    hoja.Cell(espace + 17, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
-                    hoja.Cell(espace + 17, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
-                    hoja.Cell(espace + 21, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
-                    hoja.Cell(espace + 21, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+                    hoja.Cell(espace + 18, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    hoja.Cell(espace + 18, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
 
-                    hoja.Cell(espace + 15, "E").Value = "PPP"
-                    hoja.Cell(espace + 16, "E").Value = "3% Largo Plazo (ahorro)"
-                    hoja.Cell(espace + 17, "E").Value = "IKE Deposito 1"
-                    hoja.Cell(espace + 18, "E").Value = "-"
-                    hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
-                    hoja.Cell(espace + 20, "E").Value = "IVA"
-                    hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
+                    'hoja.Cell(espace + 21, "E").Style.Fill.BackgroundColor = XLColor.FromArgb(183, 222, 232)
+                    'hoja.Cell(espace + 21, "F").Style.Fill.BackgroundColor = XLColor.FromArgb(0, 176, 80)
+
+                    hoja.Cell(espace + 15, "E").Value = "BENEFICIOSOCIAL"
+                    hoja.Cell(espace + 16, "E").Value = "Comisión 5.5%"
+                    hoja.Cell(espace + 17, "E").Value = "IVA"
+                    hoja.Cell(espace + 18, "E").Value = "SINDICATO 2"
+                    ' hoja.Cell(espace + 19, "E").Value = "Comision (PPP+Ahorro) 6%"
+                    ' hoja.Cell(espace + 20, "E").Value = "IVA"
+                    'hoja.Cell(espace + 21, "E").Value = "IKE Deposito 2"
 
                     hoja.Range(espace + 15, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=CP" & totalbuq
-                    hoja.Cell(espace + 17, "F").FormulaA1 = "=F" & espace + 15 & "+F" & espace + 16
-                    ' hoja.Cell(espace + 18, "F").Value = "-"
-                    hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
-                    hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
-                    hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 19 & "+F" & espace + 20
+                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5%"
+                    hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*16%"
+                    hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
+
+                    'hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
+                    'hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
+                    'hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 19 & "+F" & espace + 20
 
                     'DEPOSITOS
-                    hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
-                    hoja.Range(espace + 23, 5, espace + 25, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
-                    hoja.Range(espace + 23, 6, espace + 25, 6).Style.NumberFormat.Format = " #,##0.00"
+                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Border.InsideBorder = XLBorderStyleValues.Thin
+                    hoja.Range(espace + 20, 5, espace + 21, 6).Style.Border.OutsideBorder = XLBorderStyleValues.Thin
+                    hoja.Range(espace + 20, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
-                    hoja.Cell(espace + 23, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 24, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
-                    hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
-                    hoja.Cell(espace + 23, "F").FormulaA1 = "=F" & espace + 2
-                    hoja.Cell(espace + 24, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
-                    hoja.Cell(espace + 25, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+                    hoja.Cell(espace + 20, "E").Value = "Deposito Cuenta SA"
+                    hoja.Cell(espace + 21, "E").Value = "Deposito cuenta ADMINISTRACION AYIPEY TECNOLOGY"
+                    'hoja.Cell(espace + 25, "E").Value = "Deposito IKE"
+                    hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 2 'SA
+                    hoja.Cell(espace + 21, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8 & "+F" & espace + 18
+                    ' hoja.Cell(espace + 25, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 Else
                     'DEPOSITOS
@@ -10961,11 +10968,11 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 14, 6, espace + 16, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 14, "E").Value = "Deposito Cuenta SA"
-                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ASESORÍA Y CONSULTORÍA MACHT"
-                    hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
-                    hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2
+                    hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ADMINISTRACION AYIPEY TECNOLOGY"
+                    '  hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
+                    hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2 'sa
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+                    '  hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 End If
 
@@ -11051,8 +11058,8 @@ Public Class frmnominasmarinos
                     End If
 
                 ElseIf tipoperiodos2 = 3 Then
-                    textoperiodo = "PERIODO " & numperiodo2 & "SEM " & periodom
-                    hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 & "SEM " & periodom
+                    textoperiodo = "PERIODO " & numperiodo2 & " SEM " & periodom
+                    hoja2.Cell(4, 2).Value = "PERIODO " & numperiodo2 & " SEM " & periodom
                 End If
 
 
@@ -11119,13 +11126,18 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 2, 12).FormulaA1 = "=SUM(L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 2, 13).FormulaA1 = "=SUM(M6:M" & filaExcel & ")"
 
-                'Para fondeo BBVA Exce
+                'Para fondeo INBURSA Exce
 
-                hoja2.Cell(filaExcel + 4, 11).Value = "SINDICATO"
-                hoja2.Cell(filaExcel + 5, 11).Value = "PPP"
+                hoja2.Cell(filaExcel + 4, 10).Value = "INBURSA"
+                hoja2.Cell(filaExcel + 5, 10).Value = "INTERBANCARIOS"
+                'sa
+                hoja2.Cell(filaExcel + 4, 11).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""INBURSA"",K6:K" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 11).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>INBURSA"",K6:K" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 6, 11).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
-                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""SINDICATO"",L6:L" & filaExcel & ")"
-                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(E6:E" & filaExcel & ", ""<>SINDICATO"",L6:L" & filaExcel & ")"
+                'exce
+                hoja2.Cell(filaExcel + 4, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""INBURSA"",L6:L" & filaExcel & ")"
+                hoja2.Cell(filaExcel + 5, 12).FormulaA1 = "=SUMIF(G6:G" & filaExcel & ", ""<>INBURSA"",L6:L" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 6, 12).FormulaA1 = "=+L" & filaExcel + 4 & "+L" & filaExcel + 5
 
                 recorrerFilasColumnas(hoja2, 1, 3, 200, "clear")

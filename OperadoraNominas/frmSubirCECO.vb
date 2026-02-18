@@ -17,7 +17,8 @@ Public Class frmSubirCECO
         Try
 
             cargarperiodos()
-            ' cboperiodo.SelectedValue = gIdPeriodo
+            NudColumna2.Enabled = False
+            NudColumna3.Enabled = False
             'cboserie.SelectedIndex = gIdSerie
             'cboTipo.SelectedIndex = 0
         Catch ex As Exception
@@ -222,6 +223,18 @@ Public Class frmSubirCECO
         chkAll.Text = IIf(chkAll.Checked, "Desmarcar todos", "Marcar todos")
     End Sub
 
+
+
+
+
+    Private Sub cboTipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTipo.SelectedIndexChanged
+        If cboTipo.SelectedIndex = 5 Then
+            NudColumna2.Enabled = True
+            NudColumna3.Enabled = True
+        End If
+
+    End Sub
+
     Private Sub tsbGuardar_Click(sender As System.Object, e As System.EventArgs) Handles tsbGuardar.Click
         Try
 
@@ -299,6 +312,34 @@ Public Class frmSubirCECO
                                         'actualizar salario excedente/sindicato
                                         Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
                                         SQL = "update empleadosC set fSindicatoExtra ='" & ceco & "'"
+                                        SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
+                                        If nExecute(SQL) = False Then
+                                            MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+                                        pgbProgreso.Value += 1
+
+
+                                    Case 5
+                                        'actualizar bancco
+
+                                        Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
+                                        Dim banco As String = producto.SubItems(CInt(NudColumna2.Value)).Text.Trim
+                                        Dim cuenta As String = IIf(producto.SubItems(CInt(NudColumna3.Value)).Text <> "", producto.SubItems(CInt(NudColumna3.Value)).Text, "0")
+                                        Dim idbanco As Integer
+                                        Dim sqldbanco As DataRow() = nConsulta("select * from bancos where cBanco like '%" & banco & "%'") ' clave =" & b)
+                                        If sqldbanco Is Nothing Then
+                                            idbanco = 1
+                                            'mensa = "Revise el tipo de banco"
+                                            ' bandera = False
+                                        Else
+                                            idbanco = sqldbanco(0).Item("iIdBanco")
+                                        End If
+
+                                        SQL = "update empleadosC set Clabe ='" & ceco & "', "
+                                        SQL &= "fkiIdBanco= '" & idbanco & "', "
+                                        SQL &= "NumCuenta= '" & cuenta & "'"
                                         SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
                                         If nExecute(SQL) = False Then
                                             MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
