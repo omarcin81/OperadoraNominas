@@ -347,6 +347,27 @@ Public Class frmSubirCECO
                                             Exit Sub
                                         End If
                                         pgbProgreso.Value += 1
+                                    Case 6
+                                        'actualizar tipo de trabajador
+
+                                        Dim ceco As String = producto.SubItems(CInt(NudColumnaC.Value)).Text
+                                        Dim iOrigen As Int16
+                                        If ceco = "Confianza" Then
+                                            iOrigen = 1
+                                        Else
+
+                                            iOrigen = 2
+                                        End If
+
+                                        SQL = "update empleadosC set iOrigen =" & iOrigen & " "
+                                        SQL &= " WHERE iIdEmpleadoC =" & rwEmpleado(0)("iIdEmpleadoC").ToString
+
+                                        If nExecute(SQL) = False Then
+                                            MessageBox.Show("Hubo un error al actualizar el :" & cboTipo.Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+                                        pgbProgreso.Value += 1
 
                                     Case Else
 

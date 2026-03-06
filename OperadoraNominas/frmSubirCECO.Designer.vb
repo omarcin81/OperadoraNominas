@@ -26,6 +26,8 @@ Partial Class frmSubirCECO
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboTipo = New System.Windows.Forms.ComboBox()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.NudColumna3 = New System.Windows.Forms.NumericUpDown()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.NudColumna2 = New System.Windows.Forms.NumericUpDown()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboserie = New System.Windows.Forms.ComboBox()
@@ -54,9 +56,8 @@ Partial Class frmSubirCECO
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
-        Me.NudColumna3 = New System.Windows.Forms.NumericUpDown()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.pnlCatalogo.SuspendLayout()
+        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudColumna2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProgreso.SuspendLayout()
         CType(Me.NudColumnaC, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,7 +65,6 @@ Partial Class frmSubirCECO
         CType(Me.NudFilaF, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudFilaI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
-        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -81,7 +81,7 @@ Partial Class frmSubirCECO
         '
         Me.cboTipo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
-        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI", "SALARIO REAL", "SALARIO EXCEDENTE", "CLABE INTERBANCARIA"})
+        Me.cboTipo.Items.AddRange(New Object() {"CECO", "SD", "SDI", "SALARIO REAL", "SALARIO EXCEDENTE", "CLABE INTERBANCARIA", "TIPO DE EMPLEADOS"})
         Me.cboTipo.Location = New System.Drawing.Point(126, 7)
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(191, 27)
@@ -120,6 +120,27 @@ Partial Class frmSubirCECO
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1244, 535)
         Me.pnlCatalogo.TabIndex = 24
+        '
+        'NudColumna3
+        '
+        Me.NudColumna3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NudColumna3.Location = New System.Drawing.Point(1168, 49)
+        Me.NudColumna3.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.NudColumna3.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudColumna3.Name = "NudColumna3"
+        Me.NudColumna3.Size = New System.Drawing.Size(45, 27)
+        Me.NudColumna3.TabIndex = 33
+        Me.NudColumna3.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(1079, 52)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(84, 19)
+        Me.Label9.TabIndex = 32
+        Me.Label9.Text = "Col Cuenta:"
         '
         'NudColumna2
         '
@@ -423,27 +444,6 @@ Partial Class frmSubirCECO
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
         '
-        'NudColumna3
-        '
-        Me.NudColumna3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NudColumna3.Location = New System.Drawing.Point(1168, 49)
-        Me.NudColumna3.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
-        Me.NudColumna3.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NudColumna3.Name = "NudColumna3"
-        Me.NudColumna3.Size = New System.Drawing.Size(45, 27)
-        Me.NudColumna3.TabIndex = 33
-        Me.NudColumna3.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(1079, 52)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 19)
-        Me.Label9.TabIndex = 32
-        Me.Label9.Text = "Col Cuenta:"
-        '
         'frmSubirCECO
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -458,6 +458,7 @@ Partial Class frmSubirCECO
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlCatalogo.ResumeLayout(False)
         Me.pnlCatalogo.PerformLayout()
+        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudColumna2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlProgreso.ResumeLayout(False)
         Me.pnlProgreso.PerformLayout()
@@ -467,7 +468,6 @@ Partial Class frmSubirCECO
         CType(Me.NudFilaI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        CType(Me.NudColumna3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
