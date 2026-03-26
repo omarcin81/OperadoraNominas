@@ -7331,7 +7331,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 15, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5%"
+                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5.5%"
                     hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & "*16%"
                     hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
 
@@ -10941,7 +10941,7 @@ Public Class frmnominasmarinos
                     hoja.Range(espace + 15, 6, espace + 21, 6).Style.NumberFormat.Format = " #,##0.00"
 
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
-                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5%"
+                    hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5.5%"
                     hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*16%"
                     hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
 
