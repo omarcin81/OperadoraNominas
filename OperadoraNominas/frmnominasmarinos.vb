@@ -7333,7 +7333,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5.5%"
                     hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & "*16%"
-                    hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
+                    hoja.Cell(espace + 18, "F").FormulaA1 = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
 
                     'hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
                     'hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
@@ -10943,7 +10943,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=SUMIF(BT5:BT" & totalbuq - 2 & ",""PPP"",CG5:CG" & totalbuq - 2 & ")"
                     hoja.Cell(espace + 16, "F").FormulaA1 = "=(F" & espace + 15 & ")*5.5%"
                     hoja.Cell(espace + 17, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*16%"
-                    hoja.Cell(espace + 18, "F").Value = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
+                    hoja.Cell(espace + 18, "F").FormulaA1 = "=F" & espace + 15 & "+F" & espace + 16 & "+F" & espace + 17
 
                     'hoja.Cell(espace + 19, "F").FormulaA1 = "=(F" & espace + 15 & "+F" & espace + 16 & ")*0.06"
                     'hoja.Cell(espace + 20, "F").FormulaA1 = "=F" & espace + 19 & "*0.16"
