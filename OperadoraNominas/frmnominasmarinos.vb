@@ -2557,8 +2557,8 @@ Public Class frmnominasmarinos
 
                         Else
 
-                            If dtgDatos.Rows(x).Cells(2).Value = 78 Then
-                                ' MsgBox("lol")
+                            If dtgDatos.Rows(x).Cells(2).Value = 37 Then
+                                MsgBox("lol")
                             End If
                             dias = 0
                             BanPeriodo = False
@@ -7362,7 +7362,13 @@ Public Class frmnominasmarinos
                     '  hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2 'sa
                     hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
-                    '  hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
+                    '  hoja
+                    If valesc Then
+                        hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+                    Else
+                        hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 7 & "+F" & espace + 8
+                    End If
+                    ' hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 End If
 
@@ -10971,7 +10977,13 @@ Public Class frmnominasmarinos
                     hoja.Cell(espace + 15, "E").Value = "Deposito cuenta ADMINISTRACION AYIPEY TECNOLOGY"
                     '  hoja.Cell(espace + 16, "E").Value = "Deposito IKE"
                     hoja.Cell(espace + 14, "F").FormulaA1 = "=F" & espace + 2 'sa
-                    hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+
+                    If valesc Then
+                        hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 5 & "+F" & espace + 7 & "+F" & espace + 8
+                    Else
+                        hoja.Cell(espace + 15, "F").FormulaA1 = "=F" & espace + 3 & "+F" & espace + 4 & "+F" & espace + 7 & "+F" & espace + 8
+                    End If
+
                     '  hoja.Cell(espace + 16, "F").FormulaA1 = "=F" & espace + 17 & "+F" & espace + 21
 
                 End If
