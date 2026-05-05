@@ -97,6 +97,7 @@ Partial Class frmnominasmarinos
         Me.PlantillaActualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaratulaXPeriodoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReporteKatiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularSoloISRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularInfonavitSoloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -113,7 +114,6 @@ Partial Class frmnominasmarinos
         Me.TMmEspecialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkVales = New System.Windows.Forms.CheckBox()
-        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -660,18 +660,18 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(186, 48)
+        Me.cMenu.Size = New System.Drawing.Size(187, 48)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'cmdSubirNomF
@@ -848,6 +848,12 @@ Partial Class frmnominasmarinos
         Me.ReporteKatiaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.ReporteKatiaToolStripMenuItem.Text = "Reporte Katia"
         '
+        'HojaTrabajoPolizaBusquedaToolStripMenuItem
+        '
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Name = "HojaTrabajoPolizaBusquedaToolStripMenuItem"
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Text = "Hoja trabajo poliza busqueda"
+        '
         'CalculosToolStripMenuItem
         '
         Me.CalculosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularSoloISRToolStripMenuItem, Me.CalcularInfonavitSoloToolStripMenuItem, Me.CalcularProAguinaldoPrimaVacacionalToolStripMenuItem, Me.CalcularProPrimaAntiguedadIndemnizacionToolStripMenuItem, Me.CalcularSoloValesDeDespensaToolStripMenuItem, Me.ValidarSoloISRToolStripMenuItem, Me.VerTablaDeISRActualToolStripMenuItem, Me.GenerarPeriodoToolStripMenuItem})
@@ -932,13 +938,13 @@ Partial Class frmnominasmarinos
         '
         Me.TMmEspecialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalcularToolStripMenuItem})
         Me.TMmEspecialToolStripMenuItem.Name = "TMmEspecialToolStripMenuItem"
-        Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
+        Me.TMmEspecialToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
         Me.TMmEspecialToolStripMenuItem.Text = "TMM Especial"
         '
         'CalcularToolStripMenuItem
         '
         Me.CalcularToolStripMenuItem.Name = "CalcularToolStripMenuItem"
-        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.CalcularToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CalcularToolStripMenuItem.Text = "Calcular"
         '
         'chkVales
@@ -953,12 +959,6 @@ Partial Class frmnominasmarinos
         Me.chkVales.TabIndex = 44
         Me.chkVales.Text = "No calcular vales"
         Me.chkVales.UseVisualStyleBackColor = False
-        '
-        'HojaTrabajoPolizaBusquedaToolStripMenuItem
-        '
-        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Name = "HojaTrabajoPolizaBusquedaToolStripMenuItem"
-        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.HojaTrabajoPolizaBusquedaToolStripMenuItem.Text = "Hoja trabajo poliza busqueda"
         '
         'frmnominasmarinos
         '

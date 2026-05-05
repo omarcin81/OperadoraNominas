@@ -3490,11 +3490,11 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = (5481.75 / 30)
                                 totalIndeminizacion = (12069.53 / 30)
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 1797.62
-                                totalIndeminizacion = 9314.29
+                                totalPrimaAntig = 6256.57 '1797.61 Actualizacion 27042026
+                                totalIndeminizacion = 7671.89 ' 9314.29
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 4059.11
-                                totalIndeminizacion = 15877.93
+                                totalPrimaAntig = 11412.04 ' 4059.11 actualizacion 27042026
+                                totalIndeminizacion = 14679.01 '15877.93
                             End If
 
                             'calculo prima antiguedad
@@ -4902,11 +4902,11 @@ Public Class frmnominasmarinos
                                 totalPrimaAntig = (5481.75 / 30)
                                 totalIndeminizacion = (12069.53 / 30)
                             ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 1797.61
-                                totalIndeminizacion = 9314.29
+                                totalPrimaAntig = 6256.57 '1797.61 Actualizacion 27042026
+                                totalIndeminizacion = 7671.89 ' 9314.29
                             ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                                totalPrimaAntig = 4059.11
-                                totalIndeminizacion = 15877.93
+                                totalPrimaAntig = 11412.04 ' 4059.11 actualizacion 27042026
+                                totalIndeminizacion = 14679.01 '15877.93
                             ElseIf EmpresaN = "TMMS" Then
                                 totalPrimaAntig = 4059.11
                                 totalIndeminizacion = 15877.93
@@ -22250,11 +22250,11 @@ Public Class frmnominasmarinos
                     totalPrimaAntig = (5481.75 / 30)
                     totalIndeminizacion = (12069.53 / 30)
                 ElseIf NombrePeriodo = "Quincenal" And EmpresaN = "IDN" Then
-                    totalPrimaAntig = 1797.61
-                    totalIndeminizacion = 9314.29
+                    totalPrimaAntig = 6256.57 '1797.61 Actualizacion 27042026
+                    totalIndeminizacion = 7671.89 ' 9314.29
                 ElseIf NombrePeriodo = "Semanal" And EmpresaN = "IDN" Then
-                    totalPrimaAntig = 4059.11
-                    totalIndeminizacion = 15877.93
+                    totalPrimaAntig = 11412.04 ' 4059.11 actualizacion 27042026
+                    totalIndeminizacion = 14679.01 '15877.93
                 End If
 
                 Dim rwDatosEmpleadoPA As DataRow() = nConsulta(sql)
@@ -32623,5 +32623,7 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
+
 End Class
 
